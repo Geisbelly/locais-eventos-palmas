@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-13T21:54:05Z",
+  "atualizado_em": "2026-11-13T22:47:21Z",
   "observacao": "Dados reunidos de páginas públicas. Campo ausente = não encontrado na fonte. Valores são referência da data de conferência e variam conforme dia, temporada e pacote.",
   "locais": [
     {
@@ -144,7 +144,7 @@
           }
         }
       ],
-      "observacoes": "Visitas com hora marcada, cedo pela manhã. Já receberam casamento com 2 áreas de brinquedo.",
+      "observacoes": "Visitas com hora marcada, cedo pela manhã. Já receberam casamento com 2 áreas de brinquedo. O valor só é passado depois da visita.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
         "https://www.google.com/maps/place/Kazara+Eventos/data=!4m2!3m1!1s0x9324cca0857fe623:0xd362a9d6bf416eed"
@@ -156,7 +156,7 @@
       "tipo": "Salão de festas",
       "bairro": "108 Norte",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:51:45Z",
+      "atualizado_em": "2026-11-13T22:47:21Z",
       "coordenadas": {
         "lat": -10.183243,
         "lng": -48.319093
@@ -400,7 +400,7 @@
       "comodidades": [],
       "eventos": [],
       "fotos": [],
-      "observacoes": "Mesmo dono do salão climatizado da 1006 Sul. O nome não apareceu na conversa.",
+      "observacoes": "Mesmo dono do salão climatizado da 1006 Sul. O nome não apareceu na conversa. Pino aproximado no meio da 903 Sul: pedir o endereço exato.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)"
       ],
@@ -413,7 +413,12 @@
       "itens": {
         "piscina": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T22:47:21Z",
+      "coordenadas": {
+        "lat": -10.2397,
+        "lng": -48.3388,
+        "aprox": true
+      }
     },
     {
       "endereco": "Quadra, Avenida NS 4, SN - LOTE 19 H.M. SALA 03 - Plano Diretor Sul",
@@ -464,7 +469,7 @@
       }
     },
     {
-      "endereco": null,
+      "endereco": "Alameda SO, Al. 17, 141 B, lote 01C (Google Maps)",
       "capacidade": null,
       "precos": [
         {
@@ -497,14 +502,15 @@
       "fotos": [],
       "observacoes": "Espaço novo. O portfólio enviado é de locação de 5 horas: confirmar a duração. Em nov/2026 anunciaram Black Friday com 30% de desconto, sujeito a datas.",
       "fontes": [
-        "WhatsApp com o local (conversa de out–nov/2026)"
+        "WhatsApp com o local (conversa de out–nov/2026)",
+        "https://www.google.com/maps/place/Espaço+Aurora/data=!4m2!3m1!1s0x933b378e48f5e527:0xa6e10298433728f"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
       "id": "espaco-aurora",
       "nome": "Espaço Aurora",
       "tipo": "Espaço com piscina",
-      "bairro": "Palmas",
+      "bairro": "Plano Diretor Sul",
       "itens": {
         "piscina": true,
         "climatizado": true,
@@ -516,7 +522,11 @@
         "mesas": true,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T22:47:21Z",
+      "coordenadas": {
+        "lat": -10.2802028,
+        "lng": -48.3363815
+      }
     },
     {
       "endereco": "ACSO 80, Avenida LO 19, Lote 04 (antiga 801 Sul). Saída para a Praia do Prata, 150 m da Teotônio Segurado, perto da Dufrio",
@@ -730,7 +740,7 @@
       }
     },
     {
-      "endereco": null,
+      "endereco": "Sem endereço publicado; pino do Google Maps",
       "capacidade": null,
       "precos": [
         {
@@ -759,9 +769,10 @@
         "Formatura"
       ],
       "fotos": [],
-      "observacoes": "Estrutura de casa de shows, com caixa de portaria. Endereço não informado.",
+      "observacoes": "Estrutura de casa de shows, com caixa de portaria. O Google Maps tem um perfil \"SURREAL EVENTOS\" sem endereço nem telefone: confirmar se é o mesmo lugar.",
       "fontes": [
-        "WhatsApp com o local (conversa de out–nov/2026)"
+        "WhatsApp com o local (conversa de out–nov/2026)",
+        "https://www.google.com/maps/place/SURREAL+EVENTOS/data=!4m2!3m1!1s0x9324cb4f612a702d:0x507ad8324e3a8e0f"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -777,7 +788,12 @@
         "iluminacao": true,
         "mesas": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T22:47:21Z",
+      "coordenadas": {
+        "lat": -10.192349,
+        "lng": -48.3325753,
+        "aprox": true
+      }
     },
     {
       "endereco": "Saída para Porto Nacional, 14 km de Taquaralto, perto da chácara da dupla Henrique e Juliano",
@@ -813,7 +829,7 @@
       "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
-      "endereco": "Sentido Aparecida do Rio Negro, km 16",
+      "endereco": "Sentido Aparecida do Rio Negro, km 16 (pino do Google Maps)",
       "capacidade": null,
       "precos": [
         {
@@ -832,18 +848,23 @@
       "comodidades": [],
       "eventos": [],
       "fotos": [],
-      "observacoes": "O nome do espaço não apareceu na conversa. Pode ser o mesmo Espaço Paraíso Eventos, que fica na mesma saída: confirmar.",
+      "observacoes": "Na conversa o nome não apareceu; no Google Maps o mesmo WhatsApp é da Chácara W4. Detalhes do espaço vieram só em fotos.",
       "fontes": [
-        "WhatsApp com o local (conversa de out–nov/2026)"
+        "WhatsApp com o local (conversa de out–nov/2026)",
+        "https://www.google.com/maps/place/Chácara+W4/data=!4m2!3m1!1s0x933b2d9f9cd447cd:0xf5064653e7fcc7d"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
       "id": "espaco-aparecida-km16",
-      "nome": "Espaço no km 16 da saída para Aparecida do Rio Negro",
+      "nome": "Chácara W4",
       "tipo": "Chácara",
       "bairro": "Saída para Aparecida do Rio Negro",
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T22:47:21Z",
+      "coordenadas": {
+        "lat": -10.2363939,
+        "lng": -48.1770589
+      }
     },
     {
       "endereco": null,
@@ -969,8 +990,8 @@
       "id": "villa-festa",
       "nome": "Villa Festa",
       "tipo": "Salão de festas",
-      "bairro": "Região central",
-      "endereco": "Localização central em Palmas (fácil acesso por aplicativo)",
+      "bairro": "103 Norte",
+      "endereco": "Quadra 103 Norte, Rua NO 11, 08 (Google Maps)",
       "capacidade": 120,
       "precos": [
         {
@@ -1041,9 +1062,10 @@
           "legenda": "Piscina e área gourmet"
         }
       ],
-      "observacoes": "Locação de 5 horas. Fotos e valores do portfólio enviado pelo próprio espaço.",
+      "observacoes": "Locação de 5 horas. Fotos e valores do portfólio enviado pelo próprio espaço. Endereço do Google Maps (perfil \"Villa Festa\"); há outro perfil \"Villa Festa Espaço para Eventos\" na mesma Rua NO 11, nº 37. Confirmar o número na visita.",
       "fontes": [
-        "Portfólio do Villa Festa enviado pelo WhatsApp (nov/2026)"
+        "Portfólio do Villa Festa enviado pelo WhatsApp (nov/2026)",
+        "https://www.google.com/maps/place/Villa+Festa/data=!4m2!3m1!1s0x9324cb002bb45813:0x3bb149728256aa8a"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -1059,7 +1081,11 @@
         "mesas": true,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T22:47:21Z",
+      "coordenadas": {
+        "lat": -10.178312,
+        "lng": -48.338005
+      }
     },
     {
       "id": "la-maison",
@@ -1217,8 +1243,8 @@
       "id": "arena-42",
       "nome": "Arena 42",
       "tipo": "Espaço com piscina",
-      "bairro": "Palmas (ver mapa)",
-      "endereco": "Q. 405 Norte Al. 15, 18 - Plano Diretor Norte",
+      "bairro": "402 Norte",
+      "endereco": "402 Norte (conforme o local). No Google Maps aparece como Q. 405 Norte Al. 15, 18",
       "coordenadas": {
         "lat": -10.162199974060059,
         "lng": -48.341800689697266
@@ -1277,7 +1303,7 @@
           }
         }
       ],
-      "observacoes": "Visitas são agendadas com o escritório pelo WhatsApp (63) 98458-2349, de preferência cedo (antes das locações das 10h). Nome do espaço conforme a conversa; confirmar. Capacidade estimada pelas 60 cadeiras.",
+      "observacoes": "Visitas são agendadas com o escritório pelo WhatsApp (63) 98458-2349, de preferência cedo (antes das locações das 10h). Nome do espaço conforme a conversa; confirmar. Na conversa o local disse que fica na 402 Norte. Capacidade estimada pelas 60 cadeiras.",
       "fontes": [
         "WhatsApp com o local (conversa de nov/2026)",
         "https://www.google.com/maps/place/Arena+42/data=!4m2!3m1!1s0x9324cb00160b787d:0xd974cb20696e8076"
@@ -1295,7 +1321,7 @@
         "mesas": 10,
         "cadeiras": 60
       },
-      "atualizado_em": "2026-11-13T21:51:45Z"
+      "atualizado_em": "2026-11-13T22:47:21Z"
     },
     {
       "id": "oliver-martins",
@@ -1352,7 +1378,7 @@
           }
         }
       ],
-      "observacoes": "Também alugam kits de decoração pegue e monte. Pedem data, horário, número de pessoas e tipo de evento para orçar. Endereço ainda não informado.",
+      "observacoes": "Também alugam kits de decoração pegue e monte. Pedem data, horário, número de pessoas e tipo de evento para orçar. Endereço ainda não informado. Os valores de 12 h e 24 h vieram em imagem, que não está na exportação da conversa.",
       "fontes": [
         "WhatsApp com o local (conversa de nov/2026)",
         "Conversas de WhatsApp sobre a festa (out–nov/2026)",
@@ -1363,7 +1389,7 @@
       "itens": {
         "brinquedos": true
       },
-      "atualizado_em": "2026-11-13T21:51:45Z",
+      "atualizado_em": "2026-11-13T22:47:21Z",
       "coordenadas": {
         "lat": -10.311566,
         "lng": -48.300971
@@ -1551,7 +1577,7 @@
       "nome": "Imperial Red",
       "tipo": "Salão de festas",
       "bairro": "604 Norte",
-      "endereco": "604 Norte, Alameda 22, Lote 27A, Plano Diretor Norte",
+      "endereco": "Q. 604 Norte, Alameda 22, Lote 26A, Plano Diretor Norte",
       "capacidade": 120,
       "precos": [
         {
@@ -1599,7 +1625,7 @@
           }
         }
       ],
-      "observacoes": "Um dos dois espaços do Imperial Eventos (o outro é o Imperial Blue, com piscinas). Pedem data, tipo de evento, número de pessoas e duração para dar o valor exato. Endereço do cadastro do Imperial; confirmar.",
+      "observacoes": "Um dos dois espaços do Imperial Eventos (o outro é o Imperial Blue, com piscinas). Pedem data, tipo de evento, número de pessoas e duração para dar o valor exato. Lote 26A conforme o Google Maps (o cadastro antigo dizia 27A).",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
         "https://guiafix.com.br/palmas-to/salao-de-festas",
@@ -1617,7 +1643,7 @@
         "mesas": 11,
         "cadeiras": 100
       },
-      "atualizado_em": "2026-11-13T21:51:45Z",
+      "atualizado_em": "2026-11-13T22:47:21Z",
       "coordenadas": {
         "lat": -10.162961,
         "lng": -48.313502
@@ -2562,14 +2588,19 @@
       "fotos": [],
       "observacoes": "Telefones no formato antigo de 8 dígitos ((63) 8450-0068, 8115-1513, 9221-2129); provavelmente hoje com o 9 na frente.",
       "fontes": [
-        "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"
+        "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml",
+        "https://www.google.com/maps/place/Bebidas+e+Festas/data=!4m2!3m1!1s0x933b3a6f3945b4c5:0x39e9e381e77d94a4"
       ],
       "conferido_em": "2026-11-13",
       "status": "Pode estar desatualizado",
       "itens": {
         "cozinha": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T22:47:21Z",
+      "coordenadas": {
+        "lat": -10.3486179,
+        "lng": -48.2907345
+      }
     },
     {
       "id": "santa-filomena",
@@ -3143,10 +3174,10 @@
     },
     {
       "id": "lake-moonlight",
-      "nome": "Lake Moonlight Farm Events",
+      "nome": "Chácara Luar do Lago Eventos (Lake Moonlight)",
       "tipo": "Chácara",
-      "bairro": "Palmas",
-      "endereco": null,
+      "bairro": "Beira do lago, região norte",
+      "endereco": "Ver no mapa (Google Maps, perfil com o mesmo WhatsApp)",
       "capacidade": null,
       "precos": [],
       "instagram": null,
@@ -3156,9 +3187,10 @@
       "comodidades": [],
       "eventos": [],
       "fotos": [],
-      "observacoes": "Só nome e WhatsApp no diretório; o nome indica fazenda com hospedagem à beira do lago.",
+      "observacoes": "No diretório aparece como \"Lake Moonlight Farm Events\"; no Google Maps o mesmo WhatsApp é da Chácara Luar do Lago Eventos.",
       "fontes": [
-        "https://guiafix.com.br/palmas-to/salao-de-festas"
+        "https://guiafix.com.br/palmas-to/salao-de-festas",
+        "https://www.google.com/maps/place/Chácara+Luar+do+Lago+Eventos/data=!4m2!3m1!1s0x9324c9af6749d051:0x3588a165daf21755"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos",
@@ -3166,7 +3198,11 @@
         "lago": true,
         "hospedagem": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T22:47:21Z",
+      "coordenadas": {
+        "lat": -10.1081522,
+        "lng": -48.3652111
+      }
     },
     {
       "id": "casa-de-xavier",
