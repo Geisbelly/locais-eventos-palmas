@@ -113,7 +113,7 @@
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos",
-      "atualizado_em": "2026-11-13T21:00:00Z",
+      "atualizado_em": "2026-11-13T20:30:00Z",
       "detalhes": {},
       "itens": {},
       "id": "palmas-kids-fest",
@@ -121,18 +121,61 @@
       "nome": "Palmas Kids Fest & D.L.A Locações",
       "subtipos": [
         "Pula-pula / cama elástica",
-        "Piscina de bolinhas"
+        "Piscina de bolinhas",
+        "Escorregador / gangorra"
       ],
       "precos": [
         {
           "valor": "Sob consulta",
           "unidade": "por evento",
-          "condicao": "Sem valores na conversa",
+          "condicao": "Pergunte se tem desconto para alugar mais de um",
           "inclui": null
         }
       ],
       "whatsapp": "(63) 99206-4699",
-      "observacoes": "Dá para fechar brinquedos e mesas com o mesmo fornecedor."
+      "observacoes": "Dá para fechar brinquedos e mesas com o mesmo fornecedor.",
+      "objetos": [
+        {
+          "nome": "Pula-pula",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null
+        },
+        {
+          "nome": "Piscina de bolinhas",
+          "tipo": "Piscina de bolinhas",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null
+        },
+        {
+          "nome": "Escorregador",
+          "tipo": "Escorregador / gangorra",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null
+        },
+        {
+          "nome": "Gangorra",
+          "tipo": "Escorregador / gangorra",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null
+        },
+        {
+          "nome": "Mesas e cadeiras",
+          "tipo": "Mesas e cadeiras",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Pela D.L.A Locações; dá para fechar junto com os brinquedos"
+        }
+      ]
     }
   ]
 }

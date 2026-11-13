@@ -868,3 +868,29 @@ body[data-modo="eventos"] .grade-cat { grid-template-columns: 1fr; margin-top: 8
   .andamento ul { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
 }
 @media print { .pg-grade { display: block; } .pg-lado { position: static; max-height: none; } .seg-f, .andamento { display: none !important; } }
+
+/* Empresas com vários objetos (brinquedos, aluguéis) */
+.rep-objetos { grid-template-columns: 2fr 1.4fr; }
+.rep-objetos .c-obs { grid-column: 1 / -1; }
+.visao { flex: none; align-self: center; }
+.visao[hidden] { display: none; }
+.visao button { min-height: 44px; padding: 0 14px; }
+.obj-card .mini-capa svg { width: 26px; height: 26px; stroke-width: 1.7; }
+.obj-empresa { display: flex; align-items: center; gap: 8px; margin: 0; font-size: .86rem; color: var(--suave-forte); }
+.obj-empresa .mini-capa { width: 28px; height: 28px; border-radius: 8px; font-size: .74rem; }
+.obj-empresa button { border: 0; background: none; padding: 0; font: inherit; font-weight: 600; color: var(--tinta); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.obj-lista { list-style: none; margin: 0; padding: 4px 14px; background: var(--card); border: 1px solid var(--linha); border-radius: 14px; }
+.obj-lista li { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--linha); }
+.obj-lista li:last-child { border-bottom: 0; }
+.obj-lista li.menor { background: var(--verde-fundo); margin: 0 -14px; padding-left: 14px; padding-right: 14px; }
+.obj-lista li > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.obj-lista small { color: var(--suave-forte); font-size: .84rem; }
+.obj-tipo { font-size: .8rem; color: var(--suave-forte); }
+.obj-valor { flex: none; text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+.obj-valor small { font-weight: 400; color: var(--suave-forte); }
+@media (max-width: 760px) {
+  .visao { order: 3; flex: 1 1 100%; }
+  .visao:not([hidden]) { display: flex; }
+  .visao button { flex: 1; }
+  .rep-objetos { grid-template-columns: 1fr; }
+}

@@ -115,7 +115,8 @@
     brinquedos: {
       rot: 'Brinquedos e recreação', curto: 'Brinquedos', icone: 'brinquedos', um: 'fornecedor', varios: 'fornecedores', criterios: CRIT_F,
       exemplo: 'Pula Pula Kids',
-      subtipos: ['Pula-pula / cama elástica', 'Inflável / tobogã', 'Piscina de bolinhas', 'Área baby', 'Touro mecânico', 'Futebol de sabão',
+      porObjeto: { rot: 'Brinquedos', um: 'brinquedo', varios: 'brinquedos', tipoRot: 'Tipo de brinquedo', ex: 'ex.: Pula-pula 3 x 3 m' },
+      subtipos: ['Pula-pula / cama elástica', 'Inflável / tobogã', 'Piscina de bolinhas', 'Escorregador / gangorra', 'Área baby', 'Touro mecânico', 'Futebol de sabão',
         'Games / fliperama', 'Recreação com monitores', 'Personagens', 'Pintura facial / oficinas', 'Mágico / palhaço'],
       unidades: ['por evento', 'por hora', 'pacote', 'diária'],
       inclusos: [['monitor', 'Monitor', 'num'], ['entrega', 'Entrega e retirada'], ['montagem', 'Montagem'], ['higienizacao', 'Higienização'],
@@ -144,6 +145,7 @@
     alugueis: {
       rot: 'Aluguéis e barraquinhas', curto: 'Aluguéis', icone: 'alugueis', um: 'fornecedor', varios: 'fornecedores', criterios: CRIT_F,
       exemplo: 'Pipoca da Festa',
+      porObjeto: { rot: 'Itens para alugar', um: 'item', varios: 'itens', tipoRot: 'Tipo de item', ex: 'ex.: Carrinho de pipoca' },
       subtipos: ['Carrinho de pipoca', 'Algodão-doce', 'Crepe', 'Churros', 'Hot dog', 'Sorvete / açaí', 'Food truck', 'Barraquinhas temáticas',
         'Mesas e cadeiras', 'Louças e talheres', 'Toalhas e tecidos', 'Tendas', 'Som e iluminação', 'Gerador', 'Freezer / chopeira', 'Pegue e monte (decoração)'],
       unidades: ['por hora', 'por evento', 'diária', 'por unidade', 'por porção', 'pacote'],
@@ -162,7 +164,13 @@
   const SECOES = [...ORDEM_CATS.map((k) => [k, CATS[k].curto, CATS[k].icone]), ['eventos', 'Meus eventos', 'eventos']];
   const catDe = (l) => CATS[l.cat] || CATS.espacos;
   const ehEspaco = (l) => !l.cat || l.cat === 'espacos';
-  const tiposDe = (l) => (ehEspaco(l) ? [l.tipo].filter(Boolean) : l.subtipos || []);
+  const tiposDe = (l) => (ehEspaco(l) ? [l.tipo].filter(Boolean)
+    : [...new Set([...(l.subtipos || []), ...(l.objetos || []).map((o) => o.tipo).filter(Boolean)])]);
+  const objetosDe = (l) => (l.objetos || []).filter((o) => o && (o.nome || o.tipo));
+  const porObj = (sec = S.secao) => !!(CATS[sec] && CATS[sec].porObjeto);
+  // Preços da empresa somados aos de cada objeto, para achar o menor valor.
+  const precosDe = (l) => [...(l.precos || []), ...objetosDe(l).filter((o) => o.valor != null)
+    .map((o) => ({ valor: o.valor, unidade: o.unidade, condicao: o.nome || o.tipo }))];
   const ehFornSec = () => S.secao !== 'espacos' && S.secao !== 'eventos';
   function stRot(k, l) {
     const forn = l ? !ehEspaco(l) : ehFornSec();
@@ -195,7 +203,7 @@
 
   const urlSegura = (u) => (/^https?:\/\//i.test(u || '') || /^fotos\/[\w./-]+$/.test(u || '') ? u : null);
   function menorPreco(l) {
-    const vs = (l.precos || []).map((p) => p.valor).filter((v) => typeof v === 'number');
+    const vs = precosDe(l).map((p) => p.valor).filter((v) => typeof v === 'number');
     return vs.length ? Math.min(...vs) : null;
   }
   function artePorTipo(tipo) {
@@ -214,11 +222,12 @@
       + (l.capacidade ? 1 : 0) + (itensDo(l).length >= 3 ? 2 : 0) + (l.site ? 1 : 0) + ((l.fotos || []).length ? 2 : 0)
       + (/^Informado/.test(l.status || '') ? 3 : 0);
   }
-  function zapLink(numero, nome) {
+  function zapLink(numero, nome, oque) {
     let d = digitos(numero);
     if (!d) return null;
     if (!d.startsWith('55')) d = '55' + d;
-    const msg = `Olá! Encontrei ${nome} pesquisando para um evento em Palmas. Pode me passar valores, condições e datas disponíveis?`;
+    const msg = oque ? `Olá! Vi o ${oque} de ${nome} pesquisando para um evento em Palmas. Pode me passar o valor, o que está incluso e as datas disponíveis?`
+      : `Olá! Encontrei ${nome} pesquisando para um evento em Palmas. Pode me passar valores, condições e datas disponíveis?`;
     return `https://wa.me/${d}?text=${encodeURIComponent(msg)}`;
   }
   const instaUrl = (h) => (h ? (/^https?:/.test(h) ? h : `https://instagram.com/${h.replace(/^@/, '')}`) : null);
@@ -243,11 +252,13 @@
     cmp: new Set(),
     detalheId: null, detalheAba: 'sobre',
     sync: 'local', // local | sem-chave | pendente | ok | erro
-    pag: 1, porPag: 12, sig: '', ultCat: 'espacos', abaDepois: null,
+    pag: 1, porPag: 12, sig: '', ultCat: 'espacos', abaDepois: null, visao: {},
   };
   const ui = lsGet(LS.ui, {});
   if (ui.ordem) S.f.ordem = ui.ordem;
   if ([12, 24, 48].includes(ui.porPag)) S.porPag = ui.porPag;
+  if (ui.visao && typeof ui.visao === 'object') S.visao = ui.visao;
+  const verObjetos = () => porObj() && S.visao[S.secao] === 'objeto';
 
   const vazia = () => ({ status: '', favorito: false, data: '', nota: 0, criterios: {}, pros: [], contras: [], anotacoes: '', orcamento_valor: '', orcamento_condicao: '', album: '', atualizado_em: '' });
   const visita = (id) => Object.assign(vazia(), S.visitas[id] || {});
@@ -427,7 +438,7 @@
     $('#chips-rapidos').innerHTML = rapidosDe(S.secao).map(([k, r, fn]) =>
       `<label class="check"><input type="checkbox" data-rapido="${k}" ${S.f.rapidos.has(k) ? 'checked' : ''}><span>${esc(r)}</span><span class="n">${ls.filter(fn).length}</span></label>`).join('');
   }
-  function renderAplicados(n) {
+  function renderAplicados(n, nEmp = null) {
     const tags = [];
     const add = (rot, acao) => tags.push(`<button type="button" class="tag-filtro" data-remover="${acao}"><span>${esc(rot)}</span>${ic('x')}<span class="sr">remover filtro</span></button>`);
     if (S.f.busca.trim()) add(`“${S.f.busca.trim()}”`, 'busca');
@@ -439,7 +450,10 @@
     const total = daSecao().filter(passaAba).length;
     const C = CATS[S.secao];
     const lista = S.aba !== 'todos' ? ` em ${rotAba(S.aba, ABAS.find((a) => a[0] === S.aba)[1]).toLowerCase()}` : '';
-    $('#aplicados').innerHTML = `<p class="cont"><strong>${n} ${n === 1 ? C.um : C.varios}</strong> <span>${tags.length ? `com esses filtros${n !== total ? `, de ${total}` : ''}` : ''}${lista}</span></p>`
+    const P = C.porObjeto;
+    const quem = nEmp != null ? `${n} ${n === 1 ? P.um : P.varios}</strong> <span>de ${nEmp} ${nEmp === 1 ? 'empresa' : 'empresas'}${tags.length ? ', com esses filtros' : ''}`
+      : `${n} ${n === 1 ? C.um : C.varios}</strong> <span>${tags.length ? `com esses filtros${n !== total ? `, de ${total}` : ''}` : ''}`;
+    $('#aplicados').innerHTML = `<p class="cont"><strong>${quem}${lista}</span></p>`
       + tags.join('') + (tags.length ? '<button type="button" class="link-btn" data-remover="tudo">Limpar tudo</button>' : '');
     const nf = tags.length - (S.f.busca.trim() ? 1 : 0);
     const b = $('#n-filtros'); b.hidden = !nf; b.textContent = nf;
@@ -467,10 +481,10 @@
   function precoInfo(l) {
     const mp = menorPreco(l);
     if (mp == null) {
-      const txt = (l.precos || []).find((p) => typeof p.valor === 'string' && p.valor.trim());
+      const txt = precosDe(l).find((p) => typeof p.valor === 'string' && p.valor.trim());
       return { consulta: true, valor: txt ? txt.valor : 'Sob consulta', cond: txt ? txt.condicao || '' : 'Peça o valor pelo contato' };
     }
-    const nums = l.precos.filter((p) => typeof p.valor === 'number');
+    const nums = precosDe(l).filter((p) => typeof p.valor === 'number');
     const p = nums.find((x) => x.valor === mp);
     const mx = Math.max(...nums.map((x) => x.valor));
     const tx = (l.taxas || []).filter((t) => typeof t.valor === 'number').reduce((a, t) => a + t.valor, 0);
@@ -496,6 +510,12 @@
     const ord = [...its.filter((k) => prior.includes(k)), ...its.filter((k) => !prior.includes(k))];
     const f = [];
     if (l.capacidade) f.push(['pessoas', `até ${l.capacidade}`]);
+    const obs = objetosDe(l);
+    if (porObj(l.cat) && obs.length) {
+      const P = CATS[l.cat].porObjeto;
+      return obs.slice(0, 3).map((o) => `<li>${ic(CATS[l.cat].icone)}${esc(o.nome || o.tipo)}</li>`).join('')
+        + (obs.length > 3 ? `<li class="mais">+${obs.length - 3} ${obs.length - 3 === 1 ? P.um : P.varios}</li>` : '');
+    }
     if (!ehEspaco(l)) tiposDe(l).slice(0, 2).forEach((t) => f.push(['', t]));
     let usados = 0;
     for (const k of ord) { if (f.length >= 3) break; f.push([IC_ITEM[k] || 'check', itemTexto(l, k)]); usados++; }
@@ -534,24 +554,79 @@
     </article>`;
   }
   const ehCelular = () => matchMedia('(max-width: 760px)').matches;
+  // Visão por objeto: cada brinquedo (ou item de aluguel) vira um cartão, com a empresa ao lado.
+  function objetosFiltrados(empresas) {
+    const q = norm(S.f.busca.trim()).split(/\s+/).filter(Boolean);
+    const teto = Number(S.f.preco) || 0;
+    const r = [];
+    empresas.forEach((l, ord) => objetosDe(l).forEach((o, i) => {
+      if (S.f.tipo && o.tipo !== S.f.tipo) return;
+      if (teto && !(typeof o.valor === 'number' && o.valor <= teto)) return;
+      if (q.length) { const txt = norm([o.nome, o.tipo, o.obs, l.nome, l.atende_em].join(' ')); if (!q.every((t) => txt.includes(t))) return; }
+      r.push({ l, o, i, ord });
+    }));
+    const o = S.f.ordem;
+    const v = (x) => (typeof x.o.valor === 'number' ? x.o.valor : Infinity);
+    const nome = (x) => x.o.nome || x.o.tipo || '';
+    const cmpV = (a, b) => (v(a) === v(b) ? 0 : v(a) < v(b) ? -1 : 1);
+    r.sort((a, b) => (o === 'preco' ? cmpV(a, b) || nome(a).localeCompare(nome(b), 'pt-BR')
+      : o === 'nome' ? nome(a).localeCompare(nome(b), 'pt-BR') : a.ord - b.ord || a.i - b.i));
+    return r;
+  }
+  function objCardHtml({ l, o }) {
+    const nome = o.nome || o.tipo;
+    const zap = zapLink(l.whatsapp, l.nome, nome);
+    const num = typeof o.valor === 'number';
+    return `<article class="card obj-card">
+      <div class="card-cab">
+        <span class="mini-capa mono mono-${numHash(l.id + (o.tipo || '')) % 5}" aria-hidden="true">${ic(CATS[l.cat].icone)}</span>
+        <div class="card-tit">
+          <h2><button type="button" data-abrir="${l.id}">${esc(nome)}</button></h2>
+          ${o.tipo && o.tipo !== nome ? `<p class="onde">${esc(o.tipo)}</p>` : ''}
+        </div>
+      </div>
+      <div class="preco ${num ? '' : 'consulta'}"><p class="pv"><strong>${num ? brl(o.valor) : esc(o.valor || 'Sob consulta')}</strong>${num ? `<span>/ ${esc(o.unidade || 'evento')}</span>` : ''}</p>
+        ${o.obs ? `<p class="pc">${esc(o.obs)}</p>` : num ? '' : '<p class="pc">Peça o valor pelo contato</p>'}</div>
+      ${o.qtd ? `<ul class="fatos"><li>${ic('check')}${o.qtd} ${o.qtd === 1 ? 'disponível' : 'disponíveis'}</li></ul>` : ''}
+      <p class="obj-empresa">${miniCapa(l)}<span>de <button type="button" data-abrir="${l.id}">${esc(l.nome)}</button>${l.atende_em ? ` · ${esc(l.atende_em)}` : ''}</span></p>
+      <div class="rodape-card">
+        ${zap ? `<a class="acao zap" href="${zap}" target="_blank" rel="noopener">${ic('zap')}WhatsApp</a>`
+          : l.telefone ? `<a class="acao" href="tel:+55${digitos(l.telefone)}">${ic('fone')}Ligar</a>` : ''}
+        <button type="button" class="acao" data-add-evento="${l.id}">${ic('eventos')}Ao evento</button>
+        <button type="button" class="link-det" data-abrir="${l.id}">Empresa<span aria-hidden="true"> →</span></button>
+      </div>
+    </article>`;
+  }
+  function renderVisao() {
+    const el = $('#visao');
+    if (!porObj()) { el.hidden = true; return; }
+    const P = CATS[S.secao].porObjeto;
+    el.hidden = false;
+    el.innerHTML = [['empresa', 'Por empresa'], ['objeto', `Por ${P.um}`]].map(([k, r]) =>
+      `<button type="button" data-visao="${k}" aria-pressed="${(S.visao[S.secao] || 'empresa') === k}">${r}</button>`).join('');
+  }
   function renderLista() {
-    const r = filtrados();
-    const sig = JSON.stringify([S.secao, S.aba, S.f.busca, S.f.tipo, S.f.evento, S.f.cap, S.f.preco, S.f.ordem, [...S.f.rapidos], S.porPag]);
+    renderVisao();
+    const empresas = filtrados();
+    const objs = verObjetos();
+    const r = objs ? objetosFiltrados(empresas) : empresas;
+    const sig = JSON.stringify([S.secao, S.aba, S.f.busca, S.f.tipo, S.f.evento, S.f.cap, S.f.preco, S.f.ordem, [...S.f.rapidos], S.porPag, objs]);
     if (sig !== S.sig) { S.sig = sig; S.pag = 1; }
     const paginas = Math.max(1, Math.ceil(r.length / S.porPag));
     if (S.pag > paginas) S.pag = paginas;
     const mob = ehCelular();
     const ini = mob ? 0 : (S.pag - 1) * S.porPag;
     const fim = Math.min(r.length, S.pag * S.porPag);
-    renderAplicados(r.length);
+    renderAplicados(r.length, objs ? new Set(r.map((x) => x.l.id)).size : null);
     if (!r.length) {
       const msg = !daSecao().length
         ? [`Nenhum ${CATS[S.secao].um} cadastrado ainda`, 'Use o botão Cadastrar, no alto, para adicionar o primeiro.', '']
+        : objs && !daSecao().some((l) => objetosDe(l).length) ? [`Nenhum ${CATS[S.secao].porObjeto.um} listado ainda`, `Abra uma empresa, toque em Editar e cadastre os ${CATS[S.secao].porObjeto.varios} que ela tem, com o valor de cada um.`, '<button type="button" class="btn" data-visao="empresa">Ver por empresa</button>']
         : S.aba === 'todos' ? ['Nada com esses filtros', 'Tire algum filtro ou busque por outro termo.', '<button type="button" class="btn" data-remover="tudo">Limpar filtros</button>']
         : ['Lista vazia por enquanto', 'Abra um cadastro e use “Minha visita” para marcar favorito, visita ou descarte.', '<button type="button" class="btn" data-aba="todos">Ver todos</button>'];
       $('#lista').innerHTML = `<div class="vazio"><h3>${msg[0]}</h3><p>${msg[1]}</p>${msg[2]}</div>`;
     } else {
-      $('#lista').innerHTML = r.slice(ini, fim).map(cardHtml).join('');
+      $('#lista').innerHTML = r.slice(ini, fim).map(objs ? objCardHtml : cardHtml).join('');
     }
     renderPaginacao(r.length, ini, fim, paginas, mob);
     renderBarraComparar();
@@ -616,6 +691,7 @@
       esp ? ['Capacidade', l.capacidade ? `até ${l.capacidade}` : 'Não informada', l.capacidade ? 'pessoas' : '']
         : ['Atende', l.atende_em || l.bairro || 'Palmas', ''],
       esp ? ['Tempo de uso', h0 ? h0.horario : /h de uso/.test(pBase?.unidade || '') ? pBase.unidade : 'Não informado', h0 ? h0.dias : '']
+        : porObj(l.cat) && objetosDe(l).length ? [catDe(l).porObjeto.rot, `${objetosDe(l).length}`, objetosDe(l).length === 1 ? catDe(l).porObjeto.um : catDe(l).porObjeto.varios]
         : ['Oferece', tiposDe(l)[0] || catDe(l).curto, tiposDe(l).length > 1 ? `+${tiposDe(l).length - 1}` : ''],
       ['Pagamento', l.pagamento ? l.pagamento.split(/[.;]/)[0].slice(0, 60) : 'Não informado', ''],
     ];
@@ -654,6 +730,20 @@
   }
   function sobreHtml(l) {
     const esp = ehEspaco(l);
+    const objs = objetosDe(l);
+    const P = catDe(l).porObjeto;
+    const mpObj = Math.min(...objs.map((o) => (typeof o.valor === 'number' ? o.valor : Infinity)));
+    const objsHtml = P ? `<section class="secao" id="det-objetos"><h3>${esc(P.rot)}${objs.length ? ` (${objs.length})` : ''}</h3>
+      ${objs.length ? `<ul class="obj-lista">${objs.map((o) => {
+        const num = typeof o.valor === 'number';
+        return `<li class="${num && o.valor === mpObj && objs.length > 1 ? 'menor' : ''}">
+          <div><strong>${esc(o.nome || o.tipo)}</strong>${o.tipo && o.tipo !== o.nome ? `<span class="obj-tipo">${esc(o.tipo)}</span>` : ''}
+            ${o.qtd || o.obs ? `<small>${[o.qtd ? `${o.qtd} ${o.qtd === 1 ? 'disponível' : 'disponíveis'}` : null, o.obs].filter(Boolean).map(esc).join(' · ')}</small>` : ''}</div>
+          <span class="obj-valor">${num ? `${o.valor === mpObj && objs.length > 1 ? '<span class="selo-menor">Menor</span>' : ''}${brl(o.valor)} <small>/ ${esc(o.unidade || 'evento')}</small>` : `<span class="fraco">${esc(o.valor || 'Sob consulta')}</span>`}</span>
+        </li>`;
+      }).join('')}</ul>`
+        : `<div class="cartao"><p class="texto">Ainda sem a lista de ${esc(P.varios)}. Toque em Editar para cadastrar cada um com o seu valor.</p></div>`}
+    </section>` : '';
     const precos = (l.precos || []).length
       ? `<div class="cartao">${l.precos.map((p) => `
           <div class="linha-preco ${typeof p.valor === 'number' && p.valor === menorPreco(l) && l.precos.length > 1 ? 'menor' : ''}">
@@ -661,7 +751,7 @@
             <span class="c">${typeof p.valor === 'number' && p.valor === menorPreco(l) && l.precos.length > 1 ? '<span class="selo-menor">Menor</span>' : ''}${esc(p.condicao || 'Condição não informada')}</span>
             ${p.inclui ? `<span class="i">Inclui: ${esc(p.inclui)}</span>` : ''}
           </div>`).join('')}</div>`
-      : '<div class="cartao"><p class="texto">Sem valor publicado. Peça orçamento informando data, horário e número de convidados.</p></div>';
+      : objs.length ? '' : '<div class="cartao"><p class="texto">Sem valor publicado. Peça orçamento informando data, horário e número de convidados.</p></div>';
     const taxas = (l.taxas || []).length
       ? `<div class="cartao" style="margin-top:8px">${l.taxas.map((t) => `<div class="linha-preco"><span class="v">+ ${typeof t.valor === 'number' ? brl(t.valor) : esc(t.valor)}</span><span class="c">${esc(t.nome)}</span></div>`).join('')}</div>`
       : '';
@@ -683,7 +773,8 @@
     return `
       ${perguntar}
       ${l.descricao ? `<section class="secao"><h3>Sobre</h3><div class="cartao"><p class="texto">${esc(l.descricao)}</p></div></section>` : ''}
-      <section class="secao"><h3>Valores e condições</h3>${precos}${taxas}${pagamento}${orc}
+      ${objsHtml}
+      <section class="secao"><h3>${P ? 'Pacotes e condições' : 'Valores e condições'}</h3>${precos}${taxas}${pagamento}${orc}
         <div class="nota-aviso">${ic('alerta')}<span>O valor muda com o dia da semana, a temporada, a duração e o que está incluso. Os daqui são referência de ${dataBR(l.conferido_em)}.</span></div>
       </section>
       ${reserva.length ? `<section class="secao"><h3>Reserva e cancelamento</h3><div class="cartao"><dl class="det">${reserva.map(([r, v]) => `<div><dt>${r}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></div></section>` : ''}
@@ -918,10 +1009,12 @@
     precos: { rot: 'valor', campos: [['valor', 'Valor', 'R$ 1.500 ou Sob consulta'], ['unidade', 'Por', 'escolha ou escreva'], ['condicao', 'Condição', 'sexta a domingo, até 100 pessoas'], ['inclui', 'O que esse valor inclui', 'mesas, limpeza…']] },
     taxas: { rot: 'taxa', campos: [['nome', 'Taxa', 'limpeza, caução, energia'], ['valor', 'Valor', 'R$ 150']] },
     horarios: { rot: 'horário', campos: [['dias', 'Dias', 'sábado'], ['horario', 'Horário', '8h às 2h']] },
+    objetos: { rot: 'item', campos: [['nome', 'Nome', 'ex.: Pula-pula 3 x 3 m'], ['tipo', 'Tipo', 'escolha ou escreva'], ['valor', 'Valor', 'R$ 250 ou Sob consulta'],
+      ['unidade', 'Por', 'por evento'], ['qtd', 'Quantos tem', 'ex.: 2'], ['obs', 'Observação', 'idade, tamanho, monitor, energia…']] },
   };
   function linhaRep(tipo, d = {}) {
     return `<div class="rep-linha rep-${tipo}">
-      ${REP[tipo].campos.map(([k, rot, ph]) => `<label class="campo c-${k}"><span>${rot}</span><input data-k="${k}" ${tipo === 'precos' && k === 'unidade' ? 'list="dl-unidades"' : ''} value="${esc(k === 'valor' ? valorTxt(d[k]) : d[k] || '')}" placeholder="${esc(ph)}"></label>`).join('')}
+      ${REP[tipo].campos.map(([k, rot, ph]) => `<label class="campo c-${k}"><span>${rot}</span><input data-k="${k}" ${k === 'unidade' ? 'list="dl-unidades"' : tipo === 'objetos' && k === 'tipo' ? 'list="dl-subtipos"' : ''} value="${esc(k === 'valor' ? valorTxt(d[k]) : d[k] || '')}" placeholder="${esc(ph)}"></label>`).join('')}
       <button type="button" class="tirar-linha" data-tirar-linha aria-label="Remover ${REP[tipo].rot}">×</button>
     </div>`;
   }
@@ -1004,7 +1097,10 @@
           <div class="grade-2">${C.campos.map(([k, rot, tipo, x]) => campoDet(k, rot, tipo, x, det[k])).join('')}</div>
         </fieldset>`}
 
-        ${blocoRep('precos', 'Valores', 'Cada valor com a sua condição: dia, horário, número de convidados, pacote.', (l && l.precos) || [])}
+        ${C.porObjeto ? blocoRep('objetos', esc(C.porObjeto.rot), `Um por ${esc(C.porObjeto.um)}, com o valor de cada um. Assim dá para filtrar e comparar por ${esc(C.porObjeto.um)} no catálogo.`, (l && l.objetos) || [])
+          .replace(/Adicionar item/, `Adicionar ${esc(C.porObjeto.um)}`) : ''}
+        ${C.porObjeto ? `<datalist id="dl-subtipos">${C.subtipos.map((t) => `<option value="${esc(t)}">`).join('')}</datalist>` : ''}
+        ${blocoRep('precos', C.porObjeto ? 'Pacotes e outros valores' : 'Valores', C.porObjeto ? 'Combos ou valores que valem para a empresa toda (ex.: 3 brinquedos por R$ 600).' : 'Cada valor com a sua condição: dia, horário, número de convidados, pacote.', (l && l.precos) || [])}
         <datalist id="dl-unidades">${C.unidades.map((u) => `<option value="${esc(u)}">`).join('')}</datalist>
         ${blocoRep('taxas', 'Taxas extras', esp ? 'Cobranças à parte, como limpeza, caução ou energia.' : 'Frete, deslocamento, hora extra, profissional adicional.', (l && l.taxas) || [])}
         <fieldset class="ed-bloco"><legend>Pagamento, reserva e cancelamento</legend>
@@ -1118,7 +1214,12 @@
       if (!v) return;
       if (e.type === 'number') { const n = Number(v); if (Number.isFinite(n)) detalhes[e.dataset.det] = n; } else detalhes[e.dataset.det] = v;
     });
-    return { ...comum, subtipos, descricao: g('descricao') || null, atende_em: g('atende_em') || null, detalhes };
+    const objetos = CATS[ED.cat].porObjeto ? rep('objetos', (r) => {
+      const o = { nome: val(r, 'nome'), tipo: val(r, 'tipo') || null, valor: parseValor(val(r, 'valor')), unidade: val(r, 'unidade') || null,
+        qtd: parseInt(val(r, 'qtd'), 10) > 0 ? parseInt(val(r, 'qtd'), 10) : null, obs: val(r, 'obs') || null };
+      return o.nome || o.tipo ? o : null;
+    }) : undefined;
+    return { ...comum, subtipos, descricao: g('descricao') || null, atende_em: g('atende_em') || null, detalhes, ...(objetos ? { objetos } : {}) };
   }
 
   const colDe = (dados) => (dados.cat && dados.cat !== 'espacos' ? 'fornecedores' : 'locais');
@@ -1264,6 +1365,7 @@
     let b;
     if ((b = t.closest('[data-aba]'))) { S.aba = b.dataset.aba; renderAbas(); renderLista(); renderNav(); return; }
     if ((b = t.closest('[data-pag]'))) { irPagina(b.dataset.pag); return; }
+    if ((b = t.closest('[data-visao]'))) { S.visao[S.secao] = b.dataset.visao; ui.visao = S.visao; lsSet(LS.ui, ui); renderLista(); return; }
     if ((b = t.closest('[data-orc-f]'))) {
       S.orcF = b.dataset.orcF; $('#orc-lista').className = 'orc-f-' + S.orcF;
       document.querySelectorAll('[data-orc-f]').forEach((x) => x.setAttribute('aria-pressed', x === b)); return;
@@ -1478,7 +1580,8 @@
   function prepLocal(l) {
     l._busca = norm([l.nome, l.tipo, l.bairro, l.endereco, l.observacoes, l.descricao, l.atende_em, ...(l.subtipos || []),
       ...Object.values(l.detalhes || {}), ...(l.comodidades || []), ...(l.eventos || []),
-      ...itensDo(l).map((k) => rotItem(l, k)), ...(l.precos || []).map((p) => `${p.condicao || ''} ${p.inclui || ''}`)].join(' '));
+      ...itensDo(l).map((k) => rotItem(l, k)), ...(l.precos || []).map((p) => `${p.condicao || ''} ${p.inclui || ''}`),
+      ...objetosDe(l).map((o) => `${o.nome || ''} ${o.tipo || ''} ${o.obs || ''}`)].join(' '));
     return l;
   }
   // Para cada id vale a versão mais nova: a do JSON do repositório ou a gravada pelo site.
@@ -1515,7 +1618,7 @@
     const tipos = S.secao === 'espacos' ? ls.map((l) => l.tipo) : [...(CATS[S.secao]?.subtipos || []).filter((t) => ls.some((l) => tiposDe(l).includes(t))), ...ls.flatMap(tiposDe)];
     $('#f-tipo').innerHTML = '<option value="">Todos</option>' + opts(ord(tipos), S.f.tipo);
     $('#f-evento').innerHTML = '<option value="">Qualquer</option>' + opts(ord(ls.flatMap((l) => l.eventos || [])), S.f.evento);
-    $('#rot-tipo').textContent = S.secao === 'espacos' ? 'Tipo de espaço' : 'O que oferece';
+    $('#rot-tipo').textContent = S.secao === 'espacos' ? 'Tipo de espaço' : porObj() ? CATS[S.secao].porObjeto.tipoRot : 'O que oferece';
     $('#campo-cap').hidden = S.secao !== 'espacos';
     $('#f-ordem option[value="cap"]').hidden = S.secao !== 'espacos';
   }
