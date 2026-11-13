@@ -3,6 +3,332 @@
   "observacao": "Dados reunidos de páginas públicas. Campo ausente = não encontrado na fonte. Valores são referência da data de conferência e variam conforme dia, temporada e pacote.",
   "locais": [
     {
+      "endereco": "Na Av. Teotônio Segurado, perto do Cellebre (Aureny III)",
+      "capacidade": 120,
+      "precos": [
+        {
+          "valor": 1100,
+          "unidade": "diária de 12h",
+          "condicao": "Fim de semana, diária fechada (desconto oferecido)",
+          "inclui": "Mesmos itens do Cellebre: piscina, churrasqueira, cozinha, sinuca, suíte"
+        },
+        {
+          "valor": 1200,
+          "unidade": "diária de 12h",
+          "condicao": "Fim de semana, valor de tabela",
+          "inclui": "Piscina, churrasqueira, cozinha, sinuca, suíte"
+        }
+      ],
+      "taxas": [
+        {
+          "nome": "Taxa de limpeza (ofereceram por R$ 100)",
+          "valor": 120
+        }
+      ],
+      "pagamento": null,
+      "instagram": null,
+      "whatsapp": "(63) 9241-7077",
+      "site": null,
+      "horarios": [
+        {
+          "dias": "Diurna",
+          "horario": "9h às 21h (aceitam neste espaço)"
+        },
+        {
+          "dias": "Noturna",
+          "horario": "19h às 7h"
+        }
+      ],
+      "comodidades": [
+        "Piscina",
+        "Churrasqueira",
+        "Fogão industrial",
+        "Freezer e geladeira",
+        "Bebedouro",
+        "Mesa de sinuca",
+        "Quarto suíte",
+        "Mesa de buffet",
+        "Jogos de mesas"
+      ],
+      "eventos": [
+        "Aniversário",
+        "Aniversário infantil"
+      ],
+      "fotos": [],
+      "observacoes": "Mesma dona do Cellebre. Lote grande, parecido com o Cellebre. Entregam o espaço limpo.",
+      "fontes": [
+        "WhatsApp com o local (conversa de out–nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local",
+      "id": "plenitude",
+      "nome": "Espaço Plenitude",
+      "tipo": "Espaço com piscina",
+      "bairro": "Aureny III"
+    },
+    {
+      "endereco": "Av. NS 06, HM 06, 108 Norte, em frente à Igreja de Cristo",
+      "capacidade": null,
+      "precos": [
+        {
+          "valor": "Sob consulta",
+          "unidade": null,
+          "condicao": "Orçamento só depois da visita, conforme a configuração escolhida",
+          "inclui": "5 configurações de espaço"
+        }
+      ],
+      "taxas": [],
+      "pagamento": null,
+      "instagram": null,
+      "whatsapp": "(63) 8405-9340",
+      "site": null,
+      "horarios": [],
+      "comodidades": [
+        "5 configurações de espaço",
+        "Cabe área de brinquedos"
+      ],
+      "eventos": [
+        "Casamento",
+        "Aniversário infantil",
+        "Aniversário"
+      ],
+      "fotos": [],
+      "observacoes": "Visitas com hora marcada, cedo pela manhã. Já receberam casamento com 2 áreas de brinquedo.",
+      "fontes": [
+        "WhatsApp com o local (conversa de out–nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local",
+      "id": "kazara",
+      "nome": "Kazara",
+      "tipo": "Salão de festas",
+      "bairro": "108 Norte"
+    },
+    {
+      "endereco": "Bertaville, Palmas",
+      "capacidade": 60,
+      "precos": [
+        {
+          "valor": 1200,
+          "unidade": "8h de uso",
+          "condicao": "Sem uso da piscina (negociado em nov/2026)",
+          "inclui": "Cozinha, mesas, toalhas, pula-pula"
+        },
+        {
+          "valor": 1600,
+          "unidade": "12h de uso",
+          "condicao": "Contratos fechados até dez/2026; a partir de jan/2027 pode ter reajuste",
+          "inclui": "Tudo, inclusive piscina com hidromassagem"
+        }
+      ],
+      "taxas": [],
+      "pagamento": "50% na assinatura do contrato e o restante 3 dias antes do evento. Gás por conta do cliente.",
+      "instagram": null,
+      "whatsapp": "(63) 9963-2245",
+      "site": null,
+      "horarios": [
+        {
+          "dias": "Locação padrão",
+          "horario": "12 horas"
+        }
+      ],
+      "comodidades": [
+        "Beira do lago",
+        "Piscina com hidromassagem",
+        "Área grande coberta",
+        "Churrasqueira",
+        "Cozinha equipada",
+        "Fogão industrial",
+        "Freezer e geladeira",
+        "Bebedouro",
+        "15 mesas e 60 cadeiras",
+        "15 toalhas de mesa",
+        "Pula-pula grande",
+        "Área de camping",
+        "Estacionamento",
+        "Câmeras de segurança"
+      ],
+      "eventos": [
+        "Casamento",
+        "Aniversário",
+        "Corporativo",
+        "Retiro"
+      ],
+      "fotos": [],
+      "observacoes": "Em meio à natureza, na beira do lago. Gás não incluso.",
+      "fontes": [
+        "WhatsApp com o local (conversa de out–nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local",
+      "id": "ranch-teixeira",
+      "nome": "Ranch Teixeira",
+      "tipo": "Chácara",
+      "bairro": "Bertaville",
+      "coordenadas": {
+        "lat": -10.289908409118652,
+        "lng": -48.31332015991211
+      }
+    },
+    {
+      "endereco": null,
+      "capacidade": 250,
+      "precos": [
+        {
+          "valor": 3600,
+          "unidade": "evento",
+          "condicao": "2/3 do salão climatizado, festa das 15h às 20h",
+          "inclui": "Limpeza inclusa; montagem a partir das 9h e retirada até 23h59 sem custo"
+        },
+        {
+          "valor": 4300,
+          "unidade": "evento",
+          "condicao": "Salão inteiro (300 m²), festa das 15h às 20h",
+          "inclui": "Limpeza inclusa; montagem a partir das 9h e retirada até 23h59 sem custo"
+        },
+        {
+          "valor": "Menor, sob consulta",
+          "unidade": null,
+          "condicao": "Metade do salão (indicado para ~70 pessoas)",
+          "inclui": null
+        }
+      ],
+      "taxas": [],
+      "pagamento": "Data reservada com sinal de 50% (ou a combinar).",
+      "instagram": null,
+      "whatsapp": "(63) 9100-2240",
+      "site": null,
+      "horarios": [
+        {
+          "dias": "Dia do evento",
+          "horario": "Montagem a partir das 9h, desmontagem até 23h59"
+        }
+      ],
+      "comodidades": [
+        "Salão climatizado de 300 m²",
+        "Pode dividir o salão",
+        "Área externa",
+        "Cabe infláveis e pula-pula",
+        "Cadeiras tiffany e mesas de 8/10 lugares (opcionais, à parte)"
+      ],
+      "eventos": [
+        "Casamento",
+        "Aniversário",
+        "Aniversário infantil",
+        "Confraternização",
+        "Formatura"
+      ],
+      "fotos": [],
+      "observacoes": "Salão inteiro para até 250 pessoas. Liberam montagem e desmontagem fora do horário da festa sem cobrar. Endereço não informado.",
+      "fontes": [
+        "WhatsApp com o local (conversa de out–nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local",
+      "id": "ricor-eventos",
+      "nome": "Ricor Eventos",
+      "tipo": "Salão de festas",
+      "bairro": "Palmas"
+    },
+    {
+      "endereco": "1006 Sul",
+      "capacidade": null,
+      "precos": [
+        {
+          "valor": 2300,
+          "unidade": "evento",
+          "condicao": "Valor informado em nov/2026",
+          "inclui": null
+        }
+      ],
+      "taxas": [],
+      "pagamento": null,
+      "instagram": null,
+      "whatsapp": "(63) 9274-3167",
+      "site": null,
+      "horarios": [],
+      "comodidades": [
+        "Climatizado"
+      ],
+      "eventos": [],
+      "fotos": [],
+      "observacoes": "Mesmo dono do espaço com piscina na 903 Sul. O nome não apareceu na conversa.",
+      "fontes": [
+        "WhatsApp com o local (conversa de out–nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local",
+      "id": "salao-1006-sul",
+      "nome": "Salão climatizado na 1006 Sul (nome não informado)",
+      "tipo": "Salão de festas",
+      "bairro": "1006 Sul"
+    },
+    {
+      "endereco": "903 Sul",
+      "capacidade": null,
+      "precos": [
+        {
+          "valor": 2000,
+          "unidade": "evento",
+          "condicao": "Valor informado em nov/2026",
+          "inclui": null
+        }
+      ],
+      "taxas": [],
+      "pagamento": null,
+      "instagram": null,
+      "whatsapp": "(63) 9274-3167",
+      "site": null,
+      "horarios": [],
+      "comodidades": [
+        "Piscina"
+      ],
+      "eventos": [],
+      "fotos": [],
+      "observacoes": "Mesmo dono do salão climatizado da 1006 Sul. O nome não apareceu na conversa.",
+      "fontes": [
+        "WhatsApp com o local (conversa de out–nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local",
+      "id": "piscina-903-sul",
+      "nome": "Espaço com piscina na 903 Sul (nome não informado)",
+      "tipo": "Espaço com piscina",
+      "bairro": "903 Sul"
+    },
+    {
+      "endereco": null,
+      "capacidade": null,
+      "precos": [
+        {
+          "valor": "Sob consulta",
+          "unidade": null,
+          "condicao": "Atendimento passado para outro contato",
+          "inclui": null
+        }
+      ],
+      "taxas": [],
+      "pagamento": null,
+      "instagram": null,
+      "whatsapp": "(63) 8439-1458",
+      "site": null,
+      "horarios": [],
+      "comodidades": [],
+      "eventos": [],
+      "fotos": [],
+      "observacoes": "A distribuidora encaminha o aluguel do espaço para o WhatsApp (63) 8439-1458. Atendimento da loja: seg a sex 8h30–11h e 13h–18h, sábado 8h30–16h.",
+      "fontes": [
+        "WhatsApp com o local (conversa de out–nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Dados mínimos",
+      "id": "negao-distribuidora",
+      "nome": "Espaço de festas da Negão Distribuidora",
+      "tipo": "Espaço de eventos",
+      "bairro": "Palmas",
+      "telefone": "(63) 9268-4272"
+    },
+    {
       "endereco": null,
       "capacidade": null,
       "precos": [
@@ -995,30 +1321,58 @@
     },
     {
       "id": "garden-palmas",
-      "nome": "Chácara Espaço Garden Palmas",
-      "tipo": "Chácara",
+      "nome": "Espaço Garden",
+      "tipo": "Espaço com piscina",
       "bairro": "706 Sul",
-      "endereco": "706 Sul, Alameda 12",
+      "endereco": "706 Sul, Alameda 12, Lote 01, ao lado da Med Pet Veterinária",
       "capacidade": null,
-      "precos": [],
+      "precos": [
+        {
+          "valor": 900,
+          "unidade": "turno",
+          "condicao": "Orçamento de nov/2026, para cerca de 70 pessoas",
+          "inclui": "Piscina, tendas, mesas redondas, cadeiras simples, fogão e freezer pequeno"
+        }
+      ],
       "instagram": null,
-      "whatsapp": null,
+      "whatsapp": "(63) 8417-0627",
       "site": null,
-      "horarios": [],
-      "comodidades": [],
+      "horarios": [
+        {
+          "dias": "Turno diurno",
+          "horario": "9h às 18h"
+        },
+        {
+          "dias": "Turno noturno",
+          "horario": "A partir das 18h"
+        }
+      ],
+      "comodidades": [
+        "Piscina",
+        "Tendas inclusas",
+        "Mesas redondas",
+        "Cadeiras simples",
+        "Fogão",
+        "Freezer pequeno"
+      ],
       "eventos": [
         "Casamento",
         "Aniversário",
+        "Aniversário infantil",
         "Batizado"
       ],
       "fotos": [],
-      "observacoes": "Página antiga no Facebook; confirmar se segue funcionando.",
+      "observacoes": "Turnos fixos de 9h às 18h ou a partir das 18h.",
       "fontes": [
-        "https://www.facebook.com/espacogardenpalmas/",
-        "https://www.planetabrasileiro.com/chacara-espaco-garden-palmas-F170CC2061AD44C"
+        "WhatsApp com o local (conversa de out–nov/2026)",
+        "https://www.facebook.com/espacogardenpalmas/"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Pode estar desatualizado"
+      "status": "Informado pelo local",
+      "coordenadas": {
+        "lat": -10.224392890930176,
+        "lng": -48.319679260253906
+      }
     },
     {
       "id": "paraiso-eventos",
@@ -1174,28 +1528,67 @@
     {
       "id": "cellebre",
       "nome": "Cellebre Eventos",
-      "tipo": "Salão de festas",
-      "bairro": "Palmas",
-      "endereco": null,
-      "capacidade": null,
-      "precos": [],
+      "tipo": "Espaço com piscina",
+      "bairro": "Aureny III",
+      "endereco": "Aureny III",
+      "capacidade": 160,
+      "precos": [
+        {
+          "valor": 1300,
+          "unidade": "diária de 12h",
+          "condicao": "Fim de semana. Sem desconto: mesmo valor desde 2022",
+          "inclui": "Piscina, churrasqueira, cozinha, sinuca, suíte, mesas"
+        }
+      ],
       "instagram": null,
       "whatsapp": "(63) 99241-7077",
       "site": null,
-      "horarios": [],
-      "comodidades": [],
+      "horarios": [
+        {
+          "dias": "Diurna",
+          "horario": "7h às 19h30 (até 20h–21h se não houver locação à noite)"
+        },
+        {
+          "dias": "Noturna",
+          "horario": "19h às 7h"
+        }
+      ],
+      "comodidades": [
+        "Piscina",
+        "Churrasqueira",
+        "Fogão industrial",
+        "Freezer e geladeira",
+        "Bebedouro",
+        "Mesa de sinuca",
+        "Quarto suíte",
+        "Mesa de buffet",
+        "Jogos de mesas",
+        "Galpão amplo com balcão"
+      ],
       "eventos": [
         "Casamento",
+        "Aniversário",
+        "Aniversário infantil",
         "Celebração"
       ],
       "fotos": [],
-      "observacoes": null,
+      "observacoes": "Maior que o Plenitude (mesma dona). Galpão amplo, cabe bastante brinquedo, até debaixo do balcão. O horário diurno pode ser cortado se houver locação à noite. Entregam o espaço limpo.",
       "fontes": [
-        "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas",
+        "WhatsApp com o local (conversa de out–nov/2026)",
         "https://guiafix.com.br/palmas-to/salao-de-festas"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados de diretório"
+      "status": "Informado pelo local",
+      "coordenadas": {
+        "lat": -10.3219812,
+        "lng": -48.3241584
+      },
+      "taxas": [
+        {
+          "nome": "Taxa de limpeza (ofereceram por R$ 100)",
+          "valor": 120
+        }
+      ]
     },
     {
       "id": "crystal-hall",
@@ -1665,14 +2058,20 @@
       "id": "golden",
       "nome": "Espaço Golden",
       "tipo": "Salão de festas",
-      "bairro": "Palmas",
+      "bairro": "Região sul (ver mapa)",
       "endereco": null,
-      "capacidade": null,
+      "capacidade": 100,
       "precos": [
+        {
+          "valor": 3500,
+          "unidade": "evento",
+          "condicao": "Tabela 2027, só o espaço (decoração com mesa média de brinde)",
+          "inclui": "Mesas com forro, 100 cadeiras tiffany, fogão industrial, bebedouro, geladeira, freezer, mesa de buffet, limpeza e papel para os banheiros"
+        },
         {
           "valor": "Sob consulta",
           "unidade": null,
-          "condicao": "Só espaço (decoração com mesa média de brinde) ou pacote espaço + decoração + buffet",
+          "condicao": "Pacote completo: espaço + decoração + buffet",
           "inclui": null
         }
       ],
@@ -1681,6 +2080,13 @@
       "site": null,
       "horarios": [],
       "comodidades": [
+        "100 cadeiras tiffany",
+        "Mesas com forro",
+        "Fogão industrial",
+        "Bebedouro industrial",
+        "Geladeira e freezer",
+        "Mesa de buffet",
+        "Limpeza inclusa",
         "Decoração própria",
         "Buffet próprio"
       ],
@@ -1690,13 +2096,17 @@
         "Confraternização"
       ],
       "fotos": [],
-      "observacoes": "Quem aluga só o espaço ganha a decoração com mesa média. Também fazem pacote completo com buffet. Valor e endereço ainda não informados.",
+      "observacoes": "Quem aluga só o espaço ganha a decoração com mesa média. Também fazem pacote completo com buffet.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
         "https://guiafix.com.br/palmas-to/salao-de-festas"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Informado pelo local"
+      "status": "Informado pelo local",
+      "coordenadas": {
+        "lat": -10.329614639282227,
+        "lng": -48.32483673095703
+      }
     },
     {
       "id": "ximenes",
