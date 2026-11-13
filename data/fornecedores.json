@@ -93,7 +93,7 @@
       "observacoes": "Contato provável: (63) 99220-5339 (confirmar). Crianças até 7 anos não pagam."
     },
     {
-      "descricao": "Aluga pula-pula, piscina de bolinhas, escorregador e gangorras. Também aluga mesas e cadeiras (D.L.A Locações).",
+      "descricao": "Kits de área recreativa (cercadinho com tatame, mesinhas, gangorrinhas, piscina de bolinhas e pula-pula de 2 m), pula-pulas e escorregadores. Também aluga mesas e cadeiras (D.L.A Locações).",
       "atende_em": "Palmas",
       "endereco": null,
       "taxas": [],
@@ -107,13 +107,55 @@
       "instagram": null,
       "telefone": null,
       "site": null,
-      "fotos": [],
-      "fontes": [
-        "Conversas de WhatsApp sobre a festa (out–nov/2026)"
+      "fotos": [
+        {
+          "url": "fotos/palmas-kids-fest/maps-1.jpg",
+          "legenda": "Espaço recreativo com cercadinho",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/D.L.A+locações+e+palmas+kids+fest/data=!4m2!3m1!1s0x933b3546219e979d:0xa9afecaa5da9b779"
+          }
+        },
+        {
+          "url": "fotos/palmas-kids-fest/maps-2.jpg",
+          "legenda": "Piscina de bolinhas com tatame",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/D.L.A+locações+e+palmas+kids+fest/data=!4m2!3m1!1s0x933b3546219e979d:0xa9afecaa5da9b779"
+          }
+        },
+        {
+          "url": "fotos/palmas-kids-fest/maps-3.jpg",
+          "legenda": "Mesinhas infantis",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/D.L.A+locações+e+palmas+kids+fest/data=!4m2!3m1!1s0x933b3546219e979d:0xa9afecaa5da9b779"
+          }
+        },
+        {
+          "url": "fotos/palmas-kids-fest/maps-4.jpg",
+          "legenda": "Espaço recreativo montado",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/D.L.A+locações+e+palmas+kids+fest/data=!4m2!3m1!1s0x933b3546219e979d:0xa9afecaa5da9b779"
+          }
+        },
+        {
+          "url": "fotos/palmas-kids-fest/maps-5.jpg",
+          "legenda": "Escorregador e gangorra",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/D.L.A+locações+e+palmas+kids+fest/data=!4m2!3m1!1s0x933b3546219e979d:0xa9afecaa5da9b779"
+          }
+        }
       ],
-      "conferido_em": "2026-11-13",
-      "status": "Dados mínimos",
-      "atualizado_em": "2026-11-13T20:30:00Z",
+      "fontes": [
+        "Conversa de WhatsApp com a empresa (out/2026)",
+        "https://www.google.com/maps/place/D.L.A+locações+e+palmas+kids+fest/data=!4m2!3m1!1s0x933b3546219e979d:0xa9afecaa5da9b779"
+      ],
+      "conferido_em": "2026-10-15",
+      "status": "Informado pelo local",
+      "atualizado_em": "2026-11-13T22:10:09Z",
       "detalhes": {},
       "itens": {},
       "id": "palmas-kids-fest",
@@ -122,19 +164,36 @@
       "subtipos": [
         "Pula-pula / cama elástica",
         "Piscina de bolinhas",
-        "Escorregador / gangorra"
+        "Escorregador / gangorra",
+        "Área baby"
       ],
       "precos": [
         {
           "valor": "Sob consulta",
           "unidade": "por evento",
-          "condicao": "Pergunte se tem desconto para alugar mais de um",
+          "condicao": "A locação fica 24 horas. O orçamento veio em PDF (não está na conversa exportada); peça de novo para registrar os valores. Ofereceram desconto ao fechar mais itens.",
           "inclui": null
         }
       ],
       "whatsapp": "(63) 99206-4699",
-      "observacoes": "Dá para fechar brinquedos e mesas com o mesmo fornecedor.",
+      "observacoes": "Dá para fechar brinquedos e mesas com o mesmo fornecedor. Montam kits sob medida. Catálogo no WhatsApp: wa.me/c/556392064699.",
       "objetos": [
+        {
+          "nome": "Espaço recreativo (kit com cercadinho)",
+          "tipo": "Área baby",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Tatame, mesinhas, gangorrinhas, piscina de bolinhas e pula-pula de 2 m. O cercadinho não comporta mais de um pula-pula; o pula-pula grande fica fora"
+        },
+        {
+          "nome": "Pula-pula de 3 m",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Montado fora do espaço recreativo"
+        },
         {
           "nome": "Pula-pula",
           "tipo": "Pula-pula / cama elástica",
@@ -175,7 +234,525 @@
           "qtd": null,
           "obs": "Pela D.L.A Locações; dá para fechar junto com os brinquedos"
         }
-      ]
+      ],
+      "coordenadas": {
+        "lat": -10.26006,
+        "lng": -48.347234
+      }
+    },
+    {
+      "descricao": "Aluga pula-pula, piscina de bolinhas, escorregador inflável e futebol de sabão. Os infláveis vão com monitor.",
+      "atende_em": "Palmas (valores para montagem dentro do Plano Diretor)",
+      "endereco": "1503 Sul, Alameda 28, QI 21, Lote 48 - Plano Diretor Sul",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/fgl-pula-pula/maps-1.jpg",
+          "legenda": "Futebol de sabão inflável",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/FGL+PULA+PULA/data=!4m2!3m1!1s0x933b353e630f55b3:0xe538dfc6041f44f2"
+          }
+        },
+        {
+          "url": "fotos/fgl-pula-pula/maps-2.jpg",
+          "legenda": "Pula-pula",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/FGL+PULA+PULA/data=!4m2!3m1!1s0x933b353e630f55b3:0xe538dfc6041f44f2"
+          }
+        },
+        {
+          "url": "fotos/fgl-pula-pula/maps-3.jpg",
+          "legenda": "Pula-pula com rede",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/FGL+PULA+PULA/data=!4m2!3m1!1s0x933b353e630f55b3:0xe538dfc6041f44f2"
+          }
+        },
+        {
+          "url": "fotos/fgl-pula-pula/maps-4.jpg",
+          "legenda": "Piscina de bolinhas",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/FGL+PULA+PULA/data=!4m2!3m1!1s0x933b353e630f55b3:0xe538dfc6041f44f2"
+          }
+        },
+        {
+          "url": "fotos/fgl-pula-pula/maps-5.jpg",
+          "legenda": "Piscina de bolinhas com escorregador",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/FGL+PULA+PULA/data=!4m2!3m1!1s0x933b353e630f55b3:0xe538dfc6041f44f2"
+          }
+        }
+      ],
+      "fontes": [
+        "Conversa de WhatsApp com a empresa (out/2026)",
+        "https://www.google.com/maps/place/FGL+PULA+PULA/data=!4m2!3m1!1s0x933b353e630f55b3:0xe538dfc6041f44f2"
+      ],
+      "conferido_em": "2026-10-14",
+      "status": "Informado pelo local",
+      "atualizado_em": "2026-11-13T22:10:09Z",
+      "detalhes": {},
+      "itens": {
+        "monitor": 1,
+        "montagem": true
+      },
+      "subtipos": [
+        "Pula-pula / cama elástica",
+        "Piscina de bolinhas",
+        "Inflável / tobogã",
+        "Futebol de sabão"
+      ],
+      "precos": [
+        {
+          "valor": 600,
+          "unidade": "por evento",
+          "condicao": "Escorregador inflável, até 4 horas. Valores para montagem dentro do Plano Diretor de Palmas; o local muda o preço.",
+          "inclui": "1 monitor"
+        }
+      ],
+      "observacoes": "Para orçar pedem a data e a quadra da montagem. Catálogo no WhatsApp: wa.me/c/556384069232.",
+      "objetos": [
+        {
+          "nome": "Futebol de sabão (até 13 anos)",
+          "tipo": "Futebol de sabão",
+          "valor": 800,
+          "unidade": "até 4 horas",
+          "qtd": null,
+          "obs": "Inclui 1 monitor"
+        },
+        {
+          "nome": "Escorregador inflável (até 10 anos)",
+          "tipo": "Inflável / tobogã",
+          "valor": 600,
+          "unidade": "até 4 horas",
+          "qtd": null,
+          "obs": "Inclui 1 monitor"
+        },
+        {
+          "nome": "Pula-pula 3,05 m (até 12 anos)",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null
+        },
+        {
+          "nome": "Pula-pula 2,44 m (até 7 anos)",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null
+        },
+        {
+          "nome": "Piscina de bolinhas 1,50 x 1,50 m",
+          "tipo": "Piscina de bolinhas",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Com 1.500 bolinhas"
+        },
+        {
+          "nome": "Piscina de bolinhas 1,10 x 1,10 m",
+          "tipo": "Piscina de bolinhas",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Com 1.000 bolinhas"
+        }
+      ],
+      "id": "fgl-pula-pula",
+      "cat": "brinquedos",
+      "nome": "FGL Pula Pula",
+      "whatsapp": "(63) 98406-9232",
+      "coordenadas": {
+        "lat": -10.272689,
+        "lng": -48.342036
+      }
+    },
+    {
+      "descricao": "Locação de brinquedos para festas: infláveis, pula-pula e piscina de bolinhas, com catálogo no WhatsApp.",
+      "atende_em": "Palmas",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/brinque-ja/maps-1.jpg",
+          "legenda": "Infláveis montados",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Brinque+Já/data=!4m2!3m1!1s0x933b37d978236b3b:0x67ce3706fcd86a79"
+          }
+        },
+        {
+          "url": "fotos/brinque-ja/maps-2.jpg",
+          "legenda": "Pula-pula",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Brinque+Já/data=!4m2!3m1!1s0x933b37d978236b3b:0x67ce3706fcd86a79"
+          }
+        },
+        {
+          "url": "fotos/brinque-ja/maps-3.jpg",
+          "legenda": "Escorregador inflável",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Brinque+Já/data=!4m2!3m1!1s0x933b37d978236b3b:0x67ce3706fcd86a79"
+          }
+        },
+        {
+          "url": "fotos/brinque-ja/maps-4.jpg",
+          "legenda": "Tobogã inflável",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Brinque+Já/data=!4m2!3m1!1s0x933b37d978236b3b:0x67ce3706fcd86a79"
+          }
+        },
+        {
+          "url": "fotos/brinque-ja/maps-5.jpg",
+          "legenda": "Escorregador inflável",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Brinque+Já/data=!4m2!3m1!1s0x933b37d978236b3b:0x67ce3706fcd86a79"
+          }
+        }
+      ],
+      "fontes": [
+        "Conversa de WhatsApp com a empresa (out/2026)",
+        "https://www.google.com/maps/place/Brinque+Já/data=!4m2!3m1!1s0x933b37d978236b3b:0x67ce3706fcd86a79"
+      ],
+      "conferido_em": "2026-10-14",
+      "status": "Dados mínimos",
+      "atualizado_em": "2026-11-13T22:10:09Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Inflável / tobogã",
+        "Pula-pula / cama elástica",
+        "Piscina de bolinhas"
+      ],
+      "precos": [
+        {
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "condicao": "Os valores vieram em mensagem interativa e áudio, que não aparecem na conversa exportada. Peça de novo por escrito.",
+          "inclui": null
+        }
+      ],
+      "observacoes": "Para orçar pedem nome, data, local e quais brinquedos. Catálogo no WhatsApp: wa.me/c/556384320373.",
+      "objetos": [],
+      "id": "brinque-ja",
+      "cat": "brinquedos",
+      "nome": "Brinque Já Locações",
+      "whatsapp": "(63) 98432-0373",
+      "coordenadas": {
+        "lat": -10.211354,
+        "lng": -48.353901
+      }
+    },
+    {
+      "descricao": "Locação de brinquedos para festas. Trabalha com eventos de 5 horas.",
+      "atende_em": "Palmas",
+      "endereco": "ARSO 132A (1305 Sul), Alameda 1 - Plano Diretor Sul",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/kaio-locacoes/maps-1.jpg",
+          "legenda": "Tobogã inflável",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Kaio+Locações+de+Brinquedos/data=!4m2!3m1!1s0x933b35005837530b:0x3a68994317ea5f8b"
+          }
+        },
+        {
+          "url": "fotos/kaio-locacoes/maps-2.jpg",
+          "legenda": "Escorregador inflável",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Kaio+Locações+de+Brinquedos/data=!4m2!3m1!1s0x933b35005837530b:0x3a68994317ea5f8b"
+          }
+        },
+        {
+          "url": "fotos/kaio-locacoes/maps-3.jpg",
+          "legenda": "Pula-pula inflável",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Kaio+Locações+de+Brinquedos/data=!4m2!3m1!1s0x933b35005837530b:0x3a68994317ea5f8b"
+          }
+        },
+        {
+          "url": "fotos/kaio-locacoes/maps-4.jpg",
+          "legenda": "Pula-pula com rede",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Kaio+Locações+de+Brinquedos/data=!4m2!3m1!1s0x933b35005837530b:0x3a68994317ea5f8b"
+          }
+        },
+        {
+          "url": "fotos/kaio-locacoes/maps-5.jpg",
+          "legenda": "Tobogã inflável",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Kaio+Locações+de+Brinquedos/data=!4m2!3m1!1s0x933b35005837530b:0x3a68994317ea5f8b"
+          }
+        }
+      ],
+      "fontes": [
+        "Conversa de WhatsApp com a empresa (out/2026)",
+        "https://www.google.com/maps/place/Kaio+Locações+de+Brinquedos/data=!4m2!3m1!1s0x933b35005837530b:0x3a68994317ea5f8b"
+      ],
+      "conferido_em": "2026-10-14",
+      "status": "Informado pelo local",
+      "atualizado_em": "2026-11-13T22:10:09Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Inflável / tobogã",
+        "Pula-pula / cama elástica"
+      ],
+      "precos": [
+        {
+          "valor": 450,
+          "unidade": "por evento",
+          "condicao": "Brinquedo novo mostrado em vídeo (out/2026). Eventos de 5 horas.",
+          "inclui": null
+        }
+      ],
+      "observacoes": "Os valores dos outros brinquedos vieram em mensagem interativa, que não aparece na conversa exportada. Catálogo no WhatsApp: wa.me/c/556399365258.",
+      "objetos": [
+        {
+          "nome": "Brinquedo novo (mostrado em vídeo)",
+          "tipo": "Inflável / tobogã",
+          "valor": 450,
+          "unidade": "por evento (5h)",
+          "qtd": null,
+          "obs": "O nome do brinquedo só aparece no vídeo; confirmar qual é"
+        }
+      ],
+      "id": "kaio-locacoes",
+      "cat": "brinquedos",
+      "nome": "Kaio Locações de Brinquedos",
+      "whatsapp": "(63) 99936-5258",
+      "coordenadas": {
+        "lat": -10.262328,
+        "lng": -48.345653
+      }
+    },
+    {
+      "descricao": "Brinquedos infláveis e para festa, com catálogo no WhatsApp. No Google Maps aparece como loja de brinquedos.",
+      "atende_em": "Palmas",
+      "endereco": "505 Sul, Alameda 19, 09, QI 33 - Plano Diretor Sul",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/lig-brinq/maps-1.jpg",
+          "legenda": "Escorregador inflável",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Lig+brinq+brinquedos/data=!4m2!3m1!1s0x933b359bb08ba2b1:0x44b9034882ed9995"
+          }
+        },
+        {
+          "url": "fotos/lig-brinq/maps-2.jpg",
+          "legenda": "Escorregador inflável",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Lig+brinq+brinquedos/data=!4m2!3m1!1s0x933b359bb08ba2b1:0x44b9034882ed9995"
+          }
+        },
+        {
+          "url": "fotos/lig-brinq/maps-3.jpg",
+          "legenda": "Inflável",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Lig+brinq+brinquedos/data=!4m2!3m1!1s0x933b359bb08ba2b1:0x44b9034882ed9995"
+          }
+        },
+        {
+          "url": "fotos/lig-brinq/maps-4.jpg",
+          "legenda": "Escorregador inflável",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Lig+brinq+brinquedos/data=!4m2!3m1!1s0x933b359bb08ba2b1:0x44b9034882ed9995"
+          }
+        }
+      ],
+      "fontes": [
+        "https://www.google.com/maps/place/Lig+brinq+brinquedos/data=!4m2!3m1!1s0x933b359bb08ba2b1:0x44b9034882ed9995"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Dados mínimos",
+      "atualizado_em": "2026-11-13T22:10:09Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Inflável / tobogã"
+      ],
+      "precos": [
+        {
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "condicao": "A conversa ainda não teve resposta.",
+          "inclui": null
+        }
+      ],
+      "observacoes": "Confirmar se aluga brinquedos para festa e pedir os valores. Catálogo no WhatsApp: wa.me/c/556392044431.",
+      "objetos": [],
+      "id": "lig-brinq",
+      "cat": "brinquedos",
+      "nome": "Lig Brinq Brinquedos",
+      "whatsapp": "(63) 99204-4431",
+      "coordenadas": {
+        "lat": -10.213428,
+        "lng": -48.345292
+      }
+    },
+    {
+      "descricao": "Combos de brinquedos e infláveis. Os infláveis são por 4 horas, com um monitor para cada inflável.",
+      "atende_em": "Palmas",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "Conversa de WhatsApp com a empresa (out/2026)"
+      ],
+      "conferido_em": "2026-10-15",
+      "status": "Informado pelo local",
+      "atualizado_em": "2026-11-13T22:10:09Z",
+      "detalhes": {},
+      "itens": {
+        "monitor": 1
+      },
+      "subtipos": [
+        "Inflável / tobogã",
+        "Pula-pula / cama elástica"
+      ],
+      "precos": [
+        {
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "condicao": "Os valores de cada brinquedo estão no catálogo do WhatsApp (toque em mostrar detalhes). O deslocamento é cobrado conforme a distância.",
+          "inclui": "1 monitor por inflável"
+        }
+      ],
+      "observacoes": "Catálogo no WhatsApp: wa.me/c/556391058599. Não achei fotos públicas (Google Maps) desta empresa.",
+      "objetos": [
+        {
+          "nome": "Infláveis",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "4 horas de evento, 1 monitor por inflável"
+        },
+        {
+          "nome": "Pula-pula",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Tempo a combinar (as 4 horas valem só para os infláveis)"
+        }
+      ],
+      "id": "liz-brinquedos",
+      "cat": "brinquedos",
+      "nome": "Liz Brinquedos",
+      "whatsapp": "(63) 99105-8599"
+    },
+    {
+      "descricao": "Salgados para festa.",
+      "atende_em": "Palmas",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "Conversa de WhatsApp com a empresa (out/2026)"
+      ],
+      "conferido_em": "2026-10-14",
+      "status": "Dados mínimos",
+      "atualizado_em": "2026-11-13T22:10:09Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Salgados"
+      ],
+      "precos": [
+        {
+          "valor": "Sob consulta",
+          "unidade": "por cento",
+          "condicao": "Ainda sem valores.",
+          "inclui": null
+        }
+      ],
+      "observacoes": "Disse que não sabe se vai estar atendendo na data do evento; combinar de novo mais perto. Não achei fotos públicas desta empresa.",
+      "objetos": [],
+      "id": "zil-lanches",
+      "cat": "buffet",
+      "nome": "Zil Lanches",
+      "whatsapp": "(63) 98412-9348"
     }
   ]
 }
