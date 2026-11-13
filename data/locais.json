@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-13T22:47:21Z",
+  "atualizado_em": "2026-11-13T22:56:08Z",
   "observacao": "Dados reunidos de páginas públicas. Campo ausente = não encontrado na fonte. Valores são referência da data de conferência e variam conforme dia, temporada e pacote.",
   "locais": [
     {
@@ -815,7 +815,7 @@
       "comodidades": [],
       "eventos": [],
       "fotos": [],
-      "observacoes": "Pedir de novo o PDF \"Valores e informações\" para registrar preços e capacidade.",
+      "observacoes": "Pedir de novo o PDF \"Valores e informações\" para registrar preços e capacidade. Pelo que foi comentado, mandaram só o valor do pacote com brinquedos: perguntar se alugam só o espaço.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)"
       ],
@@ -826,7 +826,7 @@
       "tipo": "Chácara",
       "bairro": "Saída para Porto Nacional",
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T22:56:08Z"
     },
     {
       "endereco": "Sentido Aparecida do Rio Negro, km 16 (pino do Google Maps)",
@@ -1092,7 +1092,7 @@
       "nome": "La Maison",
       "tipo": "Espaço com piscina",
       "bairro": "Palmas",
-      "endereco": null,
+      "endereco": "Alameda 12, nº 57 (Google Maps)",
       "capacidade": 100,
       "precos": [
         {
@@ -1134,9 +1134,10 @@
         "Aniversário"
       ],
       "fotos": [],
-      "observacoes": "Valores da tabela 2025 enviada em nov/2026. Disseram que alugando o espaço todo há 20% de desconto: confirmar se já está nos R$ 5.000. Data show, microfones e som para corporativo são opcionais.",
+      "observacoes": "Valores da tabela 2025 enviada em nov/2026. Disseram que alugando o espaço todo há 20% de desconto: confirmar se já está nos R$ 5.000. Data show, microfones e som para corporativo são opcionais. No Google Maps o La Maison (local para eventos) aparece com outro telefone, (63) 98500-1847: confirmar se é o mesmo espaço.",
       "fontes": [
-        "WhatsApp com o local (conversa de nov/2026)"
+        "WhatsApp com o local (conversa de nov/2026)",
+        "https://www.google.com/maps/place/La+Maison/data=!4m2!3m1!1s0x933b31f0fde75e79:0x843d532854b0b1ab"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -1150,7 +1151,11 @@
         "gramado": true,
         "banheiros": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T22:56:08Z",
+      "coordenadas": {
+        "lat": -10.1957888,
+        "lng": -48.3203252
+      }
     },
     {
       "id": "mega-eventos",
@@ -1458,10 +1463,10 @@
       "nome": "Chácara Luar do Lago Eventos",
       "tipo": "Chácara",
       "bairro": "Palmas",
-      "endereco": null,
+      "endereco": "Beira do lago, região norte (ver mapa)",
       "coordenadas": {
-        "lat": -10.1081,
-        "lng": -48.3652
+        "lat": -10.1081522,
+        "lng": -48.3652111
       },
       "capacidade": 250,
       "precos": [
@@ -1473,7 +1478,7 @@
         }
       ],
       "instagram": null,
-      "whatsapp": null,
+      "whatsapp": "(63) 98500-3997",
       "site": null,
       "horarios": [],
       "comodidades": [
@@ -1502,10 +1507,11 @@
           }
         }
       ],
-      "observacoes": "Contato pelo formulário do Casamentos.com.br.",
+      "observacoes": "Também aparece em diretório como \"Lake Moonlight Farm Events\" (mesmo WhatsApp). Tem hospedagem.",
       "fontes": [
         "https://www.casamentos.com.br/chacara-casamento/chacara-luar-do-lago-eventos--e346250",
-        "https://www.google.com/maps/place/Ch%C3%A1cara+Luar+do+Lago+Eventos/data=!4m2!3m1!1s0x9324c9af6749d051:0x3588a165daf21755"
+        "https://www.google.com/maps/place/Ch%C3%A1cara+Luar+do+Lago+Eventos/data=!4m2!3m1!1s0x9324c9af6749d051:0x3588a165daf21755",
+        "https://guiafix.com.br/palmas-to/salao-de-festas"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
@@ -1513,9 +1519,10 @@
         "cozinha": true,
         "area_coberta": true,
         "gramado": true,
-        "lago": true
+        "lago": true,
+        "hospedagem": true
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T22:56:08Z"
     },
     {
       "id": "california-place",
@@ -2032,7 +2039,7 @@
       "tipo": "Salão de festas",
       "bairro": "110 Norte",
       "endereco": "110 Norte, Alameda 13, Lote 04, Plano Diretor Norte",
-      "capacidade": null,
+      "capacidade": 1500,
       "precos": [],
       "instagram": null,
       "whatsapp": null,
@@ -2054,16 +2061,17 @@
           }
         }
       ],
-      "observacoes": null,
+      "observacoes": "Salão climatizado com jardim, piscina, churrasqueira e campo de futebol. Recebe de 20 a 1.500 convidados. Também faz decoração, iluminação e música.",
       "fontes": [
         "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml",
         "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas",
-        "https://www.google.com/maps/place/AH%C3%83DU+%7C+Eventos+e+Buffet/data=!4m2!3m1!1s0x9324cc96aa75f62f:0xf64b16f231f3b9e0"
+        "https://www.google.com/maps/place/AH%C3%83DU+%7C+Eventos+e+Buffet/data=!4m2!3m1!1s0x9324cc96aa75f62f:0xf64b16f231f3b9e0",
+        "https://www.casamentos.com.br/salao-casamento/ahadu-eventos--e157430"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:51:45Z",
+      "atualizado_em": "2026-11-13T22:56:08Z",
       "coordenadas": {
         "lat": -10.181227,
         "lng": -48.308064
@@ -2180,12 +2188,13 @@
       "fontes": [
         "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas",
         "https://guiafix.com.br/palmas-to/salao-de-festas",
-        "https://www.google.com/maps/place/Vila+Cabana/data=!4m2!3m1!1s0x933b31a0caf28035:0x4c2200b99092883"
+        "https://www.google.com/maps/place/Vila+Cabana/data=!4m2!3m1!1s0x933b31a0caf28035:0x4c2200b99092883",
+        "https://www.casamentos.com.br/chacara-casamento/vila-cabana-eventos--e393239"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:51:45Z",
+      "atualizado_em": "2026-11-13T22:56:08Z",
       "coordenadas": {
         "lat": -10.283313,
         "lng": -48.27788
@@ -2285,8 +2294,15 @@
       "tipo": "Salão de festas",
       "bairro": "Palmas",
       "endereco": "AV. TEOTÔNIO SEGURADO 1102 SUL LOTE 17, CONJ. 01",
-      "capacidade": null,
-      "precos": [],
+      "capacidade": 1000,
+      "precos": [
+        {
+          "valor": 8820,
+          "unidade": "aluguel",
+          "condicao": "A partir de (Casamentos.com.br)",
+          "inclui": "Salão fechado e climatizado com mezanino"
+        }
+      ],
       "instagram": null,
       "whatsapp": null,
       "site": null,
@@ -2313,7 +2329,7 @@
           }
         }
       ],
-      "observacoes": "Contato pelo Casamentos.com.br.",
+      "observacoes": "Salão grande, para até 1.000 convidados. Contato pelo Casamentos.com.br.",
       "fontes": [
         "https://www.casamentos.com.br/casa-para-casamento/crystal-hall--e107623",
         "https://www.google.com/maps/place/Crystal+Hall/data=!4m2!3m1!1s0x933b35819ce3ce15:0x150782fac162d6f3"
@@ -2321,7 +2337,7 @@
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:51:45Z",
+      "atualizado_em": "2026-11-13T22:56:08Z",
       "coordenadas": {
         "lat": -10.250432,
         "lng": -48.33233
@@ -2460,9 +2476,16 @@
       "nome": "Chácara São Camillo de Lellis",
       "tipo": "Chácara",
       "bairro": "Palmas",
-      "endereco": "TO-010, 12",
-      "capacidade": null,
-      "precos": [],
+      "endereco": "TO-010, Km 12",
+      "capacidade": 150,
+      "precos": [
+        {
+          "valor": 2000,
+          "unidade": "aluguel",
+          "condicao": "A partir de (Casamentos.com.br)",
+          "inclui": null
+        }
+      ],
       "instagram": null,
       "whatsapp": null,
       "site": null,
@@ -2497,17 +2520,18 @@
           }
         }
       ],
-      "observacoes": null,
+      "observacoes": "À beira do lago, com deck, salão coberto, piscina, capela e quartos para até 26 pessoas. Recebe de 10 a 150 convidados.",
       "fontes": [
         "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas",
-        "https://www.google.com/maps/place/Ch%C3%A1cara+S%C3%A3o+Camilo+de+Lelis/data=!4m2!3m1!1s0x9324c8c8c29572cf:0xff5c03d6ca5bbfae"
+        "https://www.google.com/maps/place/Ch%C3%A1cara+S%C3%A3o+Camilo+de+Lelis/data=!4m2!3m1!1s0x9324c8c8c29572cf:0xff5c03d6ca5bbfae",
+        "https://www.casamentos.com.br/chacara-casamento/chacara-sao-camillo-de-lellis--e215480"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {
         "lago": true
       },
-      "atualizado_em": "2026-11-13T21:51:45Z",
+      "atualizado_em": "2026-11-13T22:56:08Z",
       "coordenadas": {
         "lat": -10.079617,
         "lng": -48.327209
@@ -3173,38 +3197,6 @@
       "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
-      "id": "lake-moonlight",
-      "nome": "Chácara Luar do Lago Eventos (Lake Moonlight)",
-      "tipo": "Chácara",
-      "bairro": "Beira do lago, região norte",
-      "endereco": "Ver no mapa (Google Maps, perfil com o mesmo WhatsApp)",
-      "capacidade": null,
-      "precos": [],
-      "instagram": null,
-      "whatsapp": "(63) 98500-3997",
-      "site": null,
-      "horarios": [],
-      "comodidades": [],
-      "eventos": [],
-      "fotos": [],
-      "observacoes": "No diretório aparece como \"Lake Moonlight Farm Events\"; no Google Maps o mesmo WhatsApp é da Chácara Luar do Lago Eventos.",
-      "fontes": [
-        "https://guiafix.com.br/palmas-to/salao-de-festas",
-        "https://www.google.com/maps/place/Chácara+Luar+do+Lago+Eventos/data=!4m2!3m1!1s0x9324c9af6749d051:0x3588a165daf21755"
-      ],
-      "conferido_em": "2026-11-13",
-      "status": "Dados mínimos",
-      "itens": {
-        "lago": true,
-        "hospedagem": true
-      },
-      "atualizado_em": "2026-11-13T22:47:21Z",
-      "coordenadas": {
-        "lat": -10.1081522,
-        "lng": -48.3652111
-      }
-    },
-    {
       "id": "casa-de-xavier",
       "nome": "Casa de Xavier",
       "tipo": "Salão de festas",
@@ -3261,10 +3253,10 @@
     },
     {
       "id": "espaco-60-brinquedoteca",
-      "nome": "Espaço até 60 pessoas com brinquedoteca (nome não informado)",
+      "nome": "C2 Eventos (Espaço Celebrar)",
       "tipo": "Espaço de eventos",
-      "bairro": "Palmas",
-      "endereco": null,
+      "bairro": "Região sul (Taquaralto)",
+      "endereco": "Região sul de Palmas, perto de Taquaralto (pino do Google Maps)",
       "capacidade": 60,
       "precos": [
         {
@@ -3304,7 +3296,7 @@
       ],
       "pagamento": null,
       "instagram": null,
-      "whatsapp": null,
+      "whatsapp": "(63) 98451-8576",
       "site": null,
       "horarios": [
         {
@@ -3325,9 +3317,10 @@
         "Aniversário"
       ],
       "fotos": [],
-      "observacoes": "A tabela chegou encaminhada logo depois do contato \"Vanessa Celebrar\" ((63) 98451-8576), que deve ser quem aluga. Confirmar o nome e o endereço do espaço.",
+      "observacoes": "Evento para até 60 pessoas. No Google Maps o WhatsApp é do \"C2 eventos\"; no mesmo ponto há o perfil \"ESPAÇO CELEBRAR\". Confirmar o endereço exato.",
       "fontes": [
-        "Conversas de WhatsApp sobre a festa (out–nov/2026)"
+        "Conversas de WhatsApp sobre a festa (out–nov/2026)",
+        "https://www.google.com/maps/place/C2+eventos/data=!4m2!3m1!1s0x933b3b00058d3fb9:0xac97be5b158c95d9"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -3343,7 +3336,11 @@
         "mesas": 12,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T21:00:00Z"
+      "atualizado_em": "2026-11-13T22:56:08Z",
+      "coordenadas": {
+        "lat": -10.3589156,
+        "lng": -48.2976925
+      }
     }
   ]
 }
