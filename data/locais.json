@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-13T23:20:47Z",
+  "atualizado_em": "2026-11-13T23:28:32Z",
   "observacao": "Dados reunidos de páginas públicas. Campo ausente = não encontrado na fonte. Valores são referência da data de conferência e variam conforme dia, temporada e pacote.",
   "locais": [
     {
@@ -3696,6 +3696,69 @@
       "coordenadas": {
         "lat": -10.1085586,
         "lng": -48.3651481
+      }
+    },
+    {
+      "endereco": "Residencial Avalon (Água Boa), Alameda 01, Qd. 02, Lote 02",
+      "capacidade": null,
+      "precos": [
+        {
+          "valor": 1500,
+          "unidade": "diária",
+          "condicao": "A partir de; varia com a data e o número de pessoas",
+          "inclui": "Limpeza e gás"
+        }
+      ],
+      "taxas": [],
+      "pagamento": null,
+      "instagram": null,
+      "whatsapp": "(63) 99229-6387",
+      "site": null,
+      "horarios": [],
+      "comodidades": [
+        "Piscina, duchas e 2 espreguiçadeiras",
+        "Mesa de sinuca",
+        "Gramado amplo com 2 mini traves de futebol",
+        "Área coberta com 2 banheiros, 5 ventiladores, cadeiras e armadores de rede",
+        "Área da churrasqueira com fogão a lenha e forno",
+        "Cozinha: fogão industrial, cooktop, geladeira, cervejeira, freezer horizontal e vertical, mesa de vidro com 6 cadeiras",
+        "3 suítes com ar-condicionado (uma com 5 beliches)",
+        "Jogos de mesas de plástico"
+      ],
+      "eventos": [],
+      "fotos": [],
+      "observacoes": "Limpeza e gás já inclusos na diária. Tem hospedagem em 3 suítes com ar. As fotos vieram, mas a conversa foi exportada sem mídia.",
+      "fontes": [
+        "WhatsApp com o local (conversa de nov/2026)",
+        "https://www.google.com/maps/place/O%C3%A1sis+DuCerrado/data=!4m2!3m1!1s0x9324cb492eef052d:0x7876f0861ec0ac87"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local",
+      "id": "oasis-ducerrado",
+      "nome": "Oásis DuCerrado",
+      "tipo": "Chácara",
+      "bairro": "Água Boa (Residencial Avalon)",
+      "itens": {
+        "piscina": true,
+        "jogos": true,
+        "gramado": true,
+        "area_coberta": true,
+        "banheiros": true,
+        "churrasqueira": true,
+        "cozinha": true,
+        "fogao": true,
+        "freezer": true,
+        "geladeira": true,
+        "mesas": true,
+        "cadeiras": true,
+        "limpeza": true,
+        "gas": true,
+        "hospedagem": true
+      },
+      "atualizado_em": "2026-11-13T23:28:32Z",
+      "coordenadas": {
+        "lat": -10.1327839,
+        "lng": -48.3408522
       }
     }
   ]
