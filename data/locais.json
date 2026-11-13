@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-13T23:11:27Z",
+  "atualizado_em": "2026-11-13T23:20:47Z",
   "observacao": "Dados reunidos de páginas públicas. Campo ausente = não encontrado na fonte. Valores são referência da data de conferência e variam conforme dia, temporada e pacote.",
   "locais": [
     {
@@ -3603,6 +3603,99 @@
       "coordenadas": {
         "lat": -10.1628678,
         "lng": -48.3155233
+      }
+    },
+    {
+      "endereco": "Chácara 33, zona rural, beira do lago (Google Maps)",
+      "capacidade": null,
+      "precos": [
+        {
+          "valor": "Sob consulta",
+          "unidade": null,
+          "condicao": "Depende do evento, da data e do número de pessoas",
+          "inclui": "Aluguel da chácara inteira"
+        }
+      ],
+      "taxas": [],
+      "pagamento": null,
+      "instagram": null,
+      "whatsapp": "(63) 98438-8643",
+      "site": null,
+      "horarios": [],
+      "comodidades": [
+        "Piscina",
+        "Beira do lago, com vista",
+        "Área verde grande com sombra",
+        "Quiosques rústicos com churrasqueira",
+        "Mesa de sinuca",
+        "Dormitórios com ar-condicionado (beliches)",
+        "Cozinha",
+        "Banheiros"
+      ],
+      "eventos": [
+        "Aniversário",
+        "Confraternização",
+        "Churrasco em família"
+      ],
+      "fotos": [
+        {
+          "url": "fotos/recanto-dos-buritis/beira-lago.jpg",
+          "legenda": "Gramado na beira do lago"
+        },
+        {
+          "url": "fotos/recanto-dos-buritis/quiosque.jpg",
+          "legenda": "Quiosque com churrasqueira"
+        },
+        {
+          "url": "fotos/recanto-dos-buritis/area-verde.jpg",
+          "legenda": "Área verde"
+        },
+        {
+          "url": "fotos/recanto-dos-buritis/sombra.jpg",
+          "legenda": "Área com sombra das árvores"
+        },
+        {
+          "url": "fotos/recanto-dos-buritis/quiosque-frente.jpg",
+          "legenda": "Quiosque visto do gramado"
+        },
+        {
+          "url": "fotos/recanto-dos-buritis/dormitorio.jpg",
+          "legenda": "Dormitório com beliches e ar"
+        },
+        {
+          "url": "fotos/recanto-dos-buritis/cozinha.jpg",
+          "legenda": "Cozinha"
+        }
+      ],
+      "observacoes": "Aluga a chácara inteira. O valor é passado conforme o evento, a data e o número de pessoas. Fins de semana disputados: reservam vários dias seguidos. As fotos enviadas não mostram a piscina.",
+      "fontes": [
+        "WhatsApp com o local (conversa de nov/2026)",
+        "https://www.google.com/maps/place/Ch%C3%A1cara+recantos+dos+Buritis/data=!4m2!3m1!1s0x9324c9a74da074cf:0xdb4e3caae5dc6975"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local",
+      "id": "recanto-dos-buritis",
+      "nome": "Chácara Recanto dos Buritis",
+      "tipo": "Chácara",
+      "bairro": "Beira do lago, região norte",
+      "itens": {
+        "piscina": true,
+        "lago": true,
+        "gramado": true,
+        "churrasqueira": true,
+        "area_coberta": true,
+        "jogos": true,
+        "hospedagem": true,
+        "cozinha": true,
+        "fogao": true,
+        "geladeira": true,
+        "freezer": true,
+        "banheiros": true
+      },
+      "atualizado_em": "2026-11-13T23:20:47Z",
+      "coordenadas": {
+        "lat": -10.1085586,
+        "lng": -48.3651481
       }
     }
   ]
