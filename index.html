@@ -3,28 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Locais de Eventos Palmas</title>
-  <meta name="description" content="Espaços, salões e chácaras para eventos em Palmas - TO: valores com condições, localização, Instagram, WhatsApp, horários, fotos e registro de visitas com prós e contras.">
+  <title>Eventos em Palmas</title>
+  <meta name="description" content="Espaços, buffets, brinquedos, serviços e aluguéis para eventos em Palmas - TO, com valores e condições, contato direto, avaliação de cada opção e planejamento por evento.">
   <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#14120f" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23b4781f'/><path d='M32 14l5 11 12 1-9 8 3 12-11-6-11 6 3-12-9-8 12-1z' fill='%23fff'/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Inter:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="assets/style.css?v=4">
+  <link rel="stylesheet" href="assets/style.css?v=6">
 </head>
 <body>
   <header class="hero">
     <div class="wrap hero-grid">
       <div>
         <p class="sobretitulo">Palmas · Tocantins</p>
-        <h1>Onde fazer o seu evento</h1>
-        <p class="sub">Salões, chácaras e espaços com piscina. Preço sempre com a condição ao lado, contato direto e espaço para registrar o que você achou na visita.</p>
+        <h1>Planeje seu evento</h1>
+        <p class="sub">Espaços, buffets, brinquedos, serviços e aluguéis. Preço sempre com a condição ao lado, contato direto, sua avaliação de cada opção e um plano por evento com tudo o que você escolheu.</p>
       </div>
       <dl class="numeros" id="numeros"></dl>
     </div>
   </header>
 
+  <nav class="secoes-wrap" aria-label="Seções"><div class="wrap secoes" id="secoes"></div></nav>
   <nav class="wrap abas" id="abas" aria-label="Listas"></nav>
 
   <div class="barra" id="barra">
@@ -39,7 +40,7 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
           <span class="lbl">Filtros</span> <span class="badge-n" id="n-filtros" hidden></span>
         </button>
-        <button class="btn-novo" type="button" data-acao="novo-local" title="Cadastrar local" aria-label="Cadastrar local">
+        <button class="btn-novo" id="btn-novo" type="button" data-acao="novo-local" title="Cadastrar" aria-label="Cadastrar">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span class="lbl">Cadastrar</span>
         </button>
         <button class="icone-btn" id="btn-config" type="button" title="Sincronização e backup" aria-label="Sincronização e backup">
@@ -48,9 +49,9 @@
         </button>
       </div>
       <div class="painel-filtros" id="painel-filtros">
-        <label class="campo"><span>Tipo de espaço</span><select id="f-tipo"><option value="">Todos</option></select></label>
+        <label class="campo"><span id="rot-tipo">Tipo de espaço</span><select id="f-tipo"><option value="">Todos</option></select></label>
         <label class="campo"><span>Tipo de evento</span><select id="f-evento"><option value="">Qualquer</option></select></label>
-        <label class="campo"><span>Convidados (mín.)</span><input id="f-cap" type="number" inputmode="numeric" min="0" step="10" placeholder="ex.: 100"></label>
+        <label class="campo" id="campo-cap"><span>Convidados (mín.)</span><input id="f-cap" type="number" inputmode="numeric" min="0" step="10" placeholder="ex.: 100"></label>
         <label class="campo"><span>Valor até (R$)</span><input id="f-preco" type="number" inputmode="numeric" min="0" step="50" placeholder="ex.: 1500"></label>
         <label class="campo"><span>Ordenar por</span>
           <select id="f-ordem">
@@ -70,10 +71,11 @@
     <div class="aplicados" id="aplicados" aria-live="polite"></div>
     <section id="lista" class="lista" aria-label="Locais"></section>
   </main>
+  <section id="pagina" class="wrap pagina" aria-live="polite"></section>
 
   <footer class="rodape">
     <div class="wrap">
-      <p>Dados de páginas públicas (sites oficiais, Instagram, diretórios e anúncios), conferidos em <span id="data-dados"></span>. Cada local mostra a fonte. Valores mudam conforme dia, temporada e pacote: confirme com o local antes de fechar.</p>
+      <p>Dados de páginas públicas e de conversas com os fornecedores, conferidos a partir de <span id="data-dados"></span>. Cada cadastro mostra a fonte. Valores mudam conforme dia, temporada e pacote: confirme antes de fechar.</p>
       <p><a id="link-sugerir" href="#" target="_blank" rel="noopener">Sugerir um local ou corrigir um dado</a></p>
     </div>
   </footer>
@@ -87,10 +89,11 @@
   <dialog id="detalhe" class="folha" aria-labelledby="detalhe-titulo"></dialog>
   <dialog id="comparar" class="folha larga" aria-label="Comparar locais"></dialog>
   <dialog id="editor" class="folha editor" aria-label="Cadastrar ou editar local"></dialog>
+  <dialog id="picker" class="modal largo" aria-label="Escolher opção"></dialog>
   <dialog id="config" class="modal" aria-label="Sincronização e backup"></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="config.js?v=4"></script>
-  <script src="assets/app.js?v=4"></script>
+  <script src="config.js?v=6"></script>
+  <script src="assets/app.js?v=6"></script>
 </body>
 </html>

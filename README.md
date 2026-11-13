@@ -1,23 +1,30 @@
-# Locais de eventos em Palmas - TO
+# Eventos em Palmas - TO
 
-Catálogo de salões, chácaras e espaços para eventos em Palmas, com valores e suas condições, localização, Instagram, WhatsApp, horários, fotos e observações. Também registra visitas: situação, nota por critério, prós, contras, orçamento recebido e anotações, e compara até 4 locais lado a lado.
+Catálogo para eventos em Palmas em cinco seções: **Espaços**, **Buffet e comida**, **Brinquedos e recreação**, **Serviços** (foto, DJ, decoração, cerimonial…) e **Aluguéis e barraquinhas** (pipoca, algodão-doce, food truck, mesas, tendas…). Cada cadastro tem valores com condição, o que está incluso, detalhes da categoria, pagamento, cancelamento, contato e fotos. Dá para avaliar cada opção (nota por critério, prós, contras, orçamento recebido) e comparar até 4 lado a lado.
+
+**Meus eventos** organiza o planejamento: data, horário, para quem, quem organiza, convidados, tema, orçamento e descrição. Em cada evento você adiciona as opções de cada categoria, marca com a estrela as melhores e acompanha valor combinado, pago e vencimentos, outros gastos, tarefas com prazo e cronograma do dia, tudo numa página só (com versão para imprimir).
+
+Os campos de cada categoria vieram da pesquisa em [docs/pesquisa-atributos.md](docs/pesquisa-atributos.md).
 
 Site: https://geisbelly.github.io/locais-eventos-palmas/
 
-Sem login para ver. Para gravar visitas e **cadastrar ou editar locais** pelo site é preciso digitar uma vez a **chave de edição** (ícone de nuvem).
+Sem login para ver o catálogo. Para cadastrar, editar, excluir e gravar avaliações é preciso digitar uma vez a **chave de edição** (ícone de nuvem). Os eventos ficam no aparelho e, com a chave, na nuvem, onde só quem tem a chave consegue ler.
 
 ## Onde ficam os dados
 
 | O quê | Onde | Custo |
 |---|---|---|
 | Locais (nome, preços, contato…) | `data/locais.json` neste repositório | R$ 0 |
-| Locais cadastrados ou editados pelo site | Cloudflare D1 (tabela `locais`). Vale a versão mais nova entre o banco e o JSON | R$ 0 |
+| Fornecedores (buffet, brinquedos, serviços, aluguéis) | `data/fornecedores.json` | R$ 0 |
+| Cadastros e edições feitos pelo site, e os eventos | Cloudflare D1 (tabela `registros`). Vale a versão mais nova entre o banco e o JSON | R$ 0 |
 | Visitas, prós, contras, anotações | Cloudflare D1 via Worker (pasta `worker/`) | R$ 0 no plano gratuito (5 GB, 100 mil gravações/dia) |
 | Sem Worker configurado | `localStorage` do navegador + backup em arquivo | R$ 0 |
 
-## Adicionar ou corrigir um local
+## Adicionar ou corrigir
 
-Pelo site: botão **+ Cadastrar** no topo, ou **Editar** (lápis) dentro de um local. O formulário tem o que vem no aluguel (piscina, mesas e cadeiras com quantidade, churrasqueira, limpeza…), valores com condição, taxas, horários, contato e fotos. **Remover** só esconde o local da lista.
+Pelo site: escolha a seção e use **+ Cadastrar**, ou **Editar** (lápis) dentro de um cadastro. **Excluir** só esconde da lista.
+
+Para espaços, pelo site: O formulário tem o que vem no aluguel (piscina, mesas e cadeiras com quantidade, churrasqueira, limpeza…), valores com condição, taxas, horários, contato e fotos. **Remover** só esconde o local da lista.
 
 Ou edite `data/locais.json` direto. O que vem fica em `itens` (`true` ou a quantidade):
 

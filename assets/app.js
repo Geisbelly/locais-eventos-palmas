@@ -4,7 +4,7 @@
   /* ============ Config e utilidades ============ */
   const CFG = Object.assign({ apiUrl: '', repo: '' }, window.LEP_CONFIG || {});
   const API = (CFG.apiUrl || '').replace(/\/+$/, '');
-  const LS = { locais: 'lep.locais.v1', visitas: 'lep.visitas.v1', pendentes: 'lep.pendentes.v1', chave: 'lep.chave', ui: 'lep.ui.v1' };
+  const LS = { catalogo: 'lep.catalogo.v1', eventos: 'lep.eventos.v1', evPend: 'lep.eventos.pend.v1', visitas: 'lep.visitas.v1', pendentes: 'lep.pendentes.v1', chave: 'lep.chave', ui: 'lep.ui.v1' };
   const MAX_CMP = 4;
 
   const $ = (s, r = document) => r.querySelector(s);
@@ -40,6 +40,14 @@
     mais: '<path d="M12 5v14M5 12h14"/>',
     check: '<path d="m5 12 4 4 10-10"/>',
     lixo: '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
+    buffet: '<path d="M3 17h18M5 17a7 7 0 0 1 14 0M12 8V6M10 6h4"/><path d="M4 20h16"/>',
+    brinquedos: '<path d="M12 3a5 6 0 0 1 5 6c0 3.5-2.5 6-5 6s-5-2.5-5-6a5 6 0 0 1 5-6z"/><path d="M12 15l-1 2h2l-1-2M12 17c0 2-2 2-2 4"/>',
+    servicos: '<rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8 7l1.5-3h5L16 7"/>',
+    alugueis: '<path d="M3 10 12 4l9 6"/><path d="M5 10v10M19 10v10M3 20h18"/><path d="M5 10c1.2 1.5 3.3 1.5 4.7 0 1.4 1.5 3.3 1.5 4.6 0 1.4 1.5 3.5 1.5 4.7 0"/>',
+    eventos: '<rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/><path d="m9 15 2 2 4-4"/>',
+    estrela: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+    imprimir: '<path d="M7 9V3h10v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/>',
+    relogio: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
   };
   const ic = (n) => `<svg viewBox="0 0 24 24" aria-hidden="true">${I[n] || ''}</svg>`;
 
@@ -63,14 +71,98 @@
     ['estacionamento', 'Estacionamento'], ['banheiros', 'Banheiros'], ['acessivel', 'Acessível (PCD)'], ['wifi', 'Wi-Fi'],
     ['limpeza', 'Limpeza inclusa'], ['gas', 'Gás incluso'], ['hospedagem', 'Quarto / hospedagem'], ['seguranca', 'Câmeras / segurança'],
   ];
-  const ITEM_ROT = Object.fromEntries(ITENS.map(([k, r]) => [k, r]));
   const temItem = (l, k) => !!(l.itens && l.itens[k]);
+  function rotItem(l, k) { const it = (CATS[l.cat] || { inclusos: ITENS }).inclusos.find((x) => x[0] === k); return it ? it[1] : k; }
   function itemTexto(l, k) {
     const v = l.itens && l.itens[k];
-    if (typeof v === 'number') return `${v} ${ITEM_ROT[k].toLowerCase()}`;
-    return ITEM_ROT[k];
+    return typeof v === 'number' ? `${v} ${rotItem(l, k).toLowerCase()}` : rotItem(l, k);
   }
-  const itensDo = (l) => ITENS.filter(([k]) => temItem(l, k)).map(([k]) => k);
+  const itensDo = (l) => (CATS[l.cat] || { inclusos: ITENS }).inclusos.filter(([k]) => temItem(l, k)).map(([k]) => k);
+
+  // Categorias do catálogo. Campos vieram da pesquisa em docs/pesquisa-atributos.md.
+  const CRIT_F = [
+    ['preco', 'Custo-benefício'], ['qualidade', 'Qualidade / portfólio'], ['atendimento', 'Atendimento'],
+    ['confianca', 'Confiança / referências'], ['flexibilidade', 'Flexibilidade'],
+  ];
+  const ENERGIA = ['Não precisa', '110V', '220V', '110V ou 220V'];
+  const CATS = {
+    espacos: {
+      rot: 'Espaços', curto: 'Espaços', icone: 'salao', um: 'local', varios: 'locais', criterios: CRITERIOS, inclusos: ITENS,
+      unidades: ['diária', 'evento', 'locação', '4h de uso', '5h de uso', '8h de uso', '12h de uso'],
+    },
+    buffet: {
+      rot: 'Buffet e comida', curto: 'Buffet', icone: 'buffet', um: 'fornecedor', varios: 'fornecedores', criterios: CRIT_F,
+      exemplo: 'Buffet Sabor da Casa',
+      subtipos: ['Buffet completo', 'Churrasco', 'Coquetel / finger food', 'Jantar servido', 'Salgados', 'Doces', 'Bolo', 'Kit festa', 'Bebidas / bar', 'Chopp'],
+      unidades: ['por pessoa', 'por cento', 'por kg', 'pacote', 'por evento'],
+      inclusos: [['garcons', 'Garçons', 'num'], ['copeira', 'Copeira / cozinheira'], ['louca', 'Louça e talheres'], ['toalhas', 'Toalhas e mesa posta'],
+        ['bebidas', 'Refrigerante e suco'], ['cerveja', 'Cerveja / chopp'], ['gelo', 'Gelo e copos'], ['montagem', 'Montagem e desmontagem'],
+        ['deslocamento', 'Deslocamento'], ['degustacao', 'Degustação'], ['sobremesa', 'Sobremesa'], ['bolo', 'Bolo'],
+        ['decoracao_mesa', 'Decoração das mesas'], ['dieta', 'Opção vegetariana / sem glúten']],
+      rapidos: ['garcons', 'bebidas', 'louca', 'degustacao'],
+      campos: [['convidados_min', 'Mínimo de convidados', 'num'], ['convidados_max', 'Máximo de convidados', 'num'],
+        ['duracao', 'Duração do serviço', 'txt', 'ex.: 4 horas'], ['criancas', 'Regra para crianças', 'txt', 'ex.: até 5 anos não paga, 6 a 10 meia'],
+        ['excedente', 'Convidados a mais', 'txt', 'ex.: absorve 5%, depois R$ 80 cada'], ['prazo', 'Fechar com quanto tempo', 'txt', 'ex.: 30 dias antes'],
+        ['reajuste', 'Reajuste até a data', 'txt', 'ex.: preço travado no contrato'], ['cardapio', 'Cardápio', 'area', 'Entradas, pratos, sobremesas, bebidas…']],
+    },
+    brinquedos: {
+      rot: 'Brinquedos e recreação', curto: 'Brinquedos', icone: 'brinquedos', um: 'fornecedor', varios: 'fornecedores', criterios: CRIT_F,
+      exemplo: 'Pula Pula Kids',
+      subtipos: ['Pula-pula / cama elástica', 'Inflável / tobogã', 'Piscina de bolinhas', 'Área baby', 'Touro mecânico', 'Futebol de sabão',
+        'Games / fliperama', 'Recreação com monitores', 'Personagens', 'Pintura facial / oficinas', 'Mágico / palhaço'],
+      unidades: ['por evento', 'por hora', 'pacote', 'diária'],
+      inclusos: [['monitor', 'Monitor', 'num'], ['entrega', 'Entrega e retirada'], ['montagem', 'Montagem'], ['higienizacao', 'Higienização'],
+        ['lona', 'Lona / proteção de chão'], ['seguro', 'Seguro'], ['gerador', 'Gerador'], ['extensao', 'Extensão elétrica']],
+      rapidos: ['monitor', 'entrega', 'montagem', 'higienizacao'],
+      campos: [['idade', 'Faixa de idade', 'txt', 'ex.: 3 a 10 anos'], ['simultaneas', 'Crianças ao mesmo tempo', 'num'],
+        ['tamanho', 'Tamanho do brinquedo', 'txt', 'ex.: 4 x 4 m, 3 m de altura'], ['espaco', 'Espaço necessário', 'txt', 'ex.: 5 x 5 m, chão plano'],
+        ['energia', 'Energia', 'sel', ENERGIA], ['duracao', 'Tempo de locação', 'txt', 'ex.: 4 horas'],
+        ['hora_extra', 'Hora extra', 'txt', 'ex.: R$ 50 por hora'], ['chuva', 'Se chover ou ventar', 'txt', 'ex.: remarca sem custo'],
+        ['normas', 'Normas / certificação', 'txt', 'ex.: NBR 15859']],
+    },
+    servicos: {
+      rot: 'Serviços', curto: 'Serviços', icone: 'servicos', um: 'fornecedor', varios: 'fornecedores', criterios: CRIT_F,
+      exemplo: 'Ana Lima Fotografia',
+      subtipos: ['Fotografia', 'Filmagem', 'DJ / som', 'Banda / música ao vivo', 'Decoração', 'Cerimonial / assessoria', 'Garçons / copeiras',
+        'Bartender', 'Segurança', 'Limpeza', 'Maquiagem e cabelo', 'Convites e papelaria', 'Lembrancinhas', 'Iluminação', 'Animação / MC'],
+      unidades: ['por evento', 'por hora', 'pacote', 'por pessoa', 'por profissional'],
+      inclusos: [['equipamento', 'Equipamento próprio'], ['equipe', 'Equipe de apoio', 'num'], ['deslocamento', 'Deslocamento'],
+        ['montagem', 'Montagem e desmontagem'], ['edicao', 'Edição / tratamento'], ['album', 'Álbum impresso'], ['video', 'Vídeo'],
+        ['making_of', 'Making of / preparação'], ['drone', 'Drone'], ['online', 'Entrega online'], ['reuniao', 'Reunião de alinhamento']],
+      rapidos: ['equipamento', 'deslocamento', 'edicao'],
+      campos: [['horas', 'Horas de cobertura', 'txt', 'ex.: 5 horas a partir da chegada'], ['entrega', 'Prazo de entrega', 'txt', 'ex.: fotos em 30 dias'],
+        ['hora_extra', 'Hora extra', 'txt', 'ex.: R$ 200 por hora'], ['necessidades', 'Precisa no local', 'txt', 'ex.: tomada 220V, alimentação da equipe'],
+        ['entregaveis', 'O que é entregue', 'area', 'ex.: 300 fotos tratadas, vídeo de 3 minutos'], ['portfolio', 'Link do portfólio', 'url']],
+    },
+    alugueis: {
+      rot: 'Aluguéis e barraquinhas', curto: 'Aluguéis', icone: 'alugueis', um: 'fornecedor', varios: 'fornecedores', criterios: CRIT_F,
+      exemplo: 'Pipoca da Festa',
+      subtipos: ['Carrinho de pipoca', 'Algodão-doce', 'Crepe', 'Churros', 'Hot dog', 'Sorvete / açaí', 'Food truck', 'Barraquinhas temáticas',
+        'Mesas e cadeiras', 'Louças e talheres', 'Toalhas e tecidos', 'Tendas', 'Som e iluminação', 'Gerador', 'Freezer / chopeira', 'Pegue e monte (decoração)'],
+      unidades: ['por hora', 'por evento', 'diária', 'por unidade', 'por porção', 'pacote'],
+      inclusos: [['atendente', 'Atendente / operador', 'num'], ['insumos', 'Insumos inclusos'], ['porcoes_livres', 'Porções à vontade'],
+        ['embalagens', 'Embalagens / guardanapos'], ['frete', 'Frete (entrega e retirada)'], ['montagem', 'Montagem e desmontagem'],
+        ['energia_propria', 'Gás ou energia próprios'], ['limpeza', 'Limpeza'], ['personalizacao', 'Personalização com o tema']],
+      rapidos: ['atendente', 'insumos', 'frete', 'porcoes_livres'],
+      campos: [['duracao', 'Duração mínima', 'txt', 'ex.: 3 horas'], ['hora_extra', 'Hora extra', 'txt', 'ex.: R$ 120 por hora'],
+        ['porcoes', 'Porções ou unidades', 'txt', 'ex.: 300 porções ou à vontade'], ['producao', 'Produção por hora', 'txt', 'ex.: 80 pipocas por hora'],
+        ['energia', 'Energia', 'sel', [...ENERGIA, 'Gás']], ['espaco', 'Espaço necessário', 'txt', 'ex.: 2 x 2 m perto de tomada'],
+        ['quantidade', 'Quantidade disponível', 'txt', 'ex.: 200 cadeiras'], ['caucao', 'Caução', 'txt'],
+        ['avaria', 'Quebra ou avaria', 'txt', 'ex.: cobra o valor da peça']],
+    },
+  };
+  const ORDEM_CATS = ['espacos', 'buffet', 'brinquedos', 'servicos', 'alugueis'];
+  const SECOES = [...ORDEM_CATS.map((k) => [k, CATS[k].curto, CATS[k].icone]), ['eventos', 'Meus eventos', 'eventos']];
+  const catDe = (l) => CATS[l.cat] || CATS.espacos;
+  const ehEspaco = (l) => !l.cat || l.cat === 'espacos';
+  const tiposDe = (l) => (ehEspaco(l) ? [l.tipo].filter(Boolean) : l.subtipos || []);
+  const ehFornSec = () => S.secao !== 'espacos' && S.secao !== 'eventos';
+  function stRot(k, l) {
+    const forn = l ? !ehEspaco(l) : ehFornSec();
+    if (forn && k === 'quero') return 'Quero orçar';
+    if (forn && k === 'visitado') return 'Já conversei';
+    return STATUS[k].rotulo;
+  }
 
   const RAPIDOS = [
     ['com-preco', 'Com valor', (l) => menorPreco(l) != null],
@@ -85,6 +177,14 @@
   const ABAS = [
     ['todos', 'Todos'], ['favoritos', 'Favoritos'], ['quero', 'Quero visitar'], ['visitado', 'Visitados'], ['descartado', 'Descartados'],
   ];
+  const rotAba = (k, r) => (ehFornSec() ? { quero: 'Quero orçar', visitado: 'Já conversei' }[k] || r : r);
+  function rapidosDe(sec) {
+    if (sec === 'espacos' || !CATS[sec]) return RAPIDOS;
+    const c = CATS[sec];
+    return [['com-preco', 'Com valor', (l) => menorPreco(l) != null],
+      ...c.rapidos.map((k) => [k, c.inclusos.find((x) => x[0] === k)[1], (l) => temItem(l, k)]),
+      ['zap', 'Tem WhatsApp', (l) => !!l.whatsapp]];
+  }
 
   const urlSegura = (u) => (/^https?:\/\//i.test(u || '') || /^fotos\/[\w./-]+$/.test(u || '') ? u : null);
   function menorPreco(l) {
@@ -111,7 +211,7 @@
     let d = digitos(numero);
     if (!d) return null;
     if (!d.startsWith('55')) d = '55' + d;
-    const msg = `Olá! Encontrei o ${nome} pesquisando locais de eventos em Palmas. Pode me passar valores, condições e datas disponíveis?`;
+    const msg = `Olá! Encontrei ${nome} pesquisando para um evento em Palmas. Pode me passar valores, condições e datas disponíveis?`;
     return `https://wa.me/${d}?text=${encodeURIComponent(msg)}`;
   }
   const instaUrl = (h) => (h ? (/^https?:/.test(h) ? h : `https://instagram.com/${h.replace(/^@/, '')}`) : null);
@@ -125,7 +225,9 @@
 
   /* ============ Estado ============ */
   const S = {
-    locais: [], porId: {}, dataDados: '', base: [], remotos: [],
+    locais: [], porId: {}, dataDados: '', base: [], fbase: [], remotos: [],
+    secao: 'espacos', paginaEv: null,
+    eventos: lsGet(LS.eventos, {}), evPend: new Set(lsGet(LS.evPend, [])),
     visitas: lsGet(LS.visitas, {}),
     pendentes: new Set(lsGet(LS.pendentes, [])),
     chave: lsGet(LS.chave, ''),
@@ -150,7 +252,7 @@
     clearTimeout(timerSync);
     timerSync = setTimeout(sincronizar, 800);
     atualizarSync();
-    if (render) { renderAbas(); renderLista(); renderNumeros(); }
+    if (render) { if (S.paginaEv || S.secao === 'eventos') renderTudo(); else { renderAbas(); renderLista(); renderNumeros(); } }
   }
 
   function atualizarSync(estado) {
@@ -218,14 +320,15 @@
     if (S.aba === 'todos') return true;
     return v.status === S.aba;
   }
+  const daSecao = () => S.locais.filter((l) => (l.cat || 'espacos') === S.secao);
   function filtrados() {
     const q = norm(S.f.busca.trim()).split(/\s+/).filter(Boolean);
     const cap = Number(S.f.cap) || 0;
     const teto = Number(S.f.preco) || 0;
-    const rapidos = RAPIDOS.filter(([k]) => S.f.rapidos.has(k));
-    const r = S.locais.filter((l) => {
+    const rapidos = rapidosDe(S.secao).filter(([k]) => S.f.rapidos.has(k));
+    const r = daSecao().filter((l) => {
       if (!passaAba(l)) return false;
-      if (S.f.tipo && l.tipo !== S.f.tipo) return false;
+      if (S.f.tipo && !tiposDe(l).includes(S.f.tipo)) return false;
       if (S.f.evento && !(l.eventos || []).includes(S.f.evento)) return false;
       if (cap && (l.capacidade || 0) < cap) return false;
       const mp = menorPreco(l);
@@ -254,21 +357,37 @@
 
   /* ============ Render: topo ============ */
   function renderNumeros() {
-    const vs = Object.values(S.visitas);
-    const comPreco = S.locais.filter((l) => menorPreco(l) != null).length;
+    if (S.secao === 'eventos') {
+      const evs = eventosAtivos();
+      const prox = evs.find((e) => e.data && diasAte(e.data) >= 0);
+      const contratados = evs.reduce((a, e) => a + (e.escolhas || []).filter((x) => x.status === 'contratado').length, 0);
+      $('#numeros').innerHTML = `
+        <div><dt>Eventos</dt><dd>${evs.length}</dd></div>
+        <div><dt>Próximo</dt><dd>${prox ? (diasAte(prox.data) === 0 ? 'hoje' : diasAte(prox.data) + 'd') : '—'}</dd></div>
+        <div><dt>Contratados</dt><dd>${contratados}</dd></div>`;
+      return;
+    }
+    const ls = daSecao();
+    const comPreco = ls.filter((l) => menorPreco(l) != null).length;
     $('#numeros').innerHTML = `
-      <div><dt>Locais</dt><dd>${S.locais.length}</dd></div>
+      <div><dt>${S.secao === 'espacos' ? 'Locais' : 'Cadastrados'}</dt><dd>${ls.length}</dd></div>
       <div><dt>Com valor</dt><dd>${comPreco}</dd></div>
-      <div><dt>Visitados</dt><dd>${vs.filter((v) => v.status === 'visitado').length}</dd></div>`;
+      <div><dt>${S.secao === 'espacos' ? 'Visitados' : 'Já conversei'}</dt><dd>${ls.filter((l) => visita(l.id).status === 'visitado').length}</dd></div>`;
+  }
+  function renderSecoes() {
+    const n = (k) => (k === 'eventos' ? eventosAtivos().length : S.locais.filter((l) => (l.cat || 'espacos') === k).length);
+    $('#secoes').innerHTML = SECOES.map(([k, r, icn]) =>
+      `<a class="secao-link" href="#${k}" aria-current="${S.secao === k ? 'page' : 'false'}">${ic(icn)}<span>${r}</span><span class="n">${n(k)}</span></a>`).join('');
   }
   function renderAbas() {
-    const cont = (k) => (k === 'todos' ? S.locais.length
-      : S.locais.filter((l) => (k === 'favoritos' ? visita(l.id).favorito : visita(l.id).status === k)).length);
+    const ls = daSecao();
+    const cont = (k) => (k === 'todos' ? ls.length
+      : ls.filter((l) => (k === 'favoritos' ? visita(l.id).favorito : visita(l.id).status === k)).length);
     $('#abas').innerHTML = ABAS.map(([k, r]) =>
-      `<button type="button" class="aba" data-aba="${k}" aria-pressed="${S.aba === k}">${r} <span class="n">${cont(k)}</span></button>`).join('');
+      `<button type="button" class="aba" data-aba="${k}" aria-pressed="${S.aba === k}">${rotAba(k, r)} <span class="n">${cont(k)}</span></button>`).join('');
   }
   function renderRapidos() {
-    $('#chips-rapidos').innerHTML = RAPIDOS.map(([k, r]) =>
+    $('#chips-rapidos').innerHTML = rapidosDe(S.secao).map(([k, r]) =>
       `<button type="button" class="chip" data-rapido="${k}" aria-pressed="${S.f.rapidos.has(k)}">${r}</button>`).join('');
   }
   function renderAplicados(n) {
@@ -279,9 +398,10 @@
     if (S.f.evento) add(S.f.evento, 'evento');
     if (Number(S.f.cap)) add(`${S.f.cap}+ convidados`, 'cap');
     if (Number(S.f.preco)) add(`até ${brl(Number(S.f.preco))}`, 'preco');
-    RAPIDOS.forEach(([k, r]) => { if (S.f.rapidos.has(k)) add(r, 'r:' + k); });
-    const total = S.locais.filter(passaAba).length;
-    $('#aplicados').innerHTML = `<span><strong>${n}</strong> ${n === 1 ? 'local' : 'locais'}${n !== total ? ` de ${total}` : ''}</span>`
+    rapidosDe(S.secao).forEach(([k, r]) => { if (S.f.rapidos.has(k)) add(r, 'r:' + k); });
+    const total = daSecao().filter(passaAba).length;
+    const C = CATS[S.secao];
+    $('#aplicados').innerHTML = `<span><strong>${n}</strong> ${n === 1 ? C.um : C.varios}${n !== total ? ` de ${total}` : ''}</span>`
       + tags.join('') + (tags.length > 1 ? '<button type="button" class="link-btn" data-remover="tudo">limpar tudo</button>' : '');
     const nf = tags.length;
     const b = $('#n-filtros'); b.hidden = !nf; b.textContent = nf;
@@ -295,7 +415,7 @@
       const f = fotos[0];
       return `<img src="${esc(f.url || f)}" alt="${esc(f.legenda || 'Foto de ' + l.nome)}" loading="lazy">`;
     }
-    const a = artePorTipo(l.tipo);
+    const a = ehEspaco(l) ? artePorTipo(l.tipo) : l.cat;
     return `<div class="capa-arte arte-${a}">${ic(a)}<span class="ini">${esc(iniciais(l.nome))}</span></div>`;
   }
   function precoCard(l) {
@@ -321,18 +441,19 @@
     const zap = zapLink(l.whatsapp, l.nome);
     const insta = instaUrl(l.instagram);
     const its = itensDo(l);
-    const tags = [l.capacidade ? `até ${l.capacidade} pessoas` : null, ...its.slice(0, 4).map((k) => itemTexto(l, k)),
+    const tags = [l.capacidade ? `até ${l.capacidade} pessoas` : null, ...tiposDe(l).slice(1, 3), ...its.slice(0, 4).map((k) => itemTexto(l, k)),
       its.length > 4 ? `+${its.length - 4} itens` : null].filter(Boolean);
+    const nEv = eventosCom(l.id).length;
     return `<article class="card ${v.status === 'descartado' ? 'descartado' : ''}">
       <div class="capa-box">
         <button type="button" class="capa" data-abrir="${l.id}" aria-label="Ver detalhes de ${esc(l.nome)}">${capaHtml(l)}</button>
-        <span class="selo-tipo">${esc(l.tipo)}</span>
-        ${v.status ? `<span class="selo-visita ${st.cls}">${ic(st.icone)}${st.rotulo}${v.status === 'visitado' && v.data ? ' · ' + dataBR(v.data) : ''}</span>` : ''}
+        <span class="selo-tipo">${esc(tiposDe(l)[0] || catDe(l).curto)}</span>
+        ${v.status ? `<span class="selo-visita ${st.cls}">${ic(st.icone)}${stRot(v.status, l)}${v.status === 'visitado' && v.data ? ' · ' + dataBR(v.data) : ''}</span>` : ''}
         <button type="button" class="coracao" data-fav="${l.id}" aria-pressed="${v.favorito}" aria-label="${v.favorito ? 'Remover dos' : 'Adicionar aos'} favoritos">${ic('coracao')}</button>
       </div>
       <div class="corpo">
         <h2><button type="button" data-abrir="${l.id}">${esc(l.nome)}</button></h2>
-        <p class="onde">${ic('pin')}${esc(l.bairro || 'Palmas')}</p>
+        <p class="onde">${ic('pin')}${esc(ehEspaco(l) ? l.bairro || 'Palmas' : l.atende_em || l.bairro || 'Palmas')}${nEv ? ` · <span class="no-evento">${ic('eventos')}em ${nEv} ${nEv === 1 ? 'evento' : 'eventos'}</span>` : ''}</p>
         ${precoCard(l)}
         ${v.nota ? `<div class="minha-nota">${estrelas(v.nota)} sua nota${v.pros.length || v.contras.length ? ` · ${v.pros.length} prós, ${v.contras.length} contras` : ''}</div>` : ''}
         ${tags.length ? `<ul class="tags">${tags.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
@@ -350,8 +471,9 @@
     const r = filtrados();
     renderAplicados(r.length);
     if (!r.length) {
-      const msg = S.aba === 'todos'
-        ? ['Nada com esses filtros', 'Tente tirar algum filtro ou buscar por outro termo.']
+      const msg = !daSecao().length
+        ? [`Nenhum ${CATS[S.secao].um} cadastrado ainda`, 'Use o botão + Cadastrar no alto para adicionar o primeiro.']
+        : S.aba === 'todos' ? ['Nada com esses filtros', 'Tente tirar algum filtro ou buscar por outro termo.']
         : ['Lista vazia por enquanto', 'Abra um local e use “Minha visita” para marcar favorito, visita ou descarte.'];
       $('#lista').innerHTML = `<div class="vazio"><h3>${msg[0]}</h3><p>${msg[1]}</p></div>`;
     } else {
@@ -379,9 +501,13 @@
       l.telefone && `<a class="btn" href="tel:+55${digitos(l.telefone)}">${ic('fone')}${esc(l.telefone)}</a>`,
       insta && `<a class="btn" href="${esc(insta)}" target="_blank" rel="noopener">${ic('insta')}${esc(instaArroba(l.instagram))}</a>`,
       urlSegura(l.site) && `<a class="btn" href="${esc(l.site)}" target="_blank" rel="noopener">${ic('site')}Site</a>`,
-      `<a class="btn" href="${esc(mapaUrl(l))}" target="_blank" rel="noopener">${ic('mapa')}Mapa</a>`,
+      (ehEspaco(l) || l.endereco) && `<a class="btn" href="${esc(mapaUrl(l))}" target="_blank" rel="noopener">${ic('mapa')}Mapa</a>`,
+      urlSegura(l.detalhes && l.detalhes.portfolio) && `<a class="btn" href="${esc(l.detalhes.portfolio)}" target="_blank" rel="noopener">${ic('servicos')}Portfólio</a>`,
     ].filter(Boolean).join('');
-    const meta = [l.tipo, l.endereco || l.bairro, l.capacidade ? `até ${l.capacidade} pessoas` : null].filter(Boolean).map(esc).join(' · ');
+    const meta = (ehEspaco(l)
+      ? [l.tipo, l.endereco || l.bairro, l.capacidade ? `até ${l.capacidade} pessoas` : null]
+      : [catDe(l).rot, l.atende_em ? `Atende: ${l.atende_em}` : null, l.endereco]).filter(Boolean).map(esc).join(' · ');
+    const evs = eventosCom(l.id);
     $('#detalhe').innerHTML = `
       <div class="folha-topo">
         <button type="button" class="fechar" data-fechar aria-label="Fechar">${ic('voltar')}</button>
@@ -393,10 +519,15 @@
       <div class="folha-corpo">
         <h1>${esc(l.nome)}</h1>
         <p class="meta">${meta}</p>
+        ${!ehEspaco(l) && tiposDe(l).length ? `<ul class="tags" style="margin-bottom:10px">${tiposDe(l).map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
         <div class="contatos">${contatos}</div>
+        <div class="no-evento-box">
+          ${evs.length ? `<span>Nos seus eventos: ${evs.map(({ ev, esc: e }) => `<a href="#evento/${ev.id}">${esc(ev.nome)}</a> <small>(${escRot(e.status)})</small>`).join(', ')}</span>` : ''}
+          <button type="button" class="btn ouro" data-add-evento="${l.id}">${ic('eventos')}Adicionar a um evento</button>
+        </div>
         <div class="segmento" role="tablist">
           <button type="button" role="tab" data-daba="sobre" aria-selected="${S.detalheAba === 'sobre'}">Informações</button>
-          <button type="button" role="tab" data-daba="visita" aria-selected="${S.detalheAba === 'visita'}">Minha visita</button>
+          <button type="button" role="tab" data-daba="visita" aria-selected="${S.detalheAba === 'visita'}">${ehEspaco(l) ? 'Minha visita' : 'Minha avaliação'}</button>
         </div>
         <div id="painel-detalhe">${S.detalheAba === 'sobre' ? sobreHtml(l) : visitaHtml(l)}</div>
       </div>`;
@@ -420,20 +551,27 @@
     const horarios = (l.horarios || []).length
       ? `<ul class="lista-simples">${l.horarios.map((h) => `<li><strong>${esc(h.dias)}</strong>: ${esc(h.horario)}</li>`).join('')}</ul>`
       : '<p class="texto">Não informado. Pergunte o horário de início e término e se há cobrança por hora extra.</p>';
+    const esp = ehEspaco(l);
+    const det = l.detalhes || {};
+    const camposDet = esp ? [] : (catDe(l).campos || []).filter(([k, , t]) => det[k] != null && det[k] !== '' && t !== 'url');
+    const reserva = [l.antecedencia && ['Reservar com', l.antecedencia], l.cancelamento && ['Cancelamento', l.cancelamento]].filter(Boolean);
     return `
+      ${l.descricao ? `<section class="secao"><h3>Sobre</h3><div class="cartao"><p class="texto">${esc(l.descricao)}</p></div></section>` : ''}
       <section class="secao"><h3>Valores e condições</h3>${precos}${taxas}${pagamento}${orc}
         <div class="nota-aviso">${ic('alerta')}<span>O valor muda com o dia da semana, a temporada, a duração e o que está incluso. Os daqui são referência de ${dataBR(l.conferido_em)}.</span></div>
       </section>
-      <section class="secao"><h3>Horários de uso</h3><div class="cartao">${horarios}</div></section>
-      <section class="secao"><h3>O que vem</h3>
+      ${reserva.length ? `<section class="secao"><h3>Reserva e cancelamento</h3><div class="cartao"><dl class="det">${reserva.map(([r, v]) => `<div><dt>${r}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></div></section>` : ''}
+      ${esp ? `<section class="secao"><h3>Horários de uso</h3><div class="cartao">${horarios}</div></section>` : ''}
+      ${camposDet.length ? `<section class="secao"><h3>Detalhes</h3><div class="cartao"><dl class="det">${camposDet.map(([k, r]) => `<div><dt>${esc(r)}</dt><dd>${esc(det[k])}</dd></div>`).join('')}</dl></div></section>` : ''}
+      <section class="secao"><h3>${esp ? 'O que vem' : 'O que está incluso'}</h3>
         ${itensDo(l).length
           ? `<ul class="vem">${itensDo(l).map((k) => `<li>${ic('check')}${esc(itemTexto(l, k))}</li>`).join('')}</ul>`
-          : '<div class="cartao"><p class="texto">Ainda não informado. Pergunte o que vem no aluguel e cadastre em Editar.</p></div>'}
+          : `<div class="cartao"><p class="texto">Ainda não informado. Pergunte o que ${esp ? 'vem no aluguel' : 'está no preço'} e cadastre em Editar.</p></div>`}
         ${(l.comodidades || []).length ? `<h4 class="sub-h">Detalhes e outros itens</h4><ul class="tags">${l.comodidades.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>` : ''}
       </section>
       ${(l.eventos || []).length ? `<section class="secao"><h3>Bom para</h3><ul class="tags">${l.eventos.map((c) => `<li>${esc(c)}</li>`).join('')}</ul></section>` : ''}
       ${l.observacoes ? `<section class="secao"><h3>Observações</h3><div class="cartao"><p class="texto">${esc(l.observacoes)}</p></div></section>` : ''}
-      <p style="margin:22px 0 0"><button type="button" class="btn" data-editar="${l.id}">${ic('editar')}Editar informações deste local</button></p>
+      <p style="margin:22px 0 0"><button type="button" class="btn" data-editar="${l.id}">${ic('editar')}Editar informações</button></p>
       <section class="secao fontes"><h3>De onde vieram os dados</h3>
         Conferido em ${dataBR(l.conferido_em)}${l.status ? `<span class="status-dado">${esc(l.status)}</span>` : ''}
         <ul>${(l.fontes || []).map((u) => (/^https?:\/\//.test(u)
@@ -452,12 +590,12 @@
     return `
       <section class="secao"><h3>Situação</h3>
         <div class="status-visita">${Object.entries(STATUS).map(([k, s]) =>
-          `<button type="button" data-status="${k}" data-v="${k}" aria-pressed="${v.status === k}">${ic(s.icone)}${s.rotulo}</button>`).join('')}</div>
+          `<button type="button" data-status="${k}" data-v="${k}" aria-pressed="${v.status === k}">${ic(s.icone)}${k ? stRot(k, l) : (ehEspaco(l) ? s.rotulo : 'Sem contato')}</button>`).join('')}</div>
       </section>
-      <section class="secao"><h3>Visita e nota geral</h3>
+      <section class="secao"><h3>${ehEspaco(l) ? 'Visita' : 'Contato'} e nota geral</h3>
         <div class="cartao" style="padding:12px 14px">
           <div class="grade-2">
-            <label class="campo"><span>Data da visita</span><input type="date" data-campo="data" value="${esc(v.data)}"></label>
+            <label class="campo"><span>${ehEspaco(l) ? 'Data da visita' : 'Data do contato'}</span><input type="date" data-campo="data" value="${esc(v.data)}"></label>
             <div class="campo"><span>Nota geral</span>
               <div class="nota-geral" role="radiogroup" aria-label="Nota geral">${[1, 2, 3, 4, 5].map((n) =>
                 `<button type="button" role="radio" aria-checked="${v.nota === n}" aria-label="${n} de 5" data-nota="${n}" class="${n <= v.nota ? 'on' : ''}">★</button>`).join('')}</div>
@@ -466,13 +604,13 @@
         </div>
       </section>
       <section class="secao"><h3>Avaliação por critério</h3>
-        <div class="cartao criterios">${CRITERIOS.map(([k, r]) => `
+        <div class="cartao criterios">${catDe(l).criterios.map(([k, r]) => `
           <div class="criterio"><span>${r}</span><div class="pontos">${[1, 2, 3, 4, 5].map((n) =>
             `<button type="button" data-crit="${k}:${n}" class="${(v.criterios[k] || 0) >= n ? 'on' : ''}" aria-label="${r}: ${n}">${n}</button>`).join('')}</div></div>`).join('')}
         </div>
       </section>
       ${listaEditHtml('pros', v.pros, 'Prós', 'Ex.: estacionamento amplo')}
-      ${listaEditHtml('contras', v.contras, 'Contras', 'Ex.: som só até 22h')}
+      ${listaEditHtml('contras', v.contras, 'Contras', ehEspaco(l) ? 'Ex.: som só até 22h' : 'Ex.: frete cobrado à parte')}
       <section class="secao"><h3>Orçamento recebido</h3>
         <div class="cartao" style="padding:12px 14px"><div class="grade-2">
           <label class="campo"><span>Valor</span><input data-campo="orcamento_valor" value="${esc(v.orcamento_valor)}" placeholder="Ex.: R$ 2.800" maxlength="60"></label>
@@ -511,34 +649,39 @@
     const notas = vs.map((v) => v.nota || null);
     const bp = melhor(precos, false), bc = melhor(caps, true), bn = melhor(notas, true);
     const lista = (a) => (a.length ? `<ul>${a.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : '—');
+    const esp = ls.every(ehEspaco);
+    const C = catDe(ls[0] || {});
     const linhas = [
-      ['Tipo', ls.map((l) => esc(l.tipo))],
-      ['Onde', ls.map((l) => esc(l.bairro || '—'))],
+      ['Tipo', ls.map((l) => esc(tiposDe(l).join(', ') || '—'))],
+      [esp ? 'Onde' : 'Atende em', ls.map((l) => esc((esp ? l.bairro : l.atende_em) || '—'))],
       ['Menor valor', ls.map((l, i) => {
         const p = (l.precos || []).find((x) => x.valor === precos[i]);
         return [precos[i] != null ? `<strong>${brl(precos[i])}</strong><br><small>${esc(p.unidade || '')} · ${esc(p.condicao || '')}</small>` : 'Sob consulta', precos[i] != null && precos[i] === bp];
       })],
       ['Taxas extras', ls.map((l) => ((l.taxas || []).length ? l.taxas.map((t) => `${esc(t.nome)}: ${typeof t.valor === 'number' ? brl(t.valor) : esc(t.valor)}`).join('<br>') : '—'))],
       ['Orçamento recebido', vs.map((v) => (v.orcamento_valor ? `${esc(v.orcamento_valor)}<br><small>${esc(v.orcamento_condicao)}</small>` : '—'))],
-      ['Capacidade', ls.map((l, i) => [l.capacidade ? `${l.capacidade} pessoas` : '—', caps[i] && caps[i] === bc])],
-      ['Situação', vs.map((v) => STATUS[v.status].rotulo + (v.data ? ` (${dataBR(v.data)})` : ''))],
+      ...(esp ? [['Capacidade', ls.map((l, i) => [l.capacidade ? `${l.capacidade} pessoas` : '—', caps[i] && caps[i] === bc])]] : []),
+      ['Situação', vs.map((v, i) => (v.status ? stRot(v.status, ls[i]) : '—') + (v.data ? ` (${dataBR(v.data)})` : ''))],
       ['Nota geral', vs.map((v, i) => [v.nota ? estrelas(v.nota) : '—', notas[i] && notas[i] === bn])],
-      ...CRITERIOS.map(([k, r]) => {
+      ...C.criterios.map(([k, r]) => {
         const vals = vs.map((v) => v.criterios[k] || null);
         const b = melhor(vals, true);
         return [r, vals.map((x) => [x ? `${x}/5` : '—', x && x === b])];
       }),
       ['Prós', vs.map((v) => lista(v.pros))],
       ['Contras', vs.map((v) => lista(v.contras))],
-      ['O que vem', ls.map((l) => lista(itensDo(l).map((k) => itemTexto(l, k))))],
+      [esp ? 'O que vem' : 'O que está incluso', ls.map((l) => lista(itensDo(l).map((k) => itemTexto(l, k))))],
+      ...(esp ? [] : (C.campos || []).filter(([, , t]) => t !== 'url' && t !== 'area').map(([k, r]) => [r, ls.map((l) => esc((l.detalhes || {})[k] ?? '—'))])),
+      ['Pagamento', ls.map((l) => esc(l.pagamento || '—'))],
+      ['Cancelamento', ls.map((l) => esc(l.cancelamento || '—'))],
       ['Outros itens', ls.map((l) => lista(l.comodidades || []))],
     ];
     $('#comparar').innerHTML = `
       <div class="folha-topo">
         <button type="button" class="fechar" data-fechar aria-label="Fechar">${ic('voltar')}</button>
-        <h2>Comparando ${ls.length} locais</h2>
+        <h2>Comparando ${ls.length} ${esp ? 'locais' : 'fornecedores'}</h2>
       </div>
-      <div class="folha-corpo" style="padding-bottom:8px"><p class="meta">Em verde, o melhor de cada linha. Notas e orçamentos vêm do que você registrou nas visitas.</p></div>
+      <div class="folha-corpo" style="padding-bottom:8px"><p class="meta">Em verde, o melhor de cada linha. Notas e orçamentos vêm do que você registrou.</p></div>
       <div class="tabela-wrap"><table class="tabela-cmp">
         <thead><tr><th></th>${ls.map((l) => `<th><a href="#local/${l.id}" data-abrir="${l.id}">${esc(l.nome)}</a></th>`).join('')}</tr></thead>
         <tbody>${linhas.map(([r, cels]) => `<tr><th scope="row">${r}</th>${cels.map((c) => {
@@ -555,7 +698,7 @@
     d.innerHTML = `<div class="folha-corpo">
       <h2>Sincronização</h2>
       ${API
-        ? `<p>As visitas ficam salvas neste aparelho e na nuvem. Qualquer pessoa vê o que foi registrado; para <strong>gravar</strong> visitas e <strong>cadastrar ou editar locais</strong> é preciso a chave de edição (pergunte a quem cuida do site).</p>
+        ? `<p>As visitas ficam salvas neste aparelho e na nuvem. Qualquer pessoa vê o que foi registrado; para <strong>gravar</strong> visitas, <strong>cadastrar ou editar</strong> o catálogo e <strong>ver os eventos</strong> de qualquer aparelho é preciso a chave de edição (pergunte a quem cuida do site).</p>
            <label class="campo"><span>Chave de edição</span><input id="in-chave" type="password" autocomplete="off" value="${esc(S.chave)}" placeholder="Digite a chave"></label>
            <div class="acoes"><button class="btn primario" data-acao="salvar-chave">Salvar chave</button>${S.chave ? '<button class="btn" data-acao="esquecer-chave">Esquecer neste aparelho</button>' : ''}</div>`
         : `<p>Sem nuvem configurada: as visitas ficam salvas só neste navegador. Use o backup para levar para outro aparelho.</p>`}
@@ -584,6 +727,9 @@
     toast('Chave salva. Sincronizando…');
     $('#config').close();
     sincronizar();
+    Object.keys(S.eventos).forEach((id) => S.evPend.add(id));
+    lsSet(LS.evPend, [...S.evPend]);
+    carregarEventos().then(() => { sincronizarEventos(); renderTudo(); });
   }
   function exportar() {
     const blob = new Blob([JSON.stringify({ exportado_em: new Date().toISOString(), visitas: S.visitas }, null, 2)], { type: 'application/json' });
@@ -623,7 +769,7 @@
   function idNovo(nome) {
     const base = slug(nome);
     let id = base, n = 2;
-    while (S.porId[id] || S.base.some((l) => l.id === id) || S.remotos.some((r) => r.id === id)) id = `${base}-${n++}`;
+    while (S.porId[id] || S.base.some((l) => l.id === id) || S.fbase.some((l) => l.id === id) || S.remotos.some((r) => r.id === id)) id = `${base}-${n++}`;
     return id;
   }
   // "R$ 1.500", "1500,00" -> 1500. Texto como "Sob consulta" fica como texto.
@@ -639,13 +785,13 @@
   const linhas = (txt) => String(txt || '').split('\n').map((x) => x.trim()).filter(Boolean);
 
   const REP = {
-    precos: { rot: 'valor', campos: [['valor', 'Valor', 'R$ 1.500 ou Sob consulta'], ['unidade', 'Por', 'diária, evento, 5h de uso'], ['condicao', 'Condição', 'sexta a domingo, até 100 pessoas'], ['inclui', 'O que esse valor inclui', 'mesas, limpeza…']] },
+    precos: { rot: 'valor', campos: [['valor', 'Valor', 'R$ 1.500 ou Sob consulta'], ['unidade', 'Por', 'escolha ou escreva'], ['condicao', 'Condição', 'sexta a domingo, até 100 pessoas'], ['inclui', 'O que esse valor inclui', 'mesas, limpeza…']] },
     taxas: { rot: 'taxa', campos: [['nome', 'Taxa', 'limpeza, caução, energia'], ['valor', 'Valor', 'R$ 150']] },
     horarios: { rot: 'horário', campos: [['dias', 'Dias', 'sábado'], ['horario', 'Horário', '8h às 2h']] },
   };
   function linhaRep(tipo, d = {}) {
     return `<div class="rep-linha rep-${tipo}">
-      ${REP[tipo].campos.map(([k, rot, ph]) => `<label class="campo c-${k}"><span>${rot}</span><input data-k="${k}" value="${esc(k === 'valor' ? valorTxt(d[k]) : d[k] || '')}" placeholder="${esc(ph)}"></label>`).join('')}
+      ${REP[tipo].campos.map(([k, rot, ph]) => `<label class="campo c-${k}"><span>${rot}</span><input data-k="${k}" ${tipo === 'precos' && k === 'unidade' ? 'list="dl-unidades"' : ''} value="${esc(k === 'valor' ? valorTxt(d[k]) : d[k] || '')}" placeholder="${esc(ph)}"></label>`).join('')}
       <button type="button" class="tirar-linha" data-tirar-linha aria-label="Remover ${REP[tipo].rot}">×</button>
     </div>`;
   }
@@ -656,28 +802,33 @@
     </fieldset>`;
   }
 
-  function abrirEditor(id) {
+  function campoDet(k, rot, tipo, x, v) {
+    const val = esc(v ?? '');
+    if (tipo === 'area') return `<label class="campo largo"><span>${esc(rot)}</span><textarea data-det="${k}" rows="3" placeholder="${esc(x || '')}">${val}</textarea></label>`;
+    if (tipo === 'sel') return `<label class="campo"><span>${esc(rot)}</span><select data-det="${k}"><option value="">Não informado</option>${x.map((o) => `<option ${o === v ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select></label>`;
+    if (tipo === 'num') return `<label class="campo"><span>${esc(rot)}</span><input data-det="${k}" type="number" min="0" inputmode="numeric" value="${val}"></label>`;
+    if (tipo === 'url') return `<label class="campo largo"><span>${esc(rot)}</span><input data-det="${k}" type="url" placeholder="https://" value="${val}"></label>`;
+    return `<label class="campo"><span>${esc(rot)}</span><input data-det="${k}" maxlength="300" placeholder="${esc(x || '')}" value="${val}"></label>`;
+  }
+
+  function abrirEditor(id, catNovo) {
     const l = id ? S.porId[id] : null;
     if (id && !l) return;
-    ED = { id: l ? l.id : null, sujo: false };
+    const cat = l ? l.cat || 'espacos' : (CATS[catNovo] ? catNovo : CATS[S.secao] ? S.secao : 'espacos');
+    const C = CATS[cat];
+    const esp = cat === 'espacos';
+    ED = { id: l ? l.id : null, cat, sujo: false };
     if ($('#detalhe').open) $('#detalhe').close();
     limparHash();
     const it = (l && l.itens) || {};
+    const det = (l && l.detalhes) || {};
     const eventosTodos = [...new Set([...EVENTOS_BASE, ...S.locais.flatMap((x) => x.eventos || [])])];
     const evSel = new Set((l && l.eventos) || []);
+    const subSel = new Set((l && l.subtipos) || []);
+    const subExtra = [...subSel].filter((x) => !(C.subtipos || []).includes(x));
     const mapaTxt = l ? (l.mapa || (l.coordenadas ? `${l.coordenadas.lat}, ${l.coordenadas.lng}` : '')) : '';
     const situ = [...new Set([...SITUACOES, ...(l && l.status ? [l.status] : [])])];
-    const d = $('#editor');
-    d.innerHTML = `<form id="form-editor" novalidate>
-      <div class="folha-topo">
-        <button type="button" class="fechar" data-acao="cancelar-editor" aria-label="Fechar">${ic('voltar')}</button>
-        <h2>${l ? `Editar: ${esc(l.nome)}` : 'Cadastrar local'}</h2>
-      </div>
-      <div class="folha-corpo">
-        ${!API ? '<p class="nota-aviso">A nuvem não está configurada, então não dá para salvar cadastros por aqui.</p>'
-          : !S.chave ? '<p class="nota-aviso">Para salvar você vai precisar da chave de edição. Pode preencher agora e informar a chave na hora de salvar.</p>' : ''}
-
-        <fieldset class="ed-bloco"><legend>Básico</legend>
+    const basico = esp ? `
           <div class="grade-2">
             <label class="campo largo"><span>Nome do local *</span><input name="nome" required maxlength="120" value="${esc(l?.nome || '')}" placeholder="ex.: Chácara Recanto do Sol"></label>
             <label class="campo"><span>Tipo</span><input name="tipo" list="dl-tipos" maxlength="60" value="${esc(l?.tipo || '')}" placeholder="Salão de festas, Chácara…"></label>
@@ -686,25 +837,54 @@
             <label class="campo"><span>Endereço</span><input name="endereco" maxlength="300" value="${esc(l?.endereco || '')}"></label>
             <label class="campo largo"><span>Localização no mapa</span><input name="mapa" maxlength="500" value="${esc(mapaTxt)}" placeholder="Cole o link do Google Maps ou as coordenadas (-10.18, -48.33)"></label>
           </div>
-          <datalist id="dl-tipos">${[...new Set(['Salão de festas', 'Chácara', 'Espaço com piscina', 'Espaço de eventos', 'Restaurante', ...S.locais.map((x) => x.tipo)])].map((t) => `<option value="${esc(t)}">`).join('')}</datalist>
-        </fieldset>
+          <datalist id="dl-tipos">${[...new Set(['Salão de festas', 'Chácara', 'Espaço com piscina', 'Espaço de eventos', 'Restaurante', ...S.locais.filter(ehEspaco).map((x) => x.tipo)])].filter(Boolean).map((t) => `<option value="${esc(t)}">`).join('')}</datalist>`
+      : `
+          <div class="grade-2">
+            <label class="campo largo"><span>Nome *</span><input name="nome" required maxlength="120" value="${esc(l?.nome || '')}" placeholder="ex.: ${esc(C.exemplo)}"></label>
+            <label class="campo largo"><span>Descrição curta</span><textarea name="descricao" rows="2" maxlength="600" placeholder="O que oferece, diferenciais, estilo">${esc(l?.descricao || '')}</textarea></label>
+            <label class="campo"><span>Atende em</span><input name="atende_em" maxlength="200" value="${esc(l?.atende_em || '')}" placeholder="Palmas e região"></label>
+            <label class="campo"><span>Endereço / loja (se tiver)</span><input name="endereco" maxlength="300" value="${esc(l?.endereco || '')}"></label>
+          </div>
+          <h4 class="sub-h">O que oferece</h4>
+          <div class="pills">${C.subtipos.map((t) => `<label class="pill"><input type="checkbox" data-subtipo="${esc(t)}" ${subSel.has(t) ? 'checked' : ''}><span>${ic('check')}${esc(t)}</span></label>`).join('')}</div>
+          <label class="campo" style="margin-top:10px"><span>Outro tipo (separe por vírgula)</span><input name="subtipos_extra" maxlength="200" value="${esc(subExtra.join(', '))}"></label>`;
+    const d = $('#editor');
+    d.innerHTML = `<form id="form-editor" novalidate>
+      <div class="folha-topo">
+        <button type="button" class="fechar" data-acao="cancelar-editor" aria-label="Fechar">${ic('voltar')}</button>
+        <h2>${l ? `Editar: ${esc(l.nome)}` : `Cadastrar em ${esc(C.rot)}`}</h2>
+      </div>
+      <div class="folha-corpo">
+        ${!API ? '<p class="nota-aviso">A nuvem não está configurada, então não dá para salvar cadastros por aqui.</p>'
+          : !S.chave ? '<p class="nota-aviso">Para salvar você vai precisar da chave de edição. Pode preencher agora e informar a chave na hora de salvar.</p>' : ''}
 
-        <fieldset class="ed-bloco"><legend>O que vem no aluguel</legend>
-          <p class="ajuda">Marque o que está incluso. Mesas e cadeiras aceitam a quantidade.</p>
-          <div class="pills">${ITENS.map(([k, rot, tipo]) => {
+        <fieldset class="ed-bloco"><legend>Básico</legend>${basico}</fieldset>
+
+        <fieldset class="ed-bloco"><legend>${esp ? 'O que vem no aluguel' : 'O que está incluso no preço'}</legend>
+          <p class="ajuda">Marque o que está no valor. Itens com campo aceitam quantidade.</p>
+          <div class="pills">${C.inclusos.map(([k, rot, tipo]) => {
             const v = it[k];
             return `<label class="pill${tipo === 'num' ? ' com-qtd' : ''}"><input type="checkbox" data-item="${k}" ${v ? 'checked' : ''}><span>${ic('check')}${esc(rot)}</span>${tipo === 'num'
               ? `<input type="number" class="qtd" data-qtd="${k}" min="1" max="100000" inputmode="numeric" placeholder="qtd" aria-label="Quantidade de ${esc(rot.toLowerCase())}" value="${typeof v === 'number' ? v : ''}">` : ''}</label>`;
           }).join('')}</div>
-          <label class="campo" style="margin-top:12px"><span>Outros itens e detalhes (um por linha)</span><textarea name="comodidades" rows="3" placeholder="ex.: 2 piscinas (adulto e infantil)&#10;Mesa de bolo&#10;Decoração não inclusa">${esc(((l && l.comodidades) || []).join('\n'))}</textarea></label>
+          <label class="campo" style="margin-top:12px"><span>Outros itens e detalhes (um por linha)</span><textarea name="comodidades" rows="3" placeholder="${esp ? 'ex.: 2 piscinas (adulto e infantil)&#10;Decoração não inclusa' : 'ex.: 2 tipos de massa à escolha&#10;Não inclui bebida alcoólica'}">${esc(((l && l.comodidades) || []).join('\n'))}</textarea></label>
         </fieldset>
 
-        ${blocoRep('precos', 'Valores', 'Cada valor com a sua condição: dia da semana, horário, número de convidados, pacote.', (l && l.precos) || [])}
-        ${blocoRep('taxas', 'Taxas extras', 'Cobranças à parte, como limpeza, caução ou energia.', (l && l.taxas) || [])}
-        <fieldset class="ed-bloco"><legend>Pagamento</legend>
+        ${esp ? '' : `<fieldset class="ed-bloco"><legend>Detalhes de ${esc(C.curto.toLowerCase())}</legend>
+          <div class="grade-2">${C.campos.map(([k, rot, tipo, x]) => campoDet(k, rot, tipo, x, det[k])).join('')}</div>
+        </fieldset>`}
+
+        ${blocoRep('precos', 'Valores', 'Cada valor com a sua condição: dia, horário, número de convidados, pacote.', (l && l.precos) || [])}
+        <datalist id="dl-unidades">${C.unidades.map((u) => `<option value="${esc(u)}">`).join('')}</datalist>
+        ${blocoRep('taxas', 'Taxas extras', esp ? 'Cobranças à parte, como limpeza, caução ou energia.' : 'Frete, deslocamento, hora extra, profissional adicional.', (l && l.taxas) || [])}
+        <fieldset class="ed-bloco"><legend>Pagamento, reserva e cancelamento</legend>
           <label class="campo"><span>Condições de pagamento</span><textarea name="pagamento" rows="2" maxlength="600" placeholder="ex.: 50% para reservar, resto até 7 dias antes; Pix ou cartão">${esc(l?.pagamento || '')}</textarea></label>
+          <div class="grade-2" style="margin-top:10px">
+            <label class="campo"><span>Reservar com quanto tempo</span><input name="antecedencia" maxlength="200" value="${esc(l?.antecedencia || '')}" placeholder="ex.: 30 dias antes"></label>
+            <label class="campo"><span>Cancelamento ou adiamento</span><input name="cancelamento" maxlength="300" value="${esc(l?.cancelamento || '')}" placeholder="ex.: perde o sinal; remarca 1 vez sem custo"></label>
+          </div>
         </fieldset>
-        ${blocoRep('horarios', 'Horários de uso', '', (l && l.horarios) || [])}
+        ${esp ? blocoRep('horarios', 'Horários de uso', '', (l && l.horarios) || []) : ''}
 
         <fieldset class="ed-bloco"><legend>Contato</legend>
           <div class="grade-2">
@@ -722,7 +902,7 @@
 
         <fieldset class="ed-bloco"><legend>Fotos e observações</legend>
           <label class="campo"><span>Links das fotos (um por linha)</span><textarea name="fotos" rows="3" placeholder="https://…">${esc(((l && l.fotos) || []).map((f) => f.url || f).join('\n'))}</textarea></label>
-          <label class="campo" style="margin-top:10px"><span>Observações</span><textarea name="observacoes" rows="4" maxlength="3000" placeholder="Regras, restrições de som, o que não está incluso, pontos de atenção…">${esc(l?.observacoes || '')}</textarea></label>
+          <label class="campo" style="margin-top:10px"><span>Observações</span><textarea name="observacoes" rows="4" maxlength="3000" placeholder="Regras, restrições, o que não está incluso, pontos de atenção…">${esc(l?.observacoes || '')}</textarea></label>
         </fieldset>
 
         <fieldset class="ed-bloco"><legend>Origem dos dados</legend>
@@ -733,14 +913,13 @@
         </fieldset>
       </div>
       <div class="ed-rodape">
-        ${l ? `<button type="button" class="btn ghost perigo" data-acao="remover-local">${ic('lixo')}<span class="lbl">Remover</span></button>` : ''}
+        ${l ? `<button type="button" class="btn ghost perigo" data-acao="remover-local">${ic('lixo')}<span class="lbl">Excluir</span></button>` : ''}
         <span class="espaco"></span>
         <button type="button" class="btn" data-acao="cancelar-editor">Cancelar</button>
         <button type="submit" class="btn primario" id="btn-salvar-local">Salvar</button>
       </div>
     </form>`;
     if (!d.open) d.showModal();
-    d.querySelector('.folha-corpo').scrollTop = 0;
     d.scrollTop = 0;
     if (!l) setTimeout(() => d.querySelector('[name="nome"]').focus(), 50);
   }
@@ -749,6 +928,7 @@
     const f = $('#form-editor');
     const g = (n) => (f.elements[n]?.value || '').trim();
     const base = ED.id ? S.porId[ED.id] : {};
+    const esp = ED.cat === 'espacos';
     const itens = {};
     f.querySelectorAll('[data-item]').forEach((c) => {
       if (!c.checked) return;
@@ -762,23 +942,17 @@
       return p.valor != null || p.condicao ? p : null;
     });
     const taxas = rep('taxas', (r) => (val(r, 'nome') ? { nome: val(r, 'nome'), valor: parseValor(val(r, 'valor')) } : null));
-    const horarios = rep('horarios', (r) => (val(r, 'dias') || val(r, 'horario') ? { dias: val(r, 'dias'), horario: val(r, 'horario') } : null));
     const eventos = [...f.querySelectorAll('[data-evento]:checked')].map((c) => c.dataset.evento);
     g('eventos_extra').split(',').map((x) => x.trim()).filter(Boolean).forEach((x) => { if (!eventos.includes(x)) eventos.push(x); });
     const legendas = Object.fromEntries((base.fotos || []).map((x) => [x.url || x, x.legenda || null]));
-    const mapa = g('mapa');
-    const coord = mapa.match(/(-?\d{1,2}\.\d+)\s*,\s*(-?\d{1,3}\.\d+)/);
-    const cap = parseInt(g('capacidade'), 10);
-    return {
+    const comum = {
+      cat: ED.cat,
       nome: g('nome'),
-      tipo: g('tipo') || 'Espaço de eventos',
-      bairro: g('bairro') || null,
       endereco: g('endereco') || null,
-      coordenadas: coord ? { lat: Number(coord[1]), lng: Number(coord[2]) } : null,
-      mapa: /^https?:\/\//i.test(mapa) ? mapa : null,
-      capacidade: cap > 0 ? cap : null,
       precos, taxas,
       pagamento: g('pagamento') || null,
+      antecedencia: g('antecedencia') || null,
+      cancelamento: g('cancelamento') || null,
       itens,
       comodidades: linhas(g('comodidades')),
       eventos,
@@ -786,30 +960,54 @@
       whatsapp: g('whatsapp') || null,
       telefone: g('telefone') || null,
       site: urlSegura(g('site')) ? g('site') : null,
-      horarios,
       fotos: linhas(g('fotos')).filter((u) => urlSegura(u)).map((u) => ({ url: u, legenda: legendas[u] || null })),
       observacoes: g('observacoes') || null,
       fontes: linhas(g('fontes')),
       conferido_em: new Date().toISOString().slice(0, 10),
       status: g('status') || null,
     };
+    if (esp) {
+      const mapa = g('mapa');
+      const coord = mapa.match(/(-?\d{1,2}\.\d+)\s*,\s*(-?\d{1,3}\.\d+)/);
+      const cap = parseInt(g('capacidade'), 10);
+      return {
+        ...comum,
+        tipo: g('tipo') || 'Espaço de eventos',
+        bairro: g('bairro') || null,
+        coordenadas: coord ? { lat: Number(coord[1]), lng: Number(coord[2]) } : null,
+        mapa: /^https?:\/\//i.test(mapa) ? mapa : null,
+        capacidade: cap > 0 ? cap : null,
+        horarios: rep('horarios', (r) => (val(r, 'dias') || val(r, 'horario') ? { dias: val(r, 'dias'), horario: val(r, 'horario') } : null)),
+      };
+    }
+    const subtipos = [...f.querySelectorAll('[data-subtipo]:checked')].map((c) => c.dataset.subtipo);
+    g('subtipos_extra').split(',').map((x) => x.trim()).filter(Boolean).forEach((x) => { if (!subtipos.includes(x)) subtipos.push(x); });
+    const detalhes = {};
+    f.querySelectorAll('[data-det]').forEach((e) => {
+      const v = e.value.trim();
+      if (!v) return;
+      if (e.type === 'number') { const n = Number(v); if (Number.isFinite(n)) detalhes[e.dataset.det] = n; } else detalhes[e.dataset.det] = v;
+    });
+    return { ...comum, subtipos, descricao: g('descricao') || null, atende_em: g('atende_em') || null, detalhes };
   }
 
+  const colDe = (dados) => (dados.cat && dados.cat !== 'espacos' ? 'fornecedores' : 'locais');
   async function gravarLocal(id, dados) {
+    const col = colDe(dados);
     if (!API) { toast('A nuvem não está configurada.'); return null; }
     if (!S.chave) { toast('Informe a chave de edição para salvar.'); abrirConfig(); return null; }
     const em = new Date().toISOString();
     try {
-      const r = await fetch(`${API}/locais/${encodeURIComponent(id)}`, {
+      const r = await fetch(`${API}/dados/${col}/${encodeURIComponent(id)}`, {
         method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Chave': S.chave }, body: JSON.stringify({ ...dados, atualizado_em: em }),
       });
       if (r.status === 401) { toast('Chave de edição incorreta.'); abrirConfig(); return null; }
       if (!r.ok) throw new Error(r.status);
       const j = await r.json();
-      S.remotos = S.remotos.filter((x) => x.id !== id).concat({ id, dados: j.local, atualizado_em: j.atualizado_em });
-      lsSet(LS.locais, S.remotos);
+      S.remotos = S.remotos.filter((x) => x.id !== id).concat({ col, id, dados: j.item, atualizado_em: j.atualizado_em });
+      lsSet(LS.catalogo, S.remotos);
       montarLocais(); renderOpcoes(); renderTudo();
-      return j.local;
+      return j.item;
     } catch {
       toast('Não consegui salvar agora. Confira a internet e tente de novo.');
       return null;
@@ -828,30 +1026,32 @@
     b.disabled = false; b.textContent = 'Salvar';
     if (!ok) return;
     const novo = !ED.id;
+    const addEv = ED.addEv;
     ED.sujo = false; $('#editor').close();
-    toast(novo ? 'Local cadastrado.' : 'Alterações salvas.');
+    toast(novo ? 'Cadastrado.' : 'Alterações salvas.');
+    if (novo && addEv && S.eventos[addEv]) { addEscolha(addEv, id); return; }
     abrirDetalhe(id);
   }
 
   async function removerLocal() {
     const l = S.porId[ED.id];
-    if (!l || !confirm(`Remover "${l.nome}" da lista? Ele deixa de aparecer para todo mundo.`)) return;
+    if (!l || !confirm(`Excluir "${l.nome}"? Ele deixa de aparecer para todo mundo.`)) return;
     const { _busca, _nuvem, ...resto } = l;
     const ok = await gravarLocal(l.id, { ...resto, removido: true });
     if (!ok) return;
     ED.sujo = false; $('#editor').close();
-    toast('Local removido da lista.');
+    toast('Excluído da lista.');
   }
 
   function fecharEditor() {
     if (ED && ED.sujo && !confirm('Descartar as alterações que você fez?')) return;
-    const volta = ED && ED.id;
+    const volta = ED && ED.tipo !== 'evento' && ED.id;
     if (ED) ED.sujo = false;
     $('#editor').close();
     if (volta && S.porId[volta]) abrirDetalhe(volta); // volta para onde estava
   }
   function limparHash() {
-    if (location.hash.startsWith('#local/')) history.replaceState(null, '', location.pathname + location.search);
+    if (location.hash.startsWith('#local/')) history.replaceState(null, '', hashBase());
   }
 
   /* ============ Toast ============ */
@@ -862,7 +1062,19 @@
   }
 
   /* ============ Eventos ============ */
-  function renderTudo() { renderNumeros(); renderAbas(); renderRapidos(); renderLista(); if ($('#detalhe').open) renderDetalhe(); }
+  function renderTudo() {
+    document.body.dataset.modo = S.paginaEv ? 'pagina' : S.secao === 'eventos' ? 'eventos' : 'catalogo';
+    renderSecoes();
+    if (S.paginaEv) renderPagina();
+    else {
+      renderNumeros();
+      if (S.secao === 'eventos') renderEventos();
+      else { renderAbas(); renderRapidos(); renderLista(); }
+    }
+    if ($('#detalhe').open && S.porId[S.detalheId]) renderDetalhe();
+    const bn = $('#btn-novo');
+    if (bn && CATS[S.secao]) { const r = `Cadastrar em ${CATS[S.secao].rot}`; bn.title = r; bn.setAttribute('aria-label', r); }
+  }
 
   function ligarFiltros() {
     const campos = { busca: '#f-busca', tipo: '#f-tipo', evento: '#f-evento', cap: '#f-cap', preco: '#f-preco', ordem: '#f-ordem' };
@@ -936,6 +1148,47 @@
       salvarVisita(S.detalheId, { [tipo]: arr }); renderPainelVisita(); return;
     }
     if ((b = t.closest('[data-editar]'))) { abrirEditor(b.dataset.editar); return; }
+    if ((b = t.closest('[data-add-evento]'))) { abrirPickerEvento(b.dataset.addEvento); return; }
+    if ((b = t.closest('[data-picker]'))) { abrirPicker(b.dataset.picker); return; }
+    if ((b = t.closest('[data-pick]'))) {
+      if (addEscolha(S.paginaEv, b.dataset.pick)) { toast('Adicionado ao evento.'); $('#pick-lista').innerHTML = listaPick(); }
+      return;
+    }
+    if ((b = t.closest('[data-pick-ev]'))) {
+      const evId = b.dataset.pickEv;
+      if (addEscolha(evId, PK.itemId)) {
+        $('#picker').close();
+        if ($('#detalhe').open) $('#detalhe').close();
+        toast('Adicionado ao evento.');
+        location.hash = `#evento/${evId}`;
+      }
+      return;
+    }
+    if ((b = t.closest('[data-esc-melhor]'))) {
+      const ev = evAtual(); const e = ev.escolhas[Number(b.dataset.escMelhor)];
+      if (e) { e.status = fechado(e.status) ? 'opcao' : 'escolhido'; salvarEvento(ev); }
+      return;
+    }
+    if ((b = t.closest('[data-esc-tirar]'))) {
+      const ev = evAtual(); const i = Number(b.dataset.escTirar);
+      const nome = (S.porId[ev.escolhas[i]?.id] || ev.escolhas[i] || {}).nome;
+      if (ev.escolhas[i] && confirm(`Tirar ${nome || 'esta opção'} do evento?`)) { ev.escolhas.splice(i, 1); salvarEvento(ev); }
+      return;
+    }
+    if ((b = t.closest('[data-ev-add]'))) {
+      const ev = evAtual(); const lista = b.dataset.evAdd;
+      ev[lista].push(LINHA_VAZIA[lista]());
+      salvarEvento(ev);
+      const ult = document.querySelector(`[data-evc^="${lista}.${ev[lista].length - 1}."]:not([type="checkbox"]):not([type="date"]):not([type="time"])`)
+        || document.querySelector(`[data-evc^="${lista}.${ev[lista].length - 1}."]`);
+      if (ult) ult.focus();
+      return;
+    }
+    if ((b = t.closest('[data-ev-tirar]'))) {
+      const ev = evAtual(); const [lista, i] = b.dataset.evTirar.split(':');
+      ev[lista].splice(Number(i), 1); salvarEvento(ev);
+      return;
+    }
     if ((b = t.closest('[data-tirar-linha]'))) {
       const rep = b.closest('.rep'); const linha = b.closest('.rep-linha');
       if (rep.children.length > 1) linha.remove(); else linha.querySelectorAll('input').forEach((i) => { i.value = ''; });
@@ -943,7 +1196,14 @@
     }
     if ((b = t.closest('[data-acao]'))) {
       const a = b.dataset.acao;
-      if (a === 'novo-local') abrirEditor(null);
+      if (a === 'novo-local') { if (S.secao === 'eventos') abrirEditorEvento(null); else abrirEditor(null, S.secao); }
+      if (a === 'novo-evento') abrirEditorEvento(null);
+      if (a === 'editar-evento') abrirEditorEvento(S.paginaEv);
+      if (a === 'remover-evento') removerEvento();
+      if (a === 'imprimir') window.print();
+      if (a === 'ev-sugerir') sugerirTarefas();
+      if (a === 'pick-cadastrar') { const cat = PK.cat; $('#picker').close(); abrirEditor(null, cat); ED.addEv = S.paginaEv; }
+      if (a === 'pick-novo-evento') { const it = PK.itemId; $('#picker').close(); abrirEditorEvento(null); ED.addItem = it; }
       if (a === 'cancelar-editor') fecharEditor();
       if (a === 'remover-local') removerLocal();
       if (a === 'add-linha') {
@@ -976,11 +1236,25 @@
       renderBarraComparar();
     }
     if (t.id === 'in-import' && t.files[0]) importar(t.files[0]);
+    if (t.matches('[data-evc]') && S.paginaEv) {
+      const ev = evAtual();
+      const tp = t.dataset.tipo;
+      let v = tp === 'bool' ? t.checked : t.value.trim();
+      if (tp === 'num') {
+        v = numDe(v);
+        if (v == null && t.value.trim()) { toast('Não entendi o valor. Use números, ex.: 1.500'); t.value = ''; }
+      }
+      setCaminho(ev, t.dataset.evc, v);
+      const estrutura = t.tagName === 'SELECT' || tp === 'bool';
+      salvarEvento(ev, { render: estrutura });
+      if (!estrutura) $('#pg-resumo').innerHTML = resumoHtml(ev, contas(ev));
+    }
   });
 
   const timersCampo = {};
   document.addEventListener('input', (e) => {
     const t = e.target;
+    if (t.id === 'pick-busca' && PK) { PK.busca = t.value; $('#pick-lista').innerHTML = listaPick(); return; }
     if (!t.matches('[data-campo]') || !S.detalheId) return;
     const id = S.detalheId, k = t.dataset.campo, v = t.value;
     clearTimeout(timersCampo[k]);
@@ -989,6 +1263,7 @@
 
   document.addEventListener('submit', (e) => {
     if (e.target.id === 'form-editor') { e.preventDefault(); salvarEditor(); return; }
+    if (e.target.id === 'form-evento') { e.preventDefault(); salvarEditorEvento(); return; }
     const f = e.target.closest('[data-add]');
     if (!f) return;
     e.preventDefault();
@@ -1014,16 +1289,18 @@
 
   /* ============ Locais: base (JSON) + banco ============ */
   function prepLocal(l) {
-    l._busca = norm([l.nome, l.tipo, l.bairro, l.endereco, l.observacoes, ...(l.comodidades || []), ...(l.eventos || []),
-      ...itensDo(l).map((k) => ITEM_ROT[k]), ...(l.precos || []).map((p) => `${p.condicao || ''} ${p.inclui || ''}`)].join(' '));
+    l._busca = norm([l.nome, l.tipo, l.bairro, l.endereco, l.observacoes, l.descricao, l.atende_em, ...(l.subtipos || []),
+      ...Object.values(l.detalhes || {}), ...(l.comodidades || []), ...(l.eventos || []),
+      ...itensDo(l).map((k) => rotItem(l, k)), ...(l.precos || []).map((p) => `${p.condicao || ''} ${p.inclui || ''}`)].join(' '));
     return l;
   }
   // Para cada id vale a versão mais nova: a do JSON do repositório ou a gravada pelo site.
   function montarLocais() {
-    const mapa = new Map(S.base.map((l) => [l.id, l]));
+    const mapa = new Map([...S.base, ...S.fbase].map((l) => [l.id, l]));
     for (const r of S.remotos) {
       const atual = mapa.get(r.id);
-      if (!atual || (atual.atualizado_em || '') < r.atualizado_em) mapa.set(r.id, { ...r.dados, id: r.id, atualizado_em: r.atualizado_em, _nuvem: true });
+      const cat = r.col === 'fornecedores' ? (CATS[r.dados.cat] && r.dados.cat !== 'espacos' ? r.dados.cat : 'servicos') : 'espacos';
+      if (!atual || (atual.atualizado_em || '') < r.atualizado_em) mapa.set(r.id, { ...r.dados, id: r.id, cat, atualizado_em: r.atualizado_em, _nuvem: true });
     }
     S.locais = [...mapa.values()].filter((l) => !l.removido).map(prepLocal);
     S.porId = {};
@@ -1033,18 +1310,519 @@
   async function carregarLocaisRemotos() {
     if (!API) return;
     try {
-      const r = await fetch(`${API}/locais`, { cache: 'no-store' });
-      if (!r.ok) throw new Error(r.status);
-      S.remotos = await r.json();
-      lsSet(LS.locais, S.remotos);
+      const pegar = async (col) => {
+        const r = await fetch(`${API}/dados/${col}`, { cache: 'no-store' });
+        if (!r.ok) throw new Error(r.status);
+        return (await r.json()).map((x) => ({ ...x, col }));
+      };
+      const [a, b] = await Promise.all([pegar('locais'), pegar('fornecedores')]);
+      S.remotos = [...a, ...b];
+      lsSet(LS.catalogo, S.remotos);
       montarLocais();
     } catch { /* fica com o que já tinha */ }
   }
   function renderOpcoes() {
     const opts = (vals, atual) => vals.map((t) => `<option ${t === atual ? 'selected' : ''}>${esc(t)}</option>`).join('');
     const ord = (a) => [...new Set(a)].filter(Boolean).sort((x, y) => x.localeCompare(y, 'pt-BR'));
-    $('#f-tipo').innerHTML = '<option value="">Todos</option>' + opts(ord(S.locais.map((l) => l.tipo)), S.f.tipo);
-    $('#f-evento').innerHTML = '<option value="">Qualquer</option>' + opts(ord(S.locais.flatMap((l) => l.eventos || [])), S.f.evento);
+    const ls = CATS[S.secao] ? daSecao() : [];
+    const tipos = S.secao === 'espacos' ? ls.map((l) => l.tipo) : [...(CATS[S.secao]?.subtipos || []).filter((t) => ls.some((l) => tiposDe(l).includes(t))), ...ls.flatMap(tiposDe)];
+    $('#f-tipo').innerHTML = '<option value="">Todos</option>' + opts(ord(tipos), S.f.tipo);
+    $('#f-evento').innerHTML = '<option value="">Qualquer</option>' + opts(ord(ls.flatMap((l) => l.eventos || [])), S.f.evento);
+    $('#rot-tipo').textContent = S.secao === 'espacos' ? 'Tipo de espaço' : 'O que oferece';
+    $('#campo-cap').hidden = S.secao !== 'espacos';
+    $('#f-ordem option[value="cap"]').hidden = S.secao !== 'espacos';
+  }
+
+  /* ============ Eventos ============ */
+  const EV_STATUS = [['planejando', 'Planejando'], ['contratando', 'Contratando'], ['confirmado', 'Confirmado'], ['realizado', 'Realizado'], ['cancelado', 'Cancelado']];
+  const ESC_STATUS = [['opcao', 'Opção'], ['escolhido', 'Escolhido'], ['reservado', 'Reservado'], ['contratado', 'Contratado'], ['descartado', 'Descartado']];
+  const escRot = (k) => (ESC_STATUS.find((x) => x[0] === k) || ESC_STATUS[0])[1];
+  const evStRot = (k) => (EV_STATUS.find((x) => x[0] === k) || EV_STATUS[0])[1];
+  const fechado = (st) => st === 'escolhido' || st === 'reservado' || st === 'contratado';
+  // Prazos contados para trás a partir da data do evento.
+  const MODELO_TAREFAS = [
+    [90, 'Definir orçamento e número de convidados'], [75, 'Visitar e reservar o espaço'], [60, 'Fechar o buffet (pedir degustação)'],
+    [45, 'Contratar brinquedos, serviços e aluguéis'], [30, 'Enviar os convites'], [21, 'Encomendar bolo e doces'],
+    [15, 'Confirmar presença dos convidados'], [10, 'Passar o número final de convidados ao buffet e às locadoras'],
+    [7, 'Confirmar horário de montagem com todos os fornecedores'], [5, 'Pagar os saldos que vencem antes da festa'],
+    [2, 'Separar lembrancinhas, decoração e itens de última hora'], [1, 'Repassar o cronograma do dia aos fornecedores'],
+  ];
+  const DIAS_SEM = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
+  const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+  const dataLocal = (iso) => { const [a, m, d] = iso.slice(0, 10).split('-').map(Number); return new Date(a, m - 1, d); };
+  const isoLocal = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  function diasAte(iso) {
+    if (!iso) return null;
+    const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+    return Math.round((dataLocal(iso) - hoje) / 86400000);
+  }
+  const dataLonga = (iso) => { const d = dataLocal(iso); return `${DIAS_SEM[d.getDay()]}, ${d.getDate()} de ${MESES[d.getMonth()]} de ${d.getFullYear()}`; };
+  function contagem(iso) {
+    const n = diasAte(iso);
+    if (n == null) return '';
+    if (n > 1) return `faltam ${n} dias`;
+    if (n === 1) return 'é amanhã';
+    if (n === 0) return 'é hoje';
+    return `foi há ${-n} ${n === -1 ? 'dia' : 'dias'}`;
+  }
+  const horario = (ev) => (ev.hora_inicio ? (ev.hora_fim ? `${ev.hora_inicio} às ${ev.hora_fim}` : `a partir de ${ev.hora_inicio}`) : '');
+  const numV = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : 0);
+  function numDe(txt) {
+    const t = String(txt ?? '').trim();
+    if (!t) return null;
+    const p = parseValor(t);
+    if (typeof p === 'number') return p;
+    const n = Number(t.replace(/^R\$\s*/i, '').replace(',', '.'));
+    return Number.isFinite(n) ? n : null;
+  }
+  const novoEvento = () => ({
+    id: '', nome: '', tipo: '', data: '', hora_inicio: '', hora_fim: '', para_quem: '', idade: '', organiza: '', contato: '',
+    adultos: null, criancas: null, tema: '', orcamento: null, status: 'planejando', descricao: '',
+    escolhas: [], gastos: [], tarefas: [], cronograma: [],
+  });
+  const evCompleto = (ev) => Object.assign(novoEvento(), ev);
+  const eventosAtivos = () => Object.values(S.eventos).filter((e) => e && !e.removido)
+    .sort((a, b) => (a.data || '9999').localeCompare(b.data || '9999') || (a.nome || '').localeCompare(b.nome || '', 'pt-BR'));
+  const eventosCom = (id) => eventosAtivos().flatMap((ev) => (ev.escolhas || []).filter((e) => e.id === id).map((e) => ({ ev, esc: e })));
+  const privTxt = () => (!API ? 'Os eventos ficam salvos neste navegador.'
+    : S.chave ? 'Os eventos ficam neste aparelho e na nuvem. Só quem tem a chave de edição vê.'
+      : 'Os eventos ficam salvos neste aparelho. Com a chave de edição eles vão para a nuvem, visíveis só para quem tem a chave.');
+
+  // Guardar: sempre no aparelho; na nuvem quando houver chave.
+  let timerEv = null;
+  function salvarEvento(ev, { render = true } = {}) {
+    ev.atualizado_em = new Date().toISOString();
+    S.eventos[ev.id] = ev;
+    lsSet(LS.eventos, S.eventos);
+    if (API) { S.evPend.add(ev.id); lsSet(LS.evPend, [...S.evPend]); }
+    clearTimeout(timerEv); timerEv = setTimeout(sincronizarEventos, 800);
+    if (render) renderTudo();
+  }
+  async function sincronizarEventos() {
+    if (!API || !S.chave || !S.evPend.size) return;
+    for (const id of [...S.evPend]) {
+      try {
+        const r = await fetch(`${API}/dados/eventos/${encodeURIComponent(id)}`, {
+          method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Chave': S.chave }, body: JSON.stringify(S.eventos[id]),
+        });
+        if (r.status === 401) { toast('Chave de edição recusada. Confira em Sincronização.'); break; }
+        if (!r.ok) throw new Error(r.status);
+        S.evPend.delete(id);
+      } catch { /* tenta de novo depois */ }
+    }
+    lsSet(LS.evPend, [...S.evPend]);
+  }
+  async function carregarEventos() {
+    if (!API || !S.chave) return;
+    try {
+      const r = await fetch(`${API}/dados/eventos`, { headers: { 'X-Chave': S.chave }, cache: 'no-store' });
+      if (!r.ok) throw new Error(r.status);
+      for (const { id, dados, atualizado_em: em } of await r.json()) {
+        const loc = S.eventos[id];
+        if (!loc || (loc.atualizado_em || '') < em) { S.eventos[id] = { ...dados, id, atualizado_em: em }; S.evPend.delete(id); }
+      }
+      lsSet(LS.eventos, S.eventos); lsSet(LS.evPend, [...S.evPend]);
+      sincronizarEventos();
+    } catch { /* fica com o que está no aparelho */ }
+  }
+  window.addEventListener('online', sincronizarEventos);
+
+  function contas(ev) {
+    const fech = ev.escolhas.filter((e) => fechado(e.status));
+    const combinado = fech.reduce((a, e) => a + numV(e.valor), 0) + ev.gastos.reduce((a, g) => a + numV(g.valor), 0);
+    const pago = fech.reduce((a, e) => a + numV(e.pago), 0) + ev.gastos.filter((g) => g.pago).reduce((a, g) => a + numV(g.valor), 0);
+    const pessoas = numV(ev.adultos) + numV(ev.criancas);
+    const vencimentos = fech.filter((e) => e.vencimento && numV(e.valor) > numV(e.pago))
+      .map((e) => ({ vencimento: e.vencimento, falta: numV(e.valor) - numV(e.pago), nome: (S.porId[e.id] || e).nome }))
+      .sort((a, b) => a.vencimento.localeCompare(b.vencimento));
+    return {
+      combinado, pago, falta: Math.max(0, combinado - pago), pessoas, porPessoa: pessoas ? combinado / pessoas : null,
+      semValor: fech.filter((e) => !numV(e.valor)).length, vencimentos,
+    };
+  }
+  function barraOrc(v, total) {
+    const p = Math.min(100, Math.round((v / total) * 100));
+    return `<div class="barra-orc ${v > total ? 'estourou' : ''}" role="img" aria-label="${p}% do orçamento usado"><span style="width:${p}%"></span></div>`;
+  }
+
+  /* ---- Lista de eventos ---- */
+  function cardEvento(bruto) {
+    const ev = evCompleto(bruto);
+    const c = contas(ev);
+    const d = ev.data ? dataLocal(ev.data) : null;
+    const passado = ev.status === 'cancelado' || ev.status === 'realizado' || (ev.data && diasAte(ev.data) < 0);
+    return `<article class="card ev-card ${passado ? 'passado' : ''}">
+      <a class="ev-cab" href="#evento/${ev.id}">
+        <span class="ev-data">${d ? `<span class="dia">${d.getDate()}</span><span class="mes">${MESES[d.getMonth()].slice(0, 3)} ${d.getFullYear()}</span>` : '<span class="mes">sem data</span>'}</span>
+        <span class="ev-tit"><span class="sobretitulo">${esc(ev.tipo || 'Evento')} · ${esc(evStRot(ev.status))}</span>
+          <strong>${esc(ev.nome)}</strong>
+          <small>${esc([ev.data ? contagem(ev.data) : null, horario(ev)].filter(Boolean).join(' · '))}</small></span>
+      </a>
+      <div class="corpo">
+        <ul class="ev-cats">${ORDEM_CATS.map((k) => {
+          const es = ev.escolhas.filter((e) => e.cat === k);
+          const ok = es.some((e) => fechado(e.status));
+          return `<li class="${ok ? 'ok' : es.length ? 'meio' : ''}" title="${esc(CATS[k].rot)}: ${ok ? 'escolhido' : es.length ? es.length + ' opções' : 'nada ainda'}">${ic(ok ? 'check' : CATS[k].icone)}<span>${esc(CATS[k].curto)}</span></li>`;
+        }).join('')}</ul>
+        <div class="preco"><span class="valor">${brl(c.combinado)} <small>combinado${numV(ev.orcamento) ? ` de ${brl(ev.orcamento)}` : ''}</small></span>
+          <span class="cond">${esc([c.pessoas ? `${c.pessoas} convidados` : 'Convidados a definir', ev.para_quem ? `para ${ev.para_quem}` : null].filter(Boolean).join(' · '))}</span></div>
+        ${numV(ev.orcamento) ? barraOrc(c.combinado, ev.orcamento) : ''}
+        <div class="rodape-card"><a class="btn" href="#evento/${ev.id}">Abrir planejamento</a></div>
+      </div>
+    </article>`;
+  }
+  function renderEventos() {
+    const evs = eventosAtivos();
+    $('#aplicados').innerHTML = `<span><strong>${evs.length}</strong> ${evs.length === 1 ? 'evento' : 'eventos'}</span><span class="esp"></span>
+      <button type="button" class="btn primario" data-acao="novo-evento">${ic('mais')}Novo evento</button>`;
+    $('#lista').innerHTML = evs.length ? evs.map(cardEvento).join('')
+      : `<div class="vazio"><h3>Nenhum evento ainda</h3>
+          <p>Crie um evento para juntar espaço, buffet, brinquedos, serviços e aluguéis num lugar só, com orçamento, pagamentos e tarefas.</p>
+          <p><button type="button" class="btn primario" data-acao="novo-evento">${ic('mais')}Criar o primeiro evento</button></p>
+          <p class="meta">${privTxt()}</p></div>`;
+  }
+
+  /* ---- Página do evento ---- */
+  function linhaEscolha(e, i) {
+    const l = S.porId[e.id];
+    const zap = l && zapLink(l.whatsapp, l.nome);
+    const mp = l && menorPreco(l);
+    const ref = l ? (mp != null ? `a partir de ${brl(mp)}` : 'valor sob consulta') : 'não está mais no catálogo';
+    const v = l ? visita(l.id) : null;
+    return `<div class="esc st-${e.status}">
+      <div class="esc-topo">
+        <button type="button" class="esc-estrela" data-esc-melhor="${i}" aria-pressed="${fechado(e.status)}" title="${fechado(e.status) ? 'Tirar dos escolhidos' : 'Marcar como escolhido'}" aria-label="${fechado(e.status) ? 'Tirar dos escolhidos' : 'Marcar como escolhido'}">${ic('estrela')}</button>
+        <div class="esc-nome">${l ? `<button type="button" data-abrir="${l.id}">${esc(l.nome)}</button>` : `<span>${esc(e.nome || 'Sem nome')}</span>`}
+          <small>${esc([l ? tiposDe(l)[0] : null, ref, v && v.nota ? `sua nota ${v.nota}/5` : null].filter(Boolean).join(' · '))}</small></div>
+        <span class="selo-esc">${esc(escRot(e.status))}</span>
+      </div>
+      <div class="esc-campos">
+        <label class="campo"><span>Situação</span><select data-evc="escolhas.${i}.status">${ESC_STATUS.map(([k, r]) => `<option value="${k}" ${k === e.status ? 'selected' : ''}>${r}</option>`).join('')}</select></label>
+        <label class="campo"><span>Valor combinado</span><input data-evc="escolhas.${i}.valor" data-tipo="num" inputmode="decimal" value="${e.valor != null ? esc(valorTxt(e.valor)) : ''}" placeholder="R$"></label>
+        <label class="campo"><span>Já pago</span><input data-evc="escolhas.${i}.pago" data-tipo="num" inputmode="decimal" value="${e.pago != null ? esc(valorTxt(e.pago)) : ''}" placeholder="R$"></label>
+        <label class="campo"><span>Saldo vence em</span><input type="date" data-evc="escolhas.${i}.vencimento" value="${esc(e.vencimento || '')}"></label>
+        <label class="campo largo"><span>Observação</span><input data-evc="escolhas.${i}.obs" maxlength="300" value="${esc(e.obs || '')}" placeholder="O que foi combinado, horário de montagem…"></label>
+      </div>
+      <div class="esc-acoes">${zap ? `<a class="mini zap" href="${zap}" target="_blank" rel="noopener">${ic('zap')}WhatsApp</a>` : ''}
+        ${l && l.telefone && !zap ? `<a class="mini" href="tel:+55${digitos(l.telefone)}">${ic('fone')}Ligar</a>` : ''}
+        <span class="esp"></span><button type="button" class="link-btn" data-esc-tirar="${i}">Tirar do evento</button></div>
+    </div>`;
+  }
+  function blocoCat(ev, k) {
+    const C = CATS[k];
+    const ordem = { contratado: 0, reservado: 1, escolhido: 2, opcao: 3, descartado: 4 };
+    const idx = ev.escolhas.map((e, i) => [e, i]).filter(([e]) => e.cat === k).sort((a, b) => (ordem[a[0].status] ?? 3) - (ordem[b[0].status] ?? 3));
+    const nF = idx.filter(([e]) => fechado(e.status)).length;
+    const nO = idx.filter(([e]) => e.status === 'opcao').length;
+    return `<div class="pg-cat ${nF ? 'tem' : ''}">
+      <div class="pg-cat-topo"><h3>${ic(C.icone)}${esc(C.rot)}</h3>
+        <span class="n">${nF ? `${nF} escolhido${nF > 1 ? 's' : ''}` : 'nada escolhido'}${nO ? ` · ${nO} ${nO === 1 ? 'opção' : 'opções'}` : ''}</span>
+        <button type="button" class="btn ghost" data-picker="${k}">${ic('mais')}<span class="lbl">Adicionar opção</span></button></div>
+      ${idx.length ? idx.map(([e, i]) => linhaEscolha(e, i)).join('')
+        : `<p class="texto vazio-cat">Nenhuma opção ainda. <button type="button" class="link-btn" data-picker="${k}">Escolher do catálogo</button></p>`}
+    </div>`;
+  }
+  function resumoHtml(ev, c) {
+    const orc = numV(ev.orcamento);
+    const cel = (r, v, cls = '') => `<div class="${cls}"><dt>${r}</dt><dd>${v}</dd></div>`;
+    return `<h2>Orçamento</h2>
+      <dl class="resumo">
+        ${cel('Previsto', orc ? brl(orc) : '—')}
+        ${cel('Combinado', brl(c.combinado), orc && c.combinado > orc ? 'alerta' : '')}
+        ${cel('Pago', brl(c.pago))}
+        ${cel('Falta pagar', brl(c.falta))}
+        ${cel('Por convidado', c.porPessoa ? brl(Math.round(c.porPessoa)) : '—')}
+        ${orc ? cel(c.combinado > orc ? 'Acima do previsto' : 'Ainda cabe', brl(Math.abs(orc - c.combinado)), c.combinado > orc ? 'alerta' : 'bom') : ''}
+      </dl>
+      ${orc ? barraOrc(c.combinado, orc) : ''}
+      ${c.semValor ? `<p class="nota-aviso">${ic('alerta')}<span>${c.semValor} ${c.semValor === 1 ? 'escolhido está' : 'escolhidos estão'} sem valor combinado. Preencha para o total ficar certo.</span></p>` : ''}
+      ${c.vencimentos.length ? `<h3 class="sub-h">Próximos pagamentos</h3><ul class="vencs">${c.vencimentos.map((v) =>
+        `<li class="${diasAte(v.vencimento) < 0 ? 'atrasado' : ''}"><span>${dataBR(v.vencimento)}</span><strong>${brl(v.falta)}</strong><span>${esc(v.nome)}</span></li>`).join('')}</ul>` : ''}`;
+  }
+  function linhasEv(lista, i, conteudo) {
+    return `<div class="linha-ev">${conteudo}<button type="button" class="tirar-linha" data-ev-tirar="${lista}:${i}" aria-label="Remover">×</button></div>`;
+  }
+  function listaGastos(ev) {
+    return `<p class="meta">Gastos fora do catálogo: convites, lembrancinhas, compras de mercado. Entram no combinado.</p>
+      <div class="linhas-ev">${ev.gastos.map((g, i) => linhasEv('gastos', i, `
+        <input data-evc="gastos.${i}.descricao" maxlength="200" value="${esc(g.descricao || '')}" placeholder="ex.: lembrancinhas" aria-label="Descrição">
+        <input class="curto" data-evc="gastos.${i}.valor" data-tipo="num" inputmode="decimal" value="${g.valor != null ? esc(valorTxt(g.valor)) : ''}" placeholder="R$" aria-label="Valor">
+        <label class="chk"><input type="checkbox" data-evc="gastos.${i}.pago" data-tipo="bool" ${g.pago ? 'checked' : ''}>pago</label>`)).join('')}</div>
+      <button type="button" class="btn ghost add-linha" data-ev-add="gastos">${ic('mais')}Adicionar gasto</button>`;
+  }
+  function listaTarefas(ev) {
+    const ordem = ev.tarefas.map((t, i) => [t, i]).sort((a, b) => (a[0].feito ? 1 : 0) - (b[0].feito ? 1 : 0) || (a[0].prazo || '9999').localeCompare(b[0].prazo || '9999'));
+    const feitas = ev.tarefas.filter((t) => t.feito).length;
+    return `${ev.tarefas.length ? `<p class="meta">${feitas} de ${ev.tarefas.length} feitas</p>` : ''}
+      <div class="linhas-ev">${ordem.map(([t, i]) => `<div class="linha-ev tarefa ${t.feito ? 'feita' : ''} ${!t.feito && t.prazo && diasAte(t.prazo) < 0 ? 'atrasada' : ''}">
+        <label class="chk"><input type="checkbox" data-evc="tarefas.${i}.feito" data-tipo="bool" ${t.feito ? 'checked' : ''}><span class="sr">Feita</span></label>
+        <input data-evc="tarefas.${i}.texto" maxlength="200" value="${esc(t.texto || '')}" placeholder="O que fazer" aria-label="Tarefa">
+        <input type="date" class="curto" data-evc="tarefas.${i}.prazo" value="${esc(t.prazo || '')}" aria-label="Prazo">
+        <button type="button" class="tirar-linha" data-ev-tirar="tarefas:${i}" aria-label="Remover">×</button></div>`).join('')}</div>
+      <div class="acoes-linha"><button type="button" class="btn ghost add-linha" data-ev-add="tarefas">${ic('mais')}Adicionar tarefa</button>
+        <button type="button" class="btn ghost add-linha" data-acao="ev-sugerir">${ic('check')}Sugerir tarefas${ev.data ? ' pela data' : ''}</button></div>`;
+  }
+  function listaCrono(ev) {
+    const ordem = ev.cronograma.map((x, i) => [x, i]).sort((a, b) => (a[0].hora || '99').localeCompare(b[0].hora || '99'));
+    return `<p class="meta">Horários do dia: montagem, chegada dos convidados, parabéns, fim do buffet.</p>
+      <div class="linhas-ev">${ordem.map(([x, i]) => linhasEv('cronograma', i, `
+        <input type="time" class="curto" data-evc="cronograma.${i}.hora" value="${esc(x.hora || '')}" aria-label="Horário">
+        <input data-evc="cronograma.${i}.oque" maxlength="200" value="${esc(x.oque || '')}" placeholder="ex.: chegada do buffet" aria-label="O que acontece">`)).join('')}</div>
+      <button type="button" class="btn ghost add-linha" data-ev-add="cronograma">${ic('mais')}Adicionar horário</button>`;
+  }
+  function renderPagina() {
+    const el = $('#pagina');
+    const bruto = S.eventos[S.paginaEv];
+    if (!bruto || bruto.removido) {
+      el.innerHTML = `<div class="vazio"><h3>Evento não encontrado</h3><p>Ele pode ter sido excluído${API && !S.chave ? ' ou estar salvo em outro aparelho. Informe a chave de edição para trazer da nuvem' : ''}.</p>
+        <p><a class="btn" href="#eventos">Ver eventos</a></p></div>`;
+      return;
+    }
+    const ev = evCompleto(bruto);
+    const c = contas(ev);
+    const local = ev.escolhas.find((e) => e.cat === 'espacos' && fechado(e.status));
+    const lLocal = local && S.porId[local.id];
+    const conv = [numV(ev.adultos) ? `${ev.adultos} adultos` : null, numV(ev.criancas) ? `${ev.criancas} crianças` : null].filter(Boolean).join(' + ');
+    const fatos = [
+      ['Para quem', esc([ev.para_quem, ev.idade].filter(Boolean).join(', '))],
+      ['Quem organiza', esc([ev.organiza, ev.contato].filter(Boolean).join(' · '))],
+      ['Convidados', conv ? esc(conv) + (c.pessoas && conv.includes('+') ? ` <small>(${c.pessoas})</small>` : '') : ''],
+      ['Tema', esc(ev.tema)],
+      ['Local', lLocal ? `<button type="button" class="link-btn" data-abrir="${lLocal.id}">${esc(lLocal.nome)}</button>${lLocal.endereco || lLocal.bairro ? ` <small>${esc(lLocal.endereco || lLocal.bairro)}</small>` : ''}` : '<span class="fraco">a definir</span>'],
+    ].filter(([, v]) => v);
+    el.innerHTML = `
+      <div class="pg-topo">
+        <a class="btn ghost" href="#eventos">${ic('voltar')}Eventos</a>
+        <span class="esp"></span>
+        <button type="button" class="btn" data-acao="editar-evento">${ic('editar')}<span class="lbl">Editar</span></button>
+        <button type="button" class="btn" data-acao="imprimir">${ic('imprimir')}<span class="lbl">Imprimir</span></button>
+      </div>
+      <header class="pg-cab">
+        <p class="sobretitulo">${esc(ev.tipo || 'Evento')} · ${esc(evStRot(ev.status))}</p>
+        <h1>${esc(ev.nome)}</h1>
+        <p class="pg-quando">${ev.data ? `<span>${ic('quero')}${esc(dataLonga(ev.data))}</span>` : '<span>Data a definir</span>'}
+          ${horario(ev) ? `<span>${ic('relogio')}${esc(horario(ev))}</span>` : ''}
+          ${ev.data ? `<span class="contagem">${esc(contagem(ev.data))}</span>` : ''}</p>
+        ${fatos.length ? `<dl class="pg-fatos">${fatos.map(([r, v]) => `<div><dt>${r}</dt><dd>${v}</dd></div>`).join('')}</dl>` : ''}
+        ${ev.descricao ? `<p class="pg-desc">${esc(ev.descricao)}</p>` : ''}
+      </header>
+      <section class="pg-sec" id="pg-resumo">${resumoHtml(ev, c)}</section>
+      <section class="pg-sec"><h2>Fornecedores</h2>
+        <p class="meta">Adicione as opções que está considerando e marque com a estrela as melhores. Pode haver mais de uma escolhida por categoria (buffet e bolo, por exemplo).</p>
+        ${ORDEM_CATS.map((k) => blocoCat(ev, k)).join('')}
+      </section>
+      <section class="pg-sec"><h2>Outros gastos</h2>${listaGastos(ev)}</section>
+      <section class="pg-sec"><h2>Tarefas</h2>${listaTarefas(ev)}</section>
+      <section class="pg-sec"><h2>Cronograma do dia</h2>${listaCrono(ev)}</section>
+      <p class="meta pg-priv">${privTxt()}</p>`;
+  }
+
+  /* ---- Edição na própria página ---- */
+  const LINHA_VAZIA = { gastos: () => ({ descricao: '', valor: null, pago: false }), tarefas: () => ({ texto: '', prazo: '', feito: false }), cronograma: () => ({ hora: '', oque: '' }) };
+  function evAtual() { return S.eventos[S.paginaEv] ? evCompleto(S.eventos[S.paginaEv]) : null; }
+  function setCaminho(obj, caminho, v) {
+    const ps = caminho.split('.');
+    let o = obj;
+    for (let i = 0; i < ps.length - 1; i++) { o = o[ps[i]]; if (!o) return; }
+    o[ps[ps.length - 1]] = v;
+  }
+  function addEscolha(evId, itemId) {
+    const ev = evCompleto(S.eventos[evId]);
+    const l = S.porId[itemId];
+    if (!l || ev.escolhas.some((e) => e.id === itemId)) return false;
+    ev.escolhas.push({ id: l.id, cat: l.cat || 'espacos', nome: l.nome, status: 'opcao', valor: null, pago: null, vencimento: '', obs: '' });
+    salvarEvento(ev);
+    return true;
+  }
+  function sugerirTarefas() {
+    const ev = evAtual();
+    const tem = new Set(ev.tarefas.map((t) => norm(t.texto)));
+    const base = ev.data ? dataLocal(ev.data) : null;
+    let n = 0;
+    for (const [dias, texto] of MODELO_TAREFAS) {
+      if (tem.has(norm(texto))) continue;
+      let prazo = '';
+      if (base) { const d = new Date(base); d.setDate(d.getDate() - dias); prazo = isoLocal(d); }
+      ev.tarefas.push({ texto, prazo, feito: false }); n++;
+    }
+    salvarEvento(ev);
+    toast(n ? `${n} tarefas sugeridas.` : 'As tarefas sugeridas já estão na lista.');
+  }
+
+  /* ---- Seletor: adicionar opção ao evento / item a um evento ---- */
+  let PK = null;
+  function listaPick() {
+    const ev = S.eventos[S.paginaEv];
+    const ja = new Set(((ev && ev.escolhas) || []).map((e) => e.id));
+    const q = norm(PK.busca).split(/\s+/).filter(Boolean);
+    const todos = S.locais.filter((l) => (l.cat || 'espacos') === PK.cat);
+    const ls = todos.filter((l) => q.every((t) => l._busca.includes(t)))
+      .sort((a, b) => (visita(b.id).favorito ? 1 : 0) - (visita(a.id).favorito ? 1 : 0) || (visita(b.id).nota || 0) - (visita(a.id).nota || 0) || completude(b) - completude(a));
+    if (!ls.length) return `<p class="texto">${todos.length ? 'Nada encontrado com essa busca.' : 'Nenhum cadastrado nesta categoria ainda. Use Cadastrar novo.'}</p>`;
+    return ls.map((l) => {
+      const v = visita(l.id);
+      const tem = ja.has(l.id);
+      const mp = menorPreco(l);
+      return `<button type="button" class="pick-item ${tem ? 'ok' : ''}" data-pick="${l.id}" ${tem ? 'disabled' : ''}>${ic(tem ? 'check' : 'mais')}
+        <span><strong>${esc(l.nome)}</strong><small>${esc([tiposDe(l)[0], mp != null ? `a partir de ${brl(mp)}` : 'sob consulta',
+          v.favorito ? 'favorito' : null, v.nota ? `nota ${v.nota}/5` : null, tem ? 'já está no evento' : null].filter(Boolean).join(' · '))}</small></span></button>`;
+    }).join('');
+  }
+  function renderPicker() {
+    const d = $('#picker');
+    if (PK.modo === 'item') {
+      d.innerHTML = `<div class="folha-corpo">
+        <h2>${esc(CATS[PK.cat].rot)}</h2>
+        <p>Adicione as opções que está considerando. Depois marque a melhor com a estrela.</p>
+        <label class="busca pick-busca"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <span class="sr">Buscar</span><input id="pick-busca" type="search" placeholder="Buscar…" value="${esc(PK.busca)}" autocomplete="off"></label>
+        <div class="pick-lista" id="pick-lista">${listaPick()}</div>
+        <div class="acoes"><button type="button" class="btn" data-acao="pick-cadastrar">${ic('mais')}Cadastrar novo</button><span class="esp"></span>
+          <button type="button" class="btn primario" data-fechar>Pronto</button></div></div>`;
+    } else {
+      const l = S.porId[PK.itemId];
+      const evs = eventosAtivos();
+      d.innerHTML = `<div class="folha-corpo">
+        <h2>Adicionar a um evento</h2>
+        <p><strong>${esc(l.nome)}</strong> entra como opção. No evento, marque com a estrela se for a escolhida.</p>
+        <div class="pick-lista">${evs.map((ev) => {
+          const tem = (ev.escolhas || []).some((e) => e.id === l.id);
+          return `<button type="button" class="pick-item ${tem ? 'ok' : ''}" data-pick-ev="${ev.id}" ${tem ? 'disabled' : ''}>${ic(tem ? 'check' : 'eventos')}
+            <span><strong>${esc(ev.nome)}</strong><small>${esc([ev.data ? dataBR(ev.data) : 'sem data', tem ? 'já está neste evento' : null].filter(Boolean).join(' · '))}</small></span></button>`;
+        }).join('') || '<p class="texto">Você ainda não tem eventos.</p>'}</div>
+        <div class="acoes"><button type="button" class="btn ouro" data-acao="pick-novo-evento">${ic('mais')}Criar evento novo</button><span class="esp"></span>
+          <button type="button" class="btn ghost" data-fechar>Cancelar</button></div></div>`;
+    }
+  }
+  function abrirPicker(cat) {
+    PK = { modo: 'item', cat, busca: '' };
+    renderPicker();
+    $('#picker').showModal();
+    setTimeout(() => { const b = $('#pick-busca'); if (b && window.matchMedia('(min-width: 700px)').matches) b.focus(); }, 50);
+  }
+  function abrirPickerEvento(itemId) {
+    if (!S.porId[itemId]) return;
+    PK = { modo: 'evento', itemId };
+    renderPicker();
+    $('#picker').showModal();
+  }
+
+  /* ---- Formulário do evento ---- */
+  function abrirEditorEvento(id) {
+    const ev = id && S.eventos[id] ? evCompleto(S.eventos[id]) : novoEvento();
+    ED = { tipo: 'evento', id: id && S.eventos[id] ? id : null, cat: null, sujo: false };
+    const tipos = [...new Set([...EVENTOS_BASE, 'Chá de bebê', 'Noivado', '15 anos', 'Bodas', ...eventosAtivos().map((e) => e.tipo)])].filter(Boolean);
+    const d = $('#editor');
+    d.innerHTML = `<form id="form-evento" novalidate>
+      <div class="folha-topo">
+        <button type="button" class="fechar" data-acao="cancelar-editor" aria-label="Fechar">${ic('voltar')}</button>
+        <h2>${ED.id ? `Editar: ${esc(ev.nome)}` : 'Novo evento'}</h2>
+      </div>
+      <div class="folha-corpo">
+        <fieldset class="ed-bloco"><legend>O evento</legend>
+          <div class="grade-2">
+            <label class="campo largo"><span>Nome do evento *</span><input name="nome" required maxlength="120" value="${esc(ev.nome)}" placeholder="ex.: Aniversário de 7 anos do Pedro"></label>
+            <label class="campo"><span>Tipo</span><input name="tipo" list="dl-tipos-ev" maxlength="60" value="${esc(ev.tipo)}" placeholder="Aniversário, casamento…"></label>
+            <label class="campo"><span>Situação</span><select name="status">${EV_STATUS.map(([k, r]) => `<option value="${k}" ${k === ev.status ? 'selected' : ''}>${r}</option>`).join('')}</select></label>
+            <label class="campo largo"><span>Data</span><input name="data" type="date" value="${esc(ev.data)}"></label>
+            <label class="campo"><span>Começa às</span><input name="hora_inicio" type="time" value="${esc(ev.hora_inicio)}"></label>
+            <label class="campo"><span>Termina às</span><input name="hora_fim" type="time" value="${esc(ev.hora_fim)}"></label>
+          </div>
+          <datalist id="dl-tipos-ev">${tipos.map((t) => `<option value="${esc(t)}">`).join('')}</datalist>
+        </fieldset>
+        <fieldset class="ed-bloco"><legend>Pessoas</legend>
+          <div class="grade-2">
+            <label class="campo"><span>Para quem (homenageado)</span><input name="para_quem" maxlength="120" value="${esc(ev.para_quem)}" placeholder="ex.: Pedro"></label>
+            <label class="campo"><span>O que comemora</span><input name="idade" maxlength="80" value="${esc(ev.idade)}" placeholder="ex.: 7 anos, 10 anos de casados"></label>
+            <label class="campo"><span>Quem organiza</span><input name="organiza" maxlength="120" value="${esc(ev.organiza)}"></label>
+            <label class="campo"><span>Contato de quem organiza</span><input name="contato" maxlength="60" inputmode="tel" value="${esc(ev.contato)}"></label>
+            <label class="campo"><span>Adultos</span><input name="adultos" type="number" min="0" inputmode="numeric" value="${ev.adultos ?? ''}"></label>
+            <label class="campo"><span>Crianças</span><input name="criancas" type="number" min="0" inputmode="numeric" value="${ev.criancas ?? ''}"></label>
+          </div>
+        </fieldset>
+        <fieldset class="ed-bloco"><legend>Planejamento</legend>
+          <div class="grade-2">
+            <label class="campo"><span>Tema / estilo</span><input name="tema" maxlength="120" value="${esc(ev.tema)}" placeholder="ex.: Fundo do mar"></label>
+            <label class="campo"><span>Orçamento previsto (R$)</span><input name="orcamento" inputmode="decimal" value="${ev.orcamento != null ? esc(valorTxt(ev.orcamento)) : ''}" placeholder="ex.: 8.000"></label>
+            <label class="campo largo"><span>Descrição e ideias</span><textarea name="descricao" rows="4" maxlength="3000" placeholder="Como imagina a festa, o que não pode faltar, restrições…">${esc(ev.descricao)}</textarea></label>
+          </div>
+          <p class="ajuda" style="margin-top:10px">${privTxt()}</p>
+        </fieldset>
+      </div>
+      <div class="ed-rodape">
+        ${ED.id ? `<button type="button" class="btn ghost perigo" data-acao="remover-evento">${ic('lixo')}<span class="lbl">Excluir</span></button>` : ''}
+        <span class="espaco"></span>
+        <button type="button" class="btn" data-acao="cancelar-editor">Cancelar</button>
+        <button type="submit" class="btn primario">Salvar</button>
+      </div>
+    </form>`;
+    if (!d.open) d.showModal();
+    d.scrollTop = 0;
+    if (!ED.id) setTimeout(() => d.querySelector('[name="nome"]').focus(), 50);
+  }
+  function salvarEditorEvento() {
+    const f = $('#form-evento');
+    const g = (n) => (f.elements[n]?.value || '').trim();
+    const nome = f.elements.nome;
+    if (!g('nome')) { nome.setCustomValidity('Dê um nome ao evento'); nome.reportValidity(); nome.focus(); return; }
+    nome.setCustomValidity('');
+    const novo = !ED.id;
+    const ev = novo ? novoEvento() : evCompleto(S.eventos[ED.id]);
+    if (novo) ev.id = `ev-${slug(g('nome')).slice(0, 40)}-${Date.now().toString(36)}`;
+    const int = (n) => { const x = parseInt(g(n), 10); return x >= 0 ? x : null; };
+    Object.assign(ev, {
+      nome: g('nome'), tipo: g('tipo'), status: g('status') || 'planejando', data: g('data'), hora_inicio: g('hora_inicio'), hora_fim: g('hora_fim'),
+      para_quem: g('para_quem'), idade: g('idade'), organiza: g('organiza'), contato: g('contato'), adultos: int('adultos'), criancas: int('criancas'),
+      tema: g('tema'), orcamento: numDe(g('orcamento')), descricao: g('descricao'),
+    });
+    if (ED.addItem && S.porId[ED.addItem] && !ev.escolhas.some((e) => e.id === ED.addItem)) {
+      const l = S.porId[ED.addItem];
+      ev.escolhas.push({ id: l.id, cat: l.cat || 'espacos', nome: l.nome, status: 'opcao', valor: null, pago: null, vencimento: '', obs: '' });
+    }
+    ED.sujo = false;
+    $('#editor').close();
+    salvarEvento(ev, { render: false });
+    toast(novo ? 'Evento criado.' : 'Evento salvo.');
+    if (location.hash === `#evento/${ev.id}`) renderTudo(); else location.hash = `#evento/${ev.id}`;
+  }
+  function removerEvento() {
+    const ev = S.eventos[ED.id];
+    if (!ev || !confirm(`Excluir o evento "${ev.nome}"? As escolhas, gastos e tarefas dele saem junto.`)) return;
+    ED.sujo = false;
+    $('#editor').close();
+    salvarEvento({ ...ev, removido: true }, { render: false });
+    toast('Evento excluído.');
+    location.hash = '#eventos';
+  }
+
+  /* ============ Navegação ============ */
+  function hashBase() {
+    if (S.paginaEv) return `#evento/${S.paginaEv}`;
+    return S.secao === 'espacos' ? location.pathname + location.search : `#${S.secao}`;
+  }
+  function mudarSecao(sec) {
+    if (S.secao === sec) return;
+    S.secao = sec; S.aba = 'todos'; S.cmp.clear();
+    Object.assign(S.f, { tipo: '', evento: '', cap: '' }); S.f.rapidos.clear();
+    ['tipo', 'evento', 'cap'].forEach((c) => { $('#f-' + c).value = ''; });
+    if (S.f.ordem === 'cap' && sec !== 'espacos') { S.f.ordem = 'relevancia'; $('#f-ordem').value = 'relevancia'; }
+    if (CATS[sec]) renderOpcoes();
+  }
+  function rota() {
+    const h = decodeURIComponent(location.hash.slice(1));
+    const antes = `${S.secao}|${S.paginaEv}`;
+    let m;
+    if ((m = h.match(/^evento\/(.+)$/))) { mudarSecao('eventos'); S.paginaEv = m[1]; }
+    else if ((m = h.match(/^local\/(.+)$/))) {
+      const l = S.porId[m[1]];
+      if (l) { S.paginaEv = null; mudarSecao(l.cat || 'espacos'); renderTudo(); abrirDetalhe(l.id); return; }
+    } else { S.paginaEv = null; mudarSecao(SECOES.some(([k]) => k === h) ? h : 'espacos'); }
+    renderTudo();
+    if (antes !== `${S.secao}|${S.paginaEv}`) {
+      if ($('#picker').open) $('#picker').close();
+      if ($('#detalhe').open) $('#detalhe').close();
+      window.scrollTo(0, S.paginaEv ? 0 : Math.min(window.scrollY, $('.hero').offsetHeight));
+    }
   }
 
   /* ============ Início ============ */
@@ -1056,7 +1834,13 @@
       S.dataDados = j.atualizado_em;
       const padrao = (j.atualizado_em || '2026-01-01') + 'T00:00:00Z';
       S.base = j.locais.map((l) => ({ ...l, atualizado_em: l.atualizado_em || padrao }));
-      S.remotos = lsGet(LS.locais, []);
+      S.base.forEach((l) => { l.cat = 'espacos'; });
+      try {
+        const rf = await fetch('data/fornecedores.json', { cache: 'no-cache' });
+        const jf = await rf.json();
+        S.fbase = (jf.itens || []).map((l) => ({ ...l, atualizado_em: l.atualizado_em || padrao }));
+      } catch { S.fbase = []; }
+      S.remotos = lsGet(LS.catalogo, []);
       montarLocais();
     } catch {
       $('#lista').innerHTML = '<div class="vazio"><h3>Não foi possível carregar os locais</h3><p>Recarregue a página.</p></div>';
@@ -1067,11 +1851,12 @@
     renderOpcoes();
     renderTudo();
     atualizarSync();
-    const m = location.hash.match(/^#local\/(.+)$/);
-    if (m) abrirDetalhe(decodeURIComponent(m[1]));
-    await Promise.all([carregarRemoto(), carregarLocaisRemotos()]);
-    renderOpcoes();
+    rota();
+    window.addEventListener('hashchange', rota);
+    await Promise.all([carregarRemoto(), carregarLocaisRemotos(), carregarEventos()]);
+    if (CATS[S.secao]) renderOpcoes();
     renderTudo();
+    if (location.hash.startsWith('#local/') && !$('#detalhe').open) rota();
   }
   iniciar();
 })();

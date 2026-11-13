@@ -4,8 +4,11 @@ CREATE TABLE IF NOT EXISTS visitas (
   atualizado_em TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS locais (
-  id TEXT PRIMARY KEY,
+-- Locais, fornecedores (buffet, brinquedos, serviços, aluguéis) e eventos.
+CREATE TABLE IF NOT EXISTS registros (
+  colecao TEXT NOT NULL,
+  id TEXT NOT NULL,
   dados TEXT NOT NULL,
-  atualizado_em TEXT NOT NULL
+  atualizado_em TEXT NOT NULL,
+  PRIMARY KEY (colecao, id)
 );
