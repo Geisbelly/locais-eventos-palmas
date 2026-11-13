@@ -4,19 +4,28 @@ Catálogo de salões, chácaras e espaços para eventos em Palmas, com valores e
 
 Site: https://geisbelly.github.io/locais-eventos-palmas/
 
-Sem login para ver. Para gravar visitas na nuvem é preciso digitar uma vez a **chave de edição**.
+Sem login para ver. Para gravar visitas e **cadastrar ou editar locais** pelo site é preciso digitar uma vez a **chave de edição** (ícone de nuvem).
 
 ## Onde ficam os dados
 
 | O quê | Onde | Custo |
 |---|---|---|
 | Locais (nome, preços, contato…) | `data/locais.json` neste repositório | R$ 0 |
+| Locais cadastrados ou editados pelo site | Cloudflare D1 (tabela `locais`). Vale a versão mais nova entre o banco e o JSON | R$ 0 |
 | Visitas, prós, contras, anotações | Cloudflare D1 via Worker (pasta `worker/`) | R$ 0 no plano gratuito (5 GB, 100 mil gravações/dia) |
 | Sem Worker configurado | `localStorage` do navegador + backup em arquivo | R$ 0 |
 
 ## Adicionar ou corrigir um local
 
-Edite `data/locais.json`. Cada preço leva a condição:
+Pelo site: botão **+ Cadastrar** no topo, ou **Editar** (lápis) dentro de um local. O formulário tem o que vem no aluguel (piscina, mesas e cadeiras com quantidade, churrasqueira, limpeza…), valores com condição, taxas, horários, contato e fotos. **Remover** só esconde o local da lista.
+
+Ou edite `data/locais.json` direto. O que vem fica em `itens` (`true` ou a quantidade):
+
+```json
+"itens": { "piscina": true, "mesas": 20, "cadeiras": 80, "limpeza": true }
+```
+
+Cada preço leva a condição:
 
 ```json
 "precos": [

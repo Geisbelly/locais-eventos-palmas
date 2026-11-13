@@ -39,17 +39,7 @@
           "horario": "19h às 7h"
         }
       ],
-      "comodidades": [
-        "Piscina",
-        "Churrasqueira",
-        "Fogão industrial",
-        "Freezer e geladeira",
-        "Bebedouro",
-        "Mesa de sinuca",
-        "Quarto suíte",
-        "Mesa de buffet",
-        "Jogos de mesas"
-      ],
+      "comodidades": [],
       "eventos": [
         "Aniversário",
         "Aniversário infantil"
@@ -64,7 +54,21 @@
       "id": "plenitude",
       "nome": "Espaço Plenitude",
       "tipo": "Espaço com piscina",
-      "bairro": "Aureny III"
+      "bairro": "Aureny III",
+      "itens": {
+        "piscina": true,
+        "churrasqueira": true,
+        "cozinha": true,
+        "fogao": true,
+        "freezer": true,
+        "geladeira": true,
+        "bebedouro": true,
+        "jogos": true,
+        "hospedagem": true,
+        "mesas": true,
+        "cadeiras": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "endereco": "Av. NS 06, HM 06, 108 Norte, em frente à Igreja de Cristo",
@@ -102,7 +106,9 @@
       "id": "kazara",
       "nome": "Kazara",
       "tipo": "Salão de festas",
-      "bairro": "108 Norte"
+      "bairro": "108 Norte",
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "endereco": "Bertaville, Palmas",
@@ -133,20 +139,9 @@
         }
       ],
       "comodidades": [
-        "Beira do lago",
-        "Piscina com hidromassagem",
-        "Área grande coberta",
-        "Churrasqueira",
-        "Cozinha equipada",
-        "Fogão industrial",
-        "Freezer e geladeira",
-        "Bebedouro",
         "15 mesas e 60 cadeiras",
         "15 toalhas de mesa",
-        "Pula-pula grande",
-        "Área de camping",
-        "Estacionamento",
-        "Câmeras de segurança"
+        "Área de camping"
       ],
       "eventos": [
         "Casamento",
@@ -168,7 +163,25 @@
       "coordenadas": {
         "lat": -10.289908409118652,
         "lng": -48.31332015991211
-      }
+      },
+      "itens": {
+        "piscina": true,
+        "churrasqueira": true,
+        "cozinha": true,
+        "fogao": true,
+        "freezer": true,
+        "geladeira": true,
+        "bebedouro": true,
+        "toalhas": true,
+        "brinquedos": true,
+        "area_coberta": true,
+        "lago": true,
+        "estacionamento": true,
+        "seguranca": true,
+        "mesas": 15,
+        "cadeiras": 60
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "endereco": null,
@@ -228,7 +241,12 @@
       "id": "ricor-eventos",
       "nome": "Ricor Eventos",
       "tipo": "Salão de festas",
-      "bairro": "Palmas"
+      "bairro": "Palmas",
+      "itens": {
+        "climatizado": true,
+        "limpeza": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "endereco": "1006 Sul",
@@ -247,9 +265,7 @@
       "whatsapp": "(63) 9274-3167",
       "site": null,
       "horarios": [],
-      "comodidades": [
-        "Climatizado"
-      ],
+      "comodidades": [],
       "eventos": [],
       "fotos": [],
       "observacoes": "Mesmo dono do espaço com piscina na 903 Sul. O nome não apareceu na conversa.",
@@ -261,7 +277,11 @@
       "id": "salao-1006-sul",
       "nome": "Salão climatizado na 1006 Sul (nome não informado)",
       "tipo": "Salão de festas",
-      "bairro": "1006 Sul"
+      "bairro": "1006 Sul",
+      "itens": {
+        "climatizado": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "endereco": "903 Sul",
@@ -280,9 +300,7 @@
       "whatsapp": "(63) 9274-3167",
       "site": null,
       "horarios": [],
-      "comodidades": [
-        "Piscina"
-      ],
+      "comodidades": [],
       "eventos": [],
       "fotos": [],
       "observacoes": "Mesmo dono do salão climatizado da 1006 Sul. O nome não apareceu na conversa.",
@@ -294,7 +312,11 @@
       "id": "piscina-903-sul",
       "nome": "Espaço com piscina na 903 Sul (nome não informado)",
       "tipo": "Espaço com piscina",
-      "bairro": "903 Sul"
+      "bairro": "903 Sul",
+      "itens": {
+        "piscina": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "endereco": null,
@@ -326,7 +348,9 @@
       "nome": "Espaço de festas da Negão Distribuidora",
       "tipo": "Espaço de eventos",
       "bairro": "Palmas",
-      "telefone": "(63) 9268-4272"
+      "telefone": "(63) 9268-4272",
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "endereco": null,
@@ -352,13 +376,7 @@
       "site": null,
       "horarios": [],
       "comodidades": [
-        "Salão climatizado",
         "Pé-direito de 5 m",
-        "Área externa coberta",
-        "Piscina",
-        "Brinquedão",
-        "Cozinha equipada",
-        "Som ambiente",
         "2 microfones sem fio"
       ],
       "eventos": [
@@ -375,7 +393,19 @@
       "id": "espaco-aurora",
       "nome": "Espaço Aurora",
       "tipo": "Espaço com piscina",
-      "bairro": "Palmas"
+      "bairro": "Palmas",
+      "itens": {
+        "piscina": true,
+        "climatizado": true,
+        "cozinha": true,
+        "toalhas": true,
+        "som": true,
+        "brinquedos": true,
+        "area_coberta": true,
+        "mesas": true,
+        "cadeiras": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "endereco": "ACSO 80, Avenida LO 19, Lote 04 (antiga 801 Sul). Saída para a Praia do Prata, 150 m da Teotônio Segurado, perto da Dufrio",
@@ -428,7 +458,9 @@
       "coordenadas": {
         "lat": -10.230592727661133,
         "lng": -48.33563232421875
-      }
+      },
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "endereco": null,
@@ -448,7 +480,6 @@
       "site": null,
       "horarios": [],
       "comodidades": [
-        "Piscina",
         "3 banheiros",
         "Cozinha (fogão industrial 4 bocas, geladeira, freezer)",
         "Churrasqueira com fogão e forno caipira",
@@ -470,7 +501,20 @@
       "id": "guerreiro-eventos",
       "nome": "Guerreiro Eventos",
       "tipo": "Espaço com piscina",
-      "bairro": "Palmas"
+      "bairro": "Palmas",
+      "itens": {
+        "piscina": true,
+        "churrasqueira": true,
+        "cozinha": true,
+        "fogao": true,
+        "freezer": true,
+        "geladeira": true,
+        "banheiros": true,
+        "limpeza": true,
+        "mesas": 20,
+        "cadeiras": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "endereco": "1103 Sul",
@@ -508,7 +552,9 @@
       "id": "troya-eventos",
       "nome": "Troya Eventos",
       "tipo": "Salão de festas",
-      "bairro": "1103 Sul"
+      "bairro": "1103 Sul",
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "endereco": null,
@@ -530,12 +576,8 @@
       "comodidades": [
         "2 ambientes com ar-condicionado",
         "Som PA 24 canais",
-        "Iluminação profissional",
-        "Painel de LED",
-        "Palco",
         "Bar completo",
         "Máquina de gelo",
-        "Mesas bistrô",
         "Caixa para portaria"
       ],
       "eventos": [
@@ -553,7 +595,16 @@
       "id": "surreal-eventos",
       "nome": "Surreal Eventos",
       "tipo": "Casa de shows",
-      "bairro": "Palmas"
+      "bairro": "Palmas",
+      "itens": {
+        "climatizado": true,
+        "freezer": true,
+        "som": true,
+        "palco": true,
+        "iluminacao": true,
+        "mesas": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "endereco": "Saída para Porto Nacional, 14 km de Taquaralto, perto da chácara da dupla Henrique e Juliano",
@@ -584,7 +635,9 @@
       "id": "chacara-tf",
       "nome": "Chácara TF Eventos",
       "tipo": "Chácara",
-      "bairro": "Saída para Porto Nacional"
+      "bairro": "Saída para Porto Nacional",
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "endereco": "Sentido Aparecida do Rio Negro, km 16",
@@ -615,7 +668,9 @@
       "id": "espaco-aparecida-km16",
       "nome": "Espaço no km 16 da saída para Aparecida do Rio Negro",
       "tipo": "Chácara",
-      "bairro": "Saída para Aparecida do Rio Negro"
+      "bairro": "Saída para Aparecida do Rio Negro",
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "endereco": null,
@@ -639,9 +694,7 @@
           "horario": "8h às 23h30"
         }
       ],
-      "comodidades": [
-        "Climatizado"
-      ],
+      "comodidades": [],
       "eventos": [],
       "fotos": [],
       "observacoes": "Orçamento automático (proposta nº 144) sem o nome do local. Confirmar qual espaço é e se o valor está certo.",
@@ -653,7 +706,11 @@
       "id": "salao-principal-9973",
       "nome": "Salão principal climatizado (nome não informado)",
       "tipo": "Salão de festas",
-      "bairro": "Palmas"
+      "bairro": "Palmas",
+      "itens": {
+        "climatizado": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "endereco": "604 Norte, Alameda 22, Lote 27A, Plano Diretor Norte",
@@ -680,8 +737,7 @@
       "horarios": [],
       "comodidades": [
         "3 piscinas",
-        "Área aberta",
-        "Área coberta"
+        "Área aberta"
       ],
       "eventos": [
         "Aniversário",
@@ -699,7 +755,12 @@
       "id": "imperial-blue",
       "nome": "Imperial Blue",
       "tipo": "Espaço com piscina",
-      "bairro": "604 Norte"
+      "bairro": "604 Norte",
+      "itens": {
+        "piscina": true,
+        "area_coberta": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "villa-festa",
@@ -740,12 +801,8 @@
         }
       ],
       "comodidades": [
-        "Climatizado",
-        "Piscina",
         "Área gourmet",
-        "Churrasqueira",
         "Cozinha (fogão, forno, geladeira, freezer)",
-        "Bebedouro",
         "Mesas e cadeiras para 120"
       ],
       "eventos": [
@@ -786,7 +843,20 @@
         "Portfólio do Villa Festa enviado pelo WhatsApp (nov/2026)"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Informado pelo local"
+      "status": "Informado pelo local",
+      "itens": {
+        "piscina": true,
+        "climatizado": true,
+        "churrasqueira": true,
+        "cozinha": true,
+        "fogao": true,
+        "freezer": true,
+        "geladeira": true,
+        "bebedouro": true,
+        "mesas": true,
+        "cadeiras": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "la-maison",
@@ -827,15 +897,8 @@
       "site": null,
       "horarios": [],
       "comodidades": [
-        "Climatizado",
-        "Piscina",
         "Parque aquático",
-        "Área gourmet",
-        "Churrasqueira",
-        "Salão de jogos",
-        "Som ambiente JBL",
-        "Cozinha ampla",
-        "Espaço verde"
+        "Área gourmet"
       ],
       "eventos": [
         "Corporativo",
@@ -847,7 +910,18 @@
         "WhatsApp com o local (conversa de nov/2026)"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Informado pelo local"
+      "status": "Informado pelo local",
+      "itens": {
+        "piscina": true,
+        "climatizado": true,
+        "churrasqueira": true,
+        "cozinha": true,
+        "som": true,
+        "jogos": true,
+        "gramado": true,
+        "banheiros": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "mega-eventos",
@@ -895,13 +969,8 @@
       "site": null,
       "horarios": [],
       "comodidades": [
-        "Piscina",
-        "Churrasqueira",
-        "Gás incluso",
         "2 climatizadores",
-        "Ar-condicionado (opcional)",
-        "20 mesas e 80 cadeiras",
-        "Gramado"
+        "20 mesas e 80 cadeiras"
       ],
       "eventos": [
         "Aniversário",
@@ -915,7 +984,17 @@
         "WhatsApp com o local (conversa de nov/2026)"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Informado pelo local"
+      "status": "Informado pelo local",
+      "itens": {
+        "piscina": true,
+        "climatizado": true,
+        "churrasqueira": true,
+        "gramado": true,
+        "gas": true,
+        "mesas": 20,
+        "cadeiras": 80
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "arena-42",
@@ -963,12 +1042,6 @@
         }
       ],
       "comodidades": [
-        "Piscina",
-        "Salão climatizado",
-        "Churrasqueira",
-        "Fogão industrial",
-        "Freezer e cervejeira",
-        "Bebedouro",
         "10 mesas redondas e 60 cadeiras",
         "8 banquetas",
         "Mesa com 4 poltronas"
@@ -983,7 +1056,19 @@
         "WhatsApp com o local (conversa de nov/2026)"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Informado pelo local"
+      "status": "Informado pelo local",
+      "itens": {
+        "piscina": true,
+        "climatizado": true,
+        "churrasqueira": true,
+        "cozinha": true,
+        "fogao": true,
+        "freezer": true,
+        "bebedouro": true,
+        "mesas": 10,
+        "cadeiras": 60
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "oliver-martins",
@@ -1016,7 +1101,6 @@
         }
       ],
       "comodidades": [
-        "Espaço kids (playground)",
         "Decoração própria (Oliver Decorações)"
       ],
       "eventos": [
@@ -1029,7 +1113,11 @@
         "WhatsApp com o local (conversa de nov/2026)"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Informado pelo local"
+      "status": "Informado pelo local",
+      "itens": {
+        "brinquedos": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "orla-dourada",
@@ -1044,12 +1132,7 @@
       "site": "https://www.chacaraorladourada.com.br/",
       "horarios": [],
       "comodidades": [
-        "Beira do lago",
-        "Píer para cerimônia",
-        "Piscina",
-        "Salão climatizado",
-        "Cozinha para buffet",
-        "Hospedagem (chalés)"
+        "Píer para cerimônia"
       ],
       "eventos": [
         "Casamento",
@@ -1062,7 +1145,15 @@
         "https://www.chacaraorladourada.com.br/"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Contato confirmado no site oficial"
+      "status": "Contato confirmado no site oficial",
+      "itens": {
+        "piscina": true,
+        "climatizado": true,
+        "cozinha": true,
+        "lago": true,
+        "hospedagem": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "luar-do-lago",
@@ -1088,10 +1179,7 @@
       "site": null,
       "horarios": [],
       "comodidades": [
-        "Beira do lago",
         "Área jardinada para tendas",
-        "Varanda coberta",
-        "Cozinha equipada",
         "Casa de apoio aos noivos"
       ],
       "eventos": [
@@ -1104,7 +1192,14 @@
         "https://www.casamentos.com.br/chacara-casamento/chacara-luar-do-lago-eventos--e346250"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados de diretório"
+      "status": "Dados de diretório",
+      "itens": {
+        "cozinha": true,
+        "area_coberta": true,
+        "gramado": true,
+        "lago": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "california-place",
@@ -1119,7 +1214,6 @@
       "site": "https://californiapalace.com.br/",
       "horarios": [],
       "comodidades": [
-        "Iluminação cênica",
         "Decoração branco e dourado"
       ],
       "eventos": [
@@ -1134,7 +1228,11 @@
         "https://californiapalace.com.br/"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Contato confirmado no site oficial"
+      "status": "Contato confirmado no site oficial",
+      "itens": {
+        "iluminacao": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "imperial-eventos",
@@ -1162,12 +1260,9 @@
       "site": null,
       "horarios": [],
       "comodidades": [
-        "Ar-condicionado",
         "Salão fechado",
         "100 cadeiras e 11 mesas",
-        "Cozinha (fogão industrial, forno)",
-        "Churrasqueira",
-        "Banheiro acessível"
+        "Cozinha (fogão industrial, forno)"
       ],
       "eventos": [
         "Aniversário",
@@ -1181,7 +1276,18 @@
         "https://guiafix.com.br/palmas-to/salao-de-festas"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Informado pelo local"
+      "status": "Informado pelo local",
+      "itens": {
+        "climatizado": true,
+        "churrasqueira": true,
+        "cozinha": true,
+        "fogao": true,
+        "banheiros": true,
+        "acessivel": true,
+        "mesas": 11,
+        "cadeiras": 100
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "salao-103-norte",
@@ -1203,8 +1309,6 @@
       "site": null,
       "horarios": [],
       "comodidades": [
-        "Climatizado",
-        "Som incluso",
         "100 cadeiras"
       ],
       "eventos": [
@@ -1217,7 +1321,14 @@
         "https://m.aluga.com.br/aluguel/festas-e-eventos/saloes-p--festas-e-eventos/salao-para-festas-e-eventos-em-palmas-to-151243"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Anúncio, pode ter saído do ar"
+      "status": "Anúncio, pode ter saído do ar",
+      "itens": {
+        "climatizado": true,
+        "som": true,
+        "banheiros": true,
+        "cadeiras": 100
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "espaco-piscina-pdn-mgf",
@@ -1244,10 +1355,7 @@
       "whatsapp": null,
       "site": null,
       "horarios": [],
-      "comodidades": [
-        "Piscina",
-        "Churrasqueira"
-      ],
+      "comodidades": [],
       "eventos": [
         "Aniversário",
         "Confraternização"
@@ -1258,7 +1366,12 @@
         "https://to.mgfimoveis.com.br/espaco-locacao-para-festas-eventos-temporada-to-palmas-301410135"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Anúncio, pode ter saído do ar"
+      "status": "Anúncio, pode ter saído do ar",
+      "itens": {
+        "piscina": true,
+        "churrasqueira": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "nova-canaa",
@@ -1286,7 +1399,9 @@
         "https://www.instagram.com/chacaranovacanaapalmas/"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Perfil oficial no Instagram"
+      "status": "Perfil oficial no Instagram",
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "recanto-das-pedras",
@@ -1301,11 +1416,8 @@
       "site": null,
       "horarios": [],
       "comodidades": [
-        "Piscina",
         "Campo de futebol",
-        "Salão de jogos",
-        "Bar",
-        "Cozinha"
+        "Bar"
       ],
       "eventos": [
         "Aniversário",
@@ -1317,7 +1429,13 @@
         "https://www.facebook.com/p/Chacara-Recanto-das-Pedras-loca%C3%A7%C3%A3o-para-eventos-100064534996558/"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Página no Facebook"
+      "status": "Página no Facebook",
+      "itens": {
+        "piscina": true,
+        "cozinha": true,
+        "jogos": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "garden-palmas",
@@ -1347,14 +1465,7 @@
           "horario": "A partir das 18h"
         }
       ],
-      "comodidades": [
-        "Piscina",
-        "Tendas inclusas",
-        "Mesas redondas",
-        "Cadeiras simples",
-        "Fogão",
-        "Freezer pequeno"
-      ],
+      "comodidades": [],
       "eventos": [
         "Casamento",
         "Aniversário",
@@ -1372,7 +1483,16 @@
       "coordenadas": {
         "lat": -10.224392890930176,
         "lng": -48.319679260253906
-      }
+      },
+      "itens": {
+        "piscina": true,
+        "fogao": true,
+        "freezer": true,
+        "area_coberta": true,
+        "mesas": true,
+        "cadeiras": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "paraiso-eventos",
@@ -1387,9 +1507,6 @@
       "site": null,
       "horarios": [],
       "comodidades": [
-        "Piscina",
-        "Churrasqueira",
-        "Freezer",
         "14 mesas e 46 cadeiras"
       ],
       "eventos": [
@@ -1402,7 +1519,15 @@
         "https://www.facebook.com/espacoparaiisoeventos/"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Pode estar desatualizado"
+      "status": "Pode estar desatualizado",
+      "itens": {
+        "piscina": true,
+        "churrasqueira": true,
+        "freezer": true,
+        "mesas": 14,
+        "cadeiras": 46
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "fun-world",
@@ -1426,7 +1551,9 @@
         "https://guiafix.com.br/palmas-to/salao-de-festas"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados de diretório"
+      "status": "Dados de diretório",
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "ahadu",
@@ -1453,7 +1580,9 @@
         "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados de diretório"
+      "status": "Dados de diretório",
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "belladata",
@@ -1481,7 +1610,6 @@
       "site": null,
       "horarios": [],
       "comodidades": [
-        "Palco",
         "Camarim",
         "Mesas, cadeiras e toalhas",
         "Buffet próprio"
@@ -1498,7 +1626,14 @@
         "https://www.casamentos.com.br/salao-casamento/belladata--e147988"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Informado pelo local"
+      "status": "Informado pelo local",
+      "itens": {
+        "toalhas": true,
+        "palco": true,
+        "mesas": true,
+        "cadeiras": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "vila-cabana",
@@ -1523,7 +1658,9 @@
         "https://guiafix.com.br/palmas-to/salao-de-festas"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados de diretório"
+      "status": "Dados de diretório",
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "cellebre",
@@ -1554,15 +1691,6 @@
         }
       ],
       "comodidades": [
-        "Piscina",
-        "Churrasqueira",
-        "Fogão industrial",
-        "Freezer e geladeira",
-        "Bebedouro",
-        "Mesa de sinuca",
-        "Quarto suíte",
-        "Mesa de buffet",
-        "Jogos de mesas",
         "Galpão amplo com balcão"
       ],
       "eventos": [
@@ -1588,7 +1716,21 @@
           "nome": "Taxa de limpeza (ofereceram por R$ 100)",
           "valor": 120
         }
-      ]
+      ],
+      "itens": {
+        "piscina": true,
+        "churrasqueira": true,
+        "cozinha": true,
+        "fogao": true,
+        "freezer": true,
+        "geladeira": true,
+        "bebedouro": true,
+        "jogos": true,
+        "hospedagem": true,
+        "mesas": true,
+        "cadeiras": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "crystal-hall",
@@ -1612,7 +1754,9 @@
         "https://www.casamentos.com.br/casa-para-casamento/crystal-hall--e107623"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados de diretório"
+      "status": "Dados de diretório",
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "cabana-do-lago",
@@ -1626,9 +1770,7 @@
       "whatsapp": null,
       "site": null,
       "horarios": [],
-      "comodidades": [
-        "Beira do lago"
-      ],
+      "comodidades": [],
       "eventos": [
         "Casamento"
       ],
@@ -1638,7 +1780,11 @@
         "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados de diretório"
+      "status": "Dados de diretório",
+      "itens": {
+        "lago": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "buffet-jacinta",
@@ -1666,11 +1812,6 @@
       "site": null,
       "horarios": [],
       "comodidades": [
-        "Jardim com piscina",
-        "Área coberta",
-        "Churrasqueira",
-        "Climatizadores",
-        "Freezer e fogão",
         "Banheiros masc. e fem.",
         "Buffet próprio"
       ],
@@ -1685,7 +1826,20 @@
         "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Informado pelo local"
+      "status": "Informado pelo local",
+      "itens": {
+        "piscina": true,
+        "climatizado": true,
+        "churrasqueira": true,
+        "fogao": true,
+        "freezer": true,
+        "area_coberta": true,
+        "gramado": true,
+        "banheiros": true,
+        "mesas": true,
+        "cadeiras": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "sao-camillo",
@@ -1699,9 +1853,7 @@
       "whatsapp": null,
       "site": null,
       "horarios": [],
-      "comodidades": [
-        "Beira do lago"
-      ],
+      "comodidades": [],
       "eventos": [
         "Casamento"
       ],
@@ -1711,7 +1863,11 @@
         "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados de diretório"
+      "status": "Dados de diretório",
+      "itens": {
+        "lago": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "casa-de-festas-palmas",
@@ -1727,8 +1883,7 @@
       "site": "http://www.casadefestaspalmas.com.br",
       "horarios": [],
       "comodidades": [
-        "Decoração",
-        "Locação de mesas"
+        "Decoração"
       ],
       "eventos": [
         "Aniversário"
@@ -1739,7 +1894,9 @@
         "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados de diretório"
+      "status": "Dados de diretório",
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "bebidas-e-festas",
@@ -1755,7 +1912,6 @@
       "site": null,
       "horarios": [],
       "comodidades": [
-        "Cozinha industrial",
         "Locação de mesas, freezers e toalhas",
         "Buffet"
       ],
@@ -1769,7 +1925,11 @@
         "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Pode estar desatualizado"
+      "status": "Pode estar desatualizado",
+      "itens": {
+        "cozinha": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "santa-filomena",
@@ -1785,8 +1945,6 @@
       "site": "http://www.santafilomenaempalmas.blogspot.com.br",
       "horarios": [],
       "comodidades": [
-        "Climatizado",
-        "Sonorizado",
         "Igreja ao lado (140 pessoas)"
       ],
       "eventos": [
@@ -1800,7 +1958,12 @@
         "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados de diretório"
+      "status": "Dados de diretório",
+      "itens": {
+        "climatizado": true,
+        "som": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "joao-e-maria",
@@ -1822,7 +1985,9 @@
         "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados de diretório"
+      "status": "Dados de diretório",
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "espaco-luz",
@@ -1844,7 +2009,9 @@
         "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados de diretório"
+      "status": "Dados de diretório",
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "silver-hill",
@@ -1866,7 +2033,9 @@
         "https://guiafix.com.br/palmas-to/salao-de-festas"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados mínimos"
+      "status": "Dados mínimos",
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "nave-eventos",
@@ -1895,16 +2064,9 @@
       "horarios": [],
       "comodidades": [
         "Espaço kids no mezanino",
-        "Kid play grande",
-        "Piscina de bolinhas",
-        "Pula-pula",
-        "Escorregadores",
         "Air game kids e adulto",
         "Just Dance e multijogos",
-        "Pebolim e tênis de mesa",
-        "Estacionamento",
-        "Som",
-        "Limpeza inclusa"
+        "Pebolim e tênis de mesa"
       ],
       "eventos": [
         "Aniversário infantil"
@@ -1916,7 +2078,20 @@
         "https://guiafix.com.br/palmas-to/salao-de-festas"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Informado pelo local"
+      "status": "Informado pelo local",
+      "itens": {
+        "piscina": true,
+        "freezer": true,
+        "geladeira": true,
+        "som": true,
+        "brinquedos": true,
+        "jogos": true,
+        "estacionamento": true,
+        "limpeza": true,
+        "mesas": 6,
+        "cadeiras": 70
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "vagalume",
@@ -1945,14 +2120,9 @@
       "comodidades": [
         "Climatizador 125 L",
         "Palco para DJ ou banda",
-        "Tenda coberta",
-        "Gramado",
         "Cozinha/bar (fogão industrial 6 bocas)",
-        "Cervejeira",
-        "Bebedouro",
         "4 banheiros",
-        "15 mesas e 60 cadeiras",
-        "Limpeza inclusa"
+        "15 mesas e 60 cadeiras"
       ],
       "eventos": [
         "Aniversário",
@@ -1973,7 +2143,22 @@
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
       "taxas": [],
-      "pagamento": null
+      "pagamento": null,
+      "itens": {
+        "climatizado": true,
+        "cozinha": true,
+        "fogao": true,
+        "freezer": true,
+        "bebedouro": true,
+        "palco": true,
+        "area_coberta": true,
+        "gramado": true,
+        "banheiros": true,
+        "limpeza": true,
+        "mesas": 15,
+        "cadeiras": 60
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "topazio",
@@ -2001,15 +2186,8 @@
       ],
       "comodidades": [
         "Piscina com cascata e LED",
-        "Churrasqueira",
-        "Área coberta",
-        "Cozinha (fogão industrial)",
         "Banheiros masc., fem. e PCD",
         "Duchas",
-        "Freezer e geladeira",
-        "Bebedouro",
-        "Internet",
-        "Quarto com cama",
         "10 mesas e cadeiras",
         "Mesa grande de madeira",
         "Monitoramento 24h"
@@ -2030,7 +2208,26 @@
         "lat": -10.279250144958496,
         "lng": -48.32192611694336
       },
-      "pagamento": "50% na reserva e o restante no dia do evento. Tem contrato de locação."
+      "pagamento": "50% na reserva e o restante no dia do evento. Tem contrato de locação.",
+      "itens": {
+        "piscina": true,
+        "churrasqueira": true,
+        "cozinha": true,
+        "fogao": true,
+        "freezer": true,
+        "geladeira": true,
+        "bebedouro": true,
+        "area_coberta": true,
+        "banheiros": true,
+        "acessivel": true,
+        "wifi": true,
+        "limpeza": true,
+        "hospedagem": true,
+        "seguranca": true,
+        "mesas": 10,
+        "cadeiras": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "uniao",
@@ -2052,7 +2249,9 @@
         "https://guiafix.com.br/palmas-to/salao-de-festas"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados mínimos"
+      "status": "Dados mínimos",
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "golden",
@@ -2081,12 +2280,6 @@
       "horarios": [],
       "comodidades": [
         "100 cadeiras tiffany",
-        "Mesas com forro",
-        "Fogão industrial",
-        "Bebedouro industrial",
-        "Geladeira e freezer",
-        "Mesa de buffet",
-        "Limpeza inclusa",
         "Decoração própria",
         "Buffet próprio"
       ],
@@ -2106,7 +2299,19 @@
       "coordenadas": {
         "lat": -10.329614639282227,
         "lng": -48.32483673095703
-      }
+      },
+      "itens": {
+        "fogao": true,
+        "freezer": true,
+        "geladeira": true,
+        "bebedouro": true,
+        "toalhas": true,
+        "banheiros": true,
+        "limpeza": true,
+        "mesas": true,
+        "cadeiras": 100
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "ximenes",
@@ -2128,7 +2333,9 @@
         "https://guiafix.com.br/palmas-to/salao-de-festas"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados mínimos"
+      "status": "Dados mínimos",
+      "itens": {},
+      "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
       "id": "lake-moonlight",
@@ -2142,10 +2349,7 @@
       "whatsapp": "(63) 98500-3997",
       "site": null,
       "horarios": [],
-      "comodidades": [
-        "Beira do lago",
-        "Hospedagem"
-      ],
+      "comodidades": [],
       "eventos": [],
       "fotos": [],
       "observacoes": "Só nome e WhatsApp no diretório; o nome indica fazenda com hospedagem à beira do lago.",
@@ -2153,7 +2357,12 @@
         "https://guiafix.com.br/palmas-to/salao-de-festas"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados mínimos"
+      "status": "Dados mínimos",
+      "itens": {
+        "lago": true,
+        "hospedagem": true
+      },
+      "atualizado_em": "2026-11-13T19:18:33Z"
     }
   ]
 }

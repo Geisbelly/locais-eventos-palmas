@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Inter:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="assets/style.css?v=2">
+  <link rel="stylesheet" href="assets/style.css?v=4">
 </head>
 <body>
   <header class="hero">
@@ -38,6 +38,9 @@
         <button class="btn-filtros" id="btn-filtros" type="button" aria-expanded="false" aria-controls="painel-filtros">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
           <span class="lbl">Filtros</span> <span class="badge-n" id="n-filtros" hidden></span>
+        </button>
+        <button class="btn-novo" type="button" data-acao="novo-local" title="Cadastrar local" aria-label="Cadastrar local">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span class="lbl">Cadastrar</span>
         </button>
         <button class="icone-btn" id="btn-config" type="button" title="Sincronização e backup" aria-label="Sincronização e backup">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a5 5 0 1 1 .9-9.9A6 6 0 0 1 19 10a4 4 0 0 1-1 7.9"/><path d="M12 13v8M9 18l3 3 3-3"/></svg>
@@ -83,10 +86,11 @@
 
   <dialog id="detalhe" class="folha" aria-labelledby="detalhe-titulo"></dialog>
   <dialog id="comparar" class="folha larga" aria-label="Comparar locais"></dialog>
+  <dialog id="editor" class="folha editor" aria-label="Cadastrar ou editar local"></dialog>
   <dialog id="config" class="modal" aria-label="Sincronização e backup"></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="config.js?v=2"></script>
-  <script src="assets/app.js?v=2"></script>
+  <script src="config.js?v=4"></script>
+  <script src="assets/app.js?v=4"></script>
 </body>
 </html>

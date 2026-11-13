@@ -274,6 +274,53 @@ textarea { resize: vertical; min-height: 96px; }
 .rodape p { margin: 0 0 6px; max-width: 80ch; }
 
 /* ===== Responsivo ===== */
+
+/* ===== O que vem ===== */
+.vem { list-style: none; margin: 0; padding: 12px 14px; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px 14px; background: var(--card); border: 1px solid var(--linha); border-radius: 14px; }
+.vem li { display: flex; gap: 8px; align-items: center; font-size: .92rem; }
+.vem li svg { width: 16px; height: 16px; color: var(--verde); stroke-width: 2.4; }
+.sub-h { font-size: .8rem; color: var(--suave); font-weight: 600; margin: 14px 0 6px; }
+
+/* ===== Botão cadastrar ===== */
+.btn-novo { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--ouro); background: var(--ouro); color: #fff; border-radius: 12px; padding: 0 14px; cursor: pointer; font-weight: 600; font-size: .9rem; box-shadow: var(--sombra); white-space: nowrap; }
+.btn-novo:hover { filter: brightness(1.06); }
+
+/* ===== Editor ===== */
+.editor form { min-height: 100%; display: flex; flex-direction: column; }
+.editor .folha-corpo { flex: 1; }
+.editor .folha-corpo > .nota-aviso { margin: 0 0 6px; }
+.ed-bloco { border: 0; margin: 0; padding: 18px 0 4px; border-top: 1px solid var(--linha); min-width: 0; }
+.ed-bloco:first-of-type { border-top: 0; padding-top: 6px; }
+.ed-bloco legend { font-family: var(--titulo); font-size: 1.12rem; font-weight: 650; padding: 0; margin-bottom: 4px; float: left; width: 100%; }
+.ed-bloco legend + * { clear: both; }
+.ajuda { margin: 0 0 10px; color: var(--suave); font-size: .84rem; }
+.grade-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; }
+.grade-2 .largo { grid-column: 1 / -1; }
+.campo textarea { resize: vertical; font: inherit; font-size: .95rem; }
+.pills { display: flex; flex-wrap: wrap; gap: 7px; }
+.pill { position: relative; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--linha); background: var(--card); border-radius: 999px; padding: 6px 12px 6px 10px; cursor: pointer; font-size: .88rem; color: var(--suave); user-select: none; }
+.pill > input[type="checkbox"] { position: absolute; opacity: 0; pointer-events: none; }
+.pill > span { display: inline-flex; align-items: center; gap: 6px; }
+.pill > span svg { width: 14px; height: 14px; stroke-width: 2.6; opacity: 0; width: 0; transition: width .12s; }
+.pill:has(> input:checked) { border-color: var(--verde); background: var(--verde-fundo); color: var(--verde); font-weight: 500; }
+.pill:has(> input:checked) > span svg { opacity: 1; width: 14px; }
+.pill:has(> input:focus-visible) { outline: 2px solid var(--ouro); outline-offset: 2px; }
+.pill .qtd { width: 64px; border: 1px solid var(--linha); border-radius: 8px; padding: 2px 6px; background: var(--card); color: var(--tinta); font-size: .85rem; }
+.pill .qtd:focus { outline: none; border-color: var(--ouro); }
+.rep { display: flex; flex-direction: column; gap: 8px; }
+.rep-linha { position: relative; display: grid; gap: 8px 10px; background: var(--bg-2); border-radius: 12px; padding: 10px 40px 10px 10px; }
+.rep-precos { grid-template-columns: 1fr 1fr; }
+.rep-precos .c-condicao, .rep-precos .c-inclui { grid-column: 1 / -1; }
+.rep-taxas { grid-template-columns: 2fr 1fr; }
+.rep-horarios { grid-template-columns: 1fr 1fr; }
+.tirar-linha { position: absolute; top: 6px; right: 6px; width: 30px; height: 30px; border: 0; border-radius: 50%; background: none; color: var(--fraco); font-size: 1.3rem; line-height: 1; cursor: pointer; }
+.tirar-linha:hover { background: var(--card); color: var(--vermelho); }
+.add-linha { margin-top: 6px; padding-left: 4px; color: var(--ouro-texto); }
+.ed-rodape { position: sticky; bottom: 0; display: flex; align-items: center; gap: 8px; padding: 12px 20px calc(12px + env(safe-area-inset-bottom)); background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-top: 1px solid var(--linha); }
+.ed-rodape .espaco { flex: 1; }
+.btn.perigo { color: var(--vermelho); }
+.btn:disabled { opacity: .6; cursor: progress; }
+
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; }
   .numeros div { text-align: left; }
@@ -289,6 +336,11 @@ textarea { resize: vertical; min-height: 96px; }
   .lista { grid-template-columns: 1fr; gap: 16px; }
   .busca-linha .btn-filtros { padding: 0 12px; }
   .btn-filtros .lbl { display: none; }
+  .btn-novo { padding: 0 12px; }
+  .btn-novo .lbl { display: none; }
+  .grade-2, .rep-precos, .rep-taxas, .rep-horarios { grid-template-columns: 1fr; }
+  .ed-rodape { padding-left: 16px; padding-right: 16px; }
+  .ed-rodape .perigo .lbl { display: none; }
   .folha-corpo { padding: 16px 16px 40px; }
   .status-visita button { font-size: .74rem; }
   .grade-2 { grid-template-columns: 1fr; }

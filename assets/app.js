@@ -4,7 +4,7 @@
   /* ============ Config e utilidades ============ */
   const CFG = Object.assign({ apiUrl: '', repo: '' }, window.LEP_CONFIG || {});
   const API = (CFG.apiUrl || '').replace(/\/+$/, '');
-  const LS = { visitas: 'lep.visitas.v1', pendentes: 'lep.pendentes.v1', chave: 'lep.chave', ui: 'lep.ui.v1' };
+  const LS = { locais: 'lep.locais.v1', visitas: 'lep.visitas.v1', pendentes: 'lep.pendentes.v1', chave: 'lep.chave', ui: 'lep.ui.v1' };
   const MAX_CMP = 4;
 
   const $ = (s, r = document) => r.querySelector(s);
@@ -36,6 +36,10 @@
     visitado: '<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
     descartado: '<circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/>',
     voltar: '<path d="M15 18l-6-6 6-6"/>',
+    editar: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/>',
+    mais: '<path d="M12 5v14M5 12h14"/>',
+    check: '<path d="m5 12 4 4 10-10"/>',
+    lixo: '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
   };
   const ic = (n) => `<svg viewBox="0 0 24 24" aria-hidden="true">${I[n] || ''}</svg>`;
 
@@ -49,19 +53,40 @@
     ['preco', 'Custo-benefício'], ['estrutura', 'Estrutura'], ['localizacao', 'Localização e acesso'],
     ['atendimento', 'Atendimento'], ['ambiente', 'Ambiente / beleza'],
   ];
+  // O que pode vir no aluguel. 'num' = aceita quantidade.
+  const ITENS = [
+    ['piscina', 'Piscina'], ['climatizado', 'Climatizado'], ['churrasqueira', 'Churrasqueira'],
+    ['cozinha', 'Cozinha'], ['fogao', 'Fogão'], ['freezer', 'Freezer / cervejeira'], ['geladeira', 'Geladeira'],
+    ['bebedouro', 'Bebedouro'], ['mesas', 'Mesas', 'num'], ['cadeiras', 'Cadeiras', 'num'], ['toalhas', 'Toalhas de mesa'],
+    ['som', 'Som'], ['palco', 'Palco'], ['iluminacao', 'Iluminação de festa'], ['brinquedos', 'Espaço kids / brinquedos'],
+    ['jogos', 'Sinuca / jogos'], ['area_coberta', 'Área coberta'], ['gramado', 'Gramado / jardim'], ['lago', 'Beira do lago'],
+    ['estacionamento', 'Estacionamento'], ['banheiros', 'Banheiros'], ['acessivel', 'Acessível (PCD)'], ['wifi', 'Wi-Fi'],
+    ['limpeza', 'Limpeza inclusa'], ['gas', 'Gás incluso'], ['hospedagem', 'Quarto / hospedagem'], ['seguranca', 'Câmeras / segurança'],
+  ];
+  const ITEM_ROT = Object.fromEntries(ITENS.map(([k, r]) => [k, r]));
+  const temItem = (l, k) => !!(l.itens && l.itens[k]);
+  function itemTexto(l, k) {
+    const v = l.itens && l.itens[k];
+    if (typeof v === 'number') return `${v} ${ITEM_ROT[k].toLowerCase()}`;
+    return ITEM_ROT[k];
+  }
+  const itensDo = (l) => ITENS.filter(([k]) => temItem(l, k)).map(([k]) => k);
+
   const RAPIDOS = [
     ['com-preco', 'Com valor', (l) => menorPreco(l) != null],
-    ['piscina', 'Piscina', (l) => tem(l, 'piscina')],
-    ['climatizado', 'Climatizado', (l) => tem(l, 'climatiz')],
-    ['lago', 'Beira do lago', (l) => tem(l, 'lago')],
+    ['piscina', 'Piscina', (l) => temItem(l, 'piscina')],
+    ['climatizado', 'Climatizado', (l) => temItem(l, 'climatizado')],
+    ['brinquedos', 'Espaço kids', (l) => temItem(l, 'brinquedos')],
+    ['churrasqueira', 'Churrasqueira', (l) => temItem(l, 'churrasqueira')],
+    ['limpeza', 'Limpeza inclusa', (l) => temItem(l, 'limpeza')],
+    ['lago', 'Beira do lago', (l) => temItem(l, 'lago')],
     ['zap', 'Tem WhatsApp', (l) => !!l.whatsapp],
-    ['insta', 'Tem Instagram', (l) => !!l.instagram],
   ];
   const ABAS = [
     ['todos', 'Todos'], ['favoritos', 'Favoritos'], ['quero', 'Quero visitar'], ['visitado', 'Visitados'], ['descartado', 'Descartados'],
   ];
 
-  function tem(l, termo) { return (l.comodidades || []).some((c) => norm(c).includes(termo)); }
+  const urlSegura = (u) => (/^https?:\/\//i.test(u || '') || /^fotos\/[\w./-]+$/.test(u || '') ? u : null);
   function menorPreco(l) {
     const vs = (l.precos || []).map((p) => p.valor).filter((v) => typeof v === 'number');
     return vs.length ? Math.min(...vs) : null;
@@ -79,7 +104,7 @@
   }
   function completude(l) {
     return (menorPreco(l) != null ? 4 : 0) + (l.whatsapp ? 2 : 0) + (l.instagram ? 1 : 0) + (l.endereco ? 1 : 0)
-      + (l.capacidade ? 1 : 0) + ((l.comodidades || []).length ? 1 : 0) + (l.site ? 1 : 0) + ((l.fotos || []).length ? 2 : 0)
+      + (l.capacidade ? 1 : 0) + (itensDo(l).length >= 3 ? 2 : 0) + (l.site ? 1 : 0) + ((l.fotos || []).length ? 2 : 0)
       + (/^Informado/.test(l.status || '') ? 3 : 0);
   }
   function zapLink(numero, nome) {
@@ -92,7 +117,7 @@
   const instaUrl = (h) => (h ? (/^https?:/.test(h) ? h : `https://instagram.com/${h.replace(/^@/, '')}`) : null);
   const instaArroba = (h) => '@' + String(h).replace(/^https?:\/\/(www\.)?instagram\.com\//, '').replace(/[/?#].*$/, '').replace(/^@/, '');
   function mapaUrl(l) {
-    if (l.mapa) return l.mapa;
+    if (l.mapa && urlSegura(l.mapa)) return l.mapa;
     if (l.coordenadas) return `https://www.google.com/maps/search/?api=1&query=${l.coordenadas.lat},${l.coordenadas.lng}`;
     const q = [l.nome, l.endereco, 'Palmas - TO'].filter(Boolean).join(', ');
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
@@ -100,7 +125,7 @@
 
   /* ============ Estado ============ */
   const S = {
-    locais: [], porId: {}, dataDados: '',
+    locais: [], porId: {}, dataDados: '', base: [], remotos: [],
     visitas: lsGet(LS.visitas, {}),
     pendentes: new Set(lsGet(LS.pendentes, [])),
     chave: lsGet(LS.chave, ''),
@@ -264,7 +289,7 @@
 
   /* ============ Render: cards ============ */
   function capaHtml(l, grande = false) {
-    const fotos = l.fotos || [];
+    const fotos = (l.fotos || []).filter((f) => urlSegura(f.url || f));
     if (fotos.length) {
       if (grande && fotos.length > 1) return `<div class="galeria">${fotos.map((f) => `<img src="${esc(f.url || f)}" alt="${esc(f.legenda || 'Foto de ' + l.nome)}" loading="lazy">`).join('')}</div>`;
       const f = fotos[0];
@@ -295,7 +320,9 @@
     const st = STATUS[v.status];
     const zap = zapLink(l.whatsapp, l.nome);
     const insta = instaUrl(l.instagram);
-    const tags = [l.capacidade ? `até ${l.capacidade} pessoas` : null, ...(l.comodidades || []).slice(0, 3)].filter(Boolean);
+    const its = itensDo(l);
+    const tags = [l.capacidade ? `até ${l.capacidade} pessoas` : null, ...its.slice(0, 4).map((k) => itemTexto(l, k)),
+      its.length > 4 ? `+${its.length - 4} itens` : null].filter(Boolean);
     return `<article class="card ${v.status === 'descartado' ? 'descartado' : ''}">
       <div class="capa-box">
         <button type="button" class="capa" data-abrir="${l.id}" aria-label="Ver detalhes de ${esc(l.nome)}">${capaHtml(l)}</button>
@@ -351,7 +378,7 @@
       zap && `<a class="btn zap" href="${zap}" target="_blank" rel="noopener">${ic('zap')}WhatsApp</a>`,
       l.telefone && `<a class="btn" href="tel:+55${digitos(l.telefone)}">${ic('fone')}${esc(l.telefone)}</a>`,
       insta && `<a class="btn" href="${esc(insta)}" target="_blank" rel="noopener">${ic('insta')}${esc(instaArroba(l.instagram))}</a>`,
-      l.site && `<a class="btn" href="${esc(l.site)}" target="_blank" rel="noopener">${ic('site')}Site</a>`,
+      urlSegura(l.site) && `<a class="btn" href="${esc(l.site)}" target="_blank" rel="noopener">${ic('site')}Site</a>`,
       `<a class="btn" href="${esc(mapaUrl(l))}" target="_blank" rel="noopener">${ic('mapa')}Mapa</a>`,
     ].filter(Boolean).join('');
     const meta = [l.tipo, l.endereco || l.bairro, l.capacidade ? `até ${l.capacidade} pessoas` : null].filter(Boolean).map(esc).join(' · ');
@@ -359,6 +386,7 @@
       <div class="folha-topo">
         <button type="button" class="fechar" data-fechar aria-label="Fechar">${ic('voltar')}</button>
         <h2 id="detalhe-titulo">${esc(l.nome)}</h2>
+        <button type="button" class="fechar" data-editar="${l.id}" aria-label="Editar local" title="Editar local">${ic('editar')}</button>
         <button type="button" class="coracao" style="position:static;box-shadow:none;border:1px solid var(--linha)" data-fav="${l.id}" aria-pressed="${visita(l.id).favorito}" aria-label="Favorito">${ic('coracao')}</button>
       </div>
       <div class="folha-capa">${capaHtml(l, true)}</div>
@@ -397,9 +425,15 @@
         <div class="nota-aviso">${ic('alerta')}<span>O valor muda com o dia da semana, a temporada, a duração e o que está incluso. Os daqui são referência de ${dataBR(l.conferido_em)}.</span></div>
       </section>
       <section class="secao"><h3>Horários de uso</h3><div class="cartao">${horarios}</div></section>
-      ${(l.comodidades || []).length ? `<section class="secao"><h3>Estrutura</h3><ul class="tags">${l.comodidades.map((c) => `<li>${esc(c)}</li>`).join('')}</ul></section>` : ''}
+      <section class="secao"><h3>O que vem</h3>
+        ${itensDo(l).length
+          ? `<ul class="vem">${itensDo(l).map((k) => `<li>${ic('check')}${esc(itemTexto(l, k))}</li>`).join('')}</ul>`
+          : '<div class="cartao"><p class="texto">Ainda não informado. Pergunte o que vem no aluguel e cadastre em Editar.</p></div>'}
+        ${(l.comodidades || []).length ? `<h4 class="sub-h">Detalhes e outros itens</h4><ul class="tags">${l.comodidades.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>` : ''}
+      </section>
       ${(l.eventos || []).length ? `<section class="secao"><h3>Bom para</h3><ul class="tags">${l.eventos.map((c) => `<li>${esc(c)}</li>`).join('')}</ul></section>` : ''}
       ${l.observacoes ? `<section class="secao"><h3>Observações</h3><div class="cartao"><p class="texto">${esc(l.observacoes)}</p></div></section>` : ''}
+      <p style="margin:22px 0 0"><button type="button" class="btn" data-editar="${l.id}">${ic('editar')}Editar informações deste local</button></p>
       <section class="secao fontes"><h3>De onde vieram os dados</h3>
         Conferido em ${dataBR(l.conferido_em)}${l.status ? `<span class="status-dado">${esc(l.status)}</span>` : ''}
         <ul>${(l.fontes || []).map((u) => (/^https?:\/\//.test(u)
@@ -496,7 +530,8 @@
       }),
       ['Prós', vs.map((v) => lista(v.pros))],
       ['Contras', vs.map((v) => lista(v.contras))],
-      ['Estrutura', ls.map((l) => lista(l.comodidades || []))],
+      ['O que vem', ls.map((l) => lista(itensDo(l).map((k) => itemTexto(l, k))))],
+      ['Outros itens', ls.map((l) => lista(l.comodidades || []))],
     ];
     $('#comparar').innerHTML = `
       <div class="folha-topo">
@@ -520,7 +555,7 @@
     d.innerHTML = `<div class="folha-corpo">
       <h2>Sincronização</h2>
       ${API
-        ? `<p>As visitas ficam salvas neste aparelho e na nuvem. Qualquer pessoa vê o que foi registrado; para <strong>gravar</strong> é preciso a chave de edição (pergunte a quem cuida do site).</p>
+        ? `<p>As visitas ficam salvas neste aparelho e na nuvem. Qualquer pessoa vê o que foi registrado; para <strong>gravar</strong> visitas e <strong>cadastrar ou editar locais</strong> é preciso a chave de edição (pergunte a quem cuida do site).</p>
            <label class="campo"><span>Chave de edição</span><input id="in-chave" type="password" autocomplete="off" value="${esc(S.chave)}" placeholder="Digite a chave"></label>
            <div class="acoes"><button class="btn primario" data-acao="salvar-chave">Salvar chave</button>${S.chave ? '<button class="btn" data-acao="esquecer-chave">Esquecer neste aparelho</button>' : ''}</div>`
         : `<p>Sem nuvem configurada: as visitas ficam salvas só neste navegador. Use o backup para levar para outro aparelho.</p>`}
@@ -576,6 +611,247 @@
       toast(`${n} ${n === 1 ? 'registro restaurado' : 'registros restaurados'}.`);
       renderTudo(); sincronizar();
     } catch { toast('Arquivo de backup inválido.'); }
+  }
+
+
+  /* ============ Cadastrar / editar local ============ */
+  const SITUACOES = ['Informado pelo local', 'Conferido em visita', 'Perfil oficial no Instagram', 'Dados de diretório', 'Dados mínimos', 'Pode estar desatualizado'];
+  const EVENTOS_BASE = ['Aniversário', 'Aniversário infantil', 'Casamento', 'Confraternização', 'Formatura', 'Corporativo', 'Chá revelação', 'Batizado', 'Retiro'];
+  let ED = null; // { id, sujo }
+
+  const slug = (t) => norm(t).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) || 'local';
+  function idNovo(nome) {
+    const base = slug(nome);
+    let id = base, n = 2;
+    while (S.porId[id] || S.base.some((l) => l.id === id) || S.remotos.some((r) => r.id === id)) id = `${base}-${n++}`;
+    return id;
+  }
+  // "R$ 1.500", "1500,00" -> 1500. Texto como "Sob consulta" fica como texto.
+  function parseValor(v) {
+    const t = String(v || '').trim();
+    if (!t) return null;
+    const m = t.replace(/^R\$\s*/i, '');
+    if (/^\d{1,3}(\.\d{3})*(,\d{1,2})?$|^\d+(,\d{1,2})?$/.test(m)) return Number(m.replace(/\./g, '').replace(',', '.'));
+    return t;
+  }
+  const valorTxt = (v) => (typeof v === 'number' ? v.toLocaleString('pt-BR') : v || '');
+  const val = (r, k) => (r.querySelector(`[data-k="${k}"]`)?.value || '').trim();
+  const linhas = (txt) => String(txt || '').split('\n').map((x) => x.trim()).filter(Boolean);
+
+  const REP = {
+    precos: { rot: 'valor', campos: [['valor', 'Valor', 'R$ 1.500 ou Sob consulta'], ['unidade', 'Por', 'diária, evento, 5h de uso'], ['condicao', 'Condição', 'sexta a domingo, até 100 pessoas'], ['inclui', 'O que esse valor inclui', 'mesas, limpeza…']] },
+    taxas: { rot: 'taxa', campos: [['nome', 'Taxa', 'limpeza, caução, energia'], ['valor', 'Valor', 'R$ 150']] },
+    horarios: { rot: 'horário', campos: [['dias', 'Dias', 'sábado'], ['horario', 'Horário', '8h às 2h']] },
+  };
+  function linhaRep(tipo, d = {}) {
+    return `<div class="rep-linha rep-${tipo}">
+      ${REP[tipo].campos.map(([k, rot, ph]) => `<label class="campo c-${k}"><span>${rot}</span><input data-k="${k}" value="${esc(k === 'valor' ? valorTxt(d[k]) : d[k] || '')}" placeholder="${esc(ph)}"></label>`).join('')}
+      <button type="button" class="tirar-linha" data-tirar-linha aria-label="Remover ${REP[tipo].rot}">×</button>
+    </div>`;
+  }
+  function blocoRep(tipo, titulo, ajuda, itens) {
+    return `<fieldset class="ed-bloco"><legend>${titulo}</legend>${ajuda ? `<p class="ajuda">${ajuda}</p>` : ''}
+      <div class="rep" data-rep="${tipo}">${(itens.length ? itens : [{}]).map((d) => linhaRep(tipo, d)).join('')}</div>
+      <button type="button" class="btn ghost add-linha" data-acao="add-linha" data-rep="${tipo}">${ic('mais')}Adicionar ${REP[tipo].rot}</button>
+    </fieldset>`;
+  }
+
+  function abrirEditor(id) {
+    const l = id ? S.porId[id] : null;
+    if (id && !l) return;
+    ED = { id: l ? l.id : null, sujo: false };
+    if ($('#detalhe').open) $('#detalhe').close();
+    limparHash();
+    const it = (l && l.itens) || {};
+    const eventosTodos = [...new Set([...EVENTOS_BASE, ...S.locais.flatMap((x) => x.eventos || [])])];
+    const evSel = new Set((l && l.eventos) || []);
+    const mapaTxt = l ? (l.mapa || (l.coordenadas ? `${l.coordenadas.lat}, ${l.coordenadas.lng}` : '')) : '';
+    const situ = [...new Set([...SITUACOES, ...(l && l.status ? [l.status] : [])])];
+    const d = $('#editor');
+    d.innerHTML = `<form id="form-editor" novalidate>
+      <div class="folha-topo">
+        <button type="button" class="fechar" data-acao="cancelar-editor" aria-label="Fechar">${ic('voltar')}</button>
+        <h2>${l ? `Editar: ${esc(l.nome)}` : 'Cadastrar local'}</h2>
+      </div>
+      <div class="folha-corpo">
+        ${!API ? '<p class="nota-aviso">A nuvem não está configurada, então não dá para salvar cadastros por aqui.</p>'
+          : !S.chave ? '<p class="nota-aviso">Para salvar você vai precisar da chave de edição. Pode preencher agora e informar a chave na hora de salvar.</p>' : ''}
+
+        <fieldset class="ed-bloco"><legend>Básico</legend>
+          <div class="grade-2">
+            <label class="campo largo"><span>Nome do local *</span><input name="nome" required maxlength="120" value="${esc(l?.nome || '')}" placeholder="ex.: Chácara Recanto do Sol"></label>
+            <label class="campo"><span>Tipo</span><input name="tipo" list="dl-tipos" maxlength="60" value="${esc(l?.tipo || '')}" placeholder="Salão de festas, Chácara…"></label>
+            <label class="campo"><span>Capacidade (pessoas)</span><input name="capacidade" type="number" inputmode="numeric" min="1" max="100000" value="${esc(l?.capacidade ?? '')}" placeholder="ex.: 150"></label>
+            <label class="campo"><span>Bairro / quadra</span><input name="bairro" maxlength="120" value="${esc(l?.bairro || '')}" placeholder="ex.: 403 Sul"></label>
+            <label class="campo"><span>Endereço</span><input name="endereco" maxlength="300" value="${esc(l?.endereco || '')}"></label>
+            <label class="campo largo"><span>Localização no mapa</span><input name="mapa" maxlength="500" value="${esc(mapaTxt)}" placeholder="Cole o link do Google Maps ou as coordenadas (-10.18, -48.33)"></label>
+          </div>
+          <datalist id="dl-tipos">${[...new Set(['Salão de festas', 'Chácara', 'Espaço com piscina', 'Espaço de eventos', 'Restaurante', ...S.locais.map((x) => x.tipo)])].map((t) => `<option value="${esc(t)}">`).join('')}</datalist>
+        </fieldset>
+
+        <fieldset class="ed-bloco"><legend>O que vem no aluguel</legend>
+          <p class="ajuda">Marque o que está incluso. Mesas e cadeiras aceitam a quantidade.</p>
+          <div class="pills">${ITENS.map(([k, rot, tipo]) => {
+            const v = it[k];
+            return `<label class="pill${tipo === 'num' ? ' com-qtd' : ''}"><input type="checkbox" data-item="${k}" ${v ? 'checked' : ''}><span>${ic('check')}${esc(rot)}</span>${tipo === 'num'
+              ? `<input type="number" class="qtd" data-qtd="${k}" min="1" max="100000" inputmode="numeric" placeholder="qtd" aria-label="Quantidade de ${esc(rot.toLowerCase())}" value="${typeof v === 'number' ? v : ''}">` : ''}</label>`;
+          }).join('')}</div>
+          <label class="campo" style="margin-top:12px"><span>Outros itens e detalhes (um por linha)</span><textarea name="comodidades" rows="3" placeholder="ex.: 2 piscinas (adulto e infantil)&#10;Mesa de bolo&#10;Decoração não inclusa">${esc(((l && l.comodidades) || []).join('\n'))}</textarea></label>
+        </fieldset>
+
+        ${blocoRep('precos', 'Valores', 'Cada valor com a sua condição: dia da semana, horário, número de convidados, pacote.', (l && l.precos) || [])}
+        ${blocoRep('taxas', 'Taxas extras', 'Cobranças à parte, como limpeza, caução ou energia.', (l && l.taxas) || [])}
+        <fieldset class="ed-bloco"><legend>Pagamento</legend>
+          <label class="campo"><span>Condições de pagamento</span><textarea name="pagamento" rows="2" maxlength="600" placeholder="ex.: 50% para reservar, resto até 7 dias antes; Pix ou cartão">${esc(l?.pagamento || '')}</textarea></label>
+        </fieldset>
+        ${blocoRep('horarios', 'Horários de uso', '', (l && l.horarios) || [])}
+
+        <fieldset class="ed-bloco"><legend>Contato</legend>
+          <div class="grade-2">
+            <label class="campo"><span>WhatsApp</span><input name="whatsapp" inputmode="tel" maxlength="30" value="${esc(l?.whatsapp || '')}" placeholder="(63) 9 9999-9999"></label>
+            <label class="campo"><span>Telefone</span><input name="telefone" inputmode="tel" maxlength="30" value="${esc(l?.telefone || '')}"></label>
+            <label class="campo"><span>Instagram</span><input name="instagram" maxlength="100" value="${esc(l?.instagram || '')}" placeholder="@perfil"></label>
+            <label class="campo"><span>Site</span><input name="site" type="url" maxlength="300" value="${esc(l?.site || '')}" placeholder="https://"></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="ed-bloco"><legend>Bom para</legend>
+          <div class="pills">${eventosTodos.map((ev) => `<label class="pill"><input type="checkbox" data-evento="${esc(ev)}" ${evSel.has(ev) ? 'checked' : ''}><span>${ic('check')}${esc(ev)}</span></label>`).join('')}</div>
+          <label class="campo" style="margin-top:12px"><span>Outros tipos de evento (separe por vírgula)</span><input name="eventos_extra" maxlength="200"></label>
+        </fieldset>
+
+        <fieldset class="ed-bloco"><legend>Fotos e observações</legend>
+          <label class="campo"><span>Links das fotos (um por linha)</span><textarea name="fotos" rows="3" placeholder="https://…">${esc(((l && l.fotos) || []).map((f) => f.url || f).join('\n'))}</textarea></label>
+          <label class="campo" style="margin-top:10px"><span>Observações</span><textarea name="observacoes" rows="4" maxlength="3000" placeholder="Regras, restrições de som, o que não está incluso, pontos de atenção…">${esc(l?.observacoes || '')}</textarea></label>
+        </fieldset>
+
+        <fieldset class="ed-bloco"><legend>Origem dos dados</legend>
+          <div class="grade-2">
+            <label class="campo"><span>Situação</span><select name="status">${situ.map((x) => `<option ${x === (l?.status || 'Informado pelo local') ? 'selected' : ''}>${esc(x)}</option>`).join('')}</select></label>
+            <label class="campo"><span>Fontes (uma por linha)</span><textarea name="fontes" rows="2" placeholder="Conversa no WhatsApp, link do anúncio…">${esc(((l && l.fontes) || []).join('\n'))}</textarea></label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="ed-rodape">
+        ${l ? `<button type="button" class="btn ghost perigo" data-acao="remover-local">${ic('lixo')}<span class="lbl">Remover</span></button>` : ''}
+        <span class="espaco"></span>
+        <button type="button" class="btn" data-acao="cancelar-editor">Cancelar</button>
+        <button type="submit" class="btn primario" id="btn-salvar-local">Salvar</button>
+      </div>
+    </form>`;
+    if (!d.open) d.showModal();
+    d.querySelector('.folha-corpo').scrollTop = 0;
+    d.scrollTop = 0;
+    if (!l) setTimeout(() => d.querySelector('[name="nome"]').focus(), 50);
+  }
+
+  function lerEditor() {
+    const f = $('#form-editor');
+    const g = (n) => (f.elements[n]?.value || '').trim();
+    const base = ED.id ? S.porId[ED.id] : {};
+    const itens = {};
+    f.querySelectorAll('[data-item]').forEach((c) => {
+      if (!c.checked) return;
+      const q = f.querySelector(`[data-qtd="${c.dataset.item}"]`);
+      const n = q ? parseInt(q.value, 10) : NaN;
+      itens[c.dataset.item] = n > 0 ? n : true;
+    });
+    const rep = (tipo, fn) => [...f.querySelectorAll(`[data-rep="${tipo}"] .rep-linha`)].map(fn).filter(Boolean);
+    const precos = rep('precos', (r) => {
+      const p = { valor: parseValor(val(r, 'valor')), unidade: val(r, 'unidade') || null, condicao: val(r, 'condicao') || null, inclui: val(r, 'inclui') || null };
+      return p.valor != null || p.condicao ? p : null;
+    });
+    const taxas = rep('taxas', (r) => (val(r, 'nome') ? { nome: val(r, 'nome'), valor: parseValor(val(r, 'valor')) } : null));
+    const horarios = rep('horarios', (r) => (val(r, 'dias') || val(r, 'horario') ? { dias: val(r, 'dias'), horario: val(r, 'horario') } : null));
+    const eventos = [...f.querySelectorAll('[data-evento]:checked')].map((c) => c.dataset.evento);
+    g('eventos_extra').split(',').map((x) => x.trim()).filter(Boolean).forEach((x) => { if (!eventos.includes(x)) eventos.push(x); });
+    const legendas = Object.fromEntries((base.fotos || []).map((x) => [x.url || x, x.legenda || null]));
+    const mapa = g('mapa');
+    const coord = mapa.match(/(-?\d{1,2}\.\d+)\s*,\s*(-?\d{1,3}\.\d+)/);
+    const cap = parseInt(g('capacidade'), 10);
+    return {
+      nome: g('nome'),
+      tipo: g('tipo') || 'Espaço de eventos',
+      bairro: g('bairro') || null,
+      endereco: g('endereco') || null,
+      coordenadas: coord ? { lat: Number(coord[1]), lng: Number(coord[2]) } : null,
+      mapa: /^https?:\/\//i.test(mapa) ? mapa : null,
+      capacidade: cap > 0 ? cap : null,
+      precos, taxas,
+      pagamento: g('pagamento') || null,
+      itens,
+      comodidades: linhas(g('comodidades')),
+      eventos,
+      instagram: g('instagram') || null,
+      whatsapp: g('whatsapp') || null,
+      telefone: g('telefone') || null,
+      site: urlSegura(g('site')) ? g('site') : null,
+      horarios,
+      fotos: linhas(g('fotos')).filter((u) => urlSegura(u)).map((u) => ({ url: u, legenda: legendas[u] || null })),
+      observacoes: g('observacoes') || null,
+      fontes: linhas(g('fontes')),
+      conferido_em: new Date().toISOString().slice(0, 10),
+      status: g('status') || null,
+    };
+  }
+
+  async function gravarLocal(id, dados) {
+    if (!API) { toast('A nuvem não está configurada.'); return null; }
+    if (!S.chave) { toast('Informe a chave de edição para salvar.'); abrirConfig(); return null; }
+    const em = new Date().toISOString();
+    try {
+      const r = await fetch(`${API}/locais/${encodeURIComponent(id)}`, {
+        method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Chave': S.chave }, body: JSON.stringify({ ...dados, atualizado_em: em }),
+      });
+      if (r.status === 401) { toast('Chave de edição incorreta.'); abrirConfig(); return null; }
+      if (!r.ok) throw new Error(r.status);
+      const j = await r.json();
+      S.remotos = S.remotos.filter((x) => x.id !== id).concat({ id, dados: j.local, atualizado_em: j.atualizado_em });
+      lsSet(LS.locais, S.remotos);
+      montarLocais(); renderOpcoes(); renderTudo();
+      return j.local;
+    } catch {
+      toast('Não consegui salvar agora. Confira a internet e tente de novo.');
+      return null;
+    }
+  }
+
+  async function salvarEditor() {
+    const f = $('#form-editor');
+    const nome = f.elements.nome;
+    if (!nome.value.trim()) { nome.focus(); nome.setCustomValidity('Informe o nome do local'); nome.reportValidity(); return; }
+    nome.setCustomValidity('');
+    const dados = lerEditor();
+    const id = ED.id || idNovo(dados.nome);
+    const b = $('#btn-salvar-local'); b.disabled = true; b.textContent = 'Salvando…';
+    const ok = await gravarLocal(id, dados);
+    b.disabled = false; b.textContent = 'Salvar';
+    if (!ok) return;
+    const novo = !ED.id;
+    ED.sujo = false; $('#editor').close();
+    toast(novo ? 'Local cadastrado.' : 'Alterações salvas.');
+    abrirDetalhe(id);
+  }
+
+  async function removerLocal() {
+    const l = S.porId[ED.id];
+    if (!l || !confirm(`Remover "${l.nome}" da lista? Ele deixa de aparecer para todo mundo.`)) return;
+    const { _busca, _nuvem, ...resto } = l;
+    const ok = await gravarLocal(l.id, { ...resto, removido: true });
+    if (!ok) return;
+    ED.sujo = false; $('#editor').close();
+    toast('Local removido da lista.');
+  }
+
+  function fecharEditor() {
+    if (ED && ED.sujo && !confirm('Descartar as alterações que você fez?')) return;
+    const volta = ED && ED.id;
+    if (ED) ED.sujo = false;
+    $('#editor').close();
+    if (volta && S.porId[volta]) abrirDetalhe(volta); // volta para onde estava
+  }
+  function limparHash() {
+    if (location.hash.startsWith('#local/')) history.replaceState(null, '', location.pathname + location.search);
   }
 
   /* ============ Toast ============ */
@@ -659,8 +935,22 @@
       const arr = visita(S.detalheId)[tipo].slice(); arr.splice(Number(i), 1);
       salvarVisita(S.detalheId, { [tipo]: arr }); renderPainelVisita(); return;
     }
+    if ((b = t.closest('[data-editar]'))) { abrirEditor(b.dataset.editar); return; }
+    if ((b = t.closest('[data-tirar-linha]'))) {
+      const rep = b.closest('.rep'); const linha = b.closest('.rep-linha');
+      if (rep.children.length > 1) linha.remove(); else linha.querySelectorAll('input').forEach((i) => { i.value = ''; });
+      ED.sujo = true; return;
+    }
     if ((b = t.closest('[data-acao]'))) {
       const a = b.dataset.acao;
+      if (a === 'novo-local') abrirEditor(null);
+      if (a === 'cancelar-editor') fecharEditor();
+      if (a === 'remover-local') removerLocal();
+      if (a === 'add-linha') {
+        const rep = $(`#editor [data-rep="${b.dataset.rep}"]`);
+        rep.insertAdjacentHTML('beforeend', linhaRep(b.dataset.rep));
+        rep.lastElementChild.querySelector('input').focus();
+      }
       if (a === 'abrir-comparar') abrirComparar();
       if (a === 'limpar-comparar') { S.cmp.clear(); renderLista(); }
       if (a === 'salvar-chave') salvarChave();
@@ -671,7 +961,7 @@
     if (t.closest('[data-fechar]')) { t.closest('dialog').close(); return; }
     if (t.tagName === 'DIALOG') { // clique no fundo escuro, fora da caixa
       const r = t.getBoundingClientRect();
-      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) t.close();
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) (t.id === 'editor' ? fecharEditor() : t.close());
     }
   });
 
@@ -698,6 +988,7 @@
   });
 
   document.addEventListener('submit', (e) => {
+    if (e.target.id === 'form-editor') { e.preventDefault(); salvarEditor(); return; }
     const f = e.target.closest('[data-add]');
     if (!f) return;
     e.preventDefault();
@@ -709,10 +1000,52 @@
     const nf = $(`[data-add="${tipo}"] input`); if (nf) nf.focus();
   });
 
-  $('#detalhe').addEventListener('close', () => {
-    S.detalheId = null;
-    if (location.hash.startsWith('#local/')) history.replaceState(null, '', location.pathname + location.search);
+  $('#editor').addEventListener('input', (e) => {
+    if (ED) ED.sujo = true;
+    if (e.target.matches('.qtd') && e.target.value) { const c = e.target.closest('.pill').querySelector('[data-item]'); c.checked = true; }
   });
+  $('#editor').addEventListener('cancel', (e) => { e.preventDefault(); fecharEditor(); });
+
+  $('#detalhe').addEventListener('close', () => {
+    if ($('#detalhe').open) return; // fechou e reabriu antes do evento chegar
+    S.detalheId = null;
+    limparHash();
+  });
+
+  /* ============ Locais: base (JSON) + banco ============ */
+  function prepLocal(l) {
+    l._busca = norm([l.nome, l.tipo, l.bairro, l.endereco, l.observacoes, ...(l.comodidades || []), ...(l.eventos || []),
+      ...itensDo(l).map((k) => ITEM_ROT[k]), ...(l.precos || []).map((p) => `${p.condicao || ''} ${p.inclui || ''}`)].join(' '));
+    return l;
+  }
+  // Para cada id vale a versão mais nova: a do JSON do repositório ou a gravada pelo site.
+  function montarLocais() {
+    const mapa = new Map(S.base.map((l) => [l.id, l]));
+    for (const r of S.remotos) {
+      const atual = mapa.get(r.id);
+      if (!atual || (atual.atualizado_em || '') < r.atualizado_em) mapa.set(r.id, { ...r.dados, id: r.id, atualizado_em: r.atualizado_em, _nuvem: true });
+    }
+    S.locais = [...mapa.values()].filter((l) => !l.removido).map(prepLocal);
+    S.porId = {};
+    S.locais.forEach((l) => { S.porId[l.id] = l; });
+    for (const id of [...S.cmp]) if (!S.porId[id]) S.cmp.delete(id);
+  }
+  async function carregarLocaisRemotos() {
+    if (!API) return;
+    try {
+      const r = await fetch(`${API}/locais`, { cache: 'no-store' });
+      if (!r.ok) throw new Error(r.status);
+      S.remotos = await r.json();
+      lsSet(LS.locais, S.remotos);
+      montarLocais();
+    } catch { /* fica com o que já tinha */ }
+  }
+  function renderOpcoes() {
+    const opts = (vals, atual) => vals.map((t) => `<option ${t === atual ? 'selected' : ''}>${esc(t)}</option>`).join('');
+    const ord = (a) => [...new Set(a)].filter(Boolean).sort((x, y) => x.localeCompare(y, 'pt-BR'));
+    $('#f-tipo').innerHTML = '<option value="">Todos</option>' + opts(ord(S.locais.map((l) => l.tipo)), S.f.tipo);
+    $('#f-evento').innerHTML = '<option value="">Qualquer</option>' + opts(ord(S.locais.flatMap((l) => l.eventos || [])), S.f.evento);
+  }
 
   /* ============ Início ============ */
   async function iniciar() {
@@ -721,26 +1054,23 @@
       const r = await fetch('data/locais.json', { cache: 'no-cache' });
       const j = await r.json();
       S.dataDados = j.atualizado_em;
-      S.locais = j.locais.map((l) => ({
-        ...l,
-        _busca: norm([l.nome, l.tipo, l.bairro, l.endereco, l.observacoes, ...(l.comodidades || []), ...(l.eventos || []),
-          ...(l.precos || []).map((p) => `${p.condicao || ''} ${p.inclui || ''}`)].join(' ')),
-      }));
-      S.locais.forEach((l) => { S.porId[l.id] = l; });
+      const padrao = (j.atualizado_em || '2026-01-01') + 'T00:00:00Z';
+      S.base = j.locais.map((l) => ({ ...l, atualizado_em: l.atualizado_em || padrao }));
+      S.remotos = lsGet(LS.locais, []);
+      montarLocais();
     } catch {
       $('#lista').innerHTML = '<div class="vazio"><h3>Não foi possível carregar os locais</h3><p>Recarregue a página.</p></div>';
       return;
     }
     $('#data-dados').textContent = dataBR(S.dataDados);
-    const opts = (vals) => vals.map((t) => `<option>${esc(t)}</option>`).join('');
-    $('#f-tipo').insertAdjacentHTML('beforeend', opts([...new Set(S.locais.map((l) => l.tipo))].sort((a, b) => a.localeCompare(b, 'pt-BR'))));
-    $('#f-evento').insertAdjacentHTML('beforeend', opts([...new Set(S.locais.flatMap((l) => l.eventos || []))].sort((a, b) => a.localeCompare(b, 'pt-BR'))));
     ligarFiltros();
+    renderOpcoes();
     renderTudo();
     atualizarSync();
     const m = location.hash.match(/^#local\/(.+)$/);
     if (m) abrirDetalhe(decodeURIComponent(m[1]));
-    await carregarRemoto();
+    await Promise.all([carregarRemoto(), carregarLocaisRemotos()]);
+    renderOpcoes();
     renderTudo();
   }
   iniciar();
