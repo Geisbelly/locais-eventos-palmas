@@ -79,7 +79,8 @@
   }
   function completude(l) {
     return (menorPreco(l) != null ? 4 : 0) + (l.whatsapp ? 2 : 0) + (l.instagram ? 1 : 0) + (l.endereco ? 1 : 0)
-      + (l.capacidade ? 1 : 0) + ((l.comodidades || []).length ? 1 : 0) + (l.site ? 1 : 0) + ((l.fotos || []).length ? 2 : 0);
+      + (l.capacidade ? 1 : 0) + ((l.comodidades || []).length ? 1 : 0) + (l.site ? 1 : 0) + ((l.fotos || []).length ? 2 : 0)
+      + (/^Informado/.test(l.status || '') ? 3 : 0);
   }
   function zapLink(numero, nome) {
     let d = digitos(numero);
@@ -282,7 +283,8 @@
     const p = nums.find((x) => x.valor === mp);
     const mx = Math.max(...nums.map((x) => x.valor));
     const faixa = mx > mp ? `${brl(mp)} a ${brl(mx)}` : `a partir de ${brl(mp)}`;
-    const cond = nums.length > 1 ? `${nums.length} condições · menor: ${p.condicao}` : p.condicao;
+    const tx = (l.taxas || []).filter((t) => typeof t.valor === 'number').reduce((a, t) => a + t.valor, 0);
+    const cond = (nums.length > 1 ? `${nums.length} condições · menor: ${p.condicao}` : p.condicao) + (tx ? ` · + ${brl(tx)} em taxas` : '');
     return `<div class="preco"><span class="valor">${faixa} <small>/ ${esc(p.unidade || 'evento')}</small></span><span class="cond">${esc(cond || '')}</span></div>`;
   }
   function estrelas(n) {
@@ -381,13 +383,17 @@
             ${p.inclui ? `<span class="i">Inclui: ${esc(p.inclui)}</span>` : ''}
           </div>`).join('')}</div>`
       : '<div class="cartao"><p class="texto">Sem valor publicado. Peça orçamento informando data, horário e número de convidados.</p></div>';
+    const taxas = (l.taxas || []).length
+      ? `<div class="cartao" style="margin-top:8px">${l.taxas.map((t) => `<div class="linha-preco"><span class="v">+ ${typeof t.valor === 'number' ? brl(t.valor) : esc(t.valor)}</span><span class="c">${esc(t.nome)}</span></div>`).join('')}</div>`
+      : '';
+    const pagamento = l.pagamento ? `<div class="cartao" style="margin-top:8px"><div class="linha-preco"><span class="v"><small>Pagamento</small></span><span class="c" style="font-weight:400">${esc(l.pagamento)}</span></div></div>` : '';
     const v = visita(l.id);
     const orc = v.orcamento_valor ? `<div class="cartao" style="margin-top:8px"><div class="linha-preco"><span class="v">${esc(v.orcamento_valor)}</span><span class="c">Orçamento que você recebeu</span>${v.orcamento_condicao ? `<span class="i">${esc(v.orcamento_condicao)}</span>` : ''}</div></div>` : '';
     const horarios = (l.horarios || []).length
       ? `<ul class="lista-simples">${l.horarios.map((h) => `<li><strong>${esc(h.dias)}</strong>: ${esc(h.horario)}</li>`).join('')}</ul>`
       : '<p class="texto">Não informado. Pergunte o horário de início e término e se há cobrança por hora extra.</p>';
     return `
-      <section class="secao"><h3>Valores e condições</h3>${precos}${orc}
+      <section class="secao"><h3>Valores e condições</h3>${precos}${taxas}${pagamento}${orc}
         <div class="nota-aviso">${ic('alerta')}<span>O valor muda com o dia da semana, a temporada, a duração e o que está incluso. Os daqui são referência de ${dataBR(l.conferido_em)}.</span></div>
       </section>
       <section class="secao"><h3>Horários de uso</h3><div class="cartao">${horarios}</div></section>
@@ -396,7 +402,9 @@
       ${l.observacoes ? `<section class="secao"><h3>Observações</h3><div class="cartao"><p class="texto">${esc(l.observacoes)}</p></div></section>` : ''}
       <section class="secao fontes"><h3>De onde vieram os dados</h3>
         Conferido em ${dataBR(l.conferido_em)}${l.status ? `<span class="status-dado">${esc(l.status)}</span>` : ''}
-        <ul>${(l.fontes || []).map((u) => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\/(www\.)?/, '').slice(0, 70))}</a></li>`).join('')}</ul>
+        <ul>${(l.fontes || []).map((u) => (/^https?:\/\//.test(u)
+          ? `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\/(www\.)?/, '').slice(0, 70))}</a></li>`
+          : `<li>${esc(u)}</li>`)).join('')}</ul>
       </section>`;
   }
   function listaEditHtml(tipo, itens, rotulo, ph) {
@@ -476,6 +484,7 @@
         const p = (l.precos || []).find((x) => x.valor === precos[i]);
         return [precos[i] != null ? `<strong>${brl(precos[i])}</strong><br><small>${esc(p.unidade || '')} · ${esc(p.condicao || '')}</small>` : 'Sob consulta', precos[i] != null && precos[i] === bp];
       })],
+      ['Taxas extras', ls.map((l) => ((l.taxas || []).length ? l.taxas.map((t) => `${esc(t.nome)}: ${typeof t.valor === 'number' ? brl(t.valor) : esc(t.valor)}`).join('<br>') : '—'))],
       ['Orçamento recebido', vs.map((v) => (v.orcamento_valor ? `${esc(v.orcamento_valor)}<br><small>${esc(v.orcamento_condicao)}</small>` : '—'))],
       ['Capacidade', ls.map((l, i) => [l.capacidade ? `${l.capacidade} pessoas` : '—', caps[i] && caps[i] === bc])],
       ['Situação', vs.map((v) => STATUS[v.status].rotulo + (v.data ? ` (${dataBR(v.data)})` : ''))],

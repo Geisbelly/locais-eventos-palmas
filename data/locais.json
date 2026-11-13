@@ -3,6 +3,336 @@
   "observacao": "Dados reunidos de páginas públicas. Campo ausente = não encontrado na fonte. Valores são referência da data de conferência e variam conforme dia, temporada e pacote.",
   "locais": [
     {
+      "id": "villa-festa",
+      "nome": "Villa Festa",
+      "tipo": "Salão de festas",
+      "bairro": "Região central",
+      "endereco": "Localização central em Palmas (fácil acesso por aplicativo)",
+      "capacidade": 120,
+      "precos": [
+        {
+          "valor": 4900,
+          "unidade": "5h de uso",
+          "condicao": "Sábado e feriado",
+          "inclui": "Estrutura completa, mesas e cadeiras para até 120 convidados"
+        },
+        {
+          "valor": 3900,
+          "unidade": "5h de uso",
+          "condicao": "Sexta e domingo (promoção)",
+          "inclui": "Estrutura completa, mesas e cadeiras para até 120 convidados"
+        },
+        {
+          "valor": 2900,
+          "unidade": "5h de uso",
+          "condicao": "Segunda a quinta (promoção)",
+          "inclui": "Estrutura completa, mesas e cadeiras para até 120 convidados"
+        }
+      ],
+      "taxas": [],
+      "pagamento": "Pix, cartão de crédito ou entrada + parcelamento. Descontos progressivos para empresas e para dias úteis (sob consulta).",
+      "instagram": "villafesta.pmw",
+      "whatsapp": "(63) 98458-2979",
+      "site": null,
+      "horarios": [
+        {
+          "dias": "Todas as locações",
+          "horario": "5 horas de uso"
+        }
+      ],
+      "comodidades": [
+        "Climatizado",
+        "Piscina",
+        "Área gourmet",
+        "Churrasqueira",
+        "Cozinha (fogão, forno, geladeira, freezer)",
+        "Bebedouro",
+        "Mesas e cadeiras para 120"
+      ],
+      "eventos": [
+        "Casamento",
+        "Aniversário",
+        "Formatura",
+        "Corporativo",
+        "Confraternização"
+      ],
+      "fotos": [
+        {
+          "url": "fotos/villa-festa/fachada.jpg",
+          "legenda": "Fachada"
+        },
+        {
+          "url": "fotos/villa-festa/salao.jpg",
+          "legenda": "Salão montado"
+        },
+        {
+          "url": "fotos/villa-festa/decoracao.jpg",
+          "legenda": "Salão com decoração"
+        },
+        {
+          "url": "fotos/villa-festa/lounge.jpg",
+          "legenda": "Lounge"
+        },
+        {
+          "url": "fotos/villa-festa/piscina.jpg",
+          "legenda": "Piscina"
+        },
+        {
+          "url": "fotos/villa-festa/piscina2.jpg",
+          "legenda": "Piscina e área gourmet"
+        }
+      ],
+      "observacoes": "Locação de 5 horas. Fotos e valores do portfólio enviado pelo próprio espaço.",
+      "fontes": [
+        "Portfólio do Villa Festa enviado pelo WhatsApp (nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local"
+    },
+    {
+      "id": "la-maison",
+      "nome": "La Maison",
+      "tipo": "Espaço com piscina",
+      "bairro": "Palmas",
+      "endereco": null,
+      "capacidade": 100,
+      "precos": [
+        {
+          "valor": 2500,
+          "unidade": "locação",
+          "condicao": "Só espaço externo",
+          "inclui": "Área gourmet com churrasqueira, piscina e parque aquático"
+        },
+        {
+          "valor": 3200,
+          "unidade": "locação",
+          "condicao": "Só espaço interno (salão)",
+          "inclui": "Salão climatizado para 100 pessoas sentadas, som JBL embutido, cozinha e banheiros"
+        },
+        {
+          "valor": 5000,
+          "unidade": "locação",
+          "condicao": "Espaço completo (interno + externo)",
+          "inclui": "Tudo: salão, área gourmet, piscina, parque aquático, salão de jogos"
+        }
+      ],
+      "taxas": [
+        {
+          "nome": "Taxa de limpeza",
+          "valor": 300
+        }
+      ],
+      "pagamento": "Pix ou parcelado, com a última parcela até 10 dias antes do evento. Reserva com 30% + contrato.",
+      "instagram": null,
+      "whatsapp": "(63) 9965-0102",
+      "site": null,
+      "horarios": [],
+      "comodidades": [
+        "Climatizado",
+        "Piscina",
+        "Parque aquático",
+        "Área gourmet",
+        "Churrasqueira",
+        "Salão de jogos",
+        "Som ambiente JBL",
+        "Cozinha ampla",
+        "Espaço verde"
+      ],
+      "eventos": [
+        "Corporativo",
+        "Aniversário"
+      ],
+      "fotos": [],
+      "observacoes": "Valores da tabela 2025 enviada em nov/2026. Disseram que alugando o espaço todo há 20% de desconto: confirmar se já está nos R$ 5.000. Data show, microfones e som para corporativo são opcionais.",
+      "fontes": [
+        "WhatsApp com o local (conversa de nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local"
+    },
+    {
+      "id": "mega-eventos",
+      "nome": "Espaço Mega Eventos",
+      "tipo": "Espaço com piscina",
+      "bairro": "Taquaralto (Palmas Sul)",
+      "endereco": "Taquaralto, região sul de Palmas",
+      "capacidade": 80,
+      "precos": [
+        {
+          "valor": 850,
+          "unidade": "diária",
+          "condicao": "Segunda a quinta, sem ar-condicionado",
+          "inclui": "Gás, churrasqueira, piscina, 2 climatizadores, 20 mesas e 80 cadeiras, gramado"
+        },
+        {
+          "valor": 1000,
+          "unidade": "diária",
+          "condicao": "Segunda a quinta, com ar-condicionado",
+          "inclui": "Tudo da versão sem ar + ar-condicionado ligado"
+        },
+        {
+          "valor": 1200,
+          "unidade": "diária",
+          "condicao": "Sexta, sábado e domingo, sem ar-condicionado",
+          "inclui": "Gás, churrasqueira, piscina, 2 climatizadores, 20 mesas e 80 cadeiras, gramado"
+        },
+        {
+          "valor": 1400,
+          "unidade": "diária",
+          "condicao": "Sexta, sábado e domingo, com ar-condicionado",
+          "inclui": "Tudo da versão sem ar + ar-condicionado ligado"
+        }
+      ],
+      "taxas": [
+        {
+          "nome": "Taxa de limpeza (listada na modalidade com ar)",
+          "valor": 200
+        }
+      ],
+      "pagamento": null,
+      "instagram": null,
+      "whatsapp": "(63) 8422-4643",
+      "telefone": "(63) 99279-7393",
+      "site": null,
+      "horarios": [],
+      "comodidades": [
+        "Piscina",
+        "Churrasqueira",
+        "Gás incluso",
+        "2 climatizadores",
+        "Ar-condicionado (opcional)",
+        "20 mesas e 80 cadeiras",
+        "Gramado"
+      ],
+      "eventos": [
+        "Aniversário",
+        "Casamento",
+        "Confraternização",
+        "Inauguração"
+      ],
+      "fotos": [],
+      "observacoes": "Na locação sem ar-condicionado, o ar fica desligado o evento todo. Outros contatos do anúncio: (63) 99279-7393 e (63) 99237-3331. Capacidade estimada pelas 80 cadeiras.",
+      "fontes": [
+        "WhatsApp com o local (conversa de nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local"
+    },
+    {
+      "id": "arena-42",
+      "nome": "Arena 42",
+      "tipo": "Espaço com piscina",
+      "bairro": "Palmas (ver mapa)",
+      "endereco": null,
+      "coordenadas": {
+        "lat": -10.162199974060059,
+        "lng": -48.341800689697266
+      },
+      "capacidade": 60,
+      "precos": [
+        {
+          "valor": 1300,
+          "unidade": "diária (10h até 8h do dia seguinte)",
+          "condicao": "Sexta, sábado, domingo e feriado",
+          "inclui": "Piscina, salão climatizado, churrasqueira, cozinha e mobiliário"
+        },
+        {
+          "valor": "Sob consulta",
+          "unidade": null,
+          "condicao": "Segunda a quinta",
+          "inclui": null
+        }
+      ],
+      "taxas": [
+        {
+          "nome": "Taxa de limpeza",
+          "valor": 120
+        },
+        {
+          "nome": "Taxa de gás",
+          "valor": 25
+        }
+      ],
+      "pagamento": "50% na assinatura do contrato e o restante até 24h antes do evento.",
+      "instagram": null,
+      "whatsapp": "(63) 9212-5451",
+      "site": null,
+      "horarios": [
+        {
+          "dias": "Sexta a domingo e feriado",
+          "horario": "10h até 8h do dia seguinte"
+        }
+      ],
+      "comodidades": [
+        "Piscina",
+        "Salão climatizado",
+        "Churrasqueira",
+        "Fogão industrial",
+        "Freezer e cervejeira",
+        "Bebedouro",
+        "10 mesas redondas e 60 cadeiras",
+        "8 banquetas",
+        "Mesa com 4 poltronas"
+      ],
+      "eventos": [
+        "Aniversário",
+        "Confraternização"
+      ],
+      "fotos": [],
+      "observacoes": "Visitas são agendadas com o escritório pelo WhatsApp (63) 98458-2349, de preferência cedo (antes das locações das 10h). Nome do espaço conforme a conversa; confirmar. Capacidade estimada pelas 60 cadeiras.",
+      "fontes": [
+        "WhatsApp com o local (conversa de nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local"
+    },
+    {
+      "id": "oliver-martins",
+      "nome": "Oliver & Martins Eventos",
+      "tipo": "Salão de festas",
+      "bairro": "Palmas",
+      "endereco": null,
+      "capacidade": 100,
+      "precos": [
+        {
+          "valor": "Sob consulta",
+          "unidade": null,
+          "condicao": "Locação diurna (12h) ou 24h",
+          "inclui": "Os valores vieram em imagem; pedir de novo por texto"
+        }
+      ],
+      "taxas": [],
+      "pagamento": null,
+      "instagram": null,
+      "whatsapp": "(63) 9254-9589",
+      "site": null,
+      "horarios": [
+        {
+          "dias": "Locação diurna",
+          "horario": "12 horas"
+        },
+        {
+          "dias": "Locação completa",
+          "horario": "24 horas"
+        }
+      ],
+      "comodidades": [
+        "Espaço kids (playground)",
+        "Decoração própria (Oliver Decorações)"
+      ],
+      "eventos": [
+        "Aniversário infantil",
+        "Aniversário"
+      ],
+      "fotos": [],
+      "observacoes": "Também alugam kits de decoração pegue e monte. Pedem data, horário, número de pessoas e tipo de evento para orçar. Endereço ainda não informado.",
+      "fontes": [
+        "WhatsApp com o local (conversa de nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local"
+    },
+    {
       "id": "orla-dourada",
       "nome": "Orla Dourada",
       "tipo": "Chácara",
@@ -14,11 +344,24 @@
       "whatsapp": "(63) 99246-1273",
       "site": "https://www.chacaraorladourada.com.br/",
       "horarios": [],
-      "comodidades": ["Beira do lago", "Píer para cerimônia", "Piscina", "Salão climatizado", "Cozinha para buffet", "Hospedagem (chalés)"],
-      "eventos": ["Casamento", "Corporativo", "Festa noturna"],
+      "comodidades": [
+        "Beira do lago",
+        "Píer para cerimônia",
+        "Piscina",
+        "Salão climatizado",
+        "Cozinha para buffet",
+        "Hospedagem (chalés)"
+      ],
+      "eventos": [
+        "Casamento",
+        "Corporativo",
+        "Festa noturna"
+      ],
       "fotos": [],
       "observacoes": "Cerimônia no píer à beira do lago. Valores só por orçamento.",
-      "fontes": ["https://www.chacaraorladourada.com.br/"],
+      "fontes": [
+        "https://www.chacaraorladourada.com.br/"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Contato confirmado no site oficial"
     },
@@ -28,20 +371,39 @@
       "tipo": "Chácara",
       "bairro": "Palmas",
       "endereco": null,
-      "coordenadas": { "lat": -10.1081, "lng": -48.3652 },
+      "coordenadas": {
+        "lat": -10.1081,
+        "lng": -48.3652
+      },
       "capacidade": 250,
       "precos": [
-        { "valor": 900, "unidade": "aluguel", "condicao": "A partir de; varia com temporada e serviços", "inclui": "Não detalhado na fonte" }
+        {
+          "valor": 900,
+          "unidade": "aluguel",
+          "condicao": "A partir de; varia com temporada e serviços",
+          "inclui": "Não detalhado na fonte"
+        }
       ],
       "instagram": null,
       "whatsapp": null,
       "site": null,
       "horarios": [],
-      "comodidades": ["Beira do lago", "Área jardinada para tendas", "Varanda coberta", "Cozinha equipada", "Casa de apoio aos noivos"],
-      "eventos": ["Casamento", "Ao ar livre"],
+      "comodidades": [
+        "Beira do lago",
+        "Área jardinada para tendas",
+        "Varanda coberta",
+        "Cozinha equipada",
+        "Casa de apoio aos noivos"
+      ],
+      "eventos": [
+        "Casamento",
+        "Ao ar livre"
+      ],
       "fotos": [],
       "observacoes": "Contato pelo formulário do Casamentos.com.br.",
-      "fontes": ["https://www.casamentos.com.br/chacara-casamento/chacara-luar-do-lago-eventos--e346250"],
+      "fontes": [
+        "https://www.casamentos.com.br/chacara-casamento/chacara-luar-do-lago-eventos--e346250"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório"
     },
@@ -57,11 +419,21 @@
       "whatsapp": "(63) 99299-7771",
       "site": "https://californiapalace.com.br/",
       "horarios": [],
-      "comodidades": ["Iluminação cênica", "Decoração branco e dourado"],
-      "eventos": ["Formatura", "Casamento", "Aniversário", "Corporativo"],
+      "comodidades": [
+        "Iluminação cênica",
+        "Decoração branco e dourado"
+      ],
+      "eventos": [
+        "Formatura",
+        "Casamento",
+        "Aniversário",
+        "Corporativo"
+      ],
       "fotos": [],
       "observacoes": "Espaço de alto padrão. Site sem preço publicado.",
-      "fontes": ["https://californiapalace.com.br/"],
+      "fontes": [
+        "https://californiapalace.com.br/"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Contato confirmado no site oficial"
     },
@@ -77,11 +449,26 @@
       "whatsapp": "(63) 98119-6692",
       "site": null,
       "horarios": [],
-      "comodidades": ["Climatizado", "Piscina adulto e infantil", "Hidromassagem", "Churrasqueira", "Cozinha (fogão industrial, forno)", "100 cadeiras e 11 mesas", "Banheiro acessível"],
-      "eventos": ["Aniversário infantil", "Chá", "Aniversário"],
+      "comodidades": [
+        "Climatizado",
+        "Piscina adulto e infantil",
+        "Hidromassagem",
+        "Churrasqueira",
+        "Cozinha (fogão industrial, forno)",
+        "100 cadeiras e 11 mesas",
+        "Banheiro acessível"
+      ],
+      "eventos": [
+        "Aniversário infantil",
+        "Chá",
+        "Aniversário"
+      ],
       "fotos": [],
       "observacoes": "Aparece como Espaço Imperial RED no GuiaFix e Espaço Imperial Eventos no Encontra Palmas, com o mesmo telefone. Confirmar se é o mesmo lugar.",
-      "fontes": ["https://guiafix.com.br/palmas-to/salao-de-festas", "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"],
+      "fontes": [
+        "https://guiafix.com.br/palmas-to/salao-de-festas",
+        "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório"
     },
@@ -93,17 +480,31 @@
       "endereco": "103 Norte",
       "capacidade": 150,
       "precos": [
-        { "valor": 450, "unidade": "diária", "condicao": "Valor de um dos anúncios; outro anúncio diz 'a combinar'", "inclui": "100 cadeiras, som completo, climatização e banheiros" }
+        {
+          "valor": 450,
+          "unidade": "diária",
+          "condicao": "Valor de um dos anúncios; outro anúncio diz 'a combinar'",
+          "inclui": "100 cadeiras, som completo, climatização e banheiros"
+        }
       ],
       "instagram": null,
       "whatsapp": null,
       "site": null,
       "horarios": [],
-      "comodidades": ["Climatizado", "Som incluso", "100 cadeiras"],
-      "eventos": ["Aniversário", "Confraternização"],
+      "comodidades": [
+        "Climatizado",
+        "Som incluso",
+        "100 cadeiras"
+      ],
+      "eventos": [
+        "Aniversário",
+        "Confraternização"
+      ],
       "fotos": [],
       "observacoes": "Anúncio de classificados sem nome do espaço. Contato pelo anúncio.",
-      "fontes": ["https://m.aluga.com.br/aluguel/festas-e-eventos/saloes-p--festas-e-eventos/salao-para-festas-e-eventos-em-palmas-to-151243"],
+      "fontes": [
+        "https://m.aluga.com.br/aluguel/festas-e-eventos/saloes-p--festas-e-eventos/salao-para-festas-e-eventos-em-palmas-to-151243"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Anúncio, pode ter saído do ar"
     },
@@ -115,18 +516,36 @@
       "endereco": null,
       "capacidade": null,
       "precos": [
-        { "valor": 400, "unidade": "diária", "condicao": "Segunda a quinta", "inclui": "Piscina e churrasqueira" },
-        { "valor": 600, "unidade": "diária", "condicao": "Sexta a domingo", "inclui": "Piscina e churrasqueira" }
+        {
+          "valor": 400,
+          "unidade": "diária",
+          "condicao": "Segunda a quinta",
+          "inclui": "Piscina e churrasqueira"
+        },
+        {
+          "valor": 600,
+          "unidade": "diária",
+          "condicao": "Sexta a domingo",
+          "inclui": "Piscina e churrasqueira"
+        }
       ],
       "instagram": null,
       "whatsapp": null,
       "site": null,
       "horarios": [],
-      "comodidades": ["Piscina", "Churrasqueira"],
-      "eventos": ["Aniversário", "Confraternização"],
+      "comodidades": [
+        "Piscina",
+        "Churrasqueira"
+      ],
+      "eventos": [
+        "Aniversário",
+        "Confraternização"
+      ],
       "fotos": [],
       "observacoes": "Anúncio de temporada no MGF Imóveis. Contato pelo anúncio.",
-      "fontes": ["https://to.mgfimoveis.com.br/espaco-locacao-para-festas-eventos-temporada-to-palmas-301410135"],
+      "fontes": [
+        "https://to.mgfimoveis.com.br/espaco-locacao-para-festas-eventos-temporada-to-palmas-301410135"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Anúncio, pode ter saído do ar"
     },
@@ -142,11 +561,19 @@
       "whatsapp": "(63) 99978-9770",
       "site": null,
       "horarios": [],
-      "comodidades": ["Área de camping"],
-      "eventos": ["Casamento", "Festa em família", "Retiro"],
+      "comodidades": [
+        "Área de camping"
+      ],
+      "eventos": [
+        "Casamento",
+        "Festa em família",
+        "Retiro"
+      ],
       "fotos": [],
       "observacoes": "Orçamento pelo WhatsApp. Camping para mais de 200 pessoas, usado em retiros de igreja.",
-      "fontes": ["https://www.instagram.com/chacaranovacanaapalmas/"],
+      "fontes": [
+        "https://www.instagram.com/chacaranovacanaapalmas/"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Perfil oficial no Instagram"
     },
@@ -162,11 +589,22 @@
       "whatsapp": "(63) 98109-2240",
       "site": null,
       "horarios": [],
-      "comodidades": ["Piscina", "Campo de futebol", "Salão de jogos", "Bar", "Cozinha"],
-      "eventos": ["Aniversário", "Confraternização"],
+      "comodidades": [
+        "Piscina",
+        "Campo de futebol",
+        "Salão de jogos",
+        "Bar",
+        "Cozinha"
+      ],
+      "eventos": [
+        "Aniversário",
+        "Confraternização"
+      ],
       "fotos": [],
       "observacoes": null,
-      "fontes": ["https://www.facebook.com/p/Chacara-Recanto-das-Pedras-loca%C3%A7%C3%A3o-para-eventos-100064534996558/"],
+      "fontes": [
+        "https://www.facebook.com/p/Chacara-Recanto-das-Pedras-loca%C3%A7%C3%A3o-para-eventos-100064534996558/"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Página no Facebook"
     },
@@ -183,10 +621,17 @@
       "site": null,
       "horarios": [],
       "comodidades": [],
-      "eventos": ["Casamento", "Aniversário", "Batizado"],
+      "eventos": [
+        "Casamento",
+        "Aniversário",
+        "Batizado"
+      ],
       "fotos": [],
       "observacoes": "Página antiga no Facebook; confirmar se segue funcionando.",
-      "fontes": ["https://www.facebook.com/espacogardenpalmas/", "https://www.planetabrasileiro.com/chacara-espaco-garden-palmas-F170CC2061AD44C"],
+      "fontes": [
+        "https://www.facebook.com/espacogardenpalmas/",
+        "https://www.planetabrasileiro.com/chacara-espaco-garden-palmas-F170CC2061AD44C"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Pode estar desatualizado"
     },
@@ -202,11 +647,21 @@
       "whatsapp": null,
       "site": null,
       "horarios": [],
-      "comodidades": ["Piscina", "Churrasqueira", "Freezer", "14 mesas e 46 cadeiras"],
-      "eventos": ["Aniversário", "Confraternização"],
+      "comodidades": [
+        "Piscina",
+        "Churrasqueira",
+        "Freezer",
+        "14 mesas e 46 cadeiras"
+      ],
+      "eventos": [
+        "Aniversário",
+        "Confraternização"
+      ],
       "fotos": [],
       "observacoes": "A página do Facebook falava em suspensão na pandemia. Confirmar se voltou a alugar. Capacidade estimada pelas cadeiras.",
-      "fontes": ["https://www.facebook.com/espacoparaiisoeventos/"],
+      "fontes": [
+        "https://www.facebook.com/espacoparaiisoeventos/"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Pode estar desatualizado"
     },
@@ -223,10 +678,14 @@
       "site": null,
       "horarios": [],
       "comodidades": [],
-      "eventos": ["Aniversário infantil"],
+      "eventos": [
+        "Aniversário infantil"
+      ],
       "fotos": [],
       "observacoes": null,
-      "fontes": ["https://guiafix.com.br/palmas-to/salao-de-festas"],
+      "fontes": [
+        "https://guiafix.com.br/palmas-to/salao-de-festas"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório"
     },
@@ -244,10 +703,16 @@
       "site": null,
       "horarios": [],
       "comodidades": [],
-      "eventos": ["Casamento", "Formatura"],
+      "eventos": [
+        "Casamento",
+        "Formatura"
+      ],
       "fotos": [],
       "observacoes": null,
-      "fontes": ["https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml", "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas"],
+      "fontes": [
+        "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml",
+        "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório"
     },
@@ -259,17 +724,26 @@
       "endereco": null,
       "capacidade": 400,
       "precos": [
-        { "valor": "R$ 84 (unidade não informada)", "unidade": null, "condicao": "\"A partir de\" no Casamentos.com.br; provavelmente por convidado, confirmar", "inclui": null }
+        {
+          "valor": "R$ 84 (unidade não informada)",
+          "unidade": null,
+          "condicao": "\"A partir de\" no Casamentos.com.br; provavelmente por convidado, confirmar",
+          "inclui": null
+        }
       ],
       "instagram": null,
       "whatsapp": null,
       "site": null,
       "horarios": [],
       "comodidades": [],
-      "eventos": ["Casamento"],
+      "eventos": [
+        "Casamento"
+      ],
       "fotos": [],
       "observacoes": "Atende de 50 a 400 convidados.",
-      "fontes": ["https://www.casamentos.com.br/salao-casamento/belladata--e147988"],
+      "fontes": [
+        "https://www.casamentos.com.br/salao-casamento/belladata--e147988"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório"
     },
@@ -286,10 +760,15 @@
       "site": null,
       "horarios": [],
       "comodidades": [],
-      "eventos": ["Casamento"],
+      "eventos": [
+        "Casamento"
+      ],
       "fotos": [],
       "observacoes": "O Casamentos.com.br mostra \"a partir de R$ 400.000\", valor que parece erro de cadastro; por isso ficou fora daqui.",
-      "fontes": ["https://www.casamentos.com.br/espaco-casamento/tocantins/palmas", "https://guiafix.com.br/palmas-to/salao-de-festas"],
+      "fontes": [
+        "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas",
+        "https://guiafix.com.br/palmas-to/salao-de-festas"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório"
     },
@@ -306,10 +785,16 @@
       "site": null,
       "horarios": [],
       "comodidades": [],
-      "eventos": ["Casamento", "Celebração"],
+      "eventos": [
+        "Casamento",
+        "Celebração"
+      ],
       "fotos": [],
       "observacoes": null,
-      "fontes": ["https://www.casamentos.com.br/espaco-casamento/tocantins/palmas", "https://guiafix.com.br/palmas-to/salao-de-festas"],
+      "fontes": [
+        "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas",
+        "https://guiafix.com.br/palmas-to/salao-de-festas"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório"
     },
@@ -326,10 +811,14 @@
       "site": null,
       "horarios": [],
       "comodidades": [],
-      "eventos": ["Casamento"],
+      "eventos": [
+        "Casamento"
+      ],
       "fotos": [],
       "observacoes": "Contato pelo Casamentos.com.br.",
-      "fontes": ["https://www.casamentos.com.br/casa-para-casamento/crystal-hall--e107623"],
+      "fontes": [
+        "https://www.casamentos.com.br/casa-para-casamento/crystal-hall--e107623"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório"
     },
@@ -345,11 +834,17 @@
       "whatsapp": null,
       "site": null,
       "horarios": [],
-      "comodidades": ["Beira do lago"],
-      "eventos": ["Casamento"],
+      "comodidades": [
+        "Beira do lago"
+      ],
+      "eventos": [
+        "Casamento"
+      ],
       "fotos": [],
       "observacoes": "Restaurante que recebe casamentos.",
-      "fontes": ["https://www.casamentos.com.br/espaco-casamento/tocantins/palmas"],
+      "fontes": [
+        "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório"
     },
@@ -365,11 +860,17 @@
       "whatsapp": null,
       "site": null,
       "horarios": [],
-      "comodidades": ["Buffet próprio"],
-      "eventos": ["Casamento"],
+      "comodidades": [
+        "Buffet próprio"
+      ],
+      "eventos": [
+        "Casamento"
+      ],
       "fotos": [],
       "observacoes": "Restaurante e buffet listado como salão de casamento.",
-      "fontes": ["https://www.casamentos.com.br/espaco-casamento/tocantins/palmas"],
+      "fontes": [
+        "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório"
     },
@@ -385,11 +886,17 @@
       "whatsapp": null,
       "site": null,
       "horarios": [],
-      "comodidades": ["Beira do lago"],
-      "eventos": ["Casamento"],
+      "comodidades": [
+        "Beira do lago"
+      ],
+      "eventos": [
+        "Casamento"
+      ],
       "fotos": [],
       "observacoes": null,
-      "fontes": ["https://www.casamentos.com.br/espaco-casamento/tocantins/palmas"],
+      "fontes": [
+        "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório"
     },
@@ -406,11 +913,18 @@
       "telefone": "(63) 3225-4540",
       "site": "http://www.casadefestaspalmas.com.br",
       "horarios": [],
-      "comodidades": ["Decoração", "Locação de mesas"],
-      "eventos": ["Aniversário"],
+      "comodidades": [
+        "Decoração",
+        "Locação de mesas"
+      ],
+      "eventos": [
+        "Aniversário"
+      ],
       "fotos": [],
       "observacoes": "Também faz decoração e fotografia.",
-      "fontes": ["https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"],
+      "fontes": [
+        "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório"
     },
@@ -427,11 +941,20 @@
       "telefone": "(63) 8450-0068",
       "site": null,
       "horarios": [],
-      "comodidades": ["Cozinha industrial", "Locação de mesas, freezers e toalhas", "Buffet"],
-      "eventos": ["Aniversário", "Confraternização"],
+      "comodidades": [
+        "Cozinha industrial",
+        "Locação de mesas, freezers e toalhas",
+        "Buffet"
+      ],
+      "eventos": [
+        "Aniversário",
+        "Confraternização"
+      ],
       "fotos": [],
       "observacoes": "Telefones no formato antigo de 8 dígitos ((63) 8450-0068, 8115-1513, 9221-2129); provavelmente hoje com o 9 na frente.",
-      "fontes": ["https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"],
+      "fontes": [
+        "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Pode estar desatualizado"
     },
@@ -448,11 +971,21 @@
       "telefone": "(63) 3218-8349",
       "site": "http://www.santafilomenaempalmas.blogspot.com.br",
       "horarios": [],
-      "comodidades": ["Climatizado", "Sonorizado", "Igreja ao lado (140 pessoas)"],
-      "eventos": ["Casamento", "Batizado", "Aniversário"],
+      "comodidades": [
+        "Climatizado",
+        "Sonorizado",
+        "Igreja ao lado (140 pessoas)"
+      ],
+      "eventos": [
+        "Casamento",
+        "Batizado",
+        "Aniversário"
+      ],
       "fotos": [],
       "observacoes": "Salão da paróquia; a igreja climatizada fica no mesmo terreno.",
-      "fontes": ["https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"],
+      "fontes": [
+        "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório"
     },
@@ -472,7 +1005,9 @@
       "eventos": [],
       "fotos": [],
       "observacoes": null,
-      "fontes": ["https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"],
+      "fontes": [
+        "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório"
     },
@@ -492,7 +1027,9 @@
       "eventos": [],
       "fotos": [],
       "observacoes": null,
-      "fontes": ["https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"],
+      "fontes": [
+        "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório"
     },
@@ -512,7 +1049,9 @@
       "eventos": [],
       "fotos": [],
       "observacoes": "Só nome e WhatsApp no diretório.",
-      "fontes": ["https://guiafix.com.br/palmas-to/salao-de-festas"],
+      "fontes": [
+        "https://guiafix.com.br/palmas-to/salao-de-festas"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos"
     },
@@ -532,29 +1071,68 @@
       "eventos": [],
       "fotos": [],
       "observacoes": "Só nome e WhatsApp no diretório.",
-      "fontes": ["https://guiafix.com.br/palmas-to/salao-de-festas"],
+      "fontes": [
+        "https://guiafix.com.br/palmas-to/salao-de-festas"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos"
     },
     {
       "id": "vagalume",
       "nome": "Espaço Vagalume Eventos",
-      "tipo": "Espaço de eventos",
-      "bairro": "Palmas",
-      "endereco": null,
-      "capacidade": null,
-      "precos": [],
+      "tipo": "Salão de festas",
+      "bairro": "Centro (perto da Av. JK)",
+      "endereco": "Perto da Av. JK, centro de Palmas",
+      "capacidade": 60,
+      "precos": [
+        {
+          "valor": 1700,
+          "unidade": "evento",
+          "condicao": "Orçamento para sábado, 9h às 22h, cerca de 70 pessoas (o valor muda por tipo de evento e horário)",
+          "inclui": "15 mesas e 60 cadeiras, climatizador, cozinha/bar, limpeza antes e depois"
+        }
+      ],
       "instagram": null,
       "whatsapp": "(63) 99982-8031",
       "site": null,
-      "horarios": [],
-      "comodidades": [],
-      "eventos": [],
+      "horarios": [
+        {
+          "dias": "Todos os dias",
+          "horario": "Até meia-noite (depois disso, por conta do contratante)"
+        }
+      ],
+      "comodidades": [
+        "Climatizador 125 L",
+        "Palco para DJ ou banda",
+        "Tenda coberta",
+        "Gramado",
+        "Cozinha/bar (fogão industrial 6 bocas)",
+        "Cervejeira",
+        "Bebedouro",
+        "4 banheiros",
+        "15 mesas e 60 cadeiras",
+        "Limpeza inclusa"
+      ],
+      "eventos": [
+        "Aniversário",
+        "Aniversário infantil",
+        "Formatura",
+        "Casamento",
+        "Churrasco",
+        "Chá revelação",
+        "Confraternização",
+        "Festa universitária"
+      ],
       "fotos": [],
-      "observacoes": "Só nome e WhatsApp no diretório.",
-      "fontes": ["https://guiafix.com.br/palmas-to/salao-de-festas"],
+      "observacoes": "Proibido som automotivo e som PA de 8. Três ambientes: salão coberto, tenda coberta e gramado. Capacidade estimada pelas 60 cadeiras.",
+      "fontes": [
+        "WhatsApp com o local (conversa de nov/2026)",
+        "https://guiafix.com.br/palmas-to/salao-de-festas"
+      ],
       "conferido_em": "2026-11-13",
-      "status": "Dados mínimos"
+      "status": "Informado pelo local",
+      "taxas": [],
+      "pagamento": null
     },
     {
       "id": "topazio",
@@ -572,7 +1150,9 @@
       "eventos": [],
       "fotos": [],
       "observacoes": "Só nome e WhatsApp no diretório. Também aluga material.",
-      "fontes": ["https://guiafix.com.br/palmas-to/salao-de-festas"],
+      "fontes": [
+        "https://guiafix.com.br/palmas-to/salao-de-festas"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos"
     },
@@ -592,7 +1172,9 @@
       "eventos": [],
       "fotos": [],
       "observacoes": "Só nome e WhatsApp no diretório.",
-      "fontes": ["https://guiafix.com.br/palmas-to/salao-de-festas"],
+      "fontes": [
+        "https://guiafix.com.br/palmas-to/salao-de-festas"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos"
     },
@@ -612,7 +1194,9 @@
       "eventos": [],
       "fotos": [],
       "observacoes": "Só nome e WhatsApp no diretório.",
-      "fontes": ["https://guiafix.com.br/palmas-to/salao-de-festas"],
+      "fontes": [
+        "https://guiafix.com.br/palmas-to/salao-de-festas"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos"
     },
@@ -632,7 +1216,9 @@
       "eventos": [],
       "fotos": [],
       "observacoes": "Só nome e WhatsApp no diretório.",
-      "fontes": ["https://guiafix.com.br/palmas-to/salao-de-festas"],
+      "fontes": [
+        "https://guiafix.com.br/palmas-to/salao-de-festas"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos"
     },
@@ -648,11 +1234,16 @@
       "whatsapp": "(63) 98500-3997",
       "site": null,
       "horarios": [],
-      "comodidades": ["Beira do lago", "Hospedagem"],
+      "comodidades": [
+        "Beira do lago",
+        "Hospedagem"
+      ],
       "eventos": [],
       "fotos": [],
       "observacoes": "Só nome e WhatsApp no diretório; o nome indica fazenda com hospedagem à beira do lago.",
-      "fontes": ["https://guiafix.com.br/palmas-to/salao-de-festas"],
+      "fontes": [
+        "https://guiafix.com.br/palmas-to/salao-de-festas"
+      ],
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos"
     }

@@ -152,7 +152,7 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 .estrelas .apagada { color: var(--linha); }
 .tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 4px 0 0; padding: 0; list-style: none; }
 .tags li { font-size: .74rem; background: var(--bg-2); border-radius: 6px; padding: 2px 8px; color: var(--suave); }
-.rodape-card { display: flex; align-items: center; gap: 6px; margin-top: auto; padding-top: 10px; border-top: 1px solid var(--linha); }
+.rodape-card { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: auto; padding-top: 10px; border-top: 1px solid var(--linha); }
 .rodape-card .esp { flex: 1; }
 .mini { display: inline-flex; align-items: center; justify-content: center; gap: 5px; height: 34px; min-width: 34px; padding: 0 10px; border-radius: 9px; border: 1px solid var(--linha); background: var(--card); color: var(--suave); text-decoration: none; font-size: .82rem; font-weight: 500; cursor: pointer; }
 .mini:hover { border-color: var(--ouro); color: var(--tinta); }
@@ -294,5 +294,8 @@ textarea { resize: vertical; min-height: 96px; }
   .grade-2 { grid-template-columns: 1fr; }
   .pontos button { width: 28px; height: 28px; }
   .tabela-wrap { padding: 0 0 40px; }
+  .linha-preco { grid-template-columns: 1fr; }
+  .linha-preco .i { grid-column: 1; }
+  .linha-preco .v { white-space: normal; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
