@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-13T23:33:51Z",
+  "atualizado_em": "2026-11-13T23:37:44Z",
   "observacao": "Dados reunidos de páginas públicas. Campo ausente = não encontrado na fonte. Valores são referência da data de conferência e variam conforme dia, temporada e pacote.",
   "locais": [
     {
@@ -86,10 +86,14 @@
         "mesas": true,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T21:51:45Z",
+      "atualizado_em": "2026-11-13T23:37:44Z",
       "coordenadas": {
         "lat": -10.335735,
         "lng": -48.326134
+      },
+      "uso": {
+        "modo": "fixo",
+        "texto": "9h às 21h (diurna) ou 19h às 7h (noturna)"
       }
     },
     {
@@ -251,7 +255,11 @@
         "mesas": 15,
         "cadeiras": 60
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T23:37:44Z",
+      "uso": {
+        "modo": "horas",
+        "texto": "12 horas (ou 8 horas sem piscina)"
+      }
     },
     {
       "endereco": "Alameda 13 - lote 3 - Plano Diretor Sul",
@@ -522,10 +530,14 @@
         "mesas": true,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T22:47:21Z",
+      "atualizado_em": "2026-11-13T23:37:44Z",
       "coordenadas": {
         "lat": -10.2802028,
         "lng": -48.3363815
+      },
+      "uso": {
+        "modo": "horas",
+        "texto": "5 horas (confirmar)"
       }
     },
     {
@@ -733,10 +745,14 @@
       "tipo": "Salão de festas",
       "bairro": "1103 Sul",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:51:45Z",
+      "atualizado_em": "2026-11-13T23:37:44Z",
       "coordenadas": {
         "lat": -10.249895,
         "lng": -48.341251
+      },
+      "uso": {
+        "modo": "horas",
+        "texto": "4 horas"
       }
     },
     {
@@ -1081,10 +1097,14 @@
         "mesas": true,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T22:47:21Z",
+      "atualizado_em": "2026-11-13T23:37:44Z",
       "coordenadas": {
         "lat": -10.178312,
         "lng": -48.338005
+      },
+      "uso": {
+        "modo": "horas",
+        "texto": "5 horas"
       }
     },
     {
@@ -1326,7 +1346,11 @@
         "mesas": 10,
         "cadeiras": 60
       },
-      "atualizado_em": "2026-11-13T22:47:21Z"
+      "atualizado_em": "2026-11-13T23:37:44Z",
+      "uso": {
+        "modo": "fixo",
+        "texto": "10h até 8h do dia seguinte"
+      }
     },
     {
       "id": "oliver-martins",
@@ -1394,10 +1418,14 @@
       "itens": {
         "brinquedos": true
       },
-      "atualizado_em": "2026-11-13T22:47:21Z",
+      "atualizado_em": "2026-11-13T23:37:44Z",
       "coordenadas": {
         "lat": -10.311566,
         "lng": -48.300971
+      },
+      "uso": {
+        "modo": "horas",
+        "texto": "12 ou 24 horas"
       }
     },
     {
@@ -1946,7 +1974,11 @@
         "cadeiras": true,
         "gramado": true
       },
-      "atualizado_em": "2026-11-13T23:33:51Z"
+      "atualizado_em": "2026-11-13T23:37:44Z",
+      "uso": {
+        "modo": "fixo",
+        "texto": "9h às 18h ou a partir das 18h"
+      }
     },
     {
       "id": "paraiso-eventos",
@@ -2314,7 +2346,11 @@
         "mesas": true,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T23:37:44Z",
+      "uso": {
+        "modo": "fixo",
+        "texto": "7h às 19h30 (diurna) ou 19h às 7h (noturna)"
+      }
     },
     {
       "id": "crystal-hall",
@@ -2983,10 +3019,14 @@
         "mesas": 15,
         "cadeiras": 60
       },
-      "atualizado_em": "2026-11-13T21:51:45Z",
+      "atualizado_em": "2026-11-13T23:37:44Z",
       "coordenadas": {
         "lat": -10.174238,
         "lng": -48.303734
+      },
+      "uso": {
+        "modo": "fixo",
+        "texto": "até meia-noite"
       }
     },
     {
@@ -3074,7 +3114,11 @@
         "mesas": 10,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T23:37:44Z",
+      "uso": {
+        "modo": "fixo",
+        "texto": "até 22h"
+      }
     },
     {
       "id": "uniao",
@@ -3312,10 +3356,14 @@
         "mesas": 10,
         "cadeiras": 60
       },
-      "atualizado_em": "2026-11-13T23:11:27Z",
+      "atualizado_em": "2026-11-13T23:37:44Z",
       "coordenadas": {
         "lat": -10.168904,
         "lng": -48.342521
+      },
+      "uso": {
+        "modo": "fixo",
+        "texto": "até 22h ou até meia-noite"
       }
     },
     {
@@ -3403,10 +3451,14 @@
         "mesas": 12,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T22:56:08Z",
+      "atualizado_em": "2026-11-13T23:37:44Z",
       "coordenadas": {
         "lat": -10.3589156,
         "lng": -48.2976925
+      },
+      "uso": {
+        "modo": "horas",
+        "texto": "12 ou 24 horas"
       }
     },
     {
@@ -3556,10 +3608,14 @@
         "mesas": 13,
         "hospedagem": true
       },
-      "atualizado_em": "2026-11-13T23:11:27Z",
+      "atualizado_em": "2026-11-13T23:37:44Z",
       "coordenadas": {
         "lat": -10.1103002,
         "lng": -48.3052865
+      },
+      "uso": {
+        "modo": "fixo",
+        "texto": "8h às 20h (day use) ou com pernoite até 7h"
       }
     },
     {
@@ -3627,10 +3683,14 @@
         "geladeira": true,
         "cozinha": true
       },
-      "atualizado_em": "2026-11-13T23:11:27Z",
+      "atualizado_em": "2026-11-13T23:37:44Z",
       "coordenadas": {
         "lat": -10.1628678,
         "lng": -48.3155233
+      },
+      "uso": {
+        "modo": "fixo",
+        "texto": "10h às 20h ou 13h às 23h"
       }
     },
     {

@@ -1028,6 +1028,7 @@ body[data-modo="eventos"] .grade-cat { grid-template-columns: 1fr; margin-top: 8
 .tempo-uso strong { color: var(--tinta); font-weight: 600; }
 .tempo-uso.sem strong { color: var(--suave); font-weight: 500; font-style: italic; }
 .tempo-uso.sem svg { color: var(--fraco, var(--suave)); }
+.tempo-uso.uso-horas svg { color: var(--verde); }
 .obj-tempo { display: inline-flex; align-items: center; gap: 5px; margin-top: 4px; font-size: .84rem; font-weight: 600; color: var(--tinta); }
 .obj-tempo svg { width: 14px; height: 14px; flex: none; color: var(--ouro-texto); }
 .obj-tempo.sem { color: var(--suave); font-weight: 500; font-style: italic; }

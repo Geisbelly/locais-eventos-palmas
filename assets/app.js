@@ -175,7 +175,21 @@
   const mostraTempo = (l) => CATS_TEMPO.includes(l.cat);
   const tempoDe = (l) => String((l.detalhes || {}).duracao || '').trim();
   const tempoObj = (l, o) => String(o.duracao || '').trim() || (objetosDe(l).some((x) => x.duracao) ? '' : tempoDe(l));
-  const tempoHtml = (t, cls = '') => `<p class="tempo-uso ${t ? '' : 'sem'} ${cls}">${ic('relogio')}<span>Tempo de uso</span><strong>${esc(t || 'não informado')}</strong></p>`;
+  const tempoHtml = (t, cls = '', rot = 'Tempo de uso') => `<p class="tempo-uso ${t ? '' : 'sem'} ${cls}">${ic('relogio')}<span>${esc(rot)}</span><strong>${esc(t || 'não informado')}</strong></p>`;
+  // Espaços: "fixo" = o local define a janela (ex.: 9h às 18h); "horas" = X horas de uso, você escolhe quando começa.
+  const USO = {
+    fixo: { rot: 'Horário fixo', nota: 'o local define o horário' },
+    horas: { rot: 'Horas de uso', nota: 'você escolhe o horário' },
+  };
+  const usoDe = (l) => {
+    const u = l.uso || {};
+    return { modo: USO[u.modo] ? u.modo : null, texto: String(u.texto || '').trim() };
+  };
+  function usoHtml(l) {
+    const u = usoDe(l);
+    if (!u.modo) return tempoHtml('');
+    return tempoHtml(u.modo === 'fixo' ? u.texto || 'definido pelo local' : `${u.texto || 'por horas'} · ${USO.horas.nota}`, 'uso-' + u.modo, USO[u.modo].rot);
+  }
   const porObj = (sec = S.secao) => !!(CATS[sec] && CATS[sec].porObjeto);
   // Preços da empresa somados aos de cada objeto, para achar o menor valor.
   const precosDe = (l) => [...(l.precos || []), ...objetosDe(l).filter((o) => o.valor != null)
@@ -196,6 +210,7 @@
     ['churrasqueira', 'Churrasqueira', (l) => temItem(l, 'churrasqueira')],
     ['limpeza', 'Limpeza inclusa', (l) => temItem(l, 'limpeza')],
     ['lago', 'Beira do lago', (l) => temItem(l, 'lago')],
+    ['horario-livre', 'Horário livre', (l) => usoDe(l).modo === 'horas'],
     ['zap', 'Tem WhatsApp', (l) => !!l.whatsapp],
   ];
   const ABAS = [
@@ -656,7 +671,7 @@
       </div>
       ${st || nEv ? `<div class="card-st">${st ? `<span class="pill-st ${STATUS[v.status].cls}">${ic(STATUS[v.status].icone)}${esc(st)}</span>` : ''}${nEv ? `<span class="pill-st st-ev">${ic('eventos')}em ${nEv} ${nEv === 1 ? 'evento' : 'eventos'}</span>` : ''}</div>` : ''}
       ${precoCard(l)}
-      ${mostraTempo(l) ? tempoHtml(tempoDe(l)) : ''}
+      ${mostraTempo(l) ? tempoHtml(tempoDe(l)) : ehEspaco(l) ? usoHtml(l) : ''}
       ${fatos ? `<ul class="fatos">${fatos}</ul>` : ''}
       <div class="rodape-card">
         ${zap ? `<a class="acao zap" href="${zap}" target="_blank" rel="noopener">${ic('zap')}WhatsApp</a>`
@@ -799,14 +814,13 @@
     const evs = eventosCom(l.id);
     const pi = precoInfo(l);
     const esp = ehEspaco(l);
-    const h0 = (l.horarios || [])[0];
-    const pBase = (l.precos || []).find((p) => typeof p.valor === 'number' && p.valor === menorPreco(l));
+    const u = usoDe(l);
     const fatos = [
       ['Menor valor', pi.consulta ? pi.valor : brl(menorPreco(l)), pi.consulta ? '' : `/ ${pi.unidade}`],
       esp ? ['Capacidade', l.capacidade ? `até ${l.capacidade}` : 'Não informada', l.capacidade ? 'pessoas' : '']
         : mostraTempo(l) ? ['Tempo de uso', tempoDe(l) || 'Não informado', '']
         : ['Atende', l.atende_em || l.bairro || 'Palmas', ''],
-      esp ? ['Tempo de uso', h0 ? h0.horario : /h de uso/.test(pBase?.unidade || '') ? pBase.unidade : 'Não informado', h0 ? h0.dias : '']
+      esp ? (u.modo ? [USO[u.modo].rot, u.texto || (u.modo === 'fixo' ? 'Definido pelo local' : 'Por horas'), USO[u.modo].nota] : ['Tempo de uso', 'Não informado', ''])
         : porObj(l.cat) && objetosDe(l).length ? [catDe(l).porObjeto.rot, `${objetosDe(l).length}`, objetosDe(l).length === 1 ? catDe(l).porObjeto.um : catDe(l).porObjeto.varios]
         : ['Oferece', tiposDe(l)[0] || catDe(l).curto, tiposDe(l).length > 1 ? `+${tiposDe(l).length - 1}` : ''],
       ['Pagamento', l.pagamento ? l.pagamento.split(/[.;]/)[0].slice(0, 60) : 'Não informado', ''],
@@ -882,7 +896,7 @@
     const det = l.detalhes || {};
     const camposDet = esp ? [] : (catDe(l).campos || []).filter(([k, , t]) => det[k] != null && det[k] !== '' && t !== 'url' && !(k === 'duracao' && mostraTempo(l)));
     const reserva = [l.antecedencia && ['Reservar com', l.antecedencia], l.cancelamento && ['Cancelamento', l.cancelamento]].filter(Boolean);
-    const falta = [menorPreco(l) == null && 'o valor', esp && !l.capacidade && 'a capacidade', esp && !(l.horarios || []).length && 'o horário de uso',
+    const falta = [menorPreco(l) == null && 'o valor', esp && !l.capacidade && 'a capacidade', esp && !usoDe(l).modo && 'se o horário é fixo ou por horas de uso',
       !itensDo(l).length && (esp ? 'o que vem no aluguel' : 'o que está incluso'), mostraTempo(l) && !tempoDe(l) && !objs.some((o) => o.duracao) && 'o tempo de uso', !l.pagamento && 'a forma de pagamento'].filter(Boolean);
     const zapF = zapLink(l.whatsapp, l.nome);
     const perguntar = falta.length ? `<div class="perguntar">${ic('alerta')}<div><strong>Perguntar ao ${esp ? 'local' : 'fornecedor'}</strong>
@@ -1002,6 +1016,10 @@
         const t = tempoDe(l);
         const ob = objetosDe(l).filter((o) => o.duracao && o.duracao !== t);
         return t || ob.length ? [t ? esc(t) : '', ob.length ? `<small>${ob.map((o) => `${esc(o.nome || o.tipo)}: ${esc(o.duracao)}`).join('<br>')}</small>` : ''].filter(Boolean).join('<br>') : '—';
+      })]] : []),
+      ...(esp ? [['Tempo de uso', ls.map((l) => {
+        const u = usoDe(l);
+        return u.modo ? `<strong>${USO[u.modo].rot}</strong>${u.texto ? `<br>${esc(u.texto)}` : ''}<br><small>${USO[u.modo].nota}</small>` : '—';
       })]] : []),
       ['Taxas extras', ls.map((l) => ((l.taxas || []).length ? l.taxas.map((t) => `${esc(t.nome)}: ${typeof t.valor === 'number' ? brl(t.valor) : esc(t.valor)}`).join('<br>') : '—'))],
       ['Orçamento recebido', vs.map((v) => (v.orcamento_valor ? `${esc(v.orcamento_valor)}<br><small>${esc(v.orcamento_condicao)}</small>` : '—'))],
@@ -1234,7 +1252,17 @@
             <label class="campo"><span>Cancelamento ou adiamento</span><input name="cancelamento" maxlength="300" value="${esc(l?.cancelamento || '')}" placeholder="ex.: perde o sinal; remarca 1 vez sem custo"></label>
           </div>
         </fieldset>
-        ${esp ? blocoRep('horarios', 'Horários de uso', '', (l && l.horarios) || []) : ''}
+        ${esp ? `<fieldset class="ed-bloco"><legend>Tempo de uso</legend>
+          <div class="grade-2">
+            <label class="campo"><span>Como funciona</span><select name="uso_modo">
+              <option value="">Não informado</option>
+              <option value="fixo" ${usoDe(l || {}).modo === 'fixo' ? 'selected' : ''}>Horário fixo (o local define)</option>
+              <option value="horas" ${usoDe(l || {}).modo === 'horas' ? 'selected' : ''}>Horas de uso (você escolhe o horário)</option>
+            </select></label>
+            <label class="campo"><span>Horário ou duração</span><input name="uso_texto" maxlength="120" value="${esc(usoDe(l || {}).texto)}" placeholder="ex.: 9h às 18h · ou · 5 horas"></label>
+          </div>
+        </fieldset>
+        ${blocoRep('horarios', 'Horários por dia', '', (l && l.horarios) || [])}` : ''}
 
         <fieldset class="ed-bloco"><legend>Contato</legend>
           <div class="grade-2">
@@ -1330,6 +1358,7 @@
         coordenadas: coord ? { lat: Number(coord[1]), lng: Number(coord[2]) } : null,
         mapa: /^https?:\/\//i.test(mapa) ? mapa : null,
         capacidade: cap > 0 ? cap : null,
+        uso: USO[g('uso_modo')] ? { modo: g('uso_modo'), texto: g('uso_texto') || null } : null,
         horarios: rep('horarios', (r) => (val(r, 'dias') || val(r, 'horario') ? { dias: val(r, 'dias'), horario: val(r, 'horario') } : null)),
       };
     }
