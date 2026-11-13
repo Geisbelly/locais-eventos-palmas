@@ -1184,6 +1184,16 @@
       if (ult) ult.focus();
       return;
     }
+    if ((b = t.closest('[data-gasto-st]'))) {
+      const ev = evAtual(); const g = ev.gastos[Number(b.dataset.gastoSt)];
+      if (g) {
+        g.status = g.status === 'aprovado' ? 'rascunho' : 'aprovado';
+        if (g.status === 'rascunho') g.pago = false;
+        salvarEvento(ev);
+        toast(g.status === 'aprovado' ? `${g.descricao || 'Item'} aprovado: entrou no combinado.` : `${g.descricao || 'Item'} voltou para rascunho.`);
+      }
+      return;
+    }
     if ((b = t.closest('[data-ev-tirar]'))) {
       const ev = evAtual(); const [lista, i] = b.dataset.evTirar.split(':');
       ev[lista].splice(Number(i), 1); salvarEvento(ev);
@@ -1202,6 +1212,7 @@
       if (a === 'remover-evento') removerEvento();
       if (a === 'imprimir') window.print();
       if (a === 'ev-sugerir') sugerirTarefas();
+      if (a === 'ev-sugerir-itens') sugerirItens();
       if (a === 'pick-cadastrar') { const cat = PK.cat; $('#picker').close(); abrirEditor(null, cat); ED.addEv = S.paginaEv; }
       if (a === 'pick-novo-evento') { const it = PK.itemId; $('#picker').close(); abrirEditorEvento(null); ED.addItem = it; }
       if (a === 'cancelar-editor') fecharEditor();
@@ -1245,9 +1256,13 @@
         if (v == null && t.value.trim()) { toast('Não entendi o valor. Use números, ex.: 1.500'); t.value = ''; }
       }
       setCaminho(ev, t.dataset.evc, v);
-      const estrutura = t.tagName === 'SELECT' || tp === 'bool';
+      // Mudar a categoria muda o agrupamento do orçamento: redesenha a página.
+      const estrutura = t.tagName === 'SELECT' || tp === 'bool' || /^gastos\.\d+\.categoria$/.test(t.dataset.evc);
       salvarEvento(ev, { render: estrutura });
-      if (!estrutura) $('#pg-resumo').innerHTML = resumoHtml(ev, contas(ev));
+      if (!estrutura) {
+        $('#pg-resumo').innerHTML = resumoHtml(ev, contas(ev));
+        if (t.dataset.evc.startsWith('gastos.')) atualizarOrc(ev);
+      }
     }
   });
 
@@ -1347,6 +1362,21 @@
     [7, 'Confirmar horário de montagem com todos os fornecedores'], [5, 'Pagar os saldos que vencem antes da festa'],
     [2, 'Separar lembrancinhas, decoração e itens de última hora'], [1, 'Repassar o cronograma do dia aos fornecedores'],
   ];
+  // Orçamento detalhado: itens fora do catálogo. Rascunho não conta; aprovado entra no combinado.
+  const CAT_GASTO = ['Lembrancinhas', 'Doces', 'Bolo', 'Salgados', 'Bebidas', 'Decoração', 'Balões', 'Convites', 'Descartáveis', 'Roupa', 'Fotos', 'Outros'];
+  const MODELO_ITENS = [
+    ['Bolo', 'Bolo'], ['Docinhos', 'Doces'], ['Lembrancinhas', 'Lembrancinhas'], ['Sacolinhas ou caixinhas para as lembrancinhas', 'Lembrancinhas'],
+    ['Topo de bolo', 'Decoração'], ['Painel e enfeites do tema', 'Decoração'], ['Balões', 'Balões'], ['Convites', 'Convites'],
+    ['Pratos, copos, talheres e guardanapos', 'Descartáveis'], ['Refrigerante e água', 'Bebidas'], ['Gelo', 'Bebidas'], ['Roupa do aniversariante', 'Roupa'],
+  ];
+  const novoGasto = () => ({ descricao: '', categoria: '', qtd: null, unitario: null, status: 'rascunho', pago: false, obs: '' });
+  function normGasto(g) {
+    if (!g || typeof g !== 'object') return novoGasto();
+    // Formato antigo ("outros gastos"): descricao, valor e pago, que já contavam no combinado.
+    if ('valor' in g && !('unitario' in g)) return { ...novoGasto(), descricao: g.descricao || '', qtd: 1, unitario: g.valor ?? null, status: 'aprovado', pago: !!g.pago };
+    return { ...novoGasto(), ...g, status: g.status === 'aprovado' ? 'aprovado' : 'rascunho', pago: !!g.pago };
+  }
+  const totalGasto = (g) => (g.qtd == null ? 1 : numV(g.qtd)) * numV(g.unitario);
   const DIAS_SEM = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
   const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   const dataLocal = (iso) => { const [a, m, d] = iso.slice(0, 10).split('-').map(Number); return new Date(a, m - 1, d); };
@@ -1380,7 +1410,11 @@
     adultos: null, criancas: null, tema: '', orcamento: null, status: 'planejando', descricao: '',
     escolhas: [], gastos: [], tarefas: [], cronograma: [],
   });
-  const evCompleto = (ev) => Object.assign(novoEvento(), ev);
+  function evCompleto(bruto) {
+    const ev = Object.assign(novoEvento(), bruto);
+    ev.gastos = (Array.isArray(ev.gastos) ? ev.gastos : []).map(normGasto);
+    return ev;
+  }
   const eventosAtivos = () => Object.values(S.eventos).filter((e) => e && !e.removido)
     .sort((a, b) => (a.data || '9999').localeCompare(b.data || '9999') || (a.nome || '').localeCompare(b.nome || '', 'pt-BR'));
   const eventosCom = (id) => eventosAtivos().flatMap((ev) => (ev.escolhas || []).filter((e) => e.id === id).map((e) => ({ ev, esc: e })));
@@ -1429,8 +1463,12 @@
 
   function contas(ev) {
     const fech = ev.escolhas.filter((e) => fechado(e.status));
-    const combinado = fech.reduce((a, e) => a + numV(e.valor), 0) + ev.gastos.reduce((a, g) => a + numV(g.valor), 0);
-    const pago = fech.reduce((a, e) => a + numV(e.pago), 0) + ev.gastos.filter((g) => g.pago).reduce((a, g) => a + numV(g.valor), 0);
+    const aprov = ev.gastos.filter((g) => g.status === 'aprovado');
+    const rasc = ev.gastos.filter((g) => g.status !== 'aprovado');
+    const soma = (lista) => lista.reduce((a, g) => a + totalGasto(g), 0);
+    const combinado = fech.reduce((a, e) => a + numV(e.valor), 0) + soma(aprov);
+    const pago = fech.reduce((a, e) => a + numV(e.pago), 0) + soma(aprov.filter((g) => g.pago));
+    const rascunho = soma(rasc);
     const pessoas = numV(ev.adultos) + numV(ev.criancas);
     const vencimentos = fech.filter((e) => e.vencimento && numV(e.valor) > numV(e.pago))
       .map((e) => ({ vencimento: e.vencimento, falta: numV(e.valor) - numV(e.pago), nome: (S.porId[e.id] || e).nome }))
@@ -1438,6 +1476,7 @@
     return {
       combinado, pago, falta: Math.max(0, combinado - pago), pessoas, porPessoa: pessoas ? combinado / pessoas : null,
       semValor: fech.filter((e) => !numV(e.valor)).length, vencimentos,
+      rascunho, nRasc: rasc.length, itensAprov: soma(aprov),
     };
   }
   function barraOrc(v, total) {
@@ -1533,6 +1572,8 @@
         ${cel('Falta pagar', brl(c.falta))}
         ${cel('Por convidado', c.porPessoa ? brl(Math.round(c.porPessoa)) : '—')}
         ${orc ? cel(c.combinado > orc ? 'Acima do previsto' : 'Ainda cabe', brl(Math.abs(orc - c.combinado)), c.combinado > orc ? 'alerta' : 'bom') : ''}
+        ${c.nRasc ? cel(`Em rascunho <small>(${c.nRasc} ${c.nRasc === 1 ? 'item' : 'itens'})</small>`, brl(c.rascunho), 'rasc') : ''}
+        ${c.nRasc ? cel('Se aprovar tudo', brl(c.combinado + c.rascunho), orc && c.combinado + c.rascunho > orc ? 'alerta' : '') : ''}
       </dl>
       ${orc ? barraOrc(c.combinado, orc) : ''}
       ${c.semValor ? `<p class="nota-aviso">${ic('alerta')}<span>${c.semValor} ${c.semValor === 1 ? 'escolhido está' : 'escolhidos estão'} sem valor combinado. Preencha para o total ficar certo.</span></p>` : ''}
@@ -1542,13 +1583,71 @@
   function linhasEv(lista, i, conteudo) {
     return `<div class="linha-ev">${conteudo}<button type="button" class="tirar-linha" data-ev-tirar="${lista}:${i}" aria-label="Remover">×</button></div>`;
   }
-  function listaGastos(ev) {
-    return `<p class="meta">Gastos fora do catálogo: convites, lembrancinhas, compras de mercado. Entram no combinado.</p>
-      <div class="linhas-ev">${ev.gastos.map((g, i) => linhasEv('gastos', i, `
-        <input data-evc="gastos.${i}.descricao" maxlength="200" value="${esc(g.descricao || '')}" placeholder="ex.: lembrancinhas" aria-label="Descrição">
-        <input class="curto" data-evc="gastos.${i}.valor" data-tipo="num" inputmode="decimal" value="${g.valor != null ? esc(valorTxt(g.valor)) : ''}" placeholder="R$" aria-label="Valor">
-        <label class="chk"><input type="checkbox" data-evc="gastos.${i}.pago" data-tipo="bool" ${g.pago ? 'checked' : ''}>pago</label>`)).join('')}</div>
-      <button type="button" class="btn ghost add-linha" data-ev-add="gastos">${ic('mais')}Adicionar gasto</button>`;
+  /* ---- Orçamento detalhado ---- */
+  function gruposOrc(ev) {
+    const g = new Map();
+    ev.gastos.forEach((x, i) => {
+      const k = (x.categoria || '').trim() || 'Sem categoria';
+      if (!g.has(k)) g.set(k, []);
+      g.get(k).push([x, i]);
+    });
+    const pos = (k) => (k === 'Sem categoria' ? 999 : CAT_GASTO.includes(k) ? CAT_GASTO.indexOf(k) : 500);
+    return [...g.entries()].sort((a, b) => pos(a[0]) - pos(b[0]) || a[0].localeCompare(b[0], 'pt-BR'));
+  }
+  const totGastoTxt = (g) => (g.unitario == null ? '—' : brl(totalGasto(g)));
+  function subGrupoHtml(itens) {
+    const ap = itens.filter((g) => g.status === 'aprovado').reduce((a, g) => a + totalGasto(g), 0);
+    const ra = itens.filter((g) => g.status !== 'aprovado').reduce((a, g) => a + totalGasto(g), 0);
+    const nRa = itens.filter((g) => g.status !== 'aprovado').length;
+    return [itens.length > nRa ? `<strong>${brl(ap)}</strong> aprovado` : null, nRa ? (ra ? `${brl(ra)} em rascunho` : `${nRa} em rascunho, sem valor`) : null].filter(Boolean).join(' · ');
+  }
+  function somaOrcHtml(ev) {
+    if (!ev.gastos.length) return '';
+    const c = contas(ev);
+    return `<span class="orc-ap">${ic('check')}<strong>${brl(c.itensAprov)}</strong> aprovado</span>
+      <span class="orc-ra"><strong>${brl(c.rascunho)}</strong> em rascunho${c.nRasc ? ` (${c.nRasc} ${c.nRasc === 1 ? 'item' : 'itens'})` : ''}</span>`;
+  }
+  function linhaGasto(g, i) {
+    const ap = g.status === 'aprovado';
+    const num = (k, pre, ph, rot, cls) => `<label class="g-num ${cls}"><span aria-hidden="true">${pre}</span><input data-evc="gastos.${i}.${k}" data-tipo="num" inputmode="decimal" value="${g[k] != null ? esc(k === 'unitario' && g[k] % 1 ? g[k].toLocaleString('pt-BR', { minimumFractionDigits: 2 }) : valorTxt(g[k])) : ''}" placeholder="${ph}" aria-label="${rot}"></label>`;
+    return `<div class="linha-ev gasto g-${ap ? 'aprovado' : 'rascunho'}">
+      <button type="button" class="g-st" data-gasto-st="${i}" aria-pressed="${ap}" title="${ap ? 'Voltar para rascunho' : 'Aprovar: passa a contar como gasto do evento'}">${ap ? `${ic('check')}Aprovado` : 'Rascunho'}</button>
+      <input class="g-desc" data-evc="gastos.${i}.descricao" maxlength="200" value="${esc(g.descricao || '')}" placeholder="ex.: kit de massinhas" aria-label="Item">
+      <input class="g-cat" data-evc="gastos.${i}.categoria" list="dl-cat-gasto" maxlength="60" value="${esc(g.categoria || '')}" placeholder="Categoria" aria-label="Categoria">
+      ${num('qtd', 'Qtd.', '1', 'Quantidade', 'g-qtd')}
+      ${num('unitario', 'R$', 'cada', 'Valor de cada', 'g-unit')}
+      <span class="g-total" data-g-total="${i}" title="Quantidade × valor de cada">${totGastoTxt(g)}</span>
+      ${ap ? `<label class="chk g-pago"><input type="checkbox" data-evc="gastos.${i}.pago" data-tipo="bool" ${g.pago ? 'checked' : ''}>pago</label>` : '<span class="g-pago"></span>'}
+      <input class="g-obs" data-evc="gastos.${i}.obs" maxlength="300" value="${esc(g.obs || '')}" placeholder="Onde comprar, link ou observação" aria-label="Observação">
+      <button type="button" class="tirar-linha" data-ev-tirar="gastos:${i}" aria-label="Remover">×</button>
+    </div>`;
+  }
+  function listaOrc(ev) {
+    const grupos = gruposOrc(ev);
+    return `<p class="meta">Tudo o que não vem do catálogo: lembrancinhas, doces, bolo, decoração, convites. Deixe em rascunho enquanto pesquisa; ao aprovar, o item passa a contar no combinado do evento.</p>
+      <p class="orc-soma" id="orc-soma">${somaOrcHtml(ev)}</p>
+      ${grupos.map(([k, itens], n) => `<div class="orc-grupo">
+        <div class="orc-grupo-topo"><h3>${esc(k)}</h3><span class="n" data-g-sub="${n}">${subGrupoHtml(itens.map((x) => x[0]))}</span></div>
+        <div class="linhas-ev">${itens.map(([g, i]) => linhaGasto(g, i)).join('')}</div></div>`).join('')}
+      <datalist id="dl-cat-gasto">${CAT_GASTO.map((c) => `<option value="${esc(c)}">`).join('')}</datalist>
+      <div class="acoes-linha"><button type="button" class="btn ghost add-linha" data-ev-add="gastos">${ic('mais')}Adicionar item</button>
+        <button type="button" class="btn ghost add-linha" data-acao="ev-sugerir-itens">${ic('check')}Sugerir itens de festa</button></div>`;
+  }
+  function atualizarOrc(ev) {
+    document.querySelectorAll('[data-g-total]').forEach((el) => { const g = ev.gastos[Number(el.dataset.gTotal)]; if (g) el.textContent = totGastoTxt(g); });
+    gruposOrc(ev).forEach(([, itens], n) => { const el = document.querySelector(`[data-g-sub="${n}"]`); if (el) el.innerHTML = subGrupoHtml(itens.map((x) => x[0])); });
+    const s = $('#orc-soma'); if (s) s.innerHTML = somaOrcHtml(ev);
+  }
+  function sugerirItens() {
+    const ev = evAtual();
+    const tem = new Set(ev.gastos.map((g) => norm(g.descricao)));
+    let n = 0;
+    for (const [descricao, categoria] of MODELO_ITENS) {
+      if (tem.has(norm(descricao))) continue;
+      ev.gastos.push({ ...novoGasto(), descricao, categoria }); n++;
+    }
+    salvarEvento(ev);
+    toast(n ? `${n} itens em rascunho. Preencha quantidade e valor de cada um.` : 'Os itens sugeridos já estão no orçamento.');
   }
   function listaTarefas(ev) {
     const ordem = ev.tarefas.map((t, i) => [t, i]).sort((a, b) => (a[0].feito ? 1 : 0) - (b[0].feito ? 1 : 0) || (a[0].prazo || '9999').localeCompare(b[0].prazo || '9999'));
@@ -1611,14 +1710,14 @@
         <p class="meta">Adicione as opções que está considerando e marque com a estrela as melhores. Pode haver mais de uma escolhida por categoria (buffet e bolo, por exemplo).</p>
         ${ORDEM_CATS.map((k) => blocoCat(ev, k)).join('')}
       </section>
-      <section class="pg-sec"><h2>Outros gastos</h2>${listaGastos(ev)}</section>
+      <section class="pg-sec"><h2>Orçamento detalhado</h2>${listaOrc(ev)}</section>
       <section class="pg-sec"><h2>Tarefas</h2>${listaTarefas(ev)}</section>
       <section class="pg-sec"><h2>Cronograma do dia</h2>${listaCrono(ev)}</section>
       <p class="meta pg-priv">${privTxt()}</p>`;
   }
 
   /* ---- Edição na própria página ---- */
-  const LINHA_VAZIA = { gastos: () => ({ descricao: '', valor: null, pago: false }), tarefas: () => ({ texto: '', prazo: '', feito: false }), cronograma: () => ({ hora: '', oque: '' }) };
+  const LINHA_VAZIA = { gastos: novoGasto, tarefas: () => ({ texto: '', prazo: '', feito: false }), cronograma: () => ({ hora: '', oque: '' }) };
   function evAtual() { return S.eventos[S.paginaEv] ? evCompleto(S.eventos[S.paginaEv]) : null; }
   function setCaminho(obj, caminho, v) {
     const ps = caminho.split('.');

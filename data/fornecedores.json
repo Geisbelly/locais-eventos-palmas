@@ -1,5 +1,138 @@
 {
   "atualizado_em": "2026-11-13",
   "observacao": "Buffet, brinquedos, serviços e aluguéis. Cada item tem cat (buffet | brinquedos | servicos | alugueis). Também dá para cadastrar pelo site.",
-  "itens": []
+  "itens": [
+    {
+      "descricao": "Buffet em barraquinhas, com lanches fritos na hora e minidelícias. Trabalha com pacotes.",
+      "atende_em": "Palmas",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "Conversas de WhatsApp sobre a festa (out–nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Dados mínimos",
+      "atualizado_em": "2026-11-13T21:00:00Z",
+      "detalhes": {},
+      "itens": {},
+      "id": "estacao-anime-fest",
+      "cat": "buffet",
+      "nome": "Estação Anime Fest Buffet",
+      "subtipos": [
+        "Kit festa",
+        "Salgados"
+      ],
+      "precos": [
+        {
+          "valor": "Sob consulta",
+          "unidade": "pacote",
+          "condicao": "Tem mais de um pacote; os valores vieram em imagem",
+          "inclui": null
+        }
+      ],
+      "whatsapp": "(63) 98115-7681",
+      "observacoes": "Quem pesquisou achou o valor acessível. Pedir os pacotes por escrito."
+    },
+    {
+      "descricao": "Cardápio volante para festa infantil.",
+      "atende_em": "Palmas",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "Conversas de WhatsApp sobre a festa (out–nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local",
+      "atualizado_em": "2026-11-13T21:00:00Z",
+      "detalhes": {
+        "criancas": "Até 7 anos não paga",
+        "cardapio": "Minissalgados fritos na hora: coxinha com catupiry, bolinha de queijo, miniquibe, croquete de calabresa, risole. Batata palito com molho rosé, minicachorro-quente, mini-hambúrguer, pipoca doce e salgada, minipizza.\nFinger food (escolher 2): fricassê de frango, escondidinho de aipim com carne de sol.\nSobremesas (escolher 2): picolé, pudim.\nBebidas: sucos de acerola e abacaxi (escolher 2), Coca-Cola e Guaraná normais e zero, água mineral."
+      },
+      "itens": {
+        "bebidas": true,
+        "sobremesa": true
+      },
+      "id": "buffet-volante-casamento",
+      "cat": "buffet",
+      "nome": "Buffet volante (nome não informado)",
+      "subtipos": [
+        "Coquetel / finger food",
+        "Salgados"
+      ],
+      "precos": [
+        {
+          "valor": 3500,
+          "unidade": "pacote",
+          "condicao": "Orçamento de out/2026 para cerca de 70 pessoas; confirmar se já tem desconto",
+          "inclui": "Cardápio abaixo, com escolha de 2 finger foods, 2 sobremesas e 2 sucos"
+        }
+      ],
+      "whatsapp": null,
+      "observacoes": "Contato provável: (63) 99220-5339 (confirmar). Crianças até 7 anos não pagam."
+    },
+    {
+      "descricao": "Aluga pula-pula, piscina de bolinhas, escorregador e gangorras. Também aluga mesas e cadeiras (D.L.A Locações).",
+      "atende_em": "Palmas",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "Conversas de WhatsApp sobre a festa (out–nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Dados mínimos",
+      "atualizado_em": "2026-11-13T21:00:00Z",
+      "detalhes": {},
+      "itens": {},
+      "id": "palmas-kids-fest",
+      "cat": "brinquedos",
+      "nome": "Palmas Kids Fest & D.L.A Locações",
+      "subtipos": [
+        "Pula-pula / cama elástica",
+        "Piscina de bolinhas"
+      ],
+      "precos": [
+        {
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "condicao": "Sem valores na conversa",
+          "inclui": null
+        }
+      ],
+      "whatsapp": "(63) 99206-4699",
+      "observacoes": "Dá para fechar brinquedos e mesas com o mesmo fornecedor."
+    }
+  ]
 }

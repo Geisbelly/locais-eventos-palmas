@@ -446,6 +446,41 @@ body[data-modo="pagina"] .secoes-wrap { position: sticky; top: 0; z-index: 20; b
 .acoes-linha { display: flex; flex-wrap: wrap; gap: 4px; }
 .pg-priv { margin-top: 30px; font-size: .82rem; }
 
+/* Orçamento detalhado: rascunho não conta; aprovado entra no combinado */
+.orc-soma { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 8px 0 4px; font-size: .9rem; color: var(--suave); }
+.orc-soma:empty { display: none; }
+.orc-soma strong { color: var(--tinta); font-variant-numeric: tabular-nums; }
+.orc-ap { display: inline-flex; align-items: center; gap: 6px; }
+.orc-ap svg { width: 16px; height: 16px; color: var(--verde); }
+.orc-grupo { margin-top: 14px; }
+.orc-grupo-topo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-bottom: 6px; }
+.orc-grupo-topo h3 { margin: 0; font-size: 1rem; }
+.orc-grupo-topo .n { color: var(--suave); font-size: .84rem; font-variant-numeric: tabular-nums; }
+.orc-grupo-topo .n strong { color: var(--verde); font-weight: 600; }
+.linha-ev.gasto { display: grid; flex-wrap: nowrap; grid-template-columns: auto minmax(0, 1fr) 150px 76px 110px 92px 64px 30px;
+  grid-template-areas: "st desc cat qtd unit tot pago x" ". obs obs obs obs obs obs ."; gap: 2px 6px; align-items: center; padding: 6px 6px 6px 8px; }
+.linha-ev.gasto input:not([type="checkbox"]) { width: 100%; }
+.g-st { grid-area: st; display: inline-flex; align-items: center; gap: 4px; border: 1px dashed var(--fraco); background: none; color: var(--suave);
+  border-radius: 999px; padding: 4px 10px; font: inherit; font-size: .78rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.g-st:hover { border-color: var(--verde); color: var(--verde); }
+.g-st svg { width: 14px; height: 14px; }
+.g-aprovado .g-st { border: 1px solid transparent; background: var(--verde-fundo); color: var(--verde); }
+.g-rascunho { background: var(--bg); border-style: dashed; }
+.g-rascunho .g-total { color: var(--suave); }
+.g-desc { grid-area: desc; } .g-cat { grid-area: cat; } .g-qtd { grid-area: qtd; } .g-unit { grid-area: unit; }
+.g-num { display: flex; align-items: center; min-width: 0; border-radius: 8px; }
+.g-num span { flex: none; padding-left: 8px; font-size: .78rem; color: var(--fraco); }
+.linha-ev.gasto .g-num input { padding-left: 4px; }
+.g-num:focus-within { background: var(--bg); box-shadow: 0 0 0 1px var(--ouro); }
+.linha-ev.gasto .g-num input:focus { border-color: transparent; background: transparent; }
+.g-obs { grid-area: obs; font-size: .86rem !important; color: var(--suave) !important; }
+.g-total { grid-area: tot; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.g-pago { grid-area: pago; justify-self: end; }
+.linha-ev.gasto .tirar-linha { grid-area: x; }
+.resumo .rasc { border-style: dashed; background: var(--bg); }
+.resumo .rasc dd { color: var(--suave); }
+.resumo dt small { font-size: .7rem; }
+
 /* ===== Seletor ===== */
 .modal.largo { width: min(560px, calc(100% - 24px)); }
 .pick-busca { margin: 10px 0; box-shadow: none; }
@@ -468,6 +503,8 @@ body[data-modo="pagina"] .secoes-wrap { position: sticky; top: 0; z-index: 20; b
   input, select { border: 0 !important; background: none !important; appearance: none; -webkit-appearance: none; padding: 0 !important; color: #000 !important; }
   .esc-campos { margin-left: 0; }
   .barra-orc { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .orc-grupo, .linha-ev.gasto { break-inside: avoid; }
+  .g-st { border: 0 !important; padding: 0; }
 }
 
 @media (max-width: 900px) {
@@ -477,6 +514,12 @@ body[data-modo="pagina"] .secoes-wrap { position: sticky; top: 0; z-index: 20; b
   .painel-filtros { display: none; grid-template-columns: 1fr 1fr; }
   .painel-filtros.aberto { display: grid; }
   .painel-filtros .campo:last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .linha-ev.gasto { grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-areas: "st st st tot tot x" "desc desc desc desc desc desc" "cat cat cat cat cat cat" "qtd qtd unit unit pago pago" "obs obs obs obs obs obs"; }
+  .linha-ev.gasto .tirar-linha { justify-self: end; }
+  .g-st { justify-self: start; }
 }
 @media (max-width: 520px) {
   .hero { padding-top: 28px; }

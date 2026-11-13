@@ -2,7 +2,7 @@
 
 Catálogo para eventos em Palmas em cinco seções: **Espaços**, **Buffet e comida**, **Brinquedos e recreação**, **Serviços** (foto, DJ, decoração, cerimonial…) e **Aluguéis e barraquinhas** (pipoca, algodão-doce, food truck, mesas, tendas…). Cada cadastro tem valores com condição, o que está incluso, detalhes da categoria, pagamento, cancelamento, contato e fotos. Dá para avaliar cada opção (nota por critério, prós, contras, orçamento recebido) e comparar até 4 lado a lado.
 
-**Meus eventos** organiza o planejamento: data, horário, para quem, quem organiza, convidados, tema, orçamento e descrição. Em cada evento você adiciona as opções de cada categoria, marca com a estrela as melhores e acompanha valor combinado, pago e vencimentos, outros gastos, tarefas com prazo e cronograma do dia, tudo numa página só (com versão para imprimir).
+**Meus eventos** organiza o planejamento: data, horário, para quem, quem organiza, convidados, tema, orçamento e descrição. Em cada evento você adiciona as opções de cada categoria, marca com a estrela as melhores e acompanha valor combinado, pago e vencimentos, um orçamento detalhado (itens como lembrancinhas e doces ficam em rascunho e só contam como gasto depois de aprovados), tarefas com prazo e cronograma do dia, tudo numa página só (com versão para imprimir).
 
 Os campos de cada categoria vieram da pesquisa em [docs/pesquisa-atributos.md](docs/pesquisa-atributos.md).
 

@@ -1087,7 +1087,7 @@
       ],
       "taxas": [],
       "pagamento": null,
-      "instagram": null,
+      "instagram": "olivermartinseventos",
       "whatsapp": "(63) 9254-9589",
       "site": null,
       "horarios": [
@@ -1110,14 +1110,15 @@
       "fotos": [],
       "observacoes": "Também alugam kits de decoração pegue e monte. Pedem data, horário, número de pessoas e tipo de evento para orçar. Endereço ainda não informado.",
       "fontes": [
-        "WhatsApp com o local (conversa de nov/2026)"
+        "WhatsApp com o local (conversa de nov/2026)",
+        "Conversas de WhatsApp sobre a festa (out–nov/2026)"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
       "itens": {
         "brinquedos": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:00:00Z"
     },
     {
       "id": "orla-dourada",
@@ -1807,7 +1808,7 @@
           "inclui": "Precisa contratar o buffet Jacinta"
         }
       ],
-      "instagram": null,
+      "instagram": "buffetjacinta",
       "whatsapp": "(63) 8404-1168",
       "site": null,
       "horarios": [],
@@ -1823,7 +1824,8 @@
       "observacoes": "No fim de semana só aluga junto com o buffet da casa. Endereço não informado.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
-        "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas"
+        "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas",
+        "Conversas de WhatsApp sobre a festa (out–nov/2026)"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -1839,7 +1841,7 @@
         "mesas": true,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:00:00Z"
     },
     {
       "id": "sao-camillo",
@@ -2058,7 +2060,7 @@
           "inclui": "O pacote maior traz 120 cadeiras e mesa posta para 70. Valores vieram em imagem"
         }
       ],
-      "instagram": null,
+      "instagram": "espaconaveeventos",
       "whatsapp": "(63) 98404-7425",
       "site": null,
       "horarios": [],
@@ -2072,10 +2074,11 @@
         "Aniversário infantil"
       ],
       "fotos": [],
-      "observacoes": "Também faz decoração (Luart Decorações). Não incluem balões, buffet, doces, bolo e lembrancinhas. Reserva só confirma com sinal. Endereço não informado.",
+      "observacoes": "Também faz decoração (Luart Decorações). Pacotes com decoração: mesa de bolo de 6 m com hall instagramável, ou de 10 m com fachada, ambientação do saguão e mesa posta para 70 (120 cadeiras tiffany). Há também pacote básico e intermediário com buffet para 50 pessoas (valores em imagem). Não incluem balões, buffet, doces, bolo e lembrancinhas. Reserva só confirma com sinal. Endereço não informado.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
-        "https://guiafix.com.br/palmas-to/salao-de-festas"
+        "https://guiafix.com.br/palmas-to/salao-de-festas",
+        "Conversas de WhatsApp sobre a festa (out–nov/2026)"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -2091,7 +2094,7 @@
         "mesas": 6,
         "cadeiras": 70
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:00:00Z"
     },
     {
       "id": "vagalume",
@@ -2106,9 +2109,15 @@
           "unidade": "evento",
           "condicao": "Orçamento para sábado, 9h às 22h, cerca de 70 pessoas (o valor muda por tipo de evento e horário)",
           "inclui": "15 mesas e 60 cadeiras, climatizador, cozinha/bar, limpeza antes e depois"
+        },
+        {
+          "valor": 1500,
+          "unidade": "evento",
+          "condicao": "Outro orçamento de nov/2026, feito por outra pessoa (o primeiro veio R$ 1.700)",
+          "inclui": "15 mesas e 60 cadeiras, climatizador, cozinha/bar, palco, limpeza antes e depois"
         }
       ],
-      "instagram": null,
+      "instagram": "vagalume.eventospmw",
       "whatsapp": "(63) 99982-8031",
       "site": null,
       "horarios": [
@@ -2135,10 +2144,11 @@
         "Festa universitária"
       ],
       "fotos": [],
-      "observacoes": "Proibido som automotivo e som PA de 8. Três ambientes: salão coberto, tenda coberta e gramado. Capacidade estimada pelas 60 cadeiras.",
+      "observacoes": "Proibido som automotivo e som PA de 8. Três ambientes: salão coberto, tenda coberta e gramado. Capacidade estimada pelas 60 cadeiras. Os dois orçamentos vieram com valores diferentes (R$ 1.500 e R$ 1.700): confirmar o valor na hora de fechar.",
       "fontes": [
         "WhatsApp com o local (conversa de nov/2026)",
-        "https://guiafix.com.br/palmas-to/salao-de-festas"
+        "https://guiafix.com.br/palmas-to/salao-de-festas",
+        "Conversas de WhatsApp sobre a festa (out–nov/2026)"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -2158,7 +2168,7 @@
         "mesas": 15,
         "cadeiras": 60
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:00:00Z"
     },
     {
       "id": "topazio",
@@ -2363,6 +2373,125 @@
         "hospedagem": true
       },
       "atualizado_em": "2026-11-13T19:18:33Z"
+    },
+    {
+      "id": "casa-de-xavier",
+      "nome": "Casa de Xavier",
+      "tipo": "Salão de festas",
+      "bairro": "305 Norte",
+      "endereco": "305 Norte",
+      "capacidade": null,
+      "precos": [
+        {
+          "valor": 700,
+          "unidade": "evento",
+          "condicao": "Valor repassado em nov/2026, sem detalhes de dia e horário",
+          "inclui": null
+        }
+      ],
+      "taxas": [],
+      "pagamento": null,
+      "instagram": null,
+      "whatsapp": null,
+      "site": null,
+      "horarios": [],
+      "comodidades": [],
+      "eventos": [],
+      "fotos": [],
+      "observacoes": "Só vieram nome, quadra e valor. Pedir capacidade, o que inclui e as fotos.",
+      "fontes": [
+        "Conversas de WhatsApp sobre a festa (out–nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Dados mínimos",
+      "itens": {},
+      "atualizado_em": "2026-11-13T21:00:00Z"
+    },
+    {
+      "id": "espaco-60-brinquedoteca",
+      "nome": "Espaço até 60 pessoas com brinquedoteca (nome não informado)",
+      "tipo": "Espaço de eventos",
+      "bairro": "Palmas",
+      "endereco": null,
+      "capacidade": 60,
+      "precos": [
+        {
+          "valor": 670,
+          "unidade": "12h de uso",
+          "condicao": "Fim de semana",
+          "inclui": "Fogão industrial, geladeira, freezer, bebedouro, churrasqueira, 12 jogos de mesa com cadeiras, Wi-Fi e 2 banheiros"
+        },
+        {
+          "valor": 1270,
+          "unidade": "diária",
+          "condicao": "Fim de semana, 24 horas",
+          "inclui": "Mesmos itens da locação de 12 horas"
+        },
+        {
+          "valor": 570,
+          "unidade": "12h de uso",
+          "condicao": "Segunda a sexta",
+          "inclui": "Mesmos itens"
+        },
+        {
+          "valor": 1070,
+          "unidade": "diária",
+          "condicao": "Segunda a sexta, 24 horas",
+          "inclui": "Mesmos itens"
+        }
+      ],
+      "taxas": [
+        {
+          "nome": "Brinquedoteca (pula-pula, piscina de bolinhas e gangorra), opcional",
+          "valor": 150
+        },
+        {
+          "nome": "Gás",
+          "valor": 25
+        }
+      ],
+      "pagamento": null,
+      "instagram": null,
+      "whatsapp": null,
+      "site": null,
+      "horarios": [
+        {
+          "dias": "Locação curta",
+          "horario": "12 horas"
+        },
+        {
+          "dias": "Locação completa",
+          "horario": "24 horas"
+        }
+      ],
+      "comodidades": [
+        "12 jogos de mesa com cadeiras",
+        "Brinquedoteca opcional"
+      ],
+      "eventos": [
+        "Aniversário infantil",
+        "Aniversário"
+      ],
+      "fotos": [],
+      "observacoes": "A tabela chegou encaminhada logo depois do contato \"Vanessa Celebrar\" ((63) 98451-8576), que deve ser quem aluga. Confirmar o nome e o endereço do espaço.",
+      "fontes": [
+        "Conversas de WhatsApp sobre a festa (out–nov/2026)"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local",
+      "itens": {
+        "fogao": true,
+        "geladeira": true,
+        "freezer": true,
+        "bebedouro": true,
+        "churrasqueira": true,
+        "wifi": true,
+        "banheiros": true,
+        "brinquedos": true,
+        "mesas": 12,
+        "cadeiras": true
+      },
+      "atualizado_em": "2026-11-13T21:00:00Z"
     }
   ]
 }
