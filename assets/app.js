@@ -568,7 +568,9 @@
   // Crédito das fotos copiadas de terceiros (ex.: Google Maps), com link para a página de origem.
   function creditoHtml(fotos) {
     const c = fotos.map((f) => f && f.credito).find((x) => x && /^https?:\/\//i.test(x.url || ''));
-    return c ? `<a class="foto-credito" href="${esc(c.url)}" target="_blank" rel="noopener">Fotos: ${esc(c.nome || 'fonte')}</a>` : '';
+    if (!c) return '';
+    const todas = fotos.every((f) => f && f.credito);
+    return `<a class="foto-credito" href="${esc(c.url)}" target="_blank" rel="noopener">${todas ? 'Fotos' : 'Parte das fotos'}: ${esc(c.nome || 'fonte')}</a>`;
   }
   function capaHtml(l, grande = false) {
     const fotos = (l.fotos || []).filter((f) => urlSegura(f.url || f));

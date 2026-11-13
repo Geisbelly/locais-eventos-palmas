@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-13T23:28:32Z",
+  "atualizado_em": "2026-11-13T23:33:51Z",
   "observacao": "Dados reunidos de páginas públicas. Campo ausente = não encontrado na fonte. Valores são referência da data de conferência e variam conforme dia, temporada e pacote.",
   "locais": [
     {
@@ -1873,7 +1873,14 @@
           "horario": "A partir das 18h"
         }
       ],
-      "comodidades": [],
+      "comodidades": [
+        "Piscina",
+        "Tendas montadas",
+        "Casa com varanda",
+        "Gramado com coqueiros",
+        "Mesas redondas e cadeiras simples",
+        "Fogão e freezer pequeno"
+      ],
       "eventos": [
         "Casamento",
         "Aniversário",
@@ -1881,6 +1888,26 @@
         "Batizado"
       ],
       "fotos": [
+        {
+          "url": "fotos/garden-palmas/piscina-tendas.jpg",
+          "legenda": "Piscina com as tendas ao fundo"
+        },
+        {
+          "url": "fotos/garden-palmas/casa-varanda.jpg",
+          "legenda": "Casa com varanda e rede"
+        },
+        {
+          "url": "fotos/garden-palmas/gramado.jpg",
+          "legenda": "Gramado com coqueiros"
+        },
+        {
+          "url": "fotos/garden-palmas/area-coberta.jpg",
+          "legenda": "Área coberta"
+        },
+        {
+          "url": "fotos/garden-palmas/piscina-mesas.jpg",
+          "legenda": "Piscina com mesas montadas"
+        },
         {
           "url": "fotos/garden-palmas/maps-1.jpg",
           "legenda": "Área externa à noite",
@@ -1916,9 +1943,10 @@
         "freezer": true,
         "area_coberta": true,
         "mesas": true,
-        "cadeiras": true
+        "cadeiras": true,
+        "gramado": true
       },
-      "atualizado_em": "2026-11-13T23:11:27Z"
+      "atualizado_em": "2026-11-13T23:33:51Z"
     },
     {
       "id": "paraiso-eventos",
