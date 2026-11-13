@@ -11,65 +11,92 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Inter:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="assets/style.css?v=7">
+  <link rel="stylesheet" href="assets/style.css?v=8">
 </head>
 <body>
-  <header class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <p class="sobretitulo">Palmas · Tocantins</p>
-        <h1>Planeje seu evento</h1>
-        <p class="sub">Espaços, buffets, brinquedos, serviços e aluguéis. Preço sempre com a condição ao lado, contato direto, sua avaliação de cada opção e um plano por evento com tudo o que você escolheu.</p>
-      </div>
-      <dl class="numeros" id="numeros"></dl>
-    </div>
-  </header>
-
-  <nav class="secoes-wrap" aria-label="Seções"><div class="wrap secoes" id="secoes"></div></nav>
-  <nav class="wrap abas" id="abas" aria-label="Listas"></nav>
-
-  <div class="barra" id="barra">
-    <div class="wrap">
-      <div class="busca-linha">
-        <label class="busca">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-          <span class="sr">Buscar</span>
-          <input id="f-busca" type="search" placeholder="Buscar nome, quadra, piscina…" autocomplete="off">
-        </label>
-        <button class="btn-filtros" id="btn-filtros" type="button" aria-expanded="false" aria-controls="painel-filtros">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
-          <span class="lbl">Filtros</span> <span class="badge-n" id="n-filtros" hidden></span>
+  <a class="pular" href="#lista">Pular para os resultados</a>
+  <header class="topo">
+    <div class="wrap topo-in">
+      <a class="marca" href="#espacos" aria-label="Eventos em Palmas, início">
+        <span class="marca-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6L3.3 9.2l6.1-.6z"/></svg></span>
+        <span class="marca-txt">Eventos em Palmas</span>
+      </a>
+      <nav class="nav-principal" id="nav-principal" aria-label="Principal"></nav>
+      <div class="topo-acoes">
+        <button class="sync-btn" id="btn-config" type="button" title="Sincronização e backup">
+          <span class="ponto-sync" id="ponto-sync"></span><span class="sync-txt" id="sync-curto">Neste aparelho</span>
+          <span class="sr">Sincronização e backup</span>
         </button>
         <button class="btn-novo" id="btn-novo" type="button" data-acao="novo-local" title="Cadastrar" aria-label="Cadastrar">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span class="lbl">Cadastrar</span>
         </button>
-        <button class="icone-btn" id="btn-config" type="button" title="Sincronização e backup" aria-label="Sincronização e backup">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a5 5 0 1 1 .9-9.9A6 6 0 0 1 19 10a4 4 0 0 1-1 7.9"/><path d="M12 13v8M9 18l3 3 3-3"/></svg>
-          <span class="ponto-sync" id="ponto-sync"></span>
-        </button>
       </div>
-      <div class="painel-filtros" id="painel-filtros">
-        <label class="campo"><span id="rot-tipo">Tipo de espaço</span><select id="f-tipo"><option value="">Todos</option></select></label>
-        <label class="campo"><span>Tipo de evento</span><select id="f-evento"><option value="">Qualquer</option></select></label>
-        <label class="campo" id="campo-cap"><span>Convidados (mín.)</span><input id="f-cap" type="number" inputmode="numeric" min="0" step="10" placeholder="ex.: 100"></label>
-        <label class="campo"><span>Valor até (R$)</span><input id="f-preco" type="number" inputmode="numeric" min="0" step="50" placeholder="ex.: 1500"></label>
-        <label class="campo"><span>Ordenar por</span>
-          <select id="f-ordem">
-            <option value="relevancia">Mais completos primeiro</option>
-            <option value="nome">Nome (A–Z)</option>
-            <option value="preco">Menor valor</option>
-            <option value="cap">Maior capacidade</option>
-            <option value="nota">Minha nota</option>
-          </select>
-        </label>
-      </div>
-      <div class="chips-rapidos" id="chips-rapidos" role="group" aria-label="Filtros rápidos"></div>
     </div>
+  </header>
+
+  <div class="wrap cab-pagina" id="cab-pagina">
+    <nav class="trilha" id="trilha" aria-label="Você está em"></nav>
+    <h1 id="titulo-pagina">Espaços para eventos</h1>
+    <p class="cab-resumo" id="numeros"></p>
+    <nav class="secoes" id="secoes" aria-label="Categorias"></nav>
   </div>
 
-  <main class="wrap">
-    <div class="aplicados" id="aplicados" aria-live="polite"></div>
-    <section id="lista" class="lista" aria-label="Locais"></section>
+  <main class="wrap catalogo" id="catalogo">
+    <div class="busca-linha" id="barra">
+      <label class="busca">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <span class="sr">Buscar</span>
+        <input id="f-busca" type="search" placeholder="Buscar por nome, quadra ou o que tem (ex.: piscina)" autocomplete="off">
+      </label>
+      <label class="ordenar"><span>Ordenar</span>
+        <select id="f-ordem">
+          <option value="relevancia">Mais completos</option>
+          <option value="preco">Menor valor</option>
+          <option value="cap">Maior capacidade</option>
+          <option value="nota">Minha nota</option>
+          <option value="nome">Nome (A–Z)</option>
+        </select>
+      </label>
+      <button class="btn-filtros" id="btn-filtros" type="button" aria-expanded="false" aria-controls="painel-filtros">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+        <span class="lbl">Filtros</span> <span class="badge-n" id="n-filtros" hidden></span>
+      </button>
+    </div>
+    <div class="abas-mob" id="abas-mob" role="radiogroup" aria-label="Minha lista"></div>
+
+    <div class="grade-cat">
+      <aside class="lateral" id="painel-filtros" aria-label="Filtros">
+        <div class="lateral-topo">
+          <h2>Filtros</h2>
+          <button type="button" class="fechar" data-acao="fechar-filtros" aria-label="Fechar filtros"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+        </div>
+        <section class="lat-bloco lat-lista">
+          <h2 class="lat-h">Minha lista</h2>
+          <div class="abas" id="abas" role="radiogroup" aria-label="Minha lista"></div>
+        </section>
+        <section class="lat-bloco">
+          <h2 class="lat-h">Filtros</h2>
+          <label class="campo" id="campo-cap"><span>Convidados (mín.)</span><input id="f-cap" type="number" inputmode="numeric" min="0" step="10" placeholder="ex.: 100"></label>
+          <label class="campo"><span>Valor até (R$)</span><input id="f-preco" type="number" inputmode="numeric" min="0" step="50" placeholder="ex.: 1500"></label>
+          <label class="campo"><span id="rot-tipo">Tipo de espaço</span><select id="f-tipo"><option value="">Todos</option></select></label>
+          <label class="campo"><span>Tipo de evento</span><select id="f-evento"><option value="">Qualquer</option></select></label>
+        </section>
+        <fieldset class="lat-bloco">
+          <legend class="lat-h">O que precisa ter</legend>
+          <div class="checks" id="chips-rapidos"></div>
+        </fieldset>
+        <div class="lateral-rodape">
+          <button type="button" class="btn ghost" data-remover="tudo">Limpar</button>
+          <button type="button" class="btn primario" data-acao="fechar-filtros" id="ver-resultados">Ver resultados</button>
+        </div>
+      </aside>
+
+      <section class="resultados" aria-label="Resultados">
+        <div class="aplicados" id="aplicados" aria-live="polite"></div>
+        <div id="lista" class="lista" tabindex="-1"></div>
+        <nav class="paginacao" id="paginacao" aria-label="Paginação"></nav>
+      </section>
+    </div>
   </main>
   <section id="pagina" class="wrap pagina" aria-live="polite"></section>
 
@@ -80,11 +107,13 @@
     </div>
   </footer>
 
-  <div class="barra-comparar" id="barra-comparar" hidden>
-    <span id="txt-comparar"></span>
+  <div class="barra-comparar" id="barra-comparar" role="region" aria-label="Comparação" hidden>
+    <p><strong id="n-comparar"></strong> <span id="txt-comparar"></span></p>
     <button type="button" class="btn ghost" data-acao="limpar-comparar">Limpar</button>
-    <button type="button" class="btn primario" data-acao="abrir-comparar">Comparar</button>
+    <button type="button" class="btn primario" data-acao="abrir-comparar">Comparar lado a lado</button>
   </div>
+
+  <nav class="nav-baixo" id="nav-baixo" aria-label="Atalhos"></nav>
 
   <dialog id="detalhe" class="folha" aria-labelledby="detalhe-titulo"></dialog>
   <dialog id="comparar" class="folha larga" aria-label="Comparar locais"></dialog>
@@ -93,7 +122,7 @@
   <dialog id="config" class="modal" aria-label="Sincronização e backup"></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="config.js?v=7"></script>
-  <script src="assets/app.js?v=7"></script>
+  <script src="config.js?v=8"></script>
+  <script src="assets/app.js?v=8"></script>
 </body>
 </html>
