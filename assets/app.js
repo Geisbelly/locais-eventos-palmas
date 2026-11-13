@@ -42,6 +42,7 @@
     editar: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/>',
     mais: '<path d="M12 5v14M5 12h14"/>',
     check: '<path d="m5 12 4 4 10-10"/>',
+    compartilhar: '<circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="m8.4 13.3 7.2 4.4M15.6 6.3l-7.2 4.4"/>',
     lixo: '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
     buffet: '<path d="M3 17h18M5 17a7 7 0 0 1 14 0M12 8V6M10 6h4"/><path d="M4 20h16"/>',
     brinquedos: '<path d="M12 3a5 6 0 0 1 5 6c0 3.5-2.5 6-5 6s-5-2.5-5-6a5 6 0 0 1 5-6z"/><path d="M12 15l-1 2h2l-1-2M12 17c0 2-2 2-2 4"/>',
@@ -256,6 +257,66 @@
   }
   const instaUrl = (h) => (h ? (/^https?:/.test(h) ? h : `https://instagram.com/${h.replace(/^@/, '')}`) : null);
   const instaArroba = (h) => '@' + String(h).replace(/^https?:\/\/(www\.)?instagram\.com\//, '').replace(/[/?#].*$/, '').replace(/^@/, '');
+  /* ============ Compartilhar ============ */
+  // Só dados públicos do local: nada de visita, nota, status ou eventos de quem está usando.
+  const linkLocal = (l) => `${location.origin}${location.pathname}#local/${encodeURIComponent(l.id)}`;
+  function textoLocal(l) {
+    const r = [l.nome];
+    const tipo = tiposDe(l)[0] || catDe(l).curto;
+    const onde = ehEspaco(l) ? l.endereco || l.bairro : l.atende_em || l.bairro;
+    r.push([tipo, onde, 'Palmas-TO'].filter(Boolean).join(' · '));
+    const p = menorPreco(l);
+    if (p != null) r.push(`A partir de ${brl(p)}`);
+    if (ehEspaco(l)) {
+      const u = usoDe(l);
+      if (u.modo) r.push(`${USO[u.modo].rot}: ${u.texto || USO[u.modo].nota}`);
+      if (l.capacidade) r.push(`Até ${l.capacidade} pessoas`);
+    }
+    if (l.whatsapp) r.push(`WhatsApp: ${l.whatsapp}`);
+    else if (l.telefone) r.push(`Telefone: ${l.telefone}`);
+    return r.join('\n');
+  }
+  async function compartilhar(id) {
+    const l = S.porId[id];
+    if (!l) return;
+    const url = linkLocal(l), text = textoLocal(l);
+    if (navigator.share && matchMedia('(pointer: coarse)').matches) {
+      try { await navigator.share({ title: l.nome, text, url }); return; }
+      catch (e) { if (e && e.name === 'AbortError') return; }
+    }
+    const d = $('#compartilhar');
+    d.innerHTML = `<div class="folha-corpo">
+      <h2>Compartilhar</h2>
+      <p>${esc(l.nome)}</p>
+      <pre class="comp-previa">${esc(text)}</pre>
+      <label class="comp-link"><span class="sr">Link</span><input readonly value="${esc(url)}"></label>
+      <div class="acoes">
+        <a class="btn primario" href="https://wa.me/?text=${encodeURIComponent(text + '\n\n' + url)}" target="_blank" rel="noopener">${ic('zap')}WhatsApp</a>
+        <button type="button" class="btn" data-comp="copiar">${ic('check')}Copiar link</button>
+        <button type="button" class="btn" data-comp="texto">Copiar com informações</button>
+        ${navigator.share ? `<button type="button" class="btn" data-comp="mais">${ic('compartilhar')}Mais opções</button>` : ''}
+        <button type="button" class="btn" data-fechar>Fechar</button>
+      </div></div>`;
+    const copiar = async (v, msg) => {
+      try { await navigator.clipboard.writeText(v); toast(msg); }
+      catch {
+        const i = d.querySelector('input'); const v0 = i.value;
+        i.value = v; i.focus(); i.select();
+        let ok = false; try { ok = document.execCommand('copy'); } catch { /* sem suporte */ }
+        i.value = v0;
+        if (ok) toast(msg); else { i.select(); toast('Selecione e copie o link.'); }
+      }
+    };
+    d.onclick = (e) => {
+      const b = e.target.closest('[data-comp]');
+      if (!b) return;
+      const k = b.dataset.comp;
+      if (k === 'copiar') copiar(url, 'Link copiado.');
+      if (k === 'texto') copiar(text + '\n\n' + url, 'Informações e link copiados.');
+      if (k === 'mais') navigator.share({ title: l.nome, text, url }).catch(() => {});
+    };
+    d.showModal();
+  }
   function mapaUrl(l) {
     if (l.mapa && urlSegura(l.mapa)) return l.mapa;
     if (l.coordenadas) return `https://www.google.com/maps/search/?api=1&query=${l.coordenadas.lat},${l.coordenadas.lng}`;
@@ -667,7 +728,10 @@
           <h2><button type="button" data-abrir="${l.id}">${esc(l.nome)}</button></h2>
           <p class="onde">${ic('pin')}<span>${esc(onde)}</span>${!ehEspaco(l) || !l.tipo ? '' : `<span class="tipo">· ${esc(l.tipo)}</span>`}</p>
         </div>
-        <button type="button" class="coracao" data-fav="${l.id}" aria-pressed="${v.favorito}" aria-label="${v.favorito ? 'Tirar dos' : 'Adicionar aos'} favoritos">${ic('coracao')}</button>
+        <div class="card-icones">
+          <button type="button" class="comp-btn" data-compartilhar="${l.id}" aria-label="Compartilhar ${esc(l.nome)}" title="Compartilhar">${ic('compartilhar')}</button>
+          <button type="button" class="coracao" data-fav="${l.id}" aria-pressed="${v.favorito}" aria-label="${v.favorito ? 'Tirar dos' : 'Adicionar aos'} favoritos">${ic('coracao')}</button>
+        </div>
       </div>
       ${st || nEv ? `<div class="card-st">${st ? `<span class="pill-st ${STATUS[v.status].cls}">${ic(STATUS[v.status].icone)}${esc(st)}</span>` : ''}${nEv ? `<span class="pill-st st-ev">${ic('eventos')}em ${nEv} ${nEv === 1 ? 'evento' : 'eventos'}</span>` : ''}</div>` : ''}
       ${precoCard(l)}
@@ -830,6 +894,7 @@
       <div class="folha-topo">
         <button type="button" class="fechar" data-fechar aria-label="Fechar">${ic('voltar')}</button>
         <h2 id="detalhe-titulo">${esc(l.nome)}</h2>
+        <button type="button" class="fechar" data-compartilhar="${l.id}" aria-label="Compartilhar" title="Compartilhar">${ic('compartilhar')}</button>
         <button type="button" class="fechar" data-editar="${l.id}" aria-label="Editar local" title="Editar local">${ic('editar')}</button>
         <button type="button" class="coracao" style="position:static;box-shadow:none;border:1px solid var(--linha)" data-fav="${l.id}" aria-pressed="${visita(l.id).favorito}" aria-label="Favorito">${ic('coracao')}</button>
       </div>
@@ -1570,6 +1635,7 @@
       const arr = visita(S.detalheId)[tipo].slice(); arr.splice(Number(i), 1);
       salvarVisita(S.detalheId, { [tipo]: arr }); renderPainelVisita(); return;
     }
+    if ((b = t.closest('[data-compartilhar]'))) { compartilhar(b.dataset.compartilhar); return; }
     if ((b = t.closest('[data-editar]'))) { abrirEditor(b.dataset.editar); return; }
     if ((b = t.closest('[data-add-evento]'))) { if (!precisaChave()) abrirPickerEvento(b.dataset.addEvento); return; }
     if ((b = t.closest('[data-picker]'))) { abrirPicker(b.dataset.picker); return; }
