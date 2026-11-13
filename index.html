@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Locais de Eventos Palmas</title>
+  <meta name="description" content="Espaços, salões e chácaras para eventos em Palmas - TO: valores com condições, localização, Instagram, WhatsApp, horários, fotos e registro de visitas com prós e contras.">
+  <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#14120f" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23b4781f'/><path d='M32 14l5 11 12 1-9 8 3 12-11-6-11 6 3-12-9-8 12-1z' fill='%23fff'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="sobretitulo">Palmas · Tocantins</p>
+        <h1>Onde fazer o seu evento</h1>
+        <p class="sub">Salões, chácaras e espaços com piscina. Preço sempre com a condição ao lado, contato direto e espaço para registrar o que você achou na visita.</p>
+      </div>
+      <dl class="numeros" id="numeros"></dl>
+    </div>
+  </header>
+
+  <nav class="wrap abas" id="abas" aria-label="Listas"></nav>
+
+  <div class="barra" id="barra">
+    <div class="wrap">
+      <div class="busca-linha">
+        <label class="busca">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <span class="sr">Buscar</span>
+          <input id="f-busca" type="search" placeholder="Buscar nome, quadra, piscina…" autocomplete="off">
+        </label>
+        <button class="btn-filtros" id="btn-filtros" type="button" aria-expanded="false" aria-controls="painel-filtros">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+          <span class="lbl">Filtros</span> <span class="badge-n" id="n-filtros" hidden></span>
+        </button>
+        <button class="icone-btn" id="btn-config" type="button" title="Sincronização e backup" aria-label="Sincronização e backup">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a5 5 0 1 1 .9-9.9A6 6 0 0 1 19 10a4 4 0 0 1-1 7.9"/><path d="M12 13v8M9 18l3 3 3-3"/></svg>
+          <span class="ponto-sync" id="ponto-sync"></span>
+        </button>
+      </div>
+      <div class="painel-filtros" id="painel-filtros">
+        <label class="campo"><span>Tipo de espaço</span><select id="f-tipo"><option value="">Todos</option></select></label>
+        <label class="campo"><span>Tipo de evento</span><select id="f-evento"><option value="">Qualquer</option></select></label>
+        <label class="campo"><span>Convidados (mín.)</span><input id="f-cap" type="number" inputmode="numeric" min="0" step="10" placeholder="ex.: 100"></label>
+        <label class="campo"><span>Valor até (R$)</span><input id="f-preco" type="number" inputmode="numeric" min="0" step="50" placeholder="ex.: 1500"></label>
+        <label class="campo"><span>Ordenar por</span>
+          <select id="f-ordem">
+            <option value="relevancia">Mais completos primeiro</option>
+            <option value="nome">Nome (A–Z)</option>
+            <option value="preco">Menor valor</option>
+            <option value="cap">Maior capacidade</option>
+            <option value="nota">Minha nota</option>
+          </select>
+        </label>
+      </div>
+      <div class="chips-rapidos" id="chips-rapidos" role="group" aria-label="Filtros rápidos"></div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <div class="aplicados" id="aplicados" aria-live="polite"></div>
+    <section id="lista" class="lista" aria-label="Locais"></section>
+  </main>
+
+  <footer class="rodape">
+    <div class="wrap">
+      <p>Dados de páginas públicas (sites oficiais, Instagram, diretórios e anúncios), conferidos em <span id="data-dados"></span>. Cada local mostra a fonte. Valores mudam conforme dia, temporada e pacote: confirme com o local antes de fechar.</p>
+      <p><a id="link-sugerir" href="#" target="_blank" rel="noopener">Sugerir um local ou corrigir um dado</a></p>
+    </div>
+  </footer>
+
+  <div class="barra-comparar" id="barra-comparar" hidden>
+    <span id="txt-comparar"></span>
+    <button type="button" class="btn ghost" data-acao="limpar-comparar">Limpar</button>
+    <button type="button" class="btn primario" data-acao="abrir-comparar">Comparar</button>
+  </div>
+
+  <dialog id="detalhe" class="folha" aria-labelledby="detalhe-titulo"></dialog>
+  <dialog id="comparar" class="folha larga" aria-label="Comparar locais"></dialog>
+  <dialog id="config" class="modal" aria-label="Sincronização e backup"></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="config.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

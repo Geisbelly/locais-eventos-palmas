@@ -1,0 +1,11 @@
+name = "locais-eventos-palmas-api"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+ORIGENS = "https://geisbelly.github.io"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "locais-eventos-palmas"
+database_id = "COLE_AQUI_O_ID_DO_BANCO"
