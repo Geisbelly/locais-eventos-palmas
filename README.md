@@ -4,6 +4,8 @@ Catálogo para eventos em Palmas em cinco seções: **Espaços**, **Buffet e com
 
 Em **Brinquedos** e **Aluguéis** o cadastro é por empresa, com a lista do que ela aluga (cada brinquedo ou item com tipo, valor, quantidade e observação). O catálogo mostra essas seções **por empresa** ou **por brinquedo/item**, e o filtro de tipo encontra as empresas que têm aquele objeto.
 
+As fotos de espaços que vieram do Google Maps ficam em `fotos/<id>/maps-N.jpg`. Cada foto guarda o crédito (`credito.nome` e `credito.url`), e a ficha do espaço mostra "Fotos: Google Maps" com link para a página de origem.
+
 **Meus eventos** organiza o planejamento: data, horário, para quem, quem organiza, convidados, tema, orçamento e descrição. Em cada evento você adiciona as opções de cada categoria, marca com a estrela as melhores e acompanha valor combinado, pago e vencimentos, um orçamento detalhado (itens como lembrancinhas e doces ficam em rascunho e só contam como gasto depois de aprovados), tarefas com prazo e cronograma do dia, tudo numa página só (com versão para imprimir).
 
 Os campos de cada categoria vieram da pesquisa em [docs/pesquisa-atributos.md](docs/pesquisa-atributos.md).

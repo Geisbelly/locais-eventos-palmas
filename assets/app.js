@@ -461,12 +461,18 @@
   }
 
   /* ============ Render: cards ============ */
+  // Crédito das fotos copiadas de terceiros (ex.: Google Maps), com link para a página de origem.
+  function creditoHtml(fotos) {
+    const c = fotos.map((f) => f && f.credito).find((x) => x && /^https?:\/\//i.test(x.url || ''));
+    return c ? `<a class="foto-credito" href="${esc(c.url)}" target="_blank" rel="noopener">Fotos: ${esc(c.nome || 'fonte')}</a>` : '';
+  }
   function capaHtml(l, grande = false) {
     const fotos = (l.fotos || []).filter((f) => urlSegura(f.url || f));
     if (fotos.length) {
-      if (grande && fotos.length > 1) return `<div class="galeria" tabindex="0" aria-label="Fotos, role para o lado">${fotos.map((f) => `<img src="${esc(f.url || f)}" alt="${esc(f.legenda || 'Foto de ' + l.nome)}" loading="lazy">`).join('')}</div><span class="galeria-n">${fotos.length} fotos</span>`;
+      const cred = grande ? creditoHtml(fotos) : '';
+      if (grande && fotos.length > 1) return `<div class="galeria" tabindex="0" aria-label="Fotos, role para o lado">${fotos.map((f) => `<img src="${esc(f.url || f)}" alt="${esc(f.legenda || 'Foto de ' + l.nome)}" loading="lazy">`).join('')}</div><span class="galeria-n">${fotos.length} fotos</span>${cred}`;
       const f = fotos[0];
-      return `<img src="${esc(f.url || f)}" alt="${esc(f.legenda || 'Foto de ' + l.nome)}" loading="lazy">`;
+      return `<img src="${esc(f.url || f)}" alt="${esc(f.legenda || 'Foto de ' + l.nome)}" loading="lazy">${cred}`;
     }
     const a = ehEspaco(l) ? artePorTipo(l.tipo) : l.cat;
     return `<div class="capa-arte arte-${a}">${ic(a)}<span class="ini">${esc(iniciais(l.nome))}</span></div>`;
@@ -1170,7 +1176,7 @@
     const taxas = rep('taxas', (r) => (val(r, 'nome') ? { nome: val(r, 'nome'), valor: parseValor(val(r, 'valor')) } : null));
     const eventos = [...f.querySelectorAll('[data-evento]:checked')].map((c) => c.dataset.evento);
     g('eventos_extra').split(',').map((x) => x.trim()).filter(Boolean).forEach((x) => { if (!eventos.includes(x)) eventos.push(x); });
-    const legendas = Object.fromEntries((base.fotos || []).map((x) => [x.url || x, x.legenda || null]));
+    const fotoMeta = Object.fromEntries((base.fotos || []).map((x) => [x.url || x, x]));
     const comum = {
       cat: ED.cat,
       nome: g('nome'),
@@ -1186,7 +1192,10 @@
       whatsapp: g('whatsapp') || null,
       telefone: g('telefone') || null,
       site: urlSegura(g('site')) ? g('site') : null,
-      fotos: linhas(g('fotos')).filter((u) => urlSegura(u)).map((u) => ({ url: u, legenda: legendas[u] || null })),
+      fotos: linhas(g('fotos')).filter((u) => urlSegura(u)).map((u) => {
+        const m = fotoMeta[u] || {};
+        return m.credito ? { url: u, legenda: m.legenda || null, credito: m.credito } : { url: u, legenda: m.legenda || null };
+      }),
       observacoes: g('observacoes') || null,
       fontes: linhas(g('fontes')),
       conferido_em: new Date().toISOString().slice(0, 10),

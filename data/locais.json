@@ -44,10 +44,28 @@
         "Aniversário",
         "Aniversário infantil"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/plenitude/maps-1.jpg",
+          "legenda": "Área coberta",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Plenitude+eventos/data=!4m2!3m1!1s0x933b370050bd072f:0x7a7060b9eac5062a"
+          }
+        },
+        {
+          "url": "fotos/plenitude/maps-2.jpg",
+          "legenda": "Área externa à noite",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Plenitude+eventos/data=!4m2!3m1!1s0x933b370050bd072f:0x7a7060b9eac5062a"
+          }
+        }
+      ],
       "observacoes": "Mesma dona do Cellebre. Lote grande, parecido com o Cellebre. Entregam o espaço limpo.",
       "fontes": [
-        "WhatsApp com o local (conversa de out–nov/2026)"
+        "WhatsApp com o local (conversa de out–nov/2026)",
+        "https://www.google.com/maps/place/Plenitude+eventos/data=!4m2!3m1!1s0x933b370050bd072f:0x7a7060b9eac5062a"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -68,7 +86,7 @@
         "mesas": true,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "endereco": "Av. NS 06, HM 06, 108 Norte, em frente à Igreja de Cristo",
@@ -96,10 +114,36 @@
         "Aniversário infantil",
         "Aniversário"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/kazara/maps-1.jpg",
+          "legenda": "Fachada",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Kazara+Eventos/data=!4m2!3m1!1s0x9324cca0857fe623:0xd362a9d6bf416eed"
+          }
+        },
+        {
+          "url": "fotos/kazara/maps-2.jpg",
+          "legenda": "Salão (vista 360°)",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Kazara+Eventos/data=!4m2!3m1!1s0x9324cca0857fe623:0xd362a9d6bf416eed"
+          }
+        },
+        {
+          "url": "fotos/kazara/maps-3.jpg",
+          "legenda": "Área externa (vista 360°)",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Kazara+Eventos/data=!4m2!3m1!1s0x9324cca0857fe623:0xd362a9d6bf416eed"
+          }
+        }
+      ],
       "observacoes": "Visitas com hora marcada, cedo pela manhã. Já receberam casamento com 2 áreas de brinquedo.",
       "fontes": [
-        "WhatsApp com o local (conversa de out–nov/2026)"
+        "WhatsApp com o local (conversa de out–nov/2026)",
+        "https://www.google.com/maps/place/Kazara+Eventos/data=!4m2!3m1!1s0x9324cca0857fe623:0xd362a9d6bf416eed"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -108,7 +152,7 @@
       "tipo": "Salão de festas",
       "bairro": "108 Norte",
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "endereco": "Bertaville, Palmas",
@@ -149,10 +193,28 @@
         "Corporativo",
         "Retiro"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/ranch-teixeira/maps-1.jpg",
+          "legenda": "Piscina e área coberta",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Ranch+Teixeira/data=!4m2!3m1!1s0x933b373b380465bf:0xe91fac7fb76f34de"
+          }
+        },
+        {
+          "url": "fotos/ranch-teixeira/maps-2.jpg",
+          "legenda": "Área coberta",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Ranch+Teixeira/data=!4m2!3m1!1s0x933b373b380465bf:0xe91fac7fb76f34de"
+          }
+        }
+      ],
       "observacoes": "Em meio à natureza, na beira do lago. Gás não incluso.",
       "fontes": [
-        "WhatsApp com o local (conversa de out–nov/2026)"
+        "WhatsApp com o local (conversa de out–nov/2026)",
+        "https://www.google.com/maps/place/Ranch+Teixeira/data=!4m2!3m1!1s0x933b373b380465bf:0xe91fac7fb76f34de"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -181,7 +243,7 @@
         "mesas": 15,
         "cadeiras": 60
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "endereco": null,
@@ -231,10 +293,28 @@
         "Confraternização",
         "Formatura"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/ricor-eventos/maps-1.jpg",
+          "legenda": "Área externa à noite",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Ricor+Eventos/data=!4m2!3m1!1s0x933b3500380de08f:0x29f7adec93fd46b0"
+          }
+        },
+        {
+          "url": "fotos/ricor-eventos/maps-2.jpg",
+          "legenda": "Piscina",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Ricor+Eventos/data=!4m2!3m1!1s0x933b3500380de08f:0x29f7adec93fd46b0"
+          }
+        }
+      ],
       "observacoes": "Salão inteiro para até 250 pessoas. Liberam montagem e desmontagem fora do horário da festa sem cobrar. Endereço não informado.",
       "fontes": [
-        "WhatsApp com o local (conversa de out–nov/2026)"
+        "WhatsApp com o local (conversa de out–nov/2026)",
+        "https://www.google.com/maps/place/Ricor+Eventos/data=!4m2!3m1!1s0x933b3500380de08f:0x29f7adec93fd46b0"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -246,7 +326,7 @@
         "climatizado": true,
         "limpeza": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "endereco": "1006 Sul",
@@ -337,10 +417,20 @@
       "horarios": [],
       "comodidades": [],
       "eventos": [],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/negao-distribuidora/maps-2.jpg",
+          "legenda": "Fachada da distribuidora",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Neg%C3%A3o+Distribuidora/data=!4m2!3m1!1s0x933b3595313248ed:0x23a51cd6c4a3e565"
+          }
+        }
+      ],
       "observacoes": "A distribuidora encaminha o aluguel do espaço para o WhatsApp (63) 8439-1458. Atendimento da loja: seg a sex 8h30–11h e 13h–18h, sábado 8h30–16h.",
       "fontes": [
-        "WhatsApp com o local (conversa de out–nov/2026)"
+        "WhatsApp com o local (conversa de out–nov/2026)",
+        "https://www.google.com/maps/place/Neg%C3%A3o+Distribuidora/data=!4m2!3m1!1s0x933b3595313248ed:0x23a51cd6c4a3e565"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos",
@@ -350,7 +440,7 @@
       "bairro": "Palmas",
       "telefone": "(63) 9268-4272",
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "endereco": null,
@@ -444,10 +534,36 @@
         "Formatura",
         "Corporativo"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/p1-eventos/maps-1.jpg",
+          "legenda": "Salão montado",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/P+1+Eventos/data=!4m2!3m1!1s0x933b35d16d8722c7:0xf297c42ee4f1dab"
+          }
+        },
+        {
+          "url": "fotos/p1-eventos/maps-2.jpg",
+          "legenda": "Salão (vista 360°)",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/P+1+Eventos/data=!4m2!3m1!1s0x933b35d16d8722c7:0xf297c42ee4f1dab"
+          }
+        },
+        {
+          "url": "fotos/p1-eventos/maps-4.jpg",
+          "legenda": "Fachada",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/P+1+Eventos/data=!4m2!3m1!1s0x933b35d16d8722c7:0xf297c42ee4f1dab"
+          }
+        }
+      ],
       "observacoes": "Fica onde era a Planeta Chevrolet, em frente à Casa do Extintor. Costuma ter mais de uma festa infantil no mesmo dia.",
       "fontes": [
-        "WhatsApp com o local (conversa de out–nov/2026)"
+        "WhatsApp com o local (conversa de out–nov/2026)",
+        "https://www.google.com/maps/place/P+1+Eventos/data=!4m2!3m1!1s0x933b35d16d8722c7:0xf297c42ee4f1dab"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -460,7 +576,7 @@
         "lng": -48.33563232421875
       },
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "endereco": null,
@@ -491,10 +607,20 @@
         "Aniversário",
         "Confraternização"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/guerreiro-eventos/maps-1.jpg",
+          "legenda": "Fachada",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Guerreiro+eventos/data=!4m2!3m1!1s0x933b37003f2b3529:0x8be101cf1111711c"
+          }
+        }
+      ],
       "observacoes": "Proibido som automotivo, mesmo um carro só. Endereço ainda não informado. Capacidade estimada pelos 20 jogos de mesa.",
       "fontes": [
-        "WhatsApp com o local (conversa de out–nov/2026)"
+        "WhatsApp com o local (conversa de out–nov/2026)",
+        "https://www.google.com/maps/place/Guerreiro+eventos/data=!4m2!3m1!1s0x933b37003f2b3529:0x8be101cf1111711c"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -514,7 +640,7 @@
         "mesas": 20,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "endereco": "1103 Sul",
@@ -542,10 +668,28 @@
       "eventos": [
         "Aniversário infantil"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/troya-eventos/maps-1.jpg",
+          "legenda": "Área decorada",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Troya+Eventos/data=!4m2!3m1!1s0x933b3533c7e9b8c9:0x4dd3a641cfacdd19"
+          }
+        },
+        {
+          "url": "fotos/troya-eventos/maps-2.jpg",
+          "legenda": "Decoração de festa",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Troya+Eventos/data=!4m2!3m1!1s0x933b3533c7e9b8c9:0x4dd3a641cfacdd19"
+          }
+        }
+      ],
       "observacoes": "Fotos só no Instagram. Locação de apenas 4 horas.",
       "fontes": [
-        "WhatsApp com o local (conversa de out–nov/2026)"
+        "WhatsApp com o local (conversa de out–nov/2026)",
+        "https://www.google.com/maps/place/Troya+Eventos/data=!4m2!3m1!1s0x933b3533c7e9b8c9:0x4dd3a641cfacdd19"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -554,7 +698,7 @@
       "tipo": "Salão de festas",
       "bairro": "1103 Sul",
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "endereco": null,
@@ -744,11 +888,37 @@
         "Aniversário infantil",
         "Chá"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/imperial-blue/maps-1.jpg",
+          "legenda": "Piscina",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+de+Eventos+Imperial+BLUE+%F0%9F%94%B5/data=!4m2!3m1!1s0x9324cbdc4dd3afe1:0x9724049331f79033"
+          }
+        },
+        {
+          "url": "fotos/imperial-blue/maps-2.jpg",
+          "legenda": "Salão (vista 360°)",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+de+Eventos+Imperial+BLUE+%F0%9F%94%B5/data=!4m2!3m1!1s0x9324cbdc4dd3afe1:0x9724049331f79033"
+          }
+        },
+        {
+          "url": "fotos/imperial-blue/maps-4.jpg",
+          "legenda": "Salão",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+de+Eventos+Imperial+BLUE+%F0%9F%94%B5/data=!4m2!3m1!1s0x9324cbdc4dd3afe1:0x9724049331f79033"
+          }
+        }
+      ],
       "observacoes": "Um dos dois espaços do Imperial Eventos. Pedem data, tipo de evento, número de pessoas e duração para dar o valor exato. Endereço do cadastro do Imperial; confirmar.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
-        "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"
+        "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml",
+        "https://www.google.com/maps/place/Espa%C3%A7o+de+Eventos+Imperial+BLUE+%F0%9F%94%B5/data=!4m2!3m1!1s0x9324cbdc4dd3afe1:0x9724049331f79033"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -760,7 +930,7 @@
         "piscina": true,
         "area_coberta": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "villa-festa",
@@ -978,10 +1148,20 @@
         "Confraternização",
         "Inauguração"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/mega-eventos/maps-1.jpg",
+          "legenda": "Letreiro",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/ESPA%C3%87O+MEGA+EVERTOS/data=!4m2!3m1!1s0x933b3b0065f3f2fb:0x366d9a44ae83c6f8"
+          }
+        }
+      ],
       "observacoes": "Na locação sem ar-condicionado, o ar fica desligado o evento todo. Outros contatos do anúncio: (63) 99279-7393 e (63) 99237-3331. Capacidade estimada pelas 80 cadeiras.",
       "fontes": [
-        "WhatsApp com o local (conversa de nov/2026)"
+        "WhatsApp com o local (conversa de nov/2026)",
+        "https://www.google.com/maps/place/ESPA%C3%87O+MEGA+EVERTOS/data=!4m2!3m1!1s0x933b3b0065f3f2fb:0x366d9a44ae83c6f8"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -994,7 +1174,7 @@
         "mesas": 20,
         "cadeiras": 80
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "arena-42",
@@ -1050,10 +1230,20 @@
         "Aniversário",
         "Confraternização"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/arena-42/maps-1.jpg",
+          "legenda": "Placa na entrada",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Arena+42/data=!4m2!3m1!1s0x9324cb00160b787d:0xd974cb20696e8076"
+          }
+        }
+      ],
       "observacoes": "Visitas são agendadas com o escritório pelo WhatsApp (63) 98458-2349, de preferência cedo (antes das locações das 10h). Nome do espaço conforme a conversa; confirmar. Capacidade estimada pelas 60 cadeiras.",
       "fontes": [
-        "WhatsApp com o local (conversa de nov/2026)"
+        "WhatsApp com o local (conversa de nov/2026)",
+        "https://www.google.com/maps/place/Arena+42/data=!4m2!3m1!1s0x9324cb00160b787d:0xd974cb20696e8076"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -1068,7 +1258,7 @@
         "mesas": 10,
         "cadeiras": 60
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "oliver-martins",
@@ -1107,18 +1297,36 @@
         "Aniversário infantil",
         "Aniversário"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/oliver-martins/maps-1.jpg",
+          "legenda": "Fachada",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Oliver+e+Martins+Eventos/data=!4m2!3m1!1s0x933b317b08322713:0x8c8009a77b44b9dc"
+          }
+        },
+        {
+          "url": "fotos/oliver-martins/maps-2.jpg",
+          "legenda": "Piscina",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Oliver+e+Martins+Eventos/data=!4m2!3m1!1s0x933b317b08322713:0x8c8009a77b44b9dc"
+          }
+        }
+      ],
       "observacoes": "Também alugam kits de decoração pegue e monte. Pedem data, horário, número de pessoas e tipo de evento para orçar. Endereço ainda não informado.",
       "fontes": [
         "WhatsApp com o local (conversa de nov/2026)",
-        "Conversas de WhatsApp sobre a festa (out–nov/2026)"
+        "Conversas de WhatsApp sobre a festa (out–nov/2026)",
+        "https://www.google.com/maps/place/Oliver+e+Martins+Eventos/data=!4m2!3m1!1s0x933b317b08322713:0x8c8009a77b44b9dc"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
       "itens": {
         "brinquedos": true
       },
-      "atualizado_em": "2026-11-13T21:00:00Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "orla-dourada",
@@ -1140,10 +1348,28 @@
         "Corporativo",
         "Festa noturna"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/orla-dourada/maps-1.jpg",
+          "legenda": "Vista aérea",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Ch%C3%A1cara+Orla+Dourada/data=!4m2!3m1!1s0x9324c53ca461ff33:0x3227325c6cdfde71"
+          }
+        },
+        {
+          "url": "fotos/orla-dourada/maps-2.jpg",
+          "legenda": "Vista aérea da orla",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Ch%C3%A1cara+Orla+Dourada/data=!4m2!3m1!1s0x9324c53ca461ff33:0x3227325c6cdfde71"
+          }
+        }
+      ],
       "observacoes": "Cerimônia no píer à beira do lago. Valores só por orçamento.",
       "fontes": [
-        "https://www.chacaraorladourada.com.br/"
+        "https://www.chacaraorladourada.com.br/",
+        "https://www.google.com/maps/place/Ch%C3%A1cara+Orla+Dourada/data=!4m2!3m1!1s0x9324c53ca461ff33:0x3227325c6cdfde71"
       ],
       "conferido_em": "2026-11-13",
       "status": "Contato confirmado no site oficial",
@@ -1154,7 +1380,7 @@
         "lago": true,
         "hospedagem": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "luar-do-lago",
@@ -1187,10 +1413,28 @@
         "Casamento",
         "Ao ar livre"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/luar-do-lago/maps-1.jpg",
+          "legenda": "Cerimônia ao ar livre",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Ch%C3%A1cara+Luar+do+Lago+Eventos/data=!4m2!3m1!1s0x9324c9af6749d051:0x3588a165daf21755"
+          }
+        },
+        {
+          "url": "fotos/luar-do-lago/maps-2.jpg",
+          "legenda": "Corredor da cerimônia",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Ch%C3%A1cara+Luar+do+Lago+Eventos/data=!4m2!3m1!1s0x9324c9af6749d051:0x3588a165daf21755"
+          }
+        }
+      ],
       "observacoes": "Contato pelo formulário do Casamentos.com.br.",
       "fontes": [
-        "https://www.casamentos.com.br/chacara-casamento/chacara-luar-do-lago-eventos--e346250"
+        "https://www.casamentos.com.br/chacara-casamento/chacara-luar-do-lago-eventos--e346250",
+        "https://www.google.com/maps/place/Ch%C3%A1cara+Luar+do+Lago+Eventos/data=!4m2!3m1!1s0x9324c9af6749d051:0x3588a165daf21755"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
@@ -1200,7 +1444,7 @@
         "gramado": true,
         "lago": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "california-place",
@@ -1223,17 +1467,35 @@
         "Aniversário",
         "Corporativo"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/california-place/maps-1.jpg",
+          "legenda": "Salão decorado",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Calif%C3%B3rnia+Palace+Palmas/data=!4m2!3m1!1s0x933b378954ab410f:0x656eef6a83ad52d7"
+          }
+        },
+        {
+          "url": "fotos/california-place/maps-2.jpg",
+          "legenda": "Fachada",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Calif%C3%B3rnia+Palace+Palmas/data=!4m2!3m1!1s0x933b378954ab410f:0x656eef6a83ad52d7"
+          }
+        }
+      ],
       "observacoes": "Espaço de alto padrão. Site sem preço publicado.",
       "fontes": [
-        "https://californiapalace.com.br/"
+        "https://californiapalace.com.br/",
+        "https://www.google.com/maps/place/Calif%C3%B3rnia+Palace+Palmas/data=!4m2!3m1!1s0x933b378954ab410f:0x656eef6a83ad52d7"
       ],
       "conferido_em": "2026-11-13",
       "status": "Contato confirmado no site oficial",
       "itens": {
         "iluminacao": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "imperial-eventos",
@@ -1270,11 +1532,29 @@
         "Confraternização",
         "Chá"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/imperial-eventos/maps-1.jpg",
+          "legenda": "Salão montado",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+eventos+Imperial+RED+%F0%9F%94%B4+-+Palmas/data=!4m2!3m1!1s0x9324cd548a1718ff:0x468dda9accfc75bd"
+          }
+        },
+        {
+          "url": "fotos/imperial-eventos/maps-2.jpg",
+          "legenda": "Salão decorado",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+eventos+Imperial+RED+%F0%9F%94%B4+-+Palmas/data=!4m2!3m1!1s0x9324cd548a1718ff:0x468dda9accfc75bd"
+          }
+        }
+      ],
       "observacoes": "Um dos dois espaços do Imperial Eventos (o outro é o Imperial Blue, com piscinas). Pedem data, tipo de evento, número de pessoas e duração para dar o valor exato. Endereço do cadastro do Imperial; confirmar.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
-        "https://guiafix.com.br/palmas-to/salao-de-festas"
+        "https://guiafix.com.br/palmas-to/salao-de-festas",
+        "https://www.google.com/maps/place/Espa%C3%A7o+eventos+Imperial+RED+%F0%9F%94%B4+-+Palmas/data=!4m2!3m1!1s0x9324cd548a1718ff:0x468dda9accfc75bd"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -1288,7 +1568,7 @@
         "mesas": 11,
         "cadeiras": 100
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "salao-103-norte",
@@ -1394,15 +1674,33 @@
         "Festa em família",
         "Retiro"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/nova-canaa/maps-1.jpg",
+          "legenda": "Píer no lago",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Ch%C3%A1cara+Nova+Cana%C3%A3+%7C+Palmas-TO/data=!4m2!3m1!1s0x933b38c5e3b46165:0xf68afef44befba28"
+          }
+        },
+        {
+          "url": "fotos/nova-canaa/maps-2.jpg",
+          "legenda": "Deque no lago",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Ch%C3%A1cara+Nova+Cana%C3%A3+%7C+Palmas-TO/data=!4m2!3m1!1s0x933b38c5e3b46165:0xf68afef44befba28"
+          }
+        }
+      ],
       "observacoes": "Orçamento pelo WhatsApp. Camping para mais de 200 pessoas, usado em retiros de igreja.",
       "fontes": [
-        "https://www.instagram.com/chacaranovacanaapalmas/"
+        "https://www.instagram.com/chacaranovacanaapalmas/",
+        "https://www.google.com/maps/place/Ch%C3%A1cara+Nova+Cana%C3%A3+%7C+Palmas-TO/data=!4m2!3m1!1s0x933b38c5e3b46165:0xf68afef44befba28"
       ],
       "conferido_em": "2026-11-13",
       "status": "Perfil oficial no Instagram",
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "recanto-das-pedras",
@@ -1424,10 +1722,20 @@
         "Aniversário",
         "Confraternização"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/recanto-das-pedras/maps-2.jpg",
+          "legenda": "Piscina e sede",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Ch%C3%A1cara+Recanto+das+Pedras/data=!4m2!3m1!1s0x933b2de4b54158e1:0x2a2ee33dfb7aadea"
+          }
+        }
+      ],
       "observacoes": null,
       "fontes": [
-        "https://www.facebook.com/p/Chacara-Recanto-das-Pedras-loca%C3%A7%C3%A3o-para-eventos-100064534996558/"
+        "https://www.facebook.com/p/Chacara-Recanto-das-Pedras-loca%C3%A7%C3%A3o-para-eventos-100064534996558/",
+        "https://www.google.com/maps/place/Ch%C3%A1cara+Recanto+das+Pedras/data=!4m2!3m1!1s0x933b2de4b54158e1:0x2a2ee33dfb7aadea"
       ],
       "conferido_em": "2026-11-13",
       "status": "Página no Facebook",
@@ -1436,7 +1744,7 @@
         "cozinha": true,
         "jogos": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "garden-palmas",
@@ -1473,11 +1781,29 @@
         "Aniversário infantil",
         "Batizado"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/garden-palmas/maps-1.jpg",
+          "legenda": "Área externa à noite",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+Garden+palmas/data=!4m2!3m1!1s0x933b349d502b8dcd:0xa3de131b7a53e451"
+          }
+        },
+        {
+          "url": "fotos/garden-palmas/maps-2.jpg",
+          "legenda": "Área externa montada",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+Garden+palmas/data=!4m2!3m1!1s0x933b349d502b8dcd:0xa3de131b7a53e451"
+          }
+        }
+      ],
       "observacoes": "Turnos fixos de 9h às 18h ou a partir das 18h.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
-        "https://www.facebook.com/espacogardenpalmas/"
+        "https://www.facebook.com/espacogardenpalmas/",
+        "https://www.google.com/maps/place/Espa%C3%A7o+Garden+palmas/data=!4m2!3m1!1s0x933b349d502b8dcd:0xa3de131b7a53e451"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -1493,7 +1819,7 @@
         "mesas": true,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "paraiso-eventos",
@@ -1514,10 +1840,28 @@
         "Aniversário",
         "Confraternização"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/paraiso-eventos/maps-1.jpg",
+          "legenda": "Área coberta",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+Para%C3%ADso+Eventos/data=!4m2!3m1!1s0x933b33b700309a57:0x7d18ac7e9ad841f5"
+          }
+        },
+        {
+          "url": "fotos/paraiso-eventos/maps-2.jpg",
+          "legenda": "Banheiros",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+Para%C3%ADso+Eventos/data=!4m2!3m1!1s0x933b33b700309a57:0x7d18ac7e9ad841f5"
+          }
+        }
+      ],
       "observacoes": "A página do Facebook falava em suspensão na pandemia. Confirmar se voltou a alugar. Capacidade estimada pelas cadeiras.",
       "fontes": [
-        "https://www.facebook.com/espacoparaiisoeventos/"
+        "https://www.facebook.com/espacoparaiisoeventos/",
+        "https://www.google.com/maps/place/Espa%C3%A7o+Para%C3%ADso+Eventos/data=!4m2!3m1!1s0x933b33b700309a57:0x7d18ac7e9ad841f5"
       ],
       "conferido_em": "2026-11-13",
       "status": "Pode estar desatualizado",
@@ -1528,7 +1872,7 @@
         "mesas": 14,
         "cadeiras": 46
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "fun-world",
@@ -1546,15 +1890,41 @@
       "eventos": [
         "Aniversário infantil"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/fun-world/maps-1.jpg",
+          "legenda": "Fachada",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+de+Festa+Fun+World/data=!4m2!3m1!1s0x9324cb14512ddab5:0xff5110df2dafae9d"
+          }
+        },
+        {
+          "url": "fotos/fun-world/maps-2.jpg",
+          "legenda": "Salão (vista 360°)",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+de+Festa+Fun+World/data=!4m2!3m1!1s0x9324cb14512ddab5:0xff5110df2dafae9d"
+          }
+        },
+        {
+          "url": "fotos/fun-world/maps-3.jpg",
+          "legenda": "Área de brinquedos (vista 360°)",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+de+Festa+Fun+World/data=!4m2!3m1!1s0x9324cb14512ddab5:0xff5110df2dafae9d"
+          }
+        }
+      ],
       "observacoes": null,
       "fontes": [
-        "https://guiafix.com.br/palmas-to/salao-de-festas"
+        "https://guiafix.com.br/palmas-to/salao-de-festas",
+        "https://www.google.com/maps/place/Espa%C3%A7o+de+Festa+Fun+World/data=!4m2!3m1!1s0x9324cb14512ddab5:0xff5110df2dafae9d"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "ahadu",
@@ -1574,16 +1944,26 @@
         "Casamento",
         "Formatura"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/ahadu/maps-2.jpg",
+          "legenda": "Jardim com piscina",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/AH%C3%83DU+%7C+Eventos+e+Buffet/data=!4m2!3m1!1s0x9324cc96aa75f62f:0xf64b16f231f3b9e0"
+          }
+        }
+      ],
       "observacoes": null,
       "fontes": [
         "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml",
-        "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas"
+        "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas",
+        "https://www.google.com/maps/place/AH%C3%83DU+%7C+Eventos+e+Buffet/data=!4m2!3m1!1s0x9324cc96aa75f62f:0xf64b16f231f3b9e0"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "belladata",
@@ -1620,11 +2000,21 @@
         "Aniversário infantil",
         "Aniversário"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/belladata/maps-1.jpg",
+          "legenda": "Salão montado",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Buffet+Belladata/data=!4m2!3m1!1s0x9324cb3fa949605b:0x16346dbe32bdb3c1"
+          }
+        }
+      ],
       "observacoes": "É também buffet. Pode montar brinquedos alugados dentro do salão. O Casamentos.com.br mostra \"a partir de R$ 84\", que parece ser o valor do buffet por pessoa.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
-        "https://www.casamentos.com.br/salao-casamento/belladata--e147988"
+        "https://www.casamentos.com.br/salao-casamento/belladata--e147988",
+        "https://www.google.com/maps/place/Buffet+Belladata/data=!4m2!3m1!1s0x9324cb3fa949605b:0x16346dbe32bdb3c1"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -1634,7 +2024,7 @@
         "mesas": true,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "vila-cabana",
@@ -1652,16 +2042,42 @@
       "eventos": [
         "Casamento"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/vila-cabana/maps-1.jpg",
+          "legenda": "Piscina",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Vila+Cabana/data=!4m2!3m1!1s0x933b31a0caf28035:0x4c2200b99092883"
+          }
+        },
+        {
+          "url": "fotos/vila-cabana/maps-3.jpg",
+          "legenda": "Área externa (vista 360°)",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Vila+Cabana/data=!4m2!3m1!1s0x933b31a0caf28035:0x4c2200b99092883"
+          }
+        },
+        {
+          "url": "fotos/vila-cabana/maps-4.jpg",
+          "legenda": "Jardim",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Vila+Cabana/data=!4m2!3m1!1s0x933b31a0caf28035:0x4c2200b99092883"
+          }
+        }
+      ],
       "observacoes": "O Casamentos.com.br mostra \"a partir de R$ 400.000\", valor que parece erro de cadastro; por isso ficou fora daqui.",
       "fontes": [
         "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas",
-        "https://guiafix.com.br/palmas-to/salao-de-festas"
+        "https://guiafix.com.br/palmas-to/salao-de-festas",
+        "https://www.google.com/maps/place/Vila+Cabana/data=!4m2!3m1!1s0x933b31a0caf28035:0x4c2200b99092883"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "cellebre",
@@ -1700,11 +2116,29 @@
         "Aniversário infantil",
         "Celebração"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/cellebre/maps-1.jpg",
+          "legenda": "Jardim iluminado",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Cellebre+Eventos/data=!4m2!3m1!1s0x933b3732d6b239bf:0xc00692656f951630"
+          }
+        },
+        {
+          "url": "fotos/cellebre/maps-2.jpg",
+          "legenda": "Salão decorado",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Cellebre+Eventos/data=!4m2!3m1!1s0x933b3732d6b239bf:0xc00692656f951630"
+          }
+        }
+      ],
       "observacoes": "Maior que o Plenitude (mesma dona). Galpão amplo, cabe bastante brinquedo, até debaixo do balcão. O horário diurno pode ser cortado se houver locação à noite. Entregam o espaço limpo.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
-        "https://guiafix.com.br/palmas-to/salao-de-festas"
+        "https://guiafix.com.br/palmas-to/salao-de-festas",
+        "https://www.google.com/maps/place/Cellebre+Eventos/data=!4m2!3m1!1s0x933b3732d6b239bf:0xc00692656f951630"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -1731,7 +2165,7 @@
         "mesas": true,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "crystal-hall",
@@ -1749,15 +2183,33 @@
       "eventos": [
         "Casamento"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/crystal-hall/maps-1.jpg",
+          "legenda": "Salão montado",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Crystal+Hall/data=!4m2!3m1!1s0x933b35819ce3ce15:0x150782fac162d6f3"
+          }
+        },
+        {
+          "url": "fotos/crystal-hall/maps-2.jpg",
+          "legenda": "Fachada",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Crystal+Hall/data=!4m2!3m1!1s0x933b35819ce3ce15:0x150782fac162d6f3"
+          }
+        }
+      ],
       "observacoes": "Contato pelo Casamentos.com.br.",
       "fontes": [
-        "https://www.casamentos.com.br/casa-para-casamento/crystal-hall--e107623"
+        "https://www.casamentos.com.br/casa-para-casamento/crystal-hall--e107623",
+        "https://www.google.com/maps/place/Crystal+Hall/data=!4m2!3m1!1s0x933b35819ce3ce15:0x150782fac162d6f3"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "cabana-do-lago",
@@ -1775,17 +2227,35 @@
       "eventos": [
         "Casamento"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/cabana-do-lago/maps-1.jpg",
+          "legenda": "Fachada",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Cabana+do+Lago+Restaurante/data=!4m2!3m1!1s0x9324cb4cfd87b557:0x826c7df7071b7120"
+          }
+        },
+        {
+          "url": "fotos/cabana-do-lago/maps-2.jpg",
+          "legenda": "Salão",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Cabana+do+Lago+Restaurante/data=!4m2!3m1!1s0x9324cb4cfd87b557:0x826c7df7071b7120"
+          }
+        }
+      ],
       "observacoes": "Restaurante que recebe casamentos.",
       "fontes": [
-        "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas"
+        "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas",
+        "https://www.google.com/maps/place/Cabana+do+Lago+Restaurante/data=!4m2!3m1!1s0x9324cb4cfd87b557:0x826c7df7071b7120"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {
         "lago": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "buffet-jacinta",
@@ -1820,12 +2290,30 @@
         "Casamento",
         "Aniversário"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/buffet-jacinta/maps-1.jpg",
+          "legenda": "Entrada",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Jacinta+espa%C3%A7o+para+eventos/data=!4m2!3m1!1s0x9324cd5e888a83d3:0xde9b40a485713423"
+          }
+        },
+        {
+          "url": "fotos/buffet-jacinta/maps-2.jpg",
+          "legenda": "Área externa com gramado",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Jacinta+espa%C3%A7o+para+eventos/data=!4m2!3m1!1s0x9324cd5e888a83d3:0xde9b40a485713423"
+          }
+        }
+      ],
       "observacoes": "No fim de semana só aluga junto com o buffet da casa. Endereço não informado.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
         "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas",
-        "Conversas de WhatsApp sobre a festa (out–nov/2026)"
+        "Conversas de WhatsApp sobre a festa (out–nov/2026)",
+        "https://www.google.com/maps/place/Jacinta+espa%C3%A7o+para+eventos/data=!4m2!3m1!1s0x9324cd5e888a83d3:0xde9b40a485713423"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -1841,7 +2329,7 @@
         "mesas": true,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T21:00:00Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "sao-camillo",
@@ -1859,17 +2347,43 @@
       "eventos": [
         "Casamento"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/sao-camillo/maps-1.jpg",
+          "legenda": "Área externa",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Ch%C3%A1cara+S%C3%A3o+Camilo+de+Lelis/data=!4m2!3m1!1s0x9324c8c8c29572cf:0xff5c03d6ca5bbfae"
+          }
+        },
+        {
+          "url": "fotos/sao-camillo/maps-2.jpg",
+          "legenda": "Interior (vista 360°)",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Ch%C3%A1cara+S%C3%A3o+Camilo+de+Lelis/data=!4m2!3m1!1s0x9324c8c8c29572cf:0xff5c03d6ca5bbfae"
+          }
+        },
+        {
+          "url": "fotos/sao-camillo/maps-4.jpg",
+          "legenda": "Deque com vista para o lago",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Ch%C3%A1cara+S%C3%A3o+Camilo+de+Lelis/data=!4m2!3m1!1s0x9324c8c8c29572cf:0xff5c03d6ca5bbfae"
+          }
+        }
+      ],
       "observacoes": null,
       "fontes": [
-        "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas"
+        "https://www.casamentos.com.br/espaco-casamento/tocantins/palmas",
+        "https://www.google.com/maps/place/Ch%C3%A1cara+S%C3%A3o+Camilo+de+Lelis/data=!4m2!3m1!1s0x9324c8c8c29572cf:0xff5c03d6ca5bbfae"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {
         "lago": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "casa-de-festas-palmas",
@@ -1890,15 +2404,33 @@
       "eventos": [
         "Aniversário"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/casa-de-festas-palmas/maps-1.jpg",
+          "legenda": "Mesa decorada",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Casa+de+Festas+Palmas+Decora%C3%A7%C3%B5es%2FFotografia/data=!4m2!3m1!1s0x933b3486df025937:0xd05f92bde4e673bb"
+          }
+        },
+        {
+          "url": "fotos/casa-de-festas-palmas/maps-2.jpg",
+          "legenda": "Decoração de festa",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Casa+de+Festas+Palmas+Decora%C3%A7%C3%B5es%2FFotografia/data=!4m2!3m1!1s0x933b3486df025937:0xd05f92bde4e673bb"
+          }
+        }
+      ],
       "observacoes": "Também faz decoração e fotografia.",
       "fontes": [
-        "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"
+        "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml",
+        "https://www.google.com/maps/place/Casa+de+Festas+Palmas+Decora%C3%A7%C3%B5es%2FFotografia/data=!4m2!3m1!1s0x933b3486df025937:0xd05f92bde4e673bb"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "bebidas-e-festas",
@@ -1981,15 +2513,33 @@
       "horarios": [],
       "comodidades": [],
       "eventos": [],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/joao-e-maria/maps-1.jpg",
+          "legenda": "Piscina iluminada",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Jo%C3%A3o+e+Maria+Eventos/data=!4m2!3m1!1s0x933b37be9fc5b871:0xed34c3b9a15c531c"
+          }
+        },
+        {
+          "url": "fotos/joao-e-maria/maps-2.jpg",
+          "legenda": "Decoração de festa",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Jo%C3%A3o+e+Maria+Eventos/data=!4m2!3m1!1s0x933b37be9fc5b871:0xed34c3b9a15c531c"
+          }
+        }
+      ],
       "observacoes": null,
       "fontes": [
-        "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml"
+        "https://www.encontrapalmas.com.br/e/eventos-em-palmas.shtml",
+        "https://www.google.com/maps/place/Jo%C3%A3o+e+Maria+Eventos/data=!4m2!3m1!1s0x933b37be9fc5b871:0xed34c3b9a15c531c"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "espaco-luz",
@@ -2029,15 +2579,33 @@
       "horarios": [],
       "comodidades": [],
       "eventos": [],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/silver-hill/maps-1.jpg",
+          "legenda": "Fachada",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+Silver+Hill+Festas+e+Eventos/data=!4m2!3m1!1s0x9324cdf7d9a97585:0x62e978b98a8bf7ba"
+          }
+        },
+        {
+          "url": "fotos/silver-hill/maps-2.jpg",
+          "legenda": "Salão",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+Silver+Hill+Festas+e+Eventos/data=!4m2!3m1!1s0x9324cdf7d9a97585:0x62e978b98a8bf7ba"
+          }
+        }
+      ],
       "observacoes": "Só nome e WhatsApp no diretório.",
       "fontes": [
-        "https://guiafix.com.br/palmas-to/salao-de-festas"
+        "https://guiafix.com.br/palmas-to/salao-de-festas",
+        "https://www.google.com/maps/place/Espa%C3%A7o+Silver+Hill+Festas+e+Eventos/data=!4m2!3m1!1s0x9324cdf7d9a97585:0x62e978b98a8bf7ba"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos",
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "nave-eventos",
@@ -2073,12 +2641,30 @@
       "eventos": [
         "Aniversário infantil"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/nave-eventos/maps-1.jpg",
+          "legenda": "Salão decorado",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+Nave+Eventos+Festas/data=!4m2!3m1!1s0x9324cd3b5cd8d17d:0x178bcf5524be02c"
+          }
+        },
+        {
+          "url": "fotos/nave-eventos/maps-2.jpg",
+          "legenda": "Salão decorado",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+Nave+Eventos+Festas/data=!4m2!3m1!1s0x9324cd3b5cd8d17d:0x178bcf5524be02c"
+          }
+        }
+      ],
       "observacoes": "Também faz decoração (Luart Decorações). Pacotes com decoração: mesa de bolo de 6 m com hall instagramável, ou de 10 m com fachada, ambientação do saguão e mesa posta para 70 (120 cadeiras tiffany). Há também pacote básico e intermediário com buffet para 50 pessoas (valores em imagem). Não incluem balões, buffet, doces, bolo e lembrancinhas. Reserva só confirma com sinal. Endereço não informado.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
         "https://guiafix.com.br/palmas-to/salao-de-festas",
-        "Conversas de WhatsApp sobre a festa (out–nov/2026)"
+        "Conversas de WhatsApp sobre a festa (out–nov/2026)",
+        "https://www.google.com/maps/place/Espa%C3%A7o+Nave+Eventos+Festas/data=!4m2!3m1!1s0x9324cd3b5cd8d17d:0x178bcf5524be02c"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -2094,7 +2680,7 @@
         "mesas": 6,
         "cadeiras": 70
       },
-      "atualizado_em": "2026-11-13T21:00:00Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "vagalume",
@@ -2143,12 +2729,30 @@
         "Confraternização",
         "Festa universitária"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/vagalume/maps-1.jpg",
+          "legenda": "Área coberta",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+Vagalume+Eventos/data=!4m2!3m1!1s0x9324cd5a6279b243:0x792073f5f880d420"
+          }
+        },
+        {
+          "url": "fotos/vagalume/maps-2.jpg",
+          "legenda": "Salão decorado",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+Vagalume+Eventos/data=!4m2!3m1!1s0x9324cd5a6279b243:0x792073f5f880d420"
+          }
+        }
+      ],
       "observacoes": "Proibido som automotivo e som PA de 8. Três ambientes: salão coberto, tenda coberta e gramado. Capacidade estimada pelas 60 cadeiras. Os dois orçamentos vieram com valores diferentes (R$ 1.500 e R$ 1.700): confirmar o valor na hora de fechar.",
       "fontes": [
         "WhatsApp com o local (conversa de nov/2026)",
         "https://guiafix.com.br/palmas-to/salao-de-festas",
-        "Conversas de WhatsApp sobre a festa (out–nov/2026)"
+        "Conversas de WhatsApp sobre a festa (out–nov/2026)",
+        "https://www.google.com/maps/place/Espa%C3%A7o+Vagalume+Eventos/data=!4m2!3m1!1s0x9324cd5a6279b243:0x792073f5f880d420"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -2168,7 +2772,7 @@
         "mesas": 15,
         "cadeiras": 60
       },
-      "atualizado_em": "2026-11-13T21:00:00Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "topazio",
@@ -2206,11 +2810,29 @@
         "Aniversário infantil",
         "Aniversário"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/topazio/maps-1.jpg",
+          "legenda": "Piscina",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+Top%C3%A1zio+-+Eventos+%26+Loca%C3%A7%C3%B5es/data=!4m2!3m1!1s0x933b3708701e5eab:0xdc818a57661f2a31"
+          }
+        },
+        {
+          "url": "fotos/topazio/maps-2.jpg",
+          "legenda": "Área coberta",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+Top%C3%A1zio+-+Eventos+%26+Loca%C3%A7%C3%B5es/data=!4m2!3m1!1s0x933b3708701e5eab:0xdc818a57661f2a31"
+          }
+        }
+      ],
       "observacoes": "Capacidade máxima de 70 pessoas na área coberta. Aceitam brinquedos alugados à parte.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
-        "https://guiafix.com.br/palmas-to/salao-de-festas"
+        "https://guiafix.com.br/palmas-to/salao-de-festas",
+        "https://www.google.com/maps/place/Espa%C3%A7o+Top%C3%A1zio+-+Eventos+%26+Loca%C3%A7%C3%B5es/data=!4m2!3m1!1s0x933b3708701e5eab:0xdc818a57661f2a31"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -2237,7 +2859,7 @@
         "mesas": 10,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "uniao",
@@ -2253,15 +2875,33 @@
       "horarios": [],
       "comodidades": [],
       "eventos": [],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/uniao/maps-1.jpg",
+          "legenda": "Salão",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+uni%C3%A3o+festa+e+eventos/data=!4m2!3m1!1s0x933b31e16c95cfc9:0x37bc0daa69203a51"
+          }
+        },
+        {
+          "url": "fotos/uniao/maps-2.jpg",
+          "legenda": "Ambientes",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+uni%C3%A3o+festa+e+eventos/data=!4m2!3m1!1s0x933b31e16c95cfc9:0x37bc0daa69203a51"
+          }
+        }
+      ],
       "observacoes": "Só nome e WhatsApp no diretório.",
       "fontes": [
-        "https://guiafix.com.br/palmas-to/salao-de-festas"
+        "https://guiafix.com.br/palmas-to/salao-de-festas",
+        "https://www.google.com/maps/place/Espa%C3%A7o+uni%C3%A3o+festa+e+eventos/data=!4m2!3m1!1s0x933b31e16c95cfc9:0x37bc0daa69203a51"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos",
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "golden",
@@ -2298,11 +2938,29 @@
         "Casamento",
         "Confraternização"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/golden/maps-1.jpg",
+          "legenda": "Fachada",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+Golden/data=!4m2!3m1!1s0x933b374e973bdba9:0x9b9c2c71c58b5592"
+          }
+        },
+        {
+          "url": "fotos/golden/maps-2.jpg",
+          "legenda": "Salão montado",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Espa%C3%A7o+Golden/data=!4m2!3m1!1s0x933b374e973bdba9:0x9b9c2c71c58b5592"
+          }
+        }
+      ],
       "observacoes": "Quem aluga só o espaço ganha a decoração com mesa média. Também fazem pacote completo com buffet.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
-        "https://guiafix.com.br/palmas-to/salao-de-festas"
+        "https://guiafix.com.br/palmas-to/salao-de-festas",
+        "https://www.google.com/maps/place/Espa%C3%A7o+Golden/data=!4m2!3m1!1s0x933b374e973bdba9:0x9b9c2c71c58b5592"
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
@@ -2321,7 +2979,7 @@
         "mesas": true,
         "cadeiras": 100
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "ximenes",
@@ -2397,15 +3055,33 @@
       "horarios": [],
       "comodidades": [],
       "eventos": [],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/casa-de-xavier/maps-1.jpg",
+          "legenda": "Área coberta",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Casa+Xavier+Eventos+e+Lazer/data=!4m2!3m1!1s0x9324cb93d3dcf743:0x61aef74448d52d7d"
+          }
+        },
+        {
+          "url": "fotos/casa-de-xavier/maps-2.jpg",
+          "legenda": "Salão",
+          "credito": {
+            "nome": "Google Maps",
+            "url": "https://www.google.com/maps/place/Casa+Xavier+Eventos+e+Lazer/data=!4m2!3m1!1s0x9324cb93d3dcf743:0x61aef74448d52d7d"
+          }
+        }
+      ],
       "observacoes": "Só vieram nome, quadra e valor. Pedir capacidade, o que inclui e as fotos.",
       "fontes": [
-        "Conversas de WhatsApp sobre a festa (out–nov/2026)"
+        "Conversas de WhatsApp sobre a festa (out–nov/2026)",
+        "https://www.google.com/maps/place/Casa+Xavier+Eventos+e+Lazer/data=!4m2!3m1!1s0x9324cb93d3dcf743:0x61aef74448d52d7d"
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:00:00Z"
+      "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
       "id": "espaco-60-brinquedoteca",
