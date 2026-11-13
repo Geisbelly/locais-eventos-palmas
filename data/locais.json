@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-13T22:56:08Z",
+  "atualizado_em": "2026-11-13T23:11:27Z",
   "observacao": "Dados reunidos de páginas públicas. Campo ausente = não encontrado na fonte. Valores são referência da data de conferência e variam conforme dia, temporada e pacote.",
   "locais": [
     {
@@ -1898,7 +1898,7 @@
           }
         }
       ],
-      "observacoes": "Turnos fixos de 9h às 18h ou a partir das 18h.",
+      "observacoes": "Turnos fixos de 9h às 18h ou a partir das 18h. As tendas vêm junto. Perguntar se têm dois espaços (ficou a dúvida na visita).",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
         "https://www.facebook.com/espacogardenpalmas/",
@@ -1918,7 +1918,7 @@
         "mesas": true,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T23:11:27Z"
     },
     {
       "id": "paraiso-eventos",
@@ -3198,26 +3198,57 @@
     },
     {
       "id": "casa-de-xavier",
-      "nome": "Casa de Xavier",
+      "nome": "Casa Xavier",
       "tipo": "Salão de festas",
       "bairro": "305 Norte",
       "endereco": "305 Norte",
-      "capacidade": null,
+      "capacidade": 100,
       "precos": [
         {
+          "valor": 500,
+          "unidade": "até 22h",
+          "condicao": "Terça a quinta",
+          "inclui": "10 mesas redondas e 60 cadeiras"
+        },
+        {
+          "valor": 600,
+          "unidade": "até 0h",
+          "condicao": "Terça a quinta",
+          "inclui": "10 mesas redondas e 60 cadeiras"
+        },
+        {
           "valor": 700,
-          "unidade": "evento",
-          "condicao": "Valor repassado em nov/2026, sem detalhes de dia e horário",
-          "inclui": null
+          "unidade": "até 22h",
+          "condicao": "Sexta, sábado, domingo e feriado",
+          "inclui": "10 mesas redondas e 60 cadeiras"
+        },
+        {
+          "valor": 800,
+          "unidade": "até 0h",
+          "condicao": "Sexta, sábado, domingo e feriado",
+          "inclui": "10 mesas redondas e 60 cadeiras"
         }
       ],
-      "taxas": [],
+      "taxas": [
+        {
+          "nome": "Taxa de limpeza",
+          "valor": 100
+        }
+      ],
       "pagamento": null,
       "instagram": null,
-      "whatsapp": null,
+      "whatsapp": "(63) 98454-0820",
       "site": null,
-      "horarios": [],
-      "comodidades": [],
+      "horarios": [
+        {
+          "dias": "Terça a domingo",
+          "horario": "Até 22h ou até 0h"
+        }
+      ],
+      "comodidades": [
+        "Freezer vertical, geladeira, fogão cooktop de 2 bocas e bebedouro",
+        "10 mesas redondas e 60 cadeiras inclusas"
+      ],
       "eventos": [],
       "fotos": [
         {
@@ -3237,15 +3268,23 @@
           }
         }
       ],
-      "observacoes": "Só vieram nome, quadra e valor. Pedir capacidade, o que inclui e as fotos.",
+      "observacoes": "Cabe até 100 pessoas. Visitas com hora marcada; em dia de festa no espaço, a visita fica para outro dia.",
       "fontes": [
-        "Conversas de WhatsApp sobre a festa (out–nov/2026)",
-        "https://www.google.com/maps/place/Casa+Xavier+Eventos+e+Lazer/data=!4m2!3m1!1s0x9324cb93d3dcf743:0x61aef74448d52d7d"
+        "WhatsApp com o local (conversa de nov/2026)",
+        "https://www.google.com/maps/place/Casa+Xavier+Eventos+e+Lazer/data=!4m2!3m1!1s0x9324cb93d3dcf743:0x61aef74448d52d7d",
+        "https://www.instagram.com/reel/DXDBgNuib-d/"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados mínimos",
-      "itens": {},
-      "atualizado_em": "2026-11-13T21:51:45Z",
+      "status": "Informado pelo local",
+      "itens": {
+        "freezer": true,
+        "geladeira": true,
+        "fogao": true,
+        "bebedouro": true,
+        "mesas": 10,
+        "cadeiras": 60
+      },
+      "atualizado_em": "2026-11-13T23:11:27Z",
       "coordenadas": {
         "lat": -10.168904,
         "lng": -48.342521
@@ -3340,6 +3379,230 @@
       "coordenadas": {
         "lat": -10.3589156,
         "lng": -48.2976925
+      }
+    },
+    {
+      "endereco": "Av. Sonho Meu, Palmas (Google Maps)",
+      "capacidade": null,
+      "precos": [
+        {
+          "valor": 1100,
+          "unidade": "locação",
+          "condicao": "Valor informado em nov/2026 (dia e horário não detalhados)",
+          "inclui": null
+        }
+      ],
+      "taxas": [],
+      "pagamento": null,
+      "instagram": null,
+      "whatsapp": "(16) 99620-0615",
+      "site": null,
+      "horarios": [],
+      "comodidades": [
+        "Duas piscinas, uma com cascata",
+        "Área coberta ampla",
+        "Mesa de sinuca",
+        "Jardim",
+        "Estacionamento murado",
+        "Área de churrasco gourmet ficando pronta em nov/2026"
+      ],
+      "eventos": [],
+      "fotos": [
+        {
+          "url": "fotos/chacara-girassois/piscina.jpg",
+          "legenda": "Piscina e área coberta"
+        },
+        {
+          "url": "fotos/chacara-girassois/area-coberta.jpg",
+          "legenda": "Área coberta com jardim"
+        },
+        {
+          "url": "fotos/chacara-girassois/salao-coberto.jpg",
+          "legenda": "Área coberta vazia"
+        },
+        {
+          "url": "fotos/chacara-girassois/piscina-cascata.jpg",
+          "legenda": "Piscina com cascata"
+        },
+        {
+          "url": "fotos/chacara-girassois/sinuca.jpg",
+          "legenda": "Mesa de sinuca"
+        }
+      ],
+      "observacoes": "O WhatsApp é de DDD 16. Perguntar capacidade, horários e o que o valor inclui.",
+      "fontes": [
+        "WhatsApp com o local (conversa de nov/2026)",
+        "https://www.google.com/maps/place/Chácara+dos+Girassois+eventos/data=!4m2!3m1!1s0x9324c9931bd8b3e5:0x8ae97f0bb413f77"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local",
+      "id": "chacara-girassois",
+      "nome": "Chácara dos Girassóis",
+      "tipo": "Chácara",
+      "bairro": "Região norte (Av. Sonho Meu)",
+      "itens": {
+        "piscina": true,
+        "area_coberta": true,
+        "gramado": true,
+        "jogos": true,
+        "estacionamento": true
+      },
+      "atualizado_em": "2026-11-13T23:11:27Z",
+      "coordenadas": {
+        "lat": -10.1309838,
+        "lng": -48.3375404
+      }
+    },
+    {
+      "endereco": "Pino do Google Maps (CEP 77021-090)",
+      "capacidade": 100,
+      "precos": [
+        {
+          "valor": 1000,
+          "unidade": "day use",
+          "condicao": "8h às 20h. Promoção de fim de ano, por tempo limitado",
+          "inclui": null
+        },
+        {
+          "valor": 1500,
+          "unidade": "diária com pernoite",
+          "condicao": "8h às 7h do dia seguinte. Promoção de fim de ano, por tempo limitado",
+          "inclui": null
+        },
+        {
+          "valor": 2000,
+          "unidade": "fim de semana",
+          "condicao": "8h às 22h do dia seguinte. Promoção de fim de ano, por tempo limitado",
+          "inclui": null
+        }
+      ],
+      "taxas": [
+        {
+          "nome": "Campo de futebol (por hora)",
+          "valor": 120
+        }
+      ],
+      "pagamento": null,
+      "instagram": null,
+      "whatsapp": "(63) 98485-7884",
+      "site": null,
+      "horarios": [
+        {
+          "dias": "Day use",
+          "horario": "8h às 20h"
+        },
+        {
+          "dias": "Com pernoite",
+          "horario": "8h às 7h do dia seguinte"
+        },
+        {
+          "dias": "Fim de semana",
+          "horario": "8h às 22h do dia seguinte"
+        }
+      ],
+      "comodidades": [
+        "Piscina",
+        "Churrasqueira",
+        "Campo de futebol",
+        "Área verde",
+        "13 jogos de mesa"
+      ],
+      "eventos": [],
+      "fotos": [],
+      "observacoes": "Cabem umas 100 pessoas com conforto; já recebeu mais, mas fica cheio. Valores do folheto de promoção de fim de ano.",
+      "fontes": [
+        "WhatsApp com o local (conversa de nov/2026)",
+        "https://www.google.com/maps/place/Rancho+Noleto+Espaço+para+Eventos/data=!4m2!3m1!1s0x9324cfb57b3844db:0xaffb5c54bb81dd39"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local",
+      "id": "rancho-noleto",
+      "nome": "Rancho Noleto",
+      "tipo": "Chácara",
+      "bairro": "Região norte (ver mapa)",
+      "itens": {
+        "piscina": true,
+        "churrasqueira": true,
+        "gramado": true,
+        "area_coberta": true,
+        "mesas": 13,
+        "hospedagem": true
+      },
+      "atualizado_em": "2026-11-13T23:11:27Z",
+      "coordenadas": {
+        "lat": -10.1103002,
+        "lng": -48.3052865
+      }
+    },
+    {
+      "endereco": "Bosque 604 Norte, Q. 604 Norte, Alameda 22, 5, Plano Diretor Norte",
+      "capacidade": 100,
+      "precos": [
+        {
+          "valor": 790,
+          "unidade": "locação",
+          "condicao": "10 horas: das 10h às 20h ou das 13h às 23h",
+          "inclui": "Área coberta, 2 piscinas, mesas, cadeiras, som, Wi-Fi e cozinha"
+        }
+      ],
+      "taxas": [],
+      "pagamento": "50% na reserva",
+      "instagram": null,
+      "whatsapp": "(63) 98467-5459",
+      "site": null,
+      "horarios": [
+        {
+          "dias": "Turno 1",
+          "horario": "10h às 20h"
+        },
+        {
+          "dias": "Turno 2",
+          "horario": "13h às 23h"
+        }
+      ],
+      "comodidades": [
+        "Área coberta para até 100 pessoas",
+        "2 piscinas (adulto e infantil)",
+        "2 banheiros",
+        "10 jogos de mesa redonda e 60 cadeiras",
+        "Som ambiente e Wi-Fi",
+        "Mesa de buffet de 3 m e mesa tambor",
+        "Climatizador",
+        "Churrasqueira, fogão industrial, freezer e geladeira"
+      ],
+      "eventos": [],
+      "fotos": [],
+      "observacoes": "Tudo da lista vem incluso na reserva. Telefone do perfil no Google; a conversa foi pelo WhatsApp comercial \"Meu sonho\".",
+      "fontes": [
+        "WhatsApp com o local (conversa de nov/2026)",
+        "https://www.instagram.com/reel/DUlmQUDCb3r/",
+        "https://www.google.com/maps/place/Meu+Sonho+Festas+e+Eventos/data=!4m2!3m1!1s0x9324cdbbac409a0d:0x32f3881a1dfdace4"
+      ],
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local",
+      "id": "meu-sonho",
+      "nome": "Meu Sonho Festas e Eventos",
+      "tipo": "Espaço com piscina",
+      "bairro": "604 Norte",
+      "itens": {
+        "piscina": true,
+        "area_coberta": true,
+        "banheiros": true,
+        "mesas": 10,
+        "cadeiras": 60,
+        "som": true,
+        "wifi": true,
+        "bebedouro": true,
+        "churrasqueira": true,
+        "fogao": true,
+        "freezer": true,
+        "geladeira": true,
+        "cozinha": true
+      },
+      "atualizado_em": "2026-11-13T23:11:27Z",
+      "coordenadas": {
+        "lat": -10.1628678,
+        "lng": -48.3155233
       }
     }
   ]
