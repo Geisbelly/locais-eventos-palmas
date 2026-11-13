@@ -959,3 +959,65 @@ body[data-modo="eventos"] .grade-cat { grid-template-columns: 1fr; margin-top: 8
 .card-capa, .card.comparando .card-capa { margin: 0 calc(-1 * var(--cp)); }
 @media (max-width: 760px) { .card { --cp: 14px; } .card.comparando { --cp: 13px; } }
 .det-local-acoes .btn { white-space: nowrap; padding-left: 10px; padding-right: 10px; }
+
+/* ===== Sem rolagem lateral (v12) ===== */
+/* Abas de categoria: nunca rolam para o lado */
+.secoes { flex-wrap: wrap; overflow: visible; }
+.secao-link { min-width: 0; }
+@media (max-width: 1100px) and (min-width: 761px) {
+  .secoes .secao-link .rot-longo { display: none; }
+  .secoes .secao-link .rot-curto { display: inline; }
+}
+@media (max-width: 760px) {
+  .secoes { gap: 6px; border-bottom: 0; margin-top: 14px; }
+  .secao-link { flex: 1 1 auto; justify-content: center; gap: 6px; min-height: 40px; padding: 6px 12px; margin: 0; border: 1px solid var(--borda-campo, var(--linha)); border-radius: 999px; background: var(--card); font-size: .86rem; line-height: 1.15; text-align: center; }
+  .secao-link svg { width: 16px; height: 16px; flex: none; }
+  .secao-link[aria-current="page"] { background: var(--tinta); color: var(--bg); border-color: var(--tinta); }
+  .secao-link[aria-current="page"] .n { background: rgba(255,255,255,.18); color: inherit; }
+}
+/* Minha lista (celular/tablet) e abas/chips antigos: quebram linha em vez de rolar */
+.abas, .chips-rapidos, .abas-mob { flex-wrap: wrap; overflow: visible; }
+@media (max-width: 960px) {
+  .abas-mob .aba { flex: 1 1 auto; justify-content: center; padding: 0 12px; font-size: .86rem; }
+}
+/* Comparador no celular: blocos empilhados, sem rolar para o lado */
+@media (max-width: 760px) {
+  .tabela-wrap { overflow: visible; padding: 0 0 40px; }
+  .tabela-cmp { display: block; min-width: 0; font-size: .86rem; }
+  .tabela-cmp thead, .tabela-cmp tbody { display: block; }
+  .tabela-cmp thead { position: sticky; top: var(--topo-folha, 58px); z-index: 1; background: var(--bg); border-bottom: 1px solid var(--linha); }
+  .tabela-cmp tr { display: grid; grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr)); }
+  .tabela-cmp thead th:first-child { display: none; }
+  .tabela-cmp thead th { position: static; font-size: .95rem; line-height: 1.2; padding: 10px 8px; border-bottom: 0; overflow-wrap: anywhere; }
+  .tabela-cmp tbody th { grid-column: 1 / -1; position: static; white-space: normal; background: var(--bg-2); padding: 7px 12px; border-bottom: 0; }
+  .tabela-cmp td { padding: 9px 8px; min-width: 0; overflow-wrap: anywhere; }
+  .tabela-cmp td + td { border-left: 1px solid var(--linha); }
+}
+.secao-link .rot-curto { display: none; }
+@media (max-width: 760px) {
+  .secao-link .rot-longo { display: none; }
+  .secao-link .rot-curto { display: inline; }
+  .secao-link { padding: 6px 10px; }
+  .abas-mob .aba-rot { flex: none; }
+  .abas-mob .aba { padding: 0 10px; }
+}
+@media (max-width: 760px) {
+  .secao-link, .abas-mob .aba { gap: 5px; padding: 0 10px; min-height: 38px; font-size: .84rem; }
+  .secao-link svg { display: none; }
+  .secao-link .n, .abas-mob .aba .n { background: none !important; padding: 0; font-size: .8rem; font-weight: 500; opacity: .7; }
+}
+@media (max-width: 760px) {
+  .tabela-cmp thead th { font-size: .84rem; }
+  .tabela-cmp thead th a { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
+}
+/* Cabeçalho em celulares estreitos (até 380px) */
+.marca { min-width: 0; }
+.marca-txt { overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 380px) {
+  .topo-in { gap: 6px; }
+  .topo-acoes { gap: 6px; flex: none; }
+  .marca-ic { display: none; }
+  .marca-txt { font-size: 1rem; }
+  .btn-perto { width: 40px; height: 40px; padding: 0; justify-content: center; }
+  .btn-novo { height: 40px; padding: 0 10px; }
+}

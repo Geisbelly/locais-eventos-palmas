@@ -520,7 +520,7 @@
   function renderSecoes() {
     const n = (k) => S.locais.filter((l) => (l.cat || 'espacos') === k).length;
     $('#secoes').innerHTML = ORDEM_CATS.map((k) =>
-      `<a class="secao-link" href="#${k}" ${S.secao === k ? 'aria-current="page"' : ''}>${ic(CATS[k].icone)}<span>${esc(CATS[k].rot)}</span><span class="n">${n(k)}</span></a>`).join('');
+      `<a class="secao-link" href="#${k}" ${S.secao === k ? 'aria-current="page"' : ''}>${ic(CATS[k].icone)}<span class="rot-longo">${esc(CATS[k].rot)}</span><span class="rot-curto">${esc(CATS[k].curto || CATS[k].rot)}</span><span class="n">${n(k)}</span></a>`).join('');
   }
   function renderAbas() {
     const ls = daSecao();
@@ -1010,7 +1010,7 @@
         <h2>Comparando ${ls.length} ${esp ? 'locais' : 'fornecedores'}</h2>
       </div>
       <div class="folha-corpo" style="padding-bottom:8px"><p class="meta">Em verde, o melhor de cada linha. Notas e orçamentos vêm do que você registrou.</p></div>
-      <div class="tabela-wrap"><table class="tabela-cmp">
+      <div class="tabela-wrap"><table class="tabela-cmp" style="--n:${ls.length}">
         <thead><tr><th></th>${ls.map((l) => `<th><a href="#local/${l.id}" data-abrir="${l.id}">${esc(l.nome)}</a></th>`).join('')}</tr></thead>
         <tbody>${linhas.map(([r, cels]) => `<tr><th scope="row">${r}</th>${cels.map((c) => {
           const [h, m] = Array.isArray(c) ? c : [c, false];
