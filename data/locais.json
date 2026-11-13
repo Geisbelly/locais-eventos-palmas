@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-13",
+  "atualizado_em": "2026-11-13T21:54:05Z",
   "observacao": "Dados reunidos de páginas públicas. Campo ausente = não encontrado na fonte. Valores são referência da data de conferência e variam conforme dia, temporada e pacote.",
   "locais": [
     {
@@ -86,7 +86,11 @@
         "mesas": true,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.335735,
+        "lng": -48.326134
+      }
     },
     {
       "endereco": "Av. NS 06, HM 06, 108 Norte, em frente à Igreja de Cristo",
@@ -152,7 +156,11 @@
       "tipo": "Salão de festas",
       "bairro": "108 Norte",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.183243,
+        "lng": -48.319093
+      }
     },
     {
       "endereco": "Bertaville, Palmas",
@@ -246,7 +254,7 @@
       "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
-      "endereco": null,
+      "endereco": "Alameda 13 - lote 3 - Plano Diretor Sul",
       "capacidade": 250,
       "precos": [
         {
@@ -326,7 +334,11 @@
         "climatizado": true,
         "limpeza": true
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.238703,
+        "lng": -48.331658
+      }
     },
     {
       "endereco": "1006 Sul",
@@ -361,7 +373,12 @@
       "itens": {
         "climatizado": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:54:05Z",
+      "coordenadas": {
+        "lat": -10.245515,
+        "lng": -48.320045,
+        "aprox": true
+      }
     },
     {
       "endereco": "903 Sul",
@@ -399,7 +416,7 @@
       "atualizado_em": "2026-11-13T19:18:33Z"
     },
     {
-      "endereco": null,
+      "endereco": "Quadra, Avenida NS 4, SN - LOTE 19 H.M. SALA 03 - Plano Diretor Sul",
       "capacidade": null,
       "precos": [
         {
@@ -440,7 +457,11 @@
       "bairro": "Palmas",
       "telefone": "(63) 9268-4272",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.248365,
+        "lng": -48.324494
+      }
     },
     {
       "endereco": null,
@@ -579,7 +600,7 @@
       "atualizado_em": "2026-11-13T21:30:08Z"
     },
     {
-      "endereco": null,
+      "endereco": "Acsu SO - Av. Siqueira Campos, 201 - Lote 27",
       "capacidade": 80,
       "precos": [
         {
@@ -640,7 +661,11 @@
         "mesas": 20,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.326673,
+        "lng": -48.325961
+      }
     },
     {
       "endereco": "1103 Sul",
@@ -698,7 +723,11 @@
       "tipo": "Salão de festas",
       "bairro": "1103 Sul",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.249895,
+        "lng": -48.341251
+      }
     },
     {
       "endereco": null,
@@ -930,7 +959,11 @@
         "piscina": true,
         "area_coberta": true
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.162948,
+        "lng": -48.313298
+      }
     },
     {
       "id": "villa-festa",
@@ -1174,14 +1207,18 @@
         "mesas": 20,
         "cadeiras": 80
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.360141,
+        "lng": -48.29899
+      }
     },
     {
       "id": "arena-42",
       "nome": "Arena 42",
       "tipo": "Espaço com piscina",
       "bairro": "Palmas (ver mapa)",
-      "endereco": null,
+      "endereco": "Q. 405 Norte Al. 15, 18 - Plano Diretor Norte",
       "coordenadas": {
         "lat": -10.162199974060059,
         "lng": -48.341800689697266
@@ -1258,14 +1295,14 @@
         "mesas": 10,
         "cadeiras": 60
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z"
     },
     {
       "id": "oliver-martins",
       "nome": "Oliver & Martins Eventos",
       "tipo": "Salão de festas",
       "bairro": "Palmas",
-      "endereco": null,
+      "endereco": "R. Vicinal Três, 0 - QD NE 11A LT 05 - Aureny 1",
       "capacidade": 100,
       "precos": [
         {
@@ -1326,7 +1363,11 @@
       "itens": {
         "brinquedos": true
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.311566,
+        "lng": -48.300971
+      }
     },
     {
       "id": "orla-dourada",
@@ -1380,7 +1421,11 @@
         "lago": true,
         "hospedagem": true
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.034576,
+        "lng": -48.317552
+      }
     },
     {
       "id": "luar-do-lago",
@@ -1495,7 +1540,11 @@
       "itens": {
         "iluminacao": true
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.241507,
+        "lng": -48.314818
+      }
     },
     {
       "id": "imperial-eventos",
@@ -1568,7 +1617,11 @@
         "mesas": 11,
         "cadeiras": 100
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.162961,
+        "lng": -48.313502
+      }
     },
     {
       "id": "salao-103-norte",
@@ -1609,7 +1662,12 @@
         "banheiros": true,
         "cadeiras": 100
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:54:05Z",
+      "coordenadas": {
+        "lat": -10.178203,
+        "lng": -48.339875,
+        "aprox": true
+      }
     },
     {
       "id": "espaco-piscina-pdn-mgf",
@@ -1700,7 +1758,11 @@
       "conferido_em": "2026-11-13",
       "status": "Perfil oficial no Instagram",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.410692,
+        "lng": -48.373705
+      }
     },
     {
       "id": "recanto-das-pedras",
@@ -1744,7 +1806,11 @@
         "cozinha": true,
         "jogos": true
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.250208,
+        "lng": -48.229348
+      }
     },
     {
       "id": "garden-palmas",
@@ -1872,14 +1938,18 @@
         "mesas": 14,
         "cadeiras": 46
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.244712,
+        "lng": -48.286663
+      }
     },
     {
       "id": "fun-world",
       "nome": "Espaço de Festa FUN World",
       "tipo": "Salão de festas",
       "bairro": "Palmas",
-      "endereco": null,
+      "endereco": "103 Norte Rua NO-5, Lt 44 - Plano Diretor Norte",
       "capacidade": null,
       "precos": [],
       "instagram": "funworldfestas",
@@ -1924,7 +1994,11 @@
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.182054,
+        "lng": -48.341786
+      }
     },
     {
       "id": "ahadu",
@@ -1963,7 +2037,11 @@
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.181227,
+        "lng": -48.308064
+      }
     },
     {
       "id": "belladata",
@@ -2024,14 +2102,18 @@
         "mesas": true,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.186297,
+        "lng": -48.34115
+      }
     },
     {
       "id": "vila-cabana",
       "nome": "Vila Cabana Eventos",
       "tipo": "Chácara",
       "bairro": "Palmas",
-      "endereco": null,
+      "endereco": "Loteamento Coqueirinho - Fazenda José Caboclo",
       "capacidade": 480,
       "precos": [],
       "instagram": null,
@@ -2077,7 +2159,11 @@
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.283313,
+        "lng": -48.27788
+      }
     },
     {
       "id": "cellebre",
@@ -2172,7 +2258,7 @@
       "nome": "Crystal Hall",
       "tipo": "Salão de festas",
       "bairro": "Palmas",
-      "endereco": null,
+      "endereco": "AV. TEOTÔNIO SEGURADO 1102 SUL LOTE 17, CONJ. 01",
       "capacidade": null,
       "precos": [],
       "instagram": null,
@@ -2209,14 +2295,18 @@
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.250432,
+        "lng": -48.33233
+      }
     },
     {
       "id": "cabana-do-lago",
       "nome": "Cabana do Lago",
       "tipo": "Restaurante",
       "bairro": "Palmas",
-      "endereco": null,
+      "endereco": "Q. 103 Sul Rua SO 11, 09 - Lote 03/05 - Centro",
       "capacidade": null,
       "precos": [],
       "instagram": null,
@@ -2255,14 +2345,18 @@
       "itens": {
         "lago": true
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.19013,
+        "lng": -48.337805
+      }
     },
     {
       "id": "buffet-jacinta",
       "nome": "Buffet Jacinta",
       "tipo": "Espaço com piscina",
       "bairro": "Palmas",
-      "endereco": null,
+      "endereco": "Q. 210 Sul Alameda 1, Lote 13 - Plano Diretor Sul",
       "capacidade": null,
       "precos": [
         {
@@ -2329,14 +2423,18 @@
         "mesas": true,
         "cadeiras": true
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.192466,
+        "lng": -48.309057
+      }
     },
     {
       "id": "sao-camillo",
       "nome": "Chácara São Camillo de Lellis",
       "tipo": "Chácara",
       "bairro": "Palmas",
-      "endereco": null,
+      "endereco": "TO-010, 12",
       "capacidade": null,
       "precos": [],
       "instagram": null,
@@ -2383,7 +2481,11 @@
       "itens": {
         "lago": true
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.079617,
+        "lng": -48.327209
+      }
     },
     {
       "id": "casa-de-festas-palmas",
@@ -2430,7 +2532,11 @@
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.232859,
+        "lng": -48.325098
+      }
     },
     {
       "id": "bebidas-e-festas",
@@ -2497,7 +2603,11 @@
         "climatizado": true,
         "som": true
       },
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:54:05Z",
+      "coordenadas": {
+        "lat": -10.194802,
+        "lng": -48.327624
+      }
     },
     {
       "id": "joao-e-maria",
@@ -2539,7 +2649,12 @@
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:54:05Z",
+      "coordenadas": {
+        "lat": -10.188266,
+        "lng": -48.327554,
+        "aprox": true
+      }
     },
     {
       "id": "espaco-luz",
@@ -2563,14 +2678,19 @@
       "conferido_em": "2026-11-13",
       "status": "Dados de diretório",
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-13T21:54:05Z",
+      "coordenadas": {
+        "lat": -10.185232,
+        "lng": -48.304109,
+        "aprox": true
+      }
     },
     {
       "id": "silver-hill",
       "nome": "Espaço Silver Hill Festas e Eventos",
       "tipo": "Espaço de eventos",
       "bairro": "Palmas",
-      "endereco": null,
+      "endereco": "ARNE 64, 508 N - QC 04, Alameda 06 e 08, Lote 04 - Plano Diretor Norte",
       "capacidade": null,
       "precos": [],
       "instagram": null,
@@ -2605,14 +2725,18 @@
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.166396,
+        "lng": -48.309179
+      }
     },
     {
       "id": "nave-eventos",
       "nome": "Espaço Nave",
       "tipo": "Salão de festas",
       "bairro": "Palmas",
-      "endereco": null,
+      "endereco": "212 norte, alameda, N° 25 - Plano Diretor Norte",
       "capacidade": 120,
       "precos": [
         {
@@ -2680,7 +2804,11 @@
         "mesas": 6,
         "cadeiras": 70
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.176198,
+        "lng": -48.302344
+      }
     },
     {
       "id": "vagalume",
@@ -2772,7 +2900,11 @@
         "mesas": 15,
         "cadeiras": 60
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.174238,
+        "lng": -48.303734
+      }
     },
     {
       "id": "topazio",
@@ -2866,7 +2998,7 @@
       "nome": "Espaço União Festa e Eventos",
       "tipo": "Espaço de eventos",
       "bairro": "Palmas",
-      "endereco": null,
+      "endereco": "Rua 18 qudra 17 lote 24 Lt 24 Setor, Av. União Sul",
       "capacidade": null,
       "precos": [],
       "instagram": null,
@@ -2901,14 +3033,18 @@
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.301534,
+        "lng": -48.318961
+      }
     },
     {
       "id": "golden",
       "nome": "Espaço Golden",
       "tipo": "Salão de festas",
       "bairro": "Região sul (ver mapa)",
-      "endereco": null,
+      "endereco": "Av. Siqueira Campos - Plano Diretor Sul",
       "capacidade": 100,
       "precos": [
         {
@@ -2979,7 +3115,7 @@
         "mesas": true,
         "cadeiras": 100
       },
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z"
     },
     {
       "id": "ximenes",
@@ -3081,7 +3217,11 @@
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos",
       "itens": {},
-      "atualizado_em": "2026-11-13T21:30:08Z"
+      "atualizado_em": "2026-11-13T21:51:45Z",
+      "coordenadas": {
+        "lat": -10.168904,
+        "lng": -48.342521
+      }
     },
     {
       "id": "espaco-60-brinquedoteca",

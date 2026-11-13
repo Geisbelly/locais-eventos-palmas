@@ -6,13 +6,15 @@ Em **Brinquedos** e **Aluguéis** o cadastro é por empresa, com a lista do que 
 
 As fotos de espaços que vieram do Google Maps ficam em `fotos/<id>/maps-N.jpg`. Cada foto guarda o crédito (`credito.nome` e `credito.url`), e a ficha do espaço mostra "Fotos: Google Maps" com link para a página de origem.
 
+A ficha também mostra um mapa (OpenStreetMap) com o ponto em `coordenadas` e, se a pessoa permitir, a distância em linha reta até onde ela está. A posição fica só na memória da aba: não é salva nem enviada. `coordenadas.aprox: true` marca pontos que só acertam a quadra.
+
 **Meus eventos** organiza o planejamento: data, horário, para quem, quem organiza, convidados, tema, orçamento e descrição. Em cada evento você adiciona as opções de cada categoria, marca com a estrela as melhores e acompanha valor combinado, pago e vencimentos, um orçamento detalhado (itens como lembrancinhas e doces ficam em rascunho e só contam como gasto depois de aprovados), tarefas com prazo e cronograma do dia, tudo numa página só (com versão para imprimir).
 
 Os campos de cada categoria vieram da pesquisa em [docs/pesquisa-atributos.md](docs/pesquisa-atributos.md).
 
 Site: https://geisbelly.github.io/locais-eventos-palmas/
 
-Sem login para ver o catálogo. Para cadastrar, editar, excluir e gravar avaliações é preciso digitar uma vez a **chave de edição** (ícone de nuvem). Os eventos ficam no aparelho e, com a chave, na nuvem, onde só quem tem a chave consegue ler.
+Sem login para ver o catálogo. Para cadastrar, editar, excluir e gravar avaliações é preciso digitar uma vez a **chave de edição** (ícone de nuvem). Não existe mais o modo de salvar só no aparelho: visitas, favoritos e eventos são gravados na nuvem, e sem a chave o site pede para entrar antes de salvar. Os eventos só podem ser lidos por quem tem a chave.
 
 ## Onde ficam os dados
 

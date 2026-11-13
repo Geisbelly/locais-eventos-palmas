@@ -898,3 +898,64 @@ body[data-modo="eventos"] .grade-cat { grid-template-columns: 1fr; margin-top: 8
 /* Crédito das fotos de terceiros */
 .foto-credito { position: absolute; left: 12px; bottom: 12px; background: rgba(20,18,15,.6); color: #fff; font-size: .72rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; text-decoration: none; z-index: 1; }
 .foto-credito:hover, .foto-credito:focus-visible { background: rgba(20,18,15,.82); text-decoration: underline; }
+
+/* ===== Correção: topo, capas, mapa e distância (v11) ===== */
+.topo-in { flex-wrap: nowrap; }
+.nav-principal { min-width: 0; }
+.btn-perto { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 14px; border: 1px solid var(--borda-campo, var(--linha)); background: var(--card); color: var(--tinta); border-radius: 999px; font-weight: 600; font-size: .88rem; cursor: pointer; white-space: nowrap; }
+.btn-perto:hover { border-color: var(--ouro); }
+.btn-perto[aria-pressed="true"] { background: var(--verde-fundo); border-color: var(--verde); color: var(--verde); }
+.btn-perto.carregando svg { animation: girar 1.2s linear infinite; }
+@keyframes girar { to { transform: rotate(360deg); } }
+.sync-btn { white-space: nowrap; }
+@media (max-width: 1100px) { .btn-perto .lbl { display: none; } .btn-perto { width: 44px; padding: 0; justify-content: center; } }
+@media (max-width: 900px) and (min-width: 761px) { .sync-txt { display: none; } .marca-txt { font-size: 1.05rem; } .nav-principal a, .nav-principal button { padding: 8px 10px; } }
+
+/* Cards com foto de capa grande no lugar da miniatura */
+.card.com-capa { padding-top: 0; }
+.card-capa { all: unset; display: block; position: relative; margin: 0 -18px; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--raio) var(--raio) 0 0; background: var(--bg-2); cursor: pointer; }
+.card.comparando .card-capa { margin: 0 -17px; }
+.card-capa img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
+.card:hover .card-capa img { transform: scale(1.03); }
+.capa-dist { position: absolute; left: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 4px; height: 28px; padding: 0 10px; border-radius: 999px; background: rgba(20, 18, 15, .78); color: #fff; font-size: .8rem; font-weight: 600; }
+.capa-dist svg { width: 14px; height: 14px; }
+.card .onde .dist { margin-left: 4px; color: var(--verde); font-weight: 600; white-space: nowrap; }
+.card h2, .card .onde { overflow-wrap: anywhere; }
+.card .rodape-card { flex-wrap: wrap; }
+
+/* Ficha: localização com mapa e distância */
+.det-local { margin: 22px 0 6px; }
+.det-local h3 { font-family: var(--titulo); font-size: 1.3rem; font-weight: 650; margin: 0 0 6px; }
+.det-end { display: flex; gap: 6px; margin: 0 0 10px; color: var(--suave-forte, var(--suave)); font-size: .92rem; }
+.det-end svg { margin-top: 3px; width: 16px; height: 16px; }
+.det-local-caixa { border: 1px solid var(--linha); border-radius: 16px; overflow: hidden; background: var(--card); }
+.det-mapa { display: block; width: 100%; height: 240px; border: 0; background: var(--bg-2); }
+.det-mapa.sem { height: auto; display: flex; gap: 12px; align-items: flex-start; padding: 16px; color: var(--suave-forte, var(--suave)); }
+.det-mapa.sem p { margin: 0; font-size: .92rem; }
+.det-local-pe { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+.dist-linha { display: flex; align-items: center; gap: 12px; }
+.dist-ic { width: 44px; height: 44px; flex: none; border-radius: 12px; background: var(--verde-fundo); color: var(--verde); display: grid; place-items: center; }
+.dist-n { margin: 0; font-size: 1.25rem; font-weight: 700; line-height: 1.2; }
+.dist-c { margin: 0; font-size: .82rem; color: var(--suave-forte, var(--suave)); }
+.dist-pedir { display: flex; flex-direction: column; gap: 10px; }
+.dist-pedir p, .dist-aviso { margin: 0; font-size: .9rem; color: var(--suave-forte, var(--suave)); }
+.det-local-acoes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.det-local-acoes .btn, .dist-pedir .btn { justify-content: center; min-height: 44px; }
+@media (min-width: 900px) { .det-mapa { height: 280px; } }
+
+/* Aviso para entrar com a chave antes de salvar */
+.aviso-chave { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; padding: 14px; margin: 4px 0 14px; border: 1px solid var(--linha); border-radius: 14px; background: var(--ouro-fundo); }
+.aviso-chave svg { color: var(--ouro-texto); }
+.aviso-chave p { flex: 1 1 200px; margin: 0; font-size: .92rem; }
+.card-capa.sem-foto { aspect-ratio: 16 / 7; }
+.card-capa .capa-arte { position: relative; }
+.card-capa .capa-arte svg { width: 40px; height: 40px; }
+.card-capa .capa-arte .ini { display: none; }
+.capa-sem { position: absolute; right: 10px; bottom: 10px; height: 24px; padding: 0 9px; border-radius: 999px; background: rgba(255, 255, 255, .2); color: #fff; font-size: .74rem; font-weight: 600; display: inline-flex; align-items: center; }
+.marca-txt, .nav-principal a, .nav-principal button { white-space: nowrap; }
+@media (max-width: 1000px) and (min-width: 761px) { .topo-in { gap: 12px 14px; } }
+@media (max-width: 900px) and (min-width: 761px) { .btn-novo .lbl { display: none; } .btn-novo { width: 44px; padding: 0; justify-content: center; } }
+.card { --cp: 18px; } .card.comparando { --cp: 17px; }
+.card-capa, .card.comparando .card-capa { margin: 0 calc(-1 * var(--cp)); }
+@media (max-width: 760px) { .card { --cp: 14px; } .card.comparando { --cp: 13px; } }
+.det-local-acoes .btn { white-space: nowrap; padding-left: 10px; padding-right: 10px; }

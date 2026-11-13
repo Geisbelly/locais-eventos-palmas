@@ -28,6 +28,9 @@
     fone: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
     site: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
     mapa: '<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',
+    alvo: '<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7.5"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3"/>',
+    rota: '<path d="M3 11l18-8-8 18-2-8z"/>',
+    nuvem: '<path d="M7 18a5 5 0 1 1 .9-9.9A6 6 0 0 1 19 10a4 4 0 0 1-1 8z"/>',
     coracao: '<path d="M12 20s-7-4.4-9.2-9A5 5 0 0 1 12 6a5 5 0 0 1 9.2 5c-2.2 4.6-9.2 9-9.2 9z"/>',
     x: '<path d="M6 6l12 12M18 6 6 18"/>',
     alerta: '<path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.5"/>',
@@ -238,6 +241,88 @@
     const q = [l.nome, l.endereco, 'Palmas - TO'].filter(Boolean).join(', ');
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
   }
+  function rotaUrl(l) {
+    const c = l.coordenadas;
+    const dest = c ? `${c.lat},${c.lng}` : [l.nome, l.endereco, 'Palmas - TO'].filter(Boolean).join(', ');
+    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest)}`;
+  }
+
+  /* ============ Localização do usuário e distância ============ */
+  // A posição fica só na memória desta aba: serve para calcular a distância e nunca é salva nem enviada.
+  const GEO = { pos: null, estado: 'nada' }; // nada | pedindo | ok | negado | erro
+  function distKm(l) {
+    const c = l && l.coordenadas;
+    if (!GEO.pos || !c || !isFinite(c.lat) || !isFinite(c.lng)) return null;
+    const r = (x) => (x * Math.PI) / 180;
+    const dLat = r(c.lat - GEO.pos.lat), dLng = r(c.lng - GEO.pos.lng);
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(r(GEO.pos.lat)) * Math.cos(r(c.lat)) * Math.sin(dLng / 2) ** 2;
+    return 6371 * 2 * Math.asin(Math.sqrt(h));
+  }
+  function distTxt(km) {
+    if (km == null) return '';
+    if (km < 1) return `${Math.max(50, Math.round((km * 1000) / 50) * 50)} m`;
+    return `${km.toLocaleString('pt-BR', { maximumFractionDigits: km < 10 ? 1 : 0 })} km`;
+  }
+  function pedirLocal({ avisar = true } = {}) {
+    if (!navigator.geolocation) { if (avisar) toast('Este navegador não informa a localização.'); return; }
+    if (GEO.estado === 'pedindo') return;
+    GEO.estado = 'pedindo'; aoMudarLocal();
+    navigator.geolocation.getCurrentPosition((p) => {
+      GEO.pos = { lat: p.coords.latitude, lng: p.coords.longitude }; GEO.estado = 'ok';
+      aoMudarLocal();
+    }, (e) => {
+      GEO.estado = e && e.code === 1 ? 'negado' : 'erro';
+      if (avisar) toast(GEO.estado === 'negado' ? 'A localização está bloqueada para este site. Libere nas permissões do navegador para ver as distâncias.' : 'Não consegui pegar sua localização agora. Tente de novo.');
+      aoMudarLocal();
+    }, { enableHighAccuracy: false, timeout: 15000, maximumAge: 300000 });
+  }
+  function aoMudarLocal() {
+    const b = $('#btn-perto');
+    if (b) { b.setAttribute('aria-pressed', String(GEO.estado === 'ok')); b.classList.toggle('carregando', GEO.estado === 'pedindo'); }
+    if (typeof renderLista === 'function' && $('#lista')) renderLista();
+    const d = $('#det-local');
+    if (d && S.detalheId && S.porId[S.detalheId]) d.outerHTML = localHtml(S.porId[S.detalheId]);
+  }
+  function localHtml(l) {
+    const c = l.coordenadas && isFinite(l.coordenadas.lat) && isFinite(l.coordenadas.lng) ? l.coordenadas : null;
+    if (!c && !l.endereco && !ehEspaco(l)) return '<div id="det-local" hidden></div>';
+    const end = l.endereco || (ehEspaco(l) ? l.bairro : '') || '';
+    let mapa;
+    if (c) {
+      const dd = 0.006;
+      const bbox = [c.lng - dd, c.lat - dd * 0.7, c.lng + dd, c.lat + dd * 0.7].map((n) => n.toFixed(6)).join(',');
+      mapa = `<iframe class="det-mapa" title="Mapa com a localização de ${esc(l.nome)}" loading="lazy" referrerpolicy="no-referrer"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&amp;layer=mapnik&amp;marker=${c.lat},${c.lng}"></iframe>`;
+    } else {
+      mapa = `<div class="det-mapa sem">${ic('mapa')}<p>Este espaço ainda não tem um ponto no mapa${end ? '' : ' nem endereço'}. Procure pelo nome no Google Maps ou pergunte o endereço pelo contato.</p></div>`;
+    }
+    const km = distKm(l);
+    let dist;
+    if (!c) dist = '';
+    else if (km != null) {
+      dist = `<div class="dist-linha"><span class="dist-ic">${ic('alvo')}</span><div><p class="dist-n">${distTxt(km)} de você</p>
+        <p class="dist-c">em linha reta, pela sua localização agora${c.aprox ? ' · ponto aproximado (só a quadra)' : ''}</p></div></div>`;
+    } else if (GEO.estado === 'negado') {
+      dist = `<p class="dist-aviso">A localização está bloqueada para este site. Libere nas permissões do navegador para ver a que distância ele fica de você.</p>`;
+    } else {
+      dist = `<div class="dist-pedir"><p>Veja a que distância este espaço fica de você. A localização só é usada neste aparelho para fazer a conta e não é salva.</p>
+        <button type="button" class="btn" data-acao="usar-local" ${GEO.estado === 'pedindo' ? 'disabled' : ''}>${ic('alvo')}${GEO.estado === 'pedindo' ? 'Pegando sua localização…' : 'Usar minha localização'}</button></div>`;
+    }
+    return `<section class="det-local" id="det-local" aria-labelledby="t-det-local">
+      <h3 id="t-det-local">Localização</h3>
+      ${end ? `<p class="det-end">${ic('pin')}<span>${esc(end)}</span></p>` : ''}
+      <div class="det-local-caixa">
+        ${mapa}
+        <div class="det-local-pe">
+          ${dist}
+          <div class="det-local-acoes">
+            <a class="btn primario" href="${esc(rotaUrl(l))}" target="_blank" rel="noopener">${ic('rota')}Como chegar</a>
+            <a class="btn" href="${esc(mapaUrl(l))}" target="_blank" rel="noopener">${ic('mapa')}Abrir no Maps</a>
+          </div>
+        </div>
+      </div>
+    </section>`;
+  }
 
   /* ============ Estado ============ */
   const S = {
@@ -265,7 +350,19 @@
 
   /* ============ Persistência e sincronização ============ */
   let timerSync = null;
+  // Sem a opção de guardar só no aparelho: para gravar é preciso entrar com a chave (tudo vai para a nuvem).
+  let avisouChave = 0;
+  function precisaChave() {
+    if (!API || S.chave) return false;
+    if (Date.now() - avisouChave > 1500) {
+      avisouChave = Date.now();
+      toast('Entre com a chave de edição para salvar na nuvem.');
+      if (!$('#config').open) abrirConfig();
+    }
+    return true;
+  }
   function salvarVisita(id, patch, { render = true } = {}) {
+    if (precisaChave()) return false;
     S.visitas[id] = Object.assign(visita(id), patch, { atualizado_em: new Date().toISOString() });
     lsSet(LS.visitas, S.visitas);
     if (API) { S.pendentes.add(id); lsSet(LS.pendentes, [...S.pendentes]); }
@@ -289,11 +386,11 @@
   }
   function textoSync() {
     return {
-      local: 'Salvo neste aparelho',
-      'sem-chave': 'Salvo neste aparelho. Informe a chave de edição para salvar na nuvem.',
+      local: 'Nuvem não configurada neste site.',
+      'sem-chave': 'Entre com a chave de edição para salvar. Tudo fica na nuvem, em qualquer aparelho.',
       pendente: 'Salvando na nuvem…',
-      ok: 'Salvo na nuvem',
-      erro: 'Não foi possível salvar na nuvem; ficou guardado neste aparelho e tenta de novo depois.',
+      ok: 'Tudo salvo na nuvem',
+      erro: 'Sem conexão com a nuvem agora. Tento de novo sozinho assim que voltar.',
     }[S.sync];
   }
 
@@ -372,6 +469,7 @@
       if (o === 'cap') return (b.capacidade || 0) - (a.capacidade || 0) || a.nome.localeCompare(b.nome, 'pt-BR');
       if (o === 'nota') return (visita(b.id).nota || 0) - (visita(a.id).nota || 0) || completude(b) - completude(a);
       if (o === 'nome') return a.nome.localeCompare(b.nome, 'pt-BR');
+      if (o === 'perto') return (distKm(a) ?? Infinity) - (distKm(b) ?? Infinity) || completude(b) - completude(a);
       return completude(b) - completude(a) || a.nome.localeCompare(b.nome, 'pt-BR');
     });
     return r;
@@ -379,7 +477,7 @@
 
   /* ============ Render: topo ============ */
   const TITULOS = { espacos: 'Espaços para eventos' };
-  const SYNC_CURTO = { local: 'Neste aparelho', 'sem-chave': 'Só neste aparelho', pendente: 'Salvando…', ok: 'Sincronizado', erro: 'Sem conexão' };
+  const SYNC_CURTO = { local: 'Sem nuvem', 'sem-chave': 'Entrar', pendente: 'Salvando…', ok: 'Na nuvem', erro: 'Sem conexão' };
   function renderNav() {
     const nEv = eventosAtivos().length;
     const cat = CATS[S.secao] ? S.secao : S.ultCat;
@@ -537,9 +635,11 @@
     const onde = ehEspaco(l) ? l.bairro || 'Palmas' : l.atende_em || l.bairro || 'Palmas';
     const st = v.status ? [stRot(v.status, l), v.status === 'visitado' && v.data ? dataBR(v.data).slice(0, 5) : null, v.nota ? `nota ${v.nota}` : null].filter(Boolean).join(' · ') : '';
     const fatos = fatosCard(l);
-    return `<article class="card ${v.status === 'descartado' ? 'descartado' : ''} ${cmp ? 'comparando' : ''}">
+    const foto = (l.fotos || []).find((x) => urlSegura(x.url || x));
+    const km = distKm(l);
+    return `<article class="card com-capa ${v.status === 'descartado' ? 'descartado' : ''} ${cmp ? 'comparando' : ''}">
+      <button type="button" class="card-capa ${foto ? '' : 'sem-foto'}" data-abrir="${l.id}" tabindex="-1" aria-hidden="true">${foto ? `<img src="${esc(foto.url || foto)}" alt="" loading="lazy">` : capaHtml(l)}${km != null ? `<span class="capa-dist">${ic('pin')}${distTxt(km)}</span>` : ''}${foto ? '' : '<span class="capa-sem">Sem foto ainda</span>'}</button>
       <div class="card-cab">
-        <button type="button" class="mini-capa-btn" data-abrir="${l.id}" tabindex="-1" aria-hidden="true">${miniCapa(l)}</button>
         <div class="card-tit">
           <h2><button type="button" data-abrir="${l.id}">${esc(l.nome)}</button></h2>
           <p class="onde">${ic('pin')}<span>${esc(onde)}</span>${!ehEspaco(l) || !l.tipo ? '' : `<span class="tipo">· ${esc(l.tipo)}</span>`}</p>
@@ -681,7 +781,6 @@
       l.telefone && `<a class="btn" href="tel:+55${digitos(l.telefone)}">${ic('fone')}${esc(l.telefone)}</a>`,
       insta && `<a class="btn" href="${esc(insta)}" target="_blank" rel="noopener">${ic('insta')}${esc(instaArroba(l.instagram))}</a>`,
       urlSegura(l.site) && `<a class="btn" href="${esc(l.site)}" target="_blank" rel="noopener">${ic('site')}Site</a>`,
-      (ehEspaco(l) || l.endereco) && `<a class="btn" href="${esc(mapaUrl(l))}" target="_blank" rel="noopener">${ic('mapa')}Mapa</a>`,
       urlSegura(l.detalhes && l.detalhes.portfolio) && `<a class="btn" href="${esc(l.detalhes.portfolio)}" target="_blank" rel="noopener">${ic('servicos')}Portfólio</a>`,
     ].filter(Boolean).join('');
     const meta = (ehEspaco(l)
@@ -720,6 +819,7 @@
         <p class="meta">${meta}</p>
         <dl class="det-fatos">${fatos.map(([r, v, x]) => `<div><dt>${r}</dt><dd>${esc(v)}${x ? ` <small>${esc(x)}</small>` : ''}</dd></div>`).join('')}</dl>
         ${contatos ? `<div class="contatos">${contatos}</div>` : ''}
+        ${localHtml(l)}
         ${evs.length ? `<div class="no-evento-box">${ic('eventos')}<span>Nos seus eventos: ${evs.map(({ ev, esc: e }) => `<a href="#evento/${ev.id}">${esc(ev.nome)}</a> <small>(${escRot(e.status)})</small>`).join(', ')}</span></div>` : ''}
         <div class="segmento" role="tablist">
           <button type="button" role="tab" data-daba="sobre" aria-selected="${S.detalheAba === 'sobre'}">Informações</button>
@@ -810,7 +910,8 @@
   }
   function visitaHtml(l) {
     const v = visita(l.id);
-    return `
+    const entrar = API && !S.chave ? `<div class="aviso-chave">${ic('nuvem')}<p>Para registrar visita, nota e anotações, entre com a chave de edição. Tudo fica salvo na nuvem.</p><button type="button" class="btn primario" data-acao="abrir-config">Entrar</button></div>` : '';
+    return `${entrar}
       <section class="secao"><h3>Situação</h3>
         <div class="status-visita">${Object.entries(STATUS).map(([k, s]) =>
           `<button type="button" data-status="${k}" data-v="${k}" aria-pressed="${v.status === k}">${ic(s.icone)}${k ? stRot(k, l) : (ehEspaco(l) ? s.rotulo : 'Sem contato')}</button>`).join('')}</div>
@@ -923,12 +1024,12 @@
   function abrirConfig() {
     const d = $('#config');
     d.innerHTML = `<div class="folha-corpo">
-      <h2>Sincronização</h2>
+      <h2>Salvar na nuvem</h2>
       ${API
-        ? `<p>As visitas ficam salvas neste aparelho e na nuvem. Qualquer pessoa vê o que foi registrado; para <strong>gravar</strong> visitas, <strong>cadastrar ou editar</strong> o catálogo e <strong>ver os eventos</strong> de qualquer aparelho é preciso a chave de edição (pergunte a quem cuida do site).</p>
+        ? `<p>Visitas, eventos e cadastros ficam sempre na nuvem e aparecem em qualquer aparelho. Para <strong>gravar</strong>, <strong>cadastrar ou editar</strong> e <strong>ver os eventos</strong>, entre com a chave de edição (pergunte a quem cuida do site).</p>
            <label class="campo"><span>Chave de edição</span><input id="in-chave" type="password" autocomplete="off" value="${esc(S.chave)}" placeholder="Digite a chave"></label>
-           <div class="acoes"><button class="btn primario" data-acao="salvar-chave">Salvar chave</button>${S.chave ? '<button class="btn" data-acao="esquecer-chave">Esquecer neste aparelho</button>' : ''}</div>`
-        : `<p>Sem nuvem configurada: as visitas ficam salvas só neste navegador. Use o backup para levar para outro aparelho.</p>`}
+           <div class="acoes"><button class="btn primario" data-acao="salvar-chave">${S.chave ? 'Trocar chave' : 'Entrar e sincronizar'}</button>${S.chave ? '<button class="btn" data-acao="esquecer-chave">Sair</button>' : ''}</div>`
+        : `<p>A nuvem não está configurada neste site.</p>`}
       <p class="estado-salvo"><span class="ponto-sync"></span><span id="txt-sync"></span></p>
       <h2 style="margin-top:22px">Backup</h2>
       <p>Baixe um arquivo com todas as suas visitas, prós, contras e anotações, ou restaure um backup.</p>
@@ -947,11 +1048,11 @@
       const r = await fetch(`${API}/verificar`, { headers: { 'X-Chave': v } });
       if (r.status === 401) { toast('Chave incorreta.'); return; }
       if (!r.ok) throw new Error(r.status);
-    } catch { toast('Não consegui falar com a nuvem agora. A chave foi guardada mesmo assim.'); }
+    } catch { toast('Não consegui falar com a nuvem agora. Entrei mesmo assim; sincronizo quando a conexão voltar.'); }
     S.chave = v; lsSet(LS.chave, v);
     Object.keys(S.visitas).forEach((id) => S.pendentes.add(id));
     lsSet(LS.pendentes, [...S.pendentes]);
-    toast('Chave salva. Sincronizando…');
+    toast('Pronto! Sincronizando com a nuvem…');
     $('#config').close();
     sincronizar();
     Object.keys(S.eventos).forEach((id) => S.evPend.add(id));
@@ -1325,12 +1426,13 @@
       e.value = S.f[k];
       e.addEventListener('input', () => {
         S.f[k] = e.value;
-        if (k === 'ordem') { ui.ordem = e.value; lsSet(LS.ui, ui); }
+        if (k === 'ordem') { if (e.value !== 'perto') { ui.ordem = e.value; lsSet(LS.ui, ui); } if (e.value === 'perto' && !GEO.pos) pedirLocal(); }
         renderLista();
       });
     }
     $('#btn-filtros').addEventListener('click', () => filtrosAbertos(!$('#painel-filtros').classList.contains('aberto')));
     $('#btn-config').addEventListener('click', abrirConfig);
+    $('#btn-perto').addEventListener('click', () => { S.f.ordem = 'perto'; $('#f-ordem').value = 'perto'; if (!GEO.pos) pedirLocal(); else renderLista(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && $('#painel-filtros').classList.contains('aberto')) filtrosAbertos(false); });
     let eraCel = ehCelular();
     matchMedia('(max-width: 760px)').addEventListener('change', () => {
@@ -1390,7 +1492,7 @@
     }
     if ((b = t.closest('[data-fav]'))) {
       const id = b.dataset.fav; const fav = !visita(id).favorito;
-      salvarVisita(id, { favorito: fav });
+      if (salvarVisita(id, { favorito: fav }) === false) return;
       document.querySelectorAll(`[data-fav="${id}"]`).forEach((x) => x.setAttribute('aria-pressed', fav));
       toast(fav ? 'Adicionado aos favoritos' : 'Removido dos favoritos');
       return;
@@ -1423,7 +1525,7 @@
       salvarVisita(S.detalheId, { [tipo]: arr }); renderPainelVisita(); return;
     }
     if ((b = t.closest('[data-editar]'))) { abrirEditor(b.dataset.editar); return; }
-    if ((b = t.closest('[data-add-evento]'))) { abrirPickerEvento(b.dataset.addEvento); return; }
+    if ((b = t.closest('[data-add-evento]'))) { if (!precisaChave()) abrirPickerEvento(b.dataset.addEvento); return; }
     if ((b = t.closest('[data-picker]'))) { abrirPicker(b.dataset.picker); return; }
     if ((b = t.closest('[data-pick]'))) {
       if (addEscolha(S.paginaEv, b.dataset.pick)) { toast('Adicionado ao evento.'); $('#pick-lista').innerHTML = listaPick(); }
@@ -1482,7 +1584,7 @@
     if ((b = t.closest('[data-acao]'))) {
       const a = b.dataset.acao;
       if (a === 'novo-local') { if (S.secao === 'eventos') abrirEditorEvento(null); else abrirEditor(null, S.secao); }
-      if (a === 'novo-evento') abrirEditorEvento(null);
+      if (a === 'novo-evento') { if (!precisaChave()) abrirEditorEvento(null); }
       if (a === 'editar-evento') abrirEditorEvento(S.paginaEv);
       if (a === 'remover-evento') removerEvento();
       if (a === 'imprimir') window.print();
@@ -1511,7 +1613,9 @@
       }
       if (a === 'limpar-comparar') { S.cmp.clear(); renderLista(); }
       if (a === 'salvar-chave') salvarChave();
-      if (a === 'esquecer-chave') { S.chave = ''; lsSet(LS.chave, ''); toast('Chave removida deste aparelho.'); $('#config').close(); atualizarSync(); }
+      if (a === 'usar-local') pedirLocal();
+      if (a === 'abrir-config') abrirConfig();
+      if (a === 'esquecer-chave') { S.chave = ''; lsSet(LS.chave, ''); toast('Você saiu. Para salvar de novo, entre com a chave.'); $('#config').close(); atualizarSync(); }
       if (a === 'exportar') exportar();
       return;
     }
@@ -1630,6 +1734,7 @@
     $('#rot-tipo').textContent = S.secao === 'espacos' ? 'Tipo de espaço' : porObj() ? CATS[S.secao].porObjeto.tipoRot : 'O que oferece';
     $('#campo-cap').hidden = S.secao !== 'espacos';
     $('#f-ordem option[value="cap"]').hidden = S.secao !== 'espacos';
+    $('#f-ordem option[value="perto"]').hidden = S.secao !== 'espacos';
   }
 
   /* ============ Eventos ============ */
@@ -1702,13 +1807,14 @@
   const eventosAtivos = () => Object.values(S.eventos).filter((e) => e && !e.removido)
     .sort((a, b) => (a.data || '9999').localeCompare(b.data || '9999') || (a.nome || '').localeCompare(b.nome || '', 'pt-BR'));
   const eventosCom = (id) => eventosAtivos().flatMap((ev) => (ev.escolhas || []).filter((e) => e.id === id).map((e) => ({ ev, esc: e })));
-  const privTxt = () => (!API ? 'Os eventos ficam salvos neste navegador.'
-    : S.chave ? 'Os eventos ficam neste aparelho e na nuvem. Só quem tem a chave de edição vê.'
-      : 'Os eventos ficam salvos neste aparelho. Com a chave de edição eles vão para a nuvem, visíveis só para quem tem a chave.');
+  const privTxt = () => (!API ? 'Nuvem não configurada neste site.'
+    : S.chave ? 'Os eventos ficam na nuvem. Só quem tem a chave de edição vê.'
+      : 'Entre com a chave de edição para criar e ver eventos. Eles ficam na nuvem, visíveis só para quem tem a chave.');
 
-  // Guardar: sempre no aparelho; na nuvem quando houver chave.
+  // Guardar na nuvem (com cópia de trabalho no navegador para não perder nada sem conexão).
   let timerEv = null;
   function salvarEvento(ev, { render = true } = {}) {
+    if (precisaChave()) return false;
     ev.atualizado_em = new Date().toISOString();
     S.eventos[ev.id] = ev;
     lsSet(LS.eventos, S.eventos);
@@ -2195,7 +2301,7 @@
     }
     ED.sujo = false;
     $('#editor').close();
-    salvarEvento(ev, { render: false });
+    if (salvarEvento(ev, { render: false }) === false) return;
     toast(novo ? 'Evento criado.' : 'Evento salvo.');
     if (location.hash === `#evento/${ev.id}`) renderTudo(); else location.hash = `#evento/${ev.id}`;
   }
@@ -2219,7 +2325,7 @@
     S.secao = sec; S.aba = S.abaDepois || 'todos'; S.abaDepois = null; S.cmp.clear();
     Object.assign(S.f, { tipo: '', evento: '', cap: '' }); S.f.rapidos.clear();
     ['tipo', 'evento', 'cap'].forEach((c) => { $('#f-' + c).value = ''; });
-    if (S.f.ordem === 'cap' && sec !== 'espacos') { S.f.ordem = 'relevancia'; $('#f-ordem').value = 'relevancia'; }
+    if ((S.f.ordem === 'cap' || S.f.ordem === 'perto') && sec !== 'espacos') { S.f.ordem = 'relevancia'; $('#f-ordem').value = 'relevancia'; }
     if (CATS[sec]) renderOpcoes();
   }
   function rota() {

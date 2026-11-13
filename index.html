@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Inter:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="assets/style.css?v=10">
+  <link rel="stylesheet" href="assets/style.css?v=11">
 </head>
 <body>
   <a class="pular" href="#lista">Pular para os resultados</a>
@@ -23,9 +23,12 @@
       </a>
       <nav class="nav-principal" id="nav-principal" aria-label="Principal"></nav>
       <div class="topo-acoes">
-        <button class="sync-btn" id="btn-config" type="button" title="Sincronização e backup">
-          <span class="ponto-sync" id="ponto-sync"></span><span class="sync-txt" id="sync-curto">Neste aparelho</span>
-          <span class="sr">Sincronização e backup</span>
+        <button class="btn-perto" id="btn-perto" type="button" aria-pressed="false" title="Ordenar pelos mais perto de você">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7.5"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3"/></svg><span class="lbl">Perto de mim</span>
+        </button>
+        <button class="sync-btn" id="btn-config" type="button" title="Salvar na nuvem e backup">
+          <span class="ponto-sync" id="ponto-sync"></span><span class="sync-txt" id="sync-curto">Entrar</span>
+          <span class="sr">Salvar na nuvem e backup</span>
         </button>
         <button class="btn-novo" id="btn-novo" type="button" data-acao="novo-local" title="Cadastrar" aria-label="Cadastrar">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span class="lbl">Cadastrar</span>
@@ -51,6 +54,7 @@
       <label class="ordenar"><span>Ordenar</span>
         <select id="f-ordem">
           <option value="relevancia">Mais completos</option>
+          <option value="perto">Mais perto de mim</option>
           <option value="preco">Menor valor</option>
           <option value="cap">Maior capacidade</option>
           <option value="nota">Minha nota</option>
@@ -123,7 +127,7 @@
   <dialog id="config" class="modal" aria-label="Sincronização e backup"></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="config.js?v=10"></script>
-  <script src="assets/app.js?v=10"></script>
+  <script src="config.js?v=11"></script>
+  <script src="assets/app.js?v=11"></script>
 </body>
 </html>
