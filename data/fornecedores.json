@@ -155,8 +155,10 @@
       ],
       "conferido_em": "2026-10-15",
       "status": "Informado pelo local",
-      "atualizado_em": "2026-11-13T22:10:09Z",
-      "detalhes": {},
+      "atualizado_em": "2026-11-13T22:27:50Z",
+      "detalhes": {
+        "duracao": "24 horas"
+      },
       "itens": {},
       "id": "palmas-kids-fest",
       "cat": "brinquedos",
@@ -303,8 +305,10 @@
       ],
       "conferido_em": "2026-10-14",
       "status": "Informado pelo local",
-      "atualizado_em": "2026-11-13T22:10:09Z",
-      "detalhes": {},
+      "atualizado_em": "2026-11-13T22:27:50Z",
+      "detalhes": {
+        "duracao": "Até 4 horas (infláveis e futebol de sabão)"
+      },
       "itens": {
         "monitor": 1,
         "montagem": true
@@ -329,17 +333,19 @@
           "nome": "Futebol de sabão (até 13 anos)",
           "tipo": "Futebol de sabão",
           "valor": 800,
-          "unidade": "até 4 horas",
+          "unidade": "por evento",
           "qtd": null,
-          "obs": "Inclui 1 monitor"
+          "obs": "Inclui 1 monitor",
+          "duracao": "Até 4 horas"
         },
         {
           "nome": "Escorregador inflável (até 10 anos)",
           "tipo": "Inflável / tobogã",
           "valor": 600,
-          "unidade": "até 4 horas",
+          "unidade": "por evento",
           "qtd": null,
-          "obs": "Inclui 1 monitor"
+          "obs": "Inclui 1 monitor",
+          "duracao": "Até 4 horas"
         },
         {
           "nome": "Pula-pula 3,05 m (até 12 anos)",
@@ -400,14 +406,6 @@
       "site": null,
       "fotos": [
         {
-          "url": "fotos/brinque-ja/maps-1.jpg",
-          "legenda": "Infláveis montados",
-          "credito": {
-            "nome": "Google Maps",
-            "url": "https://www.google.com/maps/place/Brinque+Já/data=!4m2!3m1!1s0x933b37d978236b3b:0x67ce3706fcd86a79"
-          }
-        },
-        {
           "url": "fotos/brinque-ja/maps-2.jpg",
           "legenda": "Pula-pula",
           "credito": {
@@ -418,14 +416,6 @@
         {
           "url": "fotos/brinque-ja/maps-3.jpg",
           "legenda": "Escorregador inflável",
-          "credito": {
-            "nome": "Google Maps",
-            "url": "https://www.google.com/maps/place/Brinque+Já/data=!4m2!3m1!1s0x933b37d978236b3b:0x67ce3706fcd86a79"
-          }
-        },
-        {
-          "url": "fotos/brinque-ja/maps-4.jpg",
-          "legenda": "Tobogã inflável",
           "credito": {
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/Brinque+Já/data=!4m2!3m1!1s0x933b37d978236b3b:0x67ce3706fcd86a79"
@@ -446,7 +436,7 @@
       ],
       "conferido_em": "2026-10-14",
       "status": "Dados mínimos",
-      "atualizado_em": "2026-11-13T22:10:09Z",
+      "atualizado_em": "2026-11-13T22:27:50Z",
       "detalhes": {},
       "itens": {},
       "subtipos": [
@@ -490,14 +480,6 @@
       "site": null,
       "fotos": [
         {
-          "url": "fotos/kaio-locacoes/maps-1.jpg",
-          "legenda": "Tobogã inflável",
-          "credito": {
-            "nome": "Google Maps",
-            "url": "https://www.google.com/maps/place/Kaio+Locações+de+Brinquedos/data=!4m2!3m1!1s0x933b35005837530b:0x3a68994317ea5f8b"
-          }
-        },
-        {
           "url": "fotos/kaio-locacoes/maps-2.jpg",
           "legenda": "Escorregador inflável",
           "credito": {
@@ -536,8 +518,10 @@
       ],
       "conferido_em": "2026-10-14",
       "status": "Informado pelo local",
-      "atualizado_em": "2026-11-13T22:10:09Z",
-      "detalhes": {},
+      "atualizado_em": "2026-11-13T22:27:50Z",
+      "detalhes": {
+        "duracao": "5 horas"
+      },
       "itens": {},
       "subtipos": [
         "Inflável / tobogã",
@@ -557,9 +541,10 @@
           "nome": "Brinquedo novo (mostrado em vídeo)",
           "tipo": "Inflável / tobogã",
           "valor": 450,
-          "unidade": "por evento (5h)",
+          "unidade": "por evento",
           "qtd": null,
-          "obs": "O nome do brinquedo só aparece no vídeo; confirmar qual é"
+          "obs": "O nome do brinquedo só aparece no vídeo; confirmar qual é",
+          "duracao": "5 horas"
         }
       ],
       "id": "kaio-locacoes",
@@ -604,14 +589,6 @@
           }
         },
         {
-          "url": "fotos/lig-brinq/maps-3.jpg",
-          "legenda": "Inflável",
-          "credito": {
-            "nome": "Google Maps",
-            "url": "https://www.google.com/maps/place/Lig+brinq+brinquedos/data=!4m2!3m1!1s0x933b359bb08ba2b1:0x44b9034882ed9995"
-          }
-        },
-        {
           "url": "fotos/lig-brinq/maps-4.jpg",
           "legenda": "Escorregador inflável",
           "credito": {
@@ -625,7 +602,7 @@
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos",
-      "atualizado_em": "2026-11-13T22:10:09Z",
+      "atualizado_em": "2026-11-13T22:27:50Z",
       "detalhes": {},
       "itens": {},
       "subtipos": [
@@ -671,8 +648,10 @@
       ],
       "conferido_em": "2026-10-15",
       "status": "Informado pelo local",
-      "atualizado_em": "2026-11-13T22:10:09Z",
-      "detalhes": {},
+      "atualizado_em": "2026-11-13T22:27:50Z",
+      "detalhes": {
+        "duracao": "4 horas nos infláveis; pula-pula a combinar"
+      },
       "itens": {
         "monitor": 1
       },
@@ -696,7 +675,8 @@
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": "4 horas de evento, 1 monitor por inflável"
+          "obs": "1 monitor por inflável",
+          "duracao": "4 horas"
         },
         {
           "nome": "Pula-pula",
@@ -704,7 +684,8 @@
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Tempo a combinar (as 4 horas valem só para os infláveis)"
+          "obs": "As 4 horas valem só para os infláveis",
+          "duracao": "A combinar"
         }
       ],
       "id": "liz-brinquedos",

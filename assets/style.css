@@ -1021,3 +1021,14 @@ body[data-modo="eventos"] .grade-cat { grid-template-columns: 1fr; margin-top: 8
   .btn-perto { width: 40px; height: 40px; padding: 0; justify-content: center; }
   .btn-novo { height: 40px; padding: 0 10px; }
 }
+
+/* ===== Tempo de uso (brinquedos e aluguéis) ===== */
+.tempo-uso { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 6px; margin: 8px 0 0; font-size: .86rem; color: var(--suave-forte, var(--suave)); }
+.tempo-uso svg { width: 16px; height: 16px; flex: none; color: var(--ouro-texto); }
+.tempo-uso strong { color: var(--tinta); font-weight: 600; }
+.tempo-uso.sem strong { color: var(--suave); font-weight: 500; font-style: italic; }
+.tempo-uso.sem svg { color: var(--fraco, var(--suave)); }
+.obj-tempo { display: inline-flex; align-items: center; gap: 5px; margin-top: 4px; font-size: .84rem; font-weight: 600; color: var(--tinta); }
+.obj-tempo svg { width: 14px; height: 14px; flex: none; color: var(--ouro-texto); }
+.obj-tempo.sem { color: var(--suave); font-weight: 500; font-style: italic; }
+.obj-lista li > div { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }

@@ -127,7 +127,7 @@
       rapidos: ['monitor', 'entrega', 'montagem', 'higienizacao'],
       campos: [['idade', 'Faixa de idade', 'txt', 'ex.: 3 a 10 anos'], ['simultaneas', 'Crianças ao mesmo tempo', 'num'],
         ['tamanho', 'Tamanho do brinquedo', 'txt', 'ex.: 4 x 4 m, 3 m de altura'], ['espaco', 'Espaço necessário', 'txt', 'ex.: 5 x 5 m, chão plano'],
-        ['energia', 'Energia', 'sel', ENERGIA], ['duracao', 'Tempo de locação', 'txt', 'ex.: 4 horas'],
+        ['energia', 'Energia', 'sel', ENERGIA], ['duracao', 'Tempo de uso', 'txt', 'ex.: 4 horas, 24 horas, a combinar'],
         ['hora_extra', 'Hora extra', 'txt', 'ex.: R$ 50 por hora'], ['chuva', 'Se chover ou ventar', 'txt', 'ex.: remarca sem custo'],
         ['normas', 'Normas / certificação', 'txt', 'ex.: NBR 15859']],
     },
@@ -170,6 +170,12 @@
   const tiposDe = (l) => (ehEspaco(l) ? [l.tipo].filter(Boolean)
     : [...new Set([...(l.subtipos || []), ...(l.objetos || []).map((o) => o.tipo).filter(Boolean)])]);
   const objetosDe = (l) => (l.objetos || []).filter((o) => o && (o.nome || o.tipo));
+  // Tempo de uso (brinquedos e aluguéis): o da empresa fica em detalhes.duracao; cada item pode ter o seu.
+  const CATS_TEMPO = ['brinquedos', 'alugueis'];
+  const mostraTempo = (l) => CATS_TEMPO.includes(l.cat);
+  const tempoDe = (l) => String((l.detalhes || {}).duracao || '').trim();
+  const tempoObj = (l, o) => String(o.duracao || '').trim() || (objetosDe(l).some((x) => x.duracao) ? '' : tempoDe(l));
+  const tempoHtml = (t, cls = '') => `<p class="tempo-uso ${t ? '' : 'sem'} ${cls}">${ic('relogio')}<span>Tempo de uso</span><strong>${esc(t || 'não informado')}</strong></p>`;
   const porObj = (sec = S.secao) => !!(CATS[sec] && CATS[sec].porObjeto);
   // Preços da empresa somados aos de cada objeto, para achar o menor valor.
   const precosDe = (l) => [...(l.precos || []), ...objetosDe(l).filter((o) => o.valor != null)
@@ -648,6 +654,7 @@
       </div>
       ${st || nEv ? `<div class="card-st">${st ? `<span class="pill-st ${STATUS[v.status].cls}">${ic(STATUS[v.status].icone)}${esc(st)}</span>` : ''}${nEv ? `<span class="pill-st st-ev">${ic('eventos')}em ${nEv} ${nEv === 1 ? 'evento' : 'eventos'}</span>` : ''}</div>` : ''}
       ${precoCard(l)}
+      ${mostraTempo(l) ? tempoHtml(tempoDe(l)) : ''}
       ${fatos ? `<ul class="fatos">${fatos}</ul>` : ''}
       <div class="rodape-card">
         ${zap ? `<a class="acao zap" href="${zap}" target="_blank" rel="noopener">${ic('zap')}WhatsApp</a>`
@@ -693,6 +700,7 @@
       </div>
       <div class="preco ${num ? '' : 'consulta'}"><p class="pv"><strong>${num ? brl(o.valor) : esc(o.valor || 'Sob consulta')}</strong>${num ? `<span>/ ${esc(o.unidade || 'evento')}</span>` : ''}</p>
         ${o.obs ? `<p class="pc">${esc(o.obs)}</p>` : num ? '' : '<p class="pc">Peça o valor pelo contato</p>'}</div>
+      ${mostraTempo(l) ? tempoHtml(tempoObj(l, o)) : ''}
       ${o.qtd ? `<ul class="fatos"><li>${ic('check')}${o.qtd} ${o.qtd === 1 ? 'disponível' : 'disponíveis'}</li></ul>` : ''}
       <p class="obj-empresa">${miniCapa(l)}<span>de <button type="button" data-abrir="${l.id}">${esc(l.nome)}</button>${l.atende_em ? ` · ${esc(l.atende_em)}` : ''}</span></p>
       <div class="rodape-card">
@@ -794,6 +802,7 @@
     const fatos = [
       ['Menor valor', pi.consulta ? pi.valor : brl(menorPreco(l)), pi.consulta ? '' : `/ ${pi.unidade}`],
       esp ? ['Capacidade', l.capacidade ? `até ${l.capacidade}` : 'Não informada', l.capacidade ? 'pessoas' : '']
+        : mostraTempo(l) ? ['Tempo de uso', tempoDe(l) || 'Não informado', '']
         : ['Atende', l.atende_em || l.bairro || 'Palmas', ''],
       esp ? ['Tempo de uso', h0 ? h0.horario : /h de uso/.test(pBase?.unidade || '') ? pBase.unidade : 'Não informado', h0 ? h0.dias : '']
         : porObj(l.cat) && objetosDe(l).length ? [catDe(l).porObjeto.rot, `${objetosDe(l).length}`, objetosDe(l).length === 1 ? catDe(l).porObjeto.um : catDe(l).porObjeto.varios]
@@ -844,6 +853,7 @@
         const num = typeof o.valor === 'number';
         return `<li class="${num && o.valor === mpObj && objs.length > 1 ? 'menor' : ''}">
           <div><strong>${esc(o.nome || o.tipo)}</strong>${o.tipo && o.tipo !== o.nome ? `<span class="obj-tipo">${esc(o.tipo)}</span>` : ''}
+            ${mostraTempo(l) ? `<span class="obj-tempo ${tempoObj(l, o) ? '' : 'sem'}">${ic('relogio')}${esc(tempoObj(l, o) || 'Tempo de uso não informado')}</span>` : ''}
             ${o.qtd || o.obs ? `<small>${[o.qtd ? `${o.qtd} ${o.qtd === 1 ? 'disponível' : 'disponíveis'}` : null, o.obs].filter(Boolean).map(esc).join(' · ')}</small>` : ''}</div>
           <span class="obj-valor">${num ? `${o.valor === mpObj && objs.length > 1 ? '<span class="selo-menor">Menor</span>' : ''}${brl(o.valor)} <small>/ ${esc(o.unidade || 'evento')}</small>` : `<span class="fraco">${esc(o.valor || 'Sob consulta')}</span>`}</span>
         </li>`;
@@ -868,10 +878,10 @@
       ? `<ul class="lista-simples">${l.horarios.map((h) => `<li><strong>${esc(h.dias)}</strong>: ${esc(h.horario)}</li>`).join('')}</ul>`
       : '<p class="texto">Não informado. Pergunte o horário de início e término e se há cobrança por hora extra.</p>';
     const det = l.detalhes || {};
-    const camposDet = esp ? [] : (catDe(l).campos || []).filter(([k, , t]) => det[k] != null && det[k] !== '' && t !== 'url');
+    const camposDet = esp ? [] : (catDe(l).campos || []).filter(([k, , t]) => det[k] != null && det[k] !== '' && t !== 'url' && !(k === 'duracao' && mostraTempo(l)));
     const reserva = [l.antecedencia && ['Reservar com', l.antecedencia], l.cancelamento && ['Cancelamento', l.cancelamento]].filter(Boolean);
     const falta = [menorPreco(l) == null && 'o valor', esp && !l.capacidade && 'a capacidade', esp && !(l.horarios || []).length && 'o horário de uso',
-      !itensDo(l).length && (esp ? 'o que vem no aluguel' : 'o que está incluso'), !l.pagamento && 'a forma de pagamento'].filter(Boolean);
+      !itensDo(l).length && (esp ? 'o que vem no aluguel' : 'o que está incluso'), mostraTempo(l) && !tempoDe(l) && !objs.some((o) => o.duracao) && 'o tempo de uso', !l.pagamento && 'a forma de pagamento'].filter(Boolean);
     const zapF = zapLink(l.whatsapp, l.nome);
     const perguntar = falta.length ? `<div class="perguntar">${ic('alerta')}<div><strong>Perguntar ao ${esp ? 'local' : 'fornecedor'}</strong>
       <span>Ainda falta saber ${falta.length > 1 ? falta.slice(0, -1).join(', ') + ' e ' + falta[falta.length - 1] : falta[0]}.</span>
@@ -986,6 +996,11 @@
         const p = (l.precos || []).find((x) => x.valor === precos[i]);
         return [precos[i] != null ? `<strong>${brl(precos[i])}</strong><br><small>${esc(p.unidade || '')} · ${esc(p.condicao || '')}</small>` : 'Sob consulta', precos[i] != null && precos[i] === bp];
       })],
+      ...(ls.some(mostraTempo) ? [['Tempo de uso', ls.map((l) => {
+        const t = tempoDe(l);
+        const ob = objetosDe(l).filter((o) => o.duracao && o.duracao !== t);
+        return t || ob.length ? [t ? esc(t) : '', ob.length ? `<small>${ob.map((o) => `${esc(o.nome || o.tipo)}: ${esc(o.duracao)}`).join('<br>')}</small>` : ''].filter(Boolean).join('<br>') : '—';
+      })]] : []),
       ['Taxas extras', ls.map((l) => ((l.taxas || []).length ? l.taxas.map((t) => `${esc(t.nome)}: ${typeof t.valor === 'number' ? brl(t.valor) : esc(t.valor)}`).join('<br>') : '—'))],
       ['Orçamento recebido', vs.map((v) => (v.orcamento_valor ? `${esc(v.orcamento_valor)}<br><small>${esc(v.orcamento_condicao)}</small>` : '—'))],
       ...(esp ? [['Capacidade', ls.map((l, i) => [l.capacidade ? `${l.capacidade} pessoas` : '—', caps[i] && caps[i] === bc])]] : []),
@@ -999,7 +1014,7 @@
       ['Prós', vs.map((v) => lista(v.pros))],
       ['Contras', vs.map((v) => lista(v.contras))],
       [esp ? 'O que vem' : 'O que está incluso', ls.map((l) => lista(itensDo(l).map((k) => itemTexto(l, k))))],
-      ...(esp ? [] : (C.campos || []).filter(([, , t]) => t !== 'url' && t !== 'area').map(([k, r]) => [r, ls.map((l) => esc((l.detalhes || {})[k] ?? '—'))])),
+      ...(esp ? [] : (C.campos || []).filter(([k, , t]) => t !== 'url' && t !== 'area' && !(k === 'duracao' && ls.some(mostraTempo))).map(([k, r]) => [r, ls.map((l) => esc((l.detalhes || {})[k] ?? '—'))])),
       ['Pagamento', ls.map((l) => esc(l.pagamento || '—'))],
       ['Cancelamento', ls.map((l) => esc(l.cancelamento || '—'))],
       ['Outros itens', ls.map((l) => lista(l.comodidades || []))],
@@ -1117,7 +1132,7 @@
     taxas: { rot: 'taxa', campos: [['nome', 'Taxa', 'limpeza, caução, energia'], ['valor', 'Valor', 'R$ 150']] },
     horarios: { rot: 'horário', campos: [['dias', 'Dias', 'sábado'], ['horario', 'Horário', '8h às 2h']] },
     objetos: { rot: 'item', campos: [['nome', 'Nome', 'ex.: Pula-pula 3 x 3 m'], ['tipo', 'Tipo', 'escolha ou escreva'], ['valor', 'Valor', 'R$ 250 ou Sob consulta'],
-      ['unidade', 'Por', 'por evento'], ['qtd', 'Quantos tem', 'ex.: 2'], ['obs', 'Observação', 'idade, tamanho, monitor, energia…']] },
+      ['unidade', 'Por', 'por evento'], ['qtd', 'Quantos tem', 'ex.: 2'], ['duracao', 'Tempo de uso', 'ex.: 4 horas'], ['obs', 'Observação', 'idade, tamanho, monitor, energia…']] },
   };
   function linhaRep(tipo, d = {}) {
     return `<div class="rep-linha rep-${tipo}">
@@ -1326,7 +1341,7 @@
     });
     const objetos = CATS[ED.cat].porObjeto ? rep('objetos', (r) => {
       const o = { nome: val(r, 'nome'), tipo: val(r, 'tipo') || null, valor: parseValor(val(r, 'valor')), unidade: val(r, 'unidade') || null,
-        qtd: parseInt(val(r, 'qtd'), 10) > 0 ? parseInt(val(r, 'qtd'), 10) : null, obs: val(r, 'obs') || null };
+        qtd: parseInt(val(r, 'qtd'), 10) > 0 ? parseInt(val(r, 'qtd'), 10) : null, duracao: val(r, 'duracao') || null, obs: val(r, 'obs') || null };
       return o.nome || o.tipo ? o : null;
     }) : undefined;
     return { ...comum, subtipos, descricao: g('descricao') || null, atende_em: g('atende_em') || null, detalhes, ...(objetos ? { objetos } : {}) };
