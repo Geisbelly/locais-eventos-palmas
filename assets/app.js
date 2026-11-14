@@ -3183,7 +3183,7 @@
         barra(L.total, prev || L.total), L.limites.some((x) => x.passou) ? 'ruim' : '')
       + card('orcamento', 'Orçamento', brl(c.combinado), orc ? `${c.combinado > orc ? 'passou' : 'de'} ${brl(orc)} · ${brl(c.pago)} pago` : `${brl(c.pago)} pago`,
         barra(c.pago, Math.max(orc, c.combinado)), orc && c.combinado > orc ? 'ruim' : '')
-      + card('dia', 'Tarefas', `${feitas}<small> de ${tar.length}</small>`, prox ? `Próxima: ${esc(prox.texto)}` : tar.length ? 'Todas feitas' : 'Nenhuma tarefa', barra(feitas, tar.length, tar.length && feitas === tar.length ? 'ok' : ''));
+      + card('dia', 'Tarefas', tar.length ? `${feitas}<small> de ${tar.length}</small>` : '—', prox ? `Próxima: ${esc(prox.texto)}` : tar.length ? 'Todas feitas' : 'Lista ainda não criada', barra(feitas, tar.length, tar.length && feitas === tar.length ? 'ok' : ''));
   }
   function faltaAgora(ev, c) {
     const it = [];
@@ -3202,6 +3202,7 @@
     if (!ev.convidados.length && !L.rs.length) add('meio', 'Montar a lista de convidados', 'Cole a lista do WhatsApp ou adicione um por um.', ['Adicionar', 'data-ev-aba="convidados"']);
     else if (L.semResposta) add('meio', `${plural(L.semResposta, 'convidado não respondeu', 'convidados não responderam')}`, ev.convite.prazo ? `Prazo: ${dataBR(ev.convite.prazo)}.` : 'Mande um lembrete pelo WhatsApp.', ['Lembrar', 'data-acao="conv-lembrar"']);
     if (ev.convidados.length && !ev.convite.prazo) add('', 'Definir o prazo de confirmação', 'Ajuda a fechar o número com o buffet.', ['Definir', 'data-ev-aba="convidados"']);
+    if (!ev.tarefas.some((t) => (t.texto || '').trim())) add('', 'Criar a lista de tarefas', ev.data ? 'Sugiro as tarefas com prazo contado a partir da data da festa.' : 'O que precisa ser feito até a festa.', [ev.data ? 'Sugerir tarefas' : 'Tarefas', ev.data ? 'data-acao="ev-sugerir"' : 'data-ev-aba="dia"']);
     const tAtr = ev.tarefas.filter((t) => !t.feito && t.prazo && (t.texto || '').trim() && diasAte(t.prazo) < 0);
     if (tAtr.length) add('ruim', plural(tAtr.length, 'tarefa atrasada', 'tarefas atrasadas'), esc(tAtr.slice(0, 2).map((t) => t.texto).join(', ')), ['Tarefas', 'data-ev-aba="dia"']);
     if (c.semValor) add('', `${plural(c.semValor, 'escolhido sem valor', 'escolhidos sem valor')} combinado`, 'Preencha para o orçamento ficar certo.', ['Fornecedores', 'data-ev-aba="fornecedores"']);
