@@ -2,14 +2,13 @@
 // GET  /visitas            -> lista pública de visitas
 // GET  /verificar          -> 204 se a chave (header X-Chave) estiver certa
 // PUT  /visitas/:local_id  -> grava a visita (sem chave)
-// GET  /dados/:colecao     -> locais e fornecedores (público); eventos (exige X-Chave)
-// PUT  /dados/:colecao/:id -> cadastra ou edita locais e fornecedores sem chave.
-//                             Excluir (removido: true) e tudo de eventos exigem X-Chave
+// GET  /dados/:colecao     -> locais, fornecedores e eventos (público)
+// PUT  /dados/:colecao/:id -> cadastra ou edita sem chave. Excluir (removido: true) exige X-Chave
 
 const MAX_BYTES = 20_000;
 const MAX_BYTES_DADOS = 100_000;
-// publica = qualquer um lê; eventos só com a chave (são planos pessoais).
-const COLECOES = { locais: { publica: true }, fornecedores: { publica: true }, eventos: { publica: false } };
+// publica = qualquer um lê e grava. A chave só vale para excluir.
+const COLECOES = { locais: { publica: true }, fornecedores: { publica: true }, eventos: { publica: true } };
 const CRITERIOS = ['preco', 'estrutura', 'localizacao', 'atendimento', 'ambiente', 'qualidade', 'confianca', 'flexibilidade'];
 
 function cors(env, req) {
@@ -139,7 +138,7 @@ export default {
         let dados;
         try { dados = JSON.parse(corpo); } catch { return json({ erro: 'json inválido' }, 400, h); }
         if (!dados || typeof dados !== 'object' || Array.isArray(dados)) return json({ erro: 'formato inválido' }, 400, h);
-        // Cadastrar e editar o catálogo é livre. A chave vale para excluir e para os eventos, que são privados.
+        // Cadastrar e editar é livre. A chave vale para excluir.
         const exigeChave = !COLECOES[col].publica || dados.removido === true;
         if (exigeChave && !(await chaveOk(req, env))) return json({ erro: 'chave inválida' }, 401, h);
         const em = quando(dados.atualizado_em);

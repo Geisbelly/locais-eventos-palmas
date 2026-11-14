@@ -14,7 +14,7 @@ Os campos de cada categoria vieram da pesquisa em [docs/pesquisa-atributos.md](d
 
 Site: https://geisbelly.github.io/locais-eventos-palmas/
 
-Sem login para ver o catálogo. Cadastrar, editar e gravar avaliações também não pedem chave: tudo é salvo direto na nuvem. A **chave de edição** (ícone de nuvem) só é pedida para **excluir** um cadastro e para criar e ver os **eventos**, que são privados. Não existe modo de salvar só no aparelho; o navegador guarda apenas uma cópia para reenviar se a conexão cair.
+Sem login para ver o catálogo. Cadastrar, editar e gravar avaliações também não pedem chave: tudo é salvo direto na nuvem. Os **eventos** seguem a mesma regra e aparecem para quem abrir o site. A **chave de edição** (ícone de nuvem) só é pedida para **excluir** um cadastro ou um evento. Não existe modo de salvar só no aparelho; o navegador guarda apenas uma cópia para reenviar se a conexão cair.
 
 ## Onde ficam os dados
 
