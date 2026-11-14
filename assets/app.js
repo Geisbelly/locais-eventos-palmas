@@ -756,50 +756,74 @@
     </article>`;
   }
   const ehCelular = () => matchMedia('(max-width: 760px)').matches;
-  // Visão por objeto: cada brinquedo (ou item de aluguel) vira um cartão, com a empresa ao lado.
+  // Visão por objeto: cada brinquedo (ou item de aluguel) vira um cartão só, com todas as empresas que o têm.
+  // O que junta itens de empresas diferentes é o campo "grupo" (ex.: Pula-pula 3,05 m); sem ele, vale o nome sem o que está entre parênteses.
+  const grupoDe = (o) => String(o.grupo || '').trim() || String(o.nome || o.tipo || '').replace(/\s*\([^)]*\)\s*/g, ' ').trim();
+  const porUn = (u) => { const t = String(u || 'evento').trim(); return /^por\b/i.test(t) ? t : `/ ${t}`; };
+  const valNum = (o) => (typeof o.valor === 'number' ? o.valor : Infinity);
   function objetosFiltrados(empresas) {
     const q = norm(S.f.busca.trim()).split(/\s+/).filter(Boolean);
     const teto = Number(S.f.preco) || 0;
-    const r = [];
+    const grupos = new Map();
     empresas.forEach((l, ord) => objetosDe(l).forEach((o, i) => {
       if (S.f.tipo && o.tipo !== S.f.tipo) return;
       if (teto && !(typeof o.valor === 'number' && o.valor <= teto)) return;
-      if (q.length) { const txt = norm([o.nome, o.tipo, o.obs, l.nome, l.atende_em].join(' ')); if (!q.every((t) => txt.includes(t))) return; }
-      r.push({ l, o, i, ord });
+      if (q.length) { const txt = norm([grupoDe(o), o.nome, o.tipo, o.obs, l.nome, l.atende_em].join(' ')); if (!q.every((t) => txt.includes(t))) return; }
+      const nome = grupoDe(o);
+      const k = norm(nome);
+      if (!grupos.has(k)) grupos.set(k, { k, nome, tipo: o.tipo, ofertas: [], ord });
+      grupos.get(k).ofertas.push({ l, o, i, ord });
     }));
+    const r = [...grupos.values()];
+    r.forEach((g) => {
+      g.ofertas.sort((a, b) => valNum(a.o) - valNum(b.o) || a.ord - b.ord || a.i - b.i);
+      g.min = valNum(g.ofertas[0].o);
+      g.nEmp = new Set(g.ofertas.map((x) => x.l.id)).size;
+    });
+    const nome = (g) => g.nome;
     const o = S.f.ordem;
-    const v = (x) => (typeof x.o.valor === 'number' ? x.o.valor : Infinity);
-    const nome = (x) => x.o.nome || x.o.tipo || '';
-    const cmpV = (a, b) => (v(a) === v(b) ? 0 : v(a) < v(b) ? -1 : 1);
-    r.sort((a, b) => (o === 'preco' ? cmpV(a, b) || nome(a).localeCompare(nome(b), 'pt-BR')
-      : o === 'nome' ? nome(a).localeCompare(nome(b), 'pt-BR') : a.ord - b.ord || a.i - b.i));
+    r.sort((a, b) => (o === 'preco' ? (a.min === b.min ? 0 : a.min < b.min ? -1 : 1) || nome(a).localeCompare(nome(b), 'pt-BR')
+      : o === 'nome' ? nome(a).localeCompare(nome(b), 'pt-BR')
+      : b.nEmp - a.nEmp || nome(a).localeCompare(nome(b), 'pt-BR')));
     return r;
   }
-  function objCardHtml({ l, o }) {
-    const nome = o.nome || o.tipo;
-    const zap = zapLink(l.whatsapp, l.nome, nome);
+  function ofertaHtml({ l, o }, g, menor) {
     const num = typeof o.valor === 'number';
-    const f = fotoObj(o);
-    return `<article class="card obj-card ${f ? 'com-capa' : ''}">
-      ${f ? `<button type="button" class="card-capa" data-abrir="${l.id}" tabindex="-1" aria-hidden="true"><img src="${esc(f.url)}" alt="" loading="lazy">${f.credito ? `<span class="capa-cred">${esc(f.credito.nome || '')}</span>` : ''}</button>` : ''}
+    const zap = zapLink(l.whatsapp, l.nome, o.nome || g.nome);
+    const outroNome = o.nome && norm(o.nome) !== norm(g.nome) ? o.nome : '';
+    const tempo = mostraTempo(l) ? tempoObj(l, o) : '';
+    const inclui = itensDo(l).slice(0, 3).map((k) => itemTexto(l, k));
+    const cond = [outroNome, o.obs, tempo && `uso: ${tempo}`, o.qtd ? `${o.qtd} ${o.qtd === 1 ? 'disponível' : 'disponíveis'}` : ''].filter(Boolean);
+    return `<li class="oferta ${menor ? 'menor' : ''}">
+      <div class="of-topo">
+        <span class="of-loja">${miniCapa(l)}<button type="button" data-abrir="${l.id}">${esc(l.nome)}</button></span>
+        <span class="of-valor ${num ? '' : 'consulta'}"><strong>${num ? brl(o.valor) : esc(o.valor || 'Sob consulta')}</strong>${num ? `<small>${esc(porUn(o.unidade))}</small>` : ''}</span>
+      </div>
+      ${cond.length ? `<p class="of-cond">${cond.map(esc).join(' · ')}</p>` : ''}
+      ${inclui.length ? `<p class="of-inclui">${ic('check')}${esc(inclui.join(' · '))}</p>` : ''}
+      <div class="of-acoes">
+        ${zap ? `<a class="of-btn zap" href="${zap}" target="_blank" rel="noopener">${ic('zap')}WhatsApp</a>`
+          : l.telefone ? `<a class="of-btn" href="tel:+55${digitos(l.telefone)}">${ic('fone')}Ligar</a>` : ''}
+        <button type="button" class="of-btn" data-add-evento="${l.id}">${ic('eventos')}Ao evento</button>
+      </div>
+    </li>`;
+  }
+  function objCardHtml(g) {
+    const comFoto = g.ofertas.find((x) => fotoObj(x.o));
+    const f = comFoto && fotoObj(comFoto.o);
+    const num = Number.isFinite(g.min);
+    const nOf = g.ofertas.length;
+    return `<article class="card obj-card grupo-card ${f ? 'com-capa' : ''}">
+      ${f ? `<button type="button" class="card-capa" data-abrir="${comFoto.l.id}" tabindex="-1" aria-hidden="true"><img src="${esc(f.url)}" alt="" loading="lazy"><span class="capa-cred">Foto: ${esc(comFoto.l.nome)}</span></button>` : ''}
       <div class="card-cab">
-        ${f ? '' : `<span class="mini-capa mono mono-${numHash(l.id + (o.tipo || '')) % 5}" aria-hidden="true">${ic(CATS[l.cat].icone)}</span>`}
+        ${f ? '' : `<span class="mini-capa mono mono-${numHash(g.k) % 5}" aria-hidden="true">${ic(CATS[S.secao].icone)}</span>`}
         <div class="card-tit">
-          <h2><button type="button" data-abrir="${l.id}">${esc(nome)}</button></h2>
-          ${o.tipo && o.tipo !== nome ? `<p class="onde">${esc(o.tipo)}</p>` : ''}
+          <h2>${esc(g.nome)}</h2>
+          <p class="onde">${g.tipo && g.tipo !== g.nome ? `${esc(g.tipo)} · ` : ''}${g.nEmp} ${g.nEmp === 1 ? 'loja' : 'lojas'}</p>
         </div>
       </div>
-      <div class="preco ${num ? '' : 'consulta'}"><p class="pv"><strong>${num ? brl(o.valor) : esc(o.valor || 'Sob consulta')}</strong>${num ? `<span>/ ${esc(o.unidade || 'evento')}</span>` : ''}</p>
-        ${o.obs ? `<p class="pc">${esc(o.obs)}</p>` : num ? '' : '<p class="pc">Peça o valor pelo contato</p>'}</div>
-      ${mostraTempo(l) ? tempoHtml(tempoObj(l, o)) : ''}
-      ${o.qtd ? `<ul class="fatos"><li>${ic('check')}${o.qtd} ${o.qtd === 1 ? 'disponível' : 'disponíveis'}</li></ul>` : ''}
-      <p class="obj-empresa">${miniCapa(l)}<span>de <button type="button" data-abrir="${l.id}">${esc(l.nome)}</button>${l.atende_em ? ` · ${esc(l.atende_em)}` : ''}</span></p>
-      <div class="rodape-card">
-        ${zap ? `<a class="acao zap" href="${zap}" target="_blank" rel="noopener">${ic('zap')}WhatsApp</a>`
-          : l.telefone ? `<a class="acao" href="tel:+55${digitos(l.telefone)}">${ic('fone')}Ligar</a>` : ''}
-        <button type="button" class="acao" data-add-evento="${l.id}">${ic('eventos')}Ao evento</button>
-        <button type="button" class="link-det" data-abrir="${l.id}">Empresa<span aria-hidden="true"> →</span></button>
-      </div>
+      <div class="preco ${num ? '' : 'consulta'}"><p class="pv"><strong>${num ? brl(g.min) : 'Sob consulta'}</strong>${num ? `<span>${g.nEmp > 1 ? `menor valor entre ${g.nEmp} lojas` : esc(porUn(g.ofertas[0].o.unidade))}</span>` : ''}</p>${num ? '' : '<p class="pc">Peça o valor pelo WhatsApp</p>'}</div>
+      <ul class="ofertas">${g.ofertas.map((x, i) => ofertaHtml(x, g, nOf > 1 && num && i === 0)).join('')}</ul>
     </article>`;
   }
   function renderVisao() {
@@ -822,7 +846,7 @@
     const mob = ehCelular();
     const ini = mob ? 0 : (S.pag - 1) * S.porPag;
     const fim = Math.min(r.length, S.pag * S.porPag);
-    renderAplicados(r.length, objs ? new Set(r.map((x) => x.l.id)).size : null);
+    renderAplicados(r.length, objs ? new Set(r.flatMap((g) => g.ofertas.map((x) => x.l.id))).size : null);
     if (!r.length) {
       const msg = !daSecao().length
         ? [`Nenhum ${CATS[S.secao].um} cadastrado ainda`, 'Use o botão Cadastrar, no alto, para adicionar o primeiro.', '']
@@ -948,7 +972,7 @@
           <div><strong>${esc(o.nome || o.tipo)}</strong>${o.tipo && o.tipo !== o.nome ? `<span class="obj-tipo">${esc(o.tipo)}</span>` : ''}
             ${mostraTempo(l) ? `<span class="obj-tempo ${tempoObj(l, o) ? '' : 'sem'}">${ic('relogio')}${esc(tempoObj(l, o) || 'Tempo de uso não informado')}</span>` : ''}
             ${o.qtd || o.obs ? `<small>${[o.qtd ? `${o.qtd} ${o.qtd === 1 ? 'disponível' : 'disponíveis'}` : null, o.obs].filter(Boolean).map(esc).join(' · ')}</small>` : ''}</div>
-          <span class="obj-valor">${num ? `${o.valor === mpObj && objs.length > 1 ? '<span class="selo-menor">Menor</span>' : ''}${brl(o.valor)} <small>/ ${esc(o.unidade || 'evento')}</small>` : `<span class="fraco">${esc(o.valor || 'Sob consulta')}</span>`}</span>
+          <span class="obj-valor">${num ? `${o.valor === mpObj && objs.length > 1 ? '<span class="selo-menor">Menor</span>' : ''}${brl(o.valor)} <small>${esc(porUn(o.unidade))}</small>` : `<span class="fraco">${esc(o.valor || 'Sob consulta')}</span>`}</span>
         </li>`;
       }).join('')}</ul>`
         : `<div class="cartao"><p class="texto">Ainda sem a lista de ${esc(P.varios)}. Toque em Editar para cadastrar cada um com o seu valor.</p></div>`}
@@ -1224,12 +1248,12 @@
     precos: { rot: 'valor', campos: [['valor', 'Valor', 'R$ 1.500 ou Sob consulta'], ['unidade', 'Por', 'escolha ou escreva'], ['condicao', 'Condição', 'sexta a domingo, até 100 pessoas'], ['inclui', 'O que esse valor inclui', 'mesas, limpeza…']] },
     taxas: { rot: 'taxa', campos: [['nome', 'Taxa', 'limpeza, caução, energia'], ['valor', 'Valor', 'R$ 150']] },
     horarios: { rot: 'horário', campos: [['dias', 'Dias', 'sábado'], ['horario', 'Horário', '8h às 2h']] },
-    objetos: { rot: 'item', campos: [['nome', 'Nome', 'ex.: Pula-pula 3 x 3 m'], ['tipo', 'Tipo', 'escolha ou escreva'], ['valor', 'Valor', 'R$ 250 ou Sob consulta'],
+    objetos: { rot: 'item', campos: [['nome', 'Nome', 'ex.: Pula-pula 3 x 3 m'], ['grupo', 'Mesmo brinquedo que', 'ex.: Pula-pula 3,05 m (junta com outras lojas)'], ['tipo', 'Tipo', 'escolha ou escreva'], ['valor', 'Valor', 'R$ 250 ou Sob consulta'],
       ['unidade', 'Por', 'por evento'], ['qtd', 'Quantos tem', 'ex.: 2'], ['duracao', 'Tempo de uso', 'ex.: 4 horas'], ['obs', 'Observação', 'idade, tamanho, monitor, energia…']] },
   };
   function linhaRep(tipo, d = {}) {
     return `<div class="rep-linha rep-${tipo}"${tipo === 'objetos' && d.foto ? ` data-foto="${esc(JSON.stringify(d.foto))}"` : ''}>
-      ${REP[tipo].campos.map(([k, rot, ph]) => `<label class="campo c-${k}"><span>${rot}</span><input data-k="${k}" ${k === 'unidade' ? 'list="dl-unidades"' : tipo === 'objetos' && k === 'tipo' ? 'list="dl-subtipos"' : ''} value="${esc(k === 'valor' ? valorTxt(d[k]) : d[k] || '')}" placeholder="${esc(ph)}"></label>`).join('')}
+      ${REP[tipo].campos.map(([k, rot, ph]) => `<label class="campo c-${k}"><span>${rot}</span><input data-k="${k}" ${k === 'unidade' ? 'list="dl-unidades"' : tipo === 'objetos' && k === 'tipo' ? 'list="dl-subtipos"' : tipo === 'objetos' && k === 'grupo' ? 'list="dl-grupos"' : ''} value="${esc(k === 'valor' ? valorTxt(d[k]) : d[k] || '')}" placeholder="${esc(ph)}"></label>`).join('')}
       <button type="button" class="tirar-linha" data-tirar-linha aria-label="Remover ${REP[tipo].rot}">×</button>
     </div>`;
   }
@@ -1314,7 +1338,8 @@
 
         ${C.porObjeto ? blocoRep('objetos', esc(C.porObjeto.rot), `Um por ${esc(C.porObjeto.um)}, com o valor de cada um. Assim dá para filtrar e comparar por ${esc(C.porObjeto.um)} no catálogo.`, (l && l.objetos) || [])
           .replace(/Adicionar item/, `Adicionar ${esc(C.porObjeto.um)}`) : ''}
-        ${C.porObjeto ? `<datalist id="dl-subtipos">${C.subtipos.map((t) => `<option value="${esc(t)}">`).join('')}</datalist>` : ''}
+        ${C.porObjeto ? `<datalist id="dl-subtipos">${C.subtipos.map((t) => `<option value="${esc(t)}">`).join('')}</datalist>
+          <datalist id="dl-grupos">${[...new Set(S.locais.filter((x) => x.cat === ED.cat).flatMap((x) => objetosDe(x).map(grupoDe)))].sort((x, y) => x.localeCompare(y, 'pt-BR')).map((t) => `<option value="${esc(t)}">`).join('')}</datalist>` : ''}
         ${blocoRep('precos', C.porObjeto ? 'Pacotes e outros valores' : 'Valores', C.porObjeto ? 'Combos ou valores que valem para a empresa toda (ex.: 3 brinquedos por R$ 600).' : 'Cada valor com a sua condição: dia, horário, número de convidados, pacote.', (l && l.precos) || [])}
         <datalist id="dl-unidades">${C.unidades.map((u) => `<option value="${esc(u)}">`).join('')}</datalist>
         ${blocoRep('taxas', 'Taxas extras', esp ? 'Cobranças à parte, como limpeza, caução ou energia.' : 'Frete, deslocamento, hora extra, profissional adicional.', (l && l.taxas) || [])}
@@ -1444,7 +1469,7 @@
       if (e.type === 'number') { const n = Number(v); if (Number.isFinite(n)) detalhes[e.dataset.det] = n; } else detalhes[e.dataset.det] = v;
     });
     const objetos = CATS[ED.cat].porObjeto ? rep('objetos', (r) => {
-      const o = { nome: val(r, 'nome'), tipo: val(r, 'tipo') || null, valor: parseValor(val(r, 'valor')), unidade: val(r, 'unidade') || null,
+      const o = { nome: val(r, 'nome'), grupo: val(r, 'grupo') || null, tipo: val(r, 'tipo') || null, valor: parseValor(val(r, 'valor')), unidade: val(r, 'unidade') || null,
         qtd: parseInt(val(r, 'qtd'), 10) > 0 ? parseInt(val(r, 'qtd'), 10) : null, duracao: val(r, 'duracao') || null, obs: val(r, 'obs') || null };
       // a foto não tem campo no editor: mantém a que já estava na linha
       if (r.dataset.foto) { try { const ft = JSON.parse(r.dataset.foto); if (fotoObj({ foto: ft })) o.foto = ft; } catch (e) { /* ignora foto inválida */ } }

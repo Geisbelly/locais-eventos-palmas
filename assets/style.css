@@ -1056,3 +1056,26 @@ span.foto-credito:hover { text-decoration: none; }
 .obj-tempo svg { width: 14px; height: 14px; flex: none; color: var(--ouro-texto); }
 .obj-tempo.sem { color: var(--suave); font-weight: 500; font-style: italic; }
 .obj-lista li > div { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+
+/* Visão por brinquedo: um cartão por brinquedo, com cada loja que o tem */
+.grupo-card .ofertas { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--linha); }
+.oferta { display: grid; gap: 6px; padding: 12px 0; border-bottom: 1px solid var(--linha); }
+.oferta:last-child { border-bottom: 0; padding-bottom: 0; }
+.oferta.menor { background: var(--verde-fundo); margin: 0 -14px; padding-left: 14px; padding-right: 14px; border-radius: 10px; }
+.of-topo { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 10px; min-width: 0; }
+.of-loja { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1 1 150px; }
+.of-loja .mini-capa { width: 28px; height: 28px; flex: none; border-radius: 8px; font-size: .74rem; }
+.of-loja button { border: 0; background: none; padding: 0; font: inherit; font-weight: 600; color: var(--tinta); cursor: pointer; text-align: left;
+  text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; overflow-wrap: break-word; min-height: 32px; }
+.of-valor { flex: none; margin-left: auto; text-align: right; white-space: nowrap; }
+.of-valor strong { font-size: 1.02rem; }
+.of-valor small { margin-left: 3px; color: var(--suave-forte); font-size: .76rem; }
+.of-valor.consulta strong { font-size: .86rem; font-weight: 600; color: var(--suave-forte); }
+.of-cond, .of-inclui { margin: 0; font-size: .82rem; color: var(--suave-forte); overflow-wrap: anywhere; }
+.of-inclui { display: flex; gap: 5px; align-items: flex-start; }
+.of-inclui svg { width: 14px; height: 14px; flex: none; margin-top: 2px; }
+.of-acoes { display: flex; flex-wrap: wrap; gap: 8px; }
+.of-btn { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--linha);
+  background: var(--card); color: var(--tinta); font: inherit; font-size: .82rem; font-weight: 600; text-decoration: none; cursor: pointer; }
+.of-btn svg { width: 15px; height: 15px; }
+.of-btn.zap { border-color: transparent; background: #1f8f4e; color: #fff; }

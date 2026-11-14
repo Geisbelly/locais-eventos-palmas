@@ -239,6 +239,7 @@
         },
         {
           "nome": "Pula-pula grande 3,05 m",
+          "grupo": "Pula-pula 3,05 m",
           "tipo": "Pula-pula / cama elástica",
           "valor": 190,
           "unidade": "por evento",
@@ -254,6 +255,7 @@
         },
         {
           "nome": "Pula-pula médio 2,44 m",
+          "grupo": "Pula-pula 2,44 m",
           "tipo": "Pula-pula / cama elástica",
           "valor": 175,
           "unidade": "por evento",
@@ -269,6 +271,7 @@
         },
         {
           "nome": "Pula-pula pequeno 2,00 m",
+          "grupo": "Pula-pula 2,00 m",
           "tipo": "Pula-pula / cama elástica",
           "valor": 150,
           "unidade": "por evento",
@@ -284,6 +287,7 @@
         },
         {
           "nome": "Piscina de bolinhas 1,5 x 1,5 m",
+          "grupo": "Piscina de bolinhas 1,5 x 1,5 m",
           "tipo": "Piscina de bolinhas",
           "valor": 160,
           "unidade": "por evento",
@@ -299,6 +303,7 @@
         },
         {
           "nome": "Piscina de bolinhas 1 x 1 m",
+          "grupo": "Piscina de bolinhas 1 x 1 m",
           "tipo": "Piscina de bolinhas",
           "valor": 120,
           "unidade": "por evento",
@@ -403,6 +408,7 @@
         },
         {
           "nome": "Mesinhas infantis",
+          "grupo": "Mesinhas infantis",
           "tipo": "Mesas e cadeiras",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -572,6 +578,7 @@
         },
         {
           "nome": "Escorregador inflável (até 10 anos)",
+          "grupo": "Escorregador inflável",
           "tipo": "Inflável / tobogã",
           "valor": 600,
           "unidade": "por evento",
@@ -581,6 +588,7 @@
         },
         {
           "nome": "Pula-pula 3,05 m (até 12 anos)",
+          "grupo": "Pula-pula 3,05 m",
           "tipo": "Pula-pula / cama elástica",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -596,6 +604,7 @@
         },
         {
           "nome": "Pula-pula 2,44 m (até 7 anos)",
+          "grupo": "Pula-pula 2,44 m",
           "tipo": "Pula-pula / cama elástica",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -611,6 +620,7 @@
         },
         {
           "nome": "Piscina de bolinhas 1,50 x 1,50 m",
+          "grupo": "Piscina de bolinhas 1,5 x 1,5 m",
           "tipo": "Piscina de bolinhas",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -626,6 +636,7 @@
         },
         {
           "nome": "Piscina de bolinhas 1,10 x 1,10 m",
+          "grupo": "Piscina de bolinhas 1 x 1 m",
           "tipo": "Piscina de bolinhas",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -793,6 +804,7 @@
         },
         {
           "nome": "Castelinho pula-pula com escorregador",
+          "grupo": "Castelinho pula-pula com escorregador",
           "tipo": "Inflável / tobogã",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -809,6 +821,7 @@
         },
         {
           "nome": "Multiplay 3x1",
+          "grupo": "Multiplay 3x1",
           "tipo": "Inflável / tobogã",
           "valor": 600,
           "unidade": "por evento",
@@ -825,6 +838,7 @@
         },
         {
           "nome": "Multiplay 3x1 (até 6 anos)",
+          "grupo": "Multiplay 3x1",
           "tipo": "Inflável / tobogã",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -841,6 +855,7 @@
         },
         {
           "nome": "Futebol de sabão pequeno 8 x 4 m",
+          "grupo": "Futebol de sabão 8 x 4 m",
           "tipo": "Futebol de sabão",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -857,6 +872,7 @@
         },
         {
           "nome": "Futebol de sabão médio 10 x 5 m",
+          "grupo": "Futebol de sabão 10 x 5 m",
           "tipo": "Futebol de sabão",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -873,6 +889,7 @@
         },
         {
           "nome": "Futebol de sabão médio com redinha 10 x 5 m",
+          "grupo": "Futebol de sabão 10 x 5 m com redinha",
           "tipo": "Futebol de sabão",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -889,6 +906,7 @@
         },
         {
           "nome": "Futebol de sabão grande 12 x 6 m",
+          "grupo": "Futebol de sabão 12 x 6 m",
           "tipo": "Futebol de sabão",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -905,6 +923,7 @@
         },
         {
           "nome": "Canhão de espuma turbo",
+          "grupo": "Canhão de espuma",
           "tipo": "Canhão de espuma",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -921,6 +940,7 @@
         },
         {
           "nome": "Cama elástica 3,05 m",
+          "grupo": "Pula-pula 3,05 m",
           "tipo": "Pula-pula / cama elástica",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -936,6 +956,7 @@
         },
         {
           "nome": "Cama elástica 3,66 m",
+          "grupo": "Pula-pula 3,66 m",
           "tipo": "Pula-pula / cama elástica",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -960,6 +981,7 @@
         },
         {
           "nome": "Pebolim",
+          "grupo": "Pebolim",
           "tipo": "Games / fliperama",
           "valor": 500,
           "unidade": "por evento",
@@ -1202,6 +1224,7 @@
         },
         {
           "nome": "Castelinho escorregador",
+          "grupo": "Castelinho pula-pula com escorregador",
           "tipo": "Inflável / tobogã",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -1218,6 +1241,7 @@
         },
         {
           "nome": "Multiplay home 3x1",
+          "grupo": "Multiplay 3x1",
           "tipo": "Inflável / tobogã",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -1250,6 +1274,7 @@
         },
         {
           "nome": "Futebol de sabão 10 x 5 m",
+          "grupo": "Futebol de sabão 10 x 5 m",
           "tipo": "Futebol de sabão",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -1266,6 +1291,7 @@
         },
         {
           "nome": "Canhão de espuma",
+          "grupo": "Canhão de espuma",
           "tipo": "Canhão de espuma",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -1284,6 +1310,7 @@
         },
         {
           "nome": "Cama elástica 2,44 m",
+          "grupo": "Pula-pula 2,44 m",
           "tipo": "Pula-pula / cama elástica",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -1300,6 +1327,7 @@
         },
         {
           "nome": "Cama elástica 3,05 m",
+          "grupo": "Pula-pula 3,05 m",
           "tipo": "Pula-pula / cama elástica",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -1316,6 +1344,7 @@
         },
         {
           "nome": "Pebolim tradicional",
+          "grupo": "Pebolim",
           "tipo": "Games / fliperama",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -1429,6 +1458,7 @@
       "objetos": [
         {
           "nome": "Escorregador inflável",
+          "grupo": "Escorregador inflável",
           "tipo": "Inflável / tobogã",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -1621,6 +1651,7 @@
         },
         {
           "nome": "Escorregador / castelinho pula-pula",
+          "grupo": "Castelinho pula-pula com escorregador",
           "tipo": "Inflável / tobogã",
           "valor": 400,
           "unidade": "por evento",
@@ -1630,6 +1661,7 @@
         },
         {
           "nome": "Futebol de sabão 10 x 5 m",
+          "grupo": "Futebol de sabão 10 x 5 m",
           "tipo": "Futebol de sabão",
           "valor": "Sob consulta",
           "unidade": "por evento",
@@ -1654,6 +1686,7 @@
         },
         {
           "nome": "Pula-pula 2,44 m",
+          "grupo": "Pula-pula 2,44 m",
           "tipo": "Pula-pula / cama elástica",
           "valor": 120,
           "unidade": "por evento",
@@ -1670,6 +1703,7 @@
         },
         {
           "nome": "Pula-pula 3,05 m",
+          "grupo": "Pula-pula 3,05 m",
           "tipo": "Pula-pula / cama elástica",
           "valor": 150,
           "unidade": "por evento",
@@ -1776,6 +1810,7 @@
         },
         {
           "nome": "Mesinhas de pintura",
+          "grupo": "Mesinhas infantis",
           "tipo": "Mesas e cadeiras",
           "valor": "Sob consulta",
           "unidade": "por evento",
