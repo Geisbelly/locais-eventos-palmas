@@ -423,7 +423,7 @@
   /* ============ Estado ============ */
   const S = {
     locais: [], porId: {}, dataDados: '', base: [], fbase: [], remotos: [],
-    secao: 'espacos', paginaEv: null, rsvp: {}, rsvpPedido: {},
+    secao: 'espacos', paginaEv: null, rsvp: {}, rsvpPedido: {}, abaEv: 'geral', convF: 'todos', convBusca: '', convAberto: new Set(),
     eventos: lsGet(LS.eventos, {}), evPend: new Set(lsGet(LS.evPend, [])),
     visitas: lsGet(LS.visitas, {}),
     pendentes: new Set(lsGet(LS.pendentes, [])),
@@ -1638,6 +1638,15 @@
     if ((b = t.closest('[data-aba]'))) { S.aba = b.dataset.aba; renderAbas(); renderLista(); renderNav(); return; }
     if ((b = t.closest('[data-pag]'))) { irPagina(b.dataset.pag); return; }
     if ((b = t.closest('[data-visao]'))) { S.visao[S.secao] = b.dataset.visao; ui.visao = S.visao; lsSet(LS.ui, ui); renderLista(); return; }
+    if ((b = t.closest('[data-ev-aba]'))) { irAbaEv(b.dataset.evAba); return; }
+    if ((b = t.closest('[data-conv-f]'))) { S.convF = b.dataset.convF; refazerTabelaConv(); const n = $('#conv-nums'); if (n) n.innerHTML = convNums(evAtual()); return; }
+    if ((b = t.closest('[data-conv-abrir]'))) {
+      const k = b.dataset.convAbrir; S.convAberto.has(k) ? S.convAberto.delete(k) : S.convAberto.add(k);
+      refazerTabelaConv();
+      const lin = document.querySelector(`[data-conv-k="${CSS.escape(k)}"]`);
+      if (lin && S.convAberto.has(k)) { const i = lin.querySelector('.ct-ed input, .ct-ed select'); if (i) i.focus({ preventScroll: true }); lin.scrollIntoView({ block: 'nearest' }); }
+      return;
+    }
     if ((b = t.closest('[data-orc-f]'))) {
       S.orcF = b.dataset.orcF; $('#orc-lista').className = 'orc-f-' + S.orcF;
       document.querySelectorAll('[data-orc-f]').forEach((x) => x.setAttribute('aria-pressed', x === b)); return;
@@ -1716,7 +1725,9 @@
     }
     if ((b = t.closest('[data-ev-add]'))) {
       const ev = evAtual(); const lista = b.dataset.evAdd;
-      ev[lista].push(LINHA_VAZIA[lista]());
+      const nova = LINHA_VAZIA[lista]();
+      if (lista === 'convidados') { S.convF = 'todos'; S.convBusca = ''; S.convAberto.add('c:' + nova.id); }
+      ev[lista].push(nova);
       salvarEvento(ev);
       const ult = document.querySelector(`[data-evc^="${lista}.${ev[lista].length - 1}."]:not([type="checkbox"]):not([type="date"]):not([type="time"])`)
         || document.querySelector(`[data-evc^="${lista}.${ev[lista].length - 1}."]`);
@@ -1764,6 +1775,7 @@
       if (a === 'rsvp-atualizar') carregarRsvp(S.paginaEv, { avisar: true });
       if (a === 'rsvp-novo') novaResposta(null);
       if (a === 'conv-importar') importarConvidados();
+      if (a === 'conv-colar-abrir') { const d = $('#conv-import'); if (d) { d.open = true; d.scrollIntoView({ block: 'nearest' }); $('#conv-colar').focus(); } }
       if (a === 'rec-abrir') abrirRecepcao();
       if (a === 'msg-abrir') abrirMensagens();
       if (a === 'itens-sug') sugerirItensFesta(b.dataset.itsug);
@@ -1855,8 +1867,9 @@
       salvarEvento(ev, { render: estrutura });
       if (!estrutura && /^(itens_festa\.|mesas$|pessoas_mesa$)/.test(t.dataset.evc)) { const it = $('#itens-corpo'); if (it) it.innerHTML = itensHtml(ev); }
       if (!estrutura) {
-        $('#pg-resumo').innerHTML = resumoHtml(ev, contas(ev));
+        atualizarPainel(ev);
         if (t.dataset.evc.startsWith('gastos.')) atualizarOrc(ev);
+        if (t.dataset.evc.startsWith('convidados.')) atualizarConvite();
       }
     }
   });
@@ -1865,6 +1878,7 @@
   document.addEventListener('input', (e) => {
     const t = e.target;
     if (t.id === 'msg-texto') { MSG.texto = t.value; MSG.editado = true; $('#msg-lista').innerHTML = listaMensagens(); return; }
+    if (t.id === 'conv-busca') { S.convBusca = t.value; refazerTabelaConv(); return; }
     if (t.id === 'rec-busca') { REC.busca = t.value; $('#rec-lista').innerHTML = listaRecepcao(); return; }
     if (t.id === 'pick-busca' && PK) { PK.busca = t.value; $('#pick-lista').innerHTML = listaPick(); return; }
     if (!t.matches('[data-campo]') || !S.detalheId) return;
@@ -2189,9 +2203,12 @@
     if (!API) { toast('A nuvem não está configurada.'); return; }
     const cv = convId ? ev.convidados.find((x) => x.id === convId) : null;
     const id = cv ? `${ev.id}-${cv.id}` : `${ev.id}-m${idCurto()}`;
-    if (rsvpsDe(ev.id).some((x) => x.id === id)) { document.querySelector(`[data-rsvp-linha="${id}"]`)?.scrollIntoView({ block: 'center' }); return; }
+    S.convF = 'todos'; S.convBusca = ''; S.convAberto.add(cv ? 'c:' + cv.id : 'r:' + id);
+    if (S.abaEv !== 'convidados') irAbaEv('convidados');
+    if (rsvpsDe(ev.id).some((x) => x.id === id)) { refazerTabelaConv(); document.querySelector(`[data-rsvp-linha="${id}"]`)?.scrollIntoView({ block: 'center' }); return; }
     salvarResposta({ id, evento: ev.id, convidado: cv ? cv.id : null, nome: cv ? cv.nome : '', resposta: 'sim',
       adultos: cv && numV(cv.lugares) ? cv.lugares : 1, criancas: 0, idades: [], contato: cv ? cv.telefone || '' : '', mensagem: '', manual: true });
+    refazerTabelaConv();
     setTimeout(() => { const el = document.querySelector(`[data-rsvp-linha="${id}"] input`); if (el) { el.scrollIntoView({ block: 'center' }); el.focus(); } }, 50);
   }
   function editarResposta(t) {
@@ -2259,17 +2276,17 @@
         <div class="orc-barra"><span class="${x.passou ? 'b-passou' : 'b-pago'}" style="width:${Math.min(100, (x.usado / x.cap) * 100).toFixed(1)}%"></span></div>`).join('')}
       ${avisosLotacao(L)}</div>`;
   }
-  function lotacaoHtml(ev) {
+  function lotacaoHtml(ev, { curto = false } = {}) {
     const L = lotacao(ev);
     const fx = (n) => { const m = {}; n.forEach((x) => { const k = x <= 2 ? '0 a 2 anos' : x <= 5 ? '3 a 5 anos' : x <= 9 ? '6 a 9 anos' : '10 a 17 anos'; m[k] = (m[k] || 0) + 1; }); return Object.entries(m).map(([k, v]) => `${v} de ${k}`).join(' · '); };
-    return `<dl class="lot-nums">
+    return `${curto ? (L.idades.length ? `<p class="lot-cri"><strong>Crianças confirmadas:</strong> ${esc(fx(L.idades))}</p>` : '') : `<dl class="lot-nums">
         <div><dt>Confirmados</dt><dd>${L.total}</dd><small>${plural(L.sim.length, 'resposta', 'respostas')}</small></div>
         <div><dt>Adultos</dt><dd>${L.adultos}</dd></div>
         <div><dt>Crianças</dt><dd>${L.criancas}</dd><small>${L.idades.length ? esc(fx(L.idades)) : ''}</small></div>
         <div><dt>Talvez</dt><dd>${L.maisTalvez - L.total}</dd></div>
         <div><dt>Não vão</dt><dd>${L.nao.length}</dd></div>
         <div><dt>Sem resposta</dt><dd>${L.semResposta}</dd><small>da lista</small></div>
-      </dl>
+      </dl>`}
       ${L.limites.length ? `<ul class="lot-limites">${L.limites.map((x) => `<li class="${x.passou ? 'ruim' : x.risco ? 'meio' : 'ok'}">
           <span>${ic(x.cat === 'buffet' ? 'buffet' : 'salao')}<strong>${esc(x.nome)}</strong></span>
           <span>${x.cap ? `${x.usado} de ${x.cap} ${x.cat === 'buffet' ? 'no buffet' : 'pessoas'}${x.passou ? ` · <b>passou ${x.usado - x.cap}</b>` : ` · sobram ${x.sobra}`}` : 'capacidade não informada'}</span></li>`).join('')}</ul>`
@@ -2290,44 +2307,154 @@
     const n = (Number(r.adultos) || 0) + (Number(r.criancas) || 0);
     return `<span class="chip-st st-${esc(r.resposta)}">${esc(respRot(r.resposta))}${r.resposta !== 'nao' && n ? ` · ${n}` : ''}</span>`;
   }
-  function respostasHtml(ev) {
-    const rs = rsvpsDe(ev.id).slice().sort((a, b) => ['sim', 'talvez', 'nao'].indexOf(a.resposta) - ['sim', 'talvez', 'nao'].indexOf(b.resposta) || String(a.nome).localeCompare(String(b.nome), 'pt-BR'));
-    if (!rs.length) return `<p class="texto vazio-cat">Nenhuma resposta ainda. As confirmações feitas pelo convite aparecem aqui.</p>`;
-    return `<div class="rsvp-lista">${rs.map((r) => {
-      const cv = r.convidado && ev.convidados.find((c) => c.id === r.convidado);
-      const f = (k, extra = '') => `data-rsvp="${esc(r.id)}|${k}" ${extra}`;
-      return `<div class="rsvp-linha st-${esc(r.resposta)}" data-rsvp-linha="${esc(r.id)}">
-        <input class="r-nome" ${f('nome')} maxlength="80" value="${esc(r.nome || '')}" placeholder="Nome" aria-label="Nome">
-        <select class="r-st" ${f('resposta')} aria-label="Situação">${RESP.map(([k, rot]) => `<option value="${k}" ${k === r.resposta ? 'selected' : ''}>${rot}</option>`).join('')}</select>
-        <label class="r-num"><span>Adultos</span><input ${f('adultos')} type="number" min="0" max="99" inputmode="numeric" value="${Number(r.adultos) || 0}"></label>
-        <label class="r-num"><span>Crianças</span><input ${f('criancas')} type="number" min="0" max="99" inputmode="numeric" value="${Number(r.criancas) || 0}"></label>
-        <label class="r-idades"><span>Idades</span><input ${f('idades')} value="${esc((r.idades || []).map((x, j) => (x == null ? null : idadeTxt(x) + ((r.sexos || [])[j] || ''))).filter(Boolean).join(', '))}" placeholder="ex.: 3m, 7f" title="m = menino, f = menina"></label>
-        <span class="r-info">${[cv ? 'da lista' : r.manual ? 'lançada aqui' : 'pelo link', r.presente && ev.presentes.find((g) => g.id === r.presente) ? `presente: ${esc(ev.presentes.find((g) => g.id === r.presente).nome)}` : null, r.contato ? esc(r.contato) : null, r.atualizado_em ? dataBR(r.atualizado_em.slice(0, 10)) : null].filter(Boolean).join(' · ')}${r.mensagem ? `<em>“${esc(r.mensagem)}”</em>` : ''}</span>
+  /* ---- Convidados: uma tabela só (lista + respostas) ---- */
+  const CONV_F = [['todos', 'Todos'], ['sim', 'Confirmados'], ['talvez', 'Talvez'], ['nao', 'Não vão'], ['pend', 'Sem resposta']];
+  function linhasConv(ev) {
+    const rs = rsvpsDe(ev.id);
+    const ids = new Set(ev.convidados.map((c) => c.id));
+    const ls = ev.convidados.map((cv, i) => ({ k: 'c:' + cv.id, cv, i, r: rs.find((x) => x.convidado === cv.id) || null }));
+    rs.filter((r) => !r.convidado || !ids.has(r.convidado)).forEach((r) => ls.push({ k: 'r:' + r.id, cv: null, i: -1, r }));
+    return ls.map((x) => ({ ...x, st: x.r ? x.r.resposta : 'pend', nome: (x.cv && x.cv.nome) || (x.r && x.r.nome) || '' }));
+  }
+  function convFiltradas(ev) {
+    const f = S.convF || 'todos', q = norm(S.convBusca || '');
+    return linhasConv(ev).filter((x) => (f === 'todos' || x.st === f)
+      && (!q || norm([x.nome, x.cv && x.cv.telefone, x.r && x.r.contato].filter(Boolean).join(' ')).includes(q)));
+  }
+  function convNums(ev) {
+    const L = lotacao(ev);
+    const f = S.convF || 'todos';
+    const card = (k, rot, v, sub) => `<button type="button" class="cnum-card c-${k}" data-conv-f="${k}" aria-pressed="${f === k}"><span>${rot}</span><strong>${v}</strong><small>${sub}</small></button>`;
+    const buf = L.limites.find((x) => x.cat === 'buffet' && x.cap) || L.limites.find((x) => x.cap);
+    return card('sim', 'Confirmados', L.total, L.total ? `${plural(L.adultos, 'adulto', 'adultos')} · ${plural(L.criancas, 'criança', 'crianças')}` : 'pessoas')
+      + card('talvez', 'Talvez', L.maisTalvez - L.total, plural(L.talvez.length, 'resposta', 'respostas'))
+      + card('nao', 'Não vão', L.nao.length, L.nao.length === 1 ? 'resposta' : 'respostas')
+      + card('pend', 'Sem resposta', L.semResposta, `de ${plural(ev.convidados.filter((c) => c.nome).length, 'convite', 'convites')}`)
+      + (buf ? `<div class="cnum-card c-cap ${buf.passou ? 'ruim' : ''}"><span>${buf.cat === 'buffet' ? 'Buffet' : 'Espaço'}</span><strong>${buf.usado}<small> / ${buf.cap}</small></strong><small>${buf.passou ? `passou ${buf.usado - buf.cap}` : `sobram ${buf.sobra}`}</small></div>` : '');
+  }
+  function pessoasConv(x) {
+    const { cv, r } = x;
+    if (!r) return cv && numV(cv.lugares) ? `<span class="fraco">convite para ${cv.lugares}</span>` : '<span class="fraco">—</span>';
+    if (r.resposta === 'nao') return '<span class="fraco">—</span>';
+    const ad = Number(r.adultos) || 0, cr = Number(r.criancas) || 0;
+    return [ad ? plural(ad, 'adulto', 'adultos') : null, cr ? plural(cr, 'criança', 'crianças') : null].filter(Boolean).join(' + ') || '<span class="fraco">—</span>';
+  }
+  function detalhesConv(ev, x) {
+    const { r } = x;
+    if (!r) return x.cv && x.cv.telefone ? `<span class="fraco">${esc(x.cv.telefone)}</span>` : '';
+    const sx = (j) => ({ m: ' menino', f: ' menina' }[(r.sexos || [])[j]] || '');
+    const idades = (r.idades || []).map((v, j) => (v == null ? null : `${idadeTxt(v)} ${v === 1 ? 'ano' : 'anos'}${sx(j)}`)).filter(Boolean);
+    const pres = r.presente && ev.presentes.find((g) => g.id === r.presente);
+    return [idades.length ? esc(idades.join(', ')) : null, pres ? `presente: ${esc(pres.nome)}` : null, r.mensagem ? `<em>“${esc(r.mensagem)}”</em>` : null,
+      `<span class="fraco">${x.cv ? (r.manual ? 'lançada aqui' : 'pelo link') : r.manual ? 'fora da lista, lançada aqui' : 'fora da lista, pelo link'}</span>`].filter(Boolean).join(' · ');
+  }
+  function resumoConv(ev, x) {
+    const aberto = S.convAberto.has(x.k);
+    return `<span class="ct-nome"><strong>${esc(x.nome) || '<span class="fraco">Sem nome</span>'}</strong>${x.cv && x.cv.telefone ? `<small>${esc(x.cv.telefone)}</small>` : x.r && x.r.contato ? `<small>${esc(x.r.contato)}</small>` : ''}</span>
+      <span class="ct-st">${x.r ? `<span class="chip-st st-${esc(x.r.resposta)}">${esc(respRot(x.r.resposta))}</span>` : '<span class="chip-st pend">Sem resposta</span>'}</span>
+      <span class="ct-pes">${pessoasConv(x)}</span>
+      <span class="ct-det">${detalhesConv(ev, x)}</span>
+      <span class="ct-acoes">${x.cv ? `<a class="mini zap" href="${esc(zapConvite(ev, x.cv))}" target="_blank" rel="noopener" title="Abrir o WhatsApp com o convite de ${esc(x.nome)}">${ic('zap')}<span class="lbl">Enviar</span></a>` : ''}
+        <button type="button" class="mini" data-conv-abrir="${esc(x.k)}" aria-expanded="${aberto}" title="${aberto ? 'Fechar' : 'Editar'}">${ic(aberto ? 'x' : 'editar')}<span class="sr">${aberto ? 'Fechar' : 'Editar'}</span></button></span>`;
+  }
+  function editorConv(ev, x) {
+    const { cv, r, i } = x;
+    const f = (k) => `data-rsvp="${esc(r.id)}|${k}"`;
+    return `<div class="ct-ed">
+      ${cv ? `<div class="ct-ed-grupo"><p class="ct-ed-tit">Convite</p><div class="ct-ed-campos">
+        <label class="campo"><span>Nome</span><input data-evc="convidados.${i}.nome" maxlength="80" value="${esc(cv.nome || '')}" placeholder="ex.: Família Souza"></label>
+        <label class="campo"><span>WhatsApp</span><input data-evc="convidados.${i}.telefone" maxlength="30" inputmode="tel" value="${esc(cv.telefone || '')}" placeholder="63 9…"></label>
+        <label class="campo cnum"><span>Lugares</span><input data-evc="convidados.${i}.lugares" data-tipo="num" inputmode="numeric" value="${cv.lugares != null ? esc(cv.lugares) : ''}" placeholder="ex.: 4" title="Quantas pessoas o convite inclui"></label></div>
+        <div class="acoes-linha"><button type="button" class="mini" data-conv-link="${esc(cv.id)}">Copiar link do convite</button>
+          ${r ? '' : `<button type="button" class="mini" data-conv-resp="${esc(cv.id)}" title="Para quem respondeu por telefone ou pessoalmente">${ic('check')}Lançar resposta</button>`}
+          <span class="esp"></span><button type="button" class="link-btn perigo" data-ev-tirar="convidados:${i}">Tirar da lista</button></div></div>` : ''}
+      ${r ? `<div class="ct-ed-grupo" data-rsvp-linha="${esc(r.id)}"><p class="ct-ed-tit">Resposta</p><div class="ct-ed-campos">
+        ${cv ? '' : `<label class="campo"><span>Nome</span><input ${f('nome')} maxlength="80" value="${esc(r.nome || '')}" placeholder="Nome"></label>`}
+        <label class="campo"><span>Situação</span><select ${f('resposta')}>${RESP.map(([k, rot]) => `<option value="${k}" ${k === r.resposta ? 'selected' : ''}>${rot}</option>`).join('')}</select></label>
+        <label class="campo cnum"><span>Adultos</span><input ${f('adultos')} type="number" min="0" max="99" inputmode="numeric" value="${Number(r.adultos) || 0}"></label>
+        <label class="campo cnum"><span>Crianças</span><input ${f('criancas')} type="number" min="0" max="99" inputmode="numeric" value="${Number(r.criancas) || 0}"></label>
+        <label class="campo"><span>Idades das crianças</span><input ${f('idades')} value="${esc((r.idades || []).map((v, j) => (v == null ? null : idadeTxt(v) + ((r.sexos || [])[j] || ''))).filter(Boolean).join(', '))}" placeholder="ex.: 3m, 7f" title="m = menino, f = menina"></label></div>
+        <p class="meta">${[r.contato ? `Contato: ${esc(r.contato)}` : null, r.atualizado_em ? `Atualizada em ${dataBR(r.atualizado_em.slice(0, 10))}` : null, 'Idades: 3m = menino de 3 anos, 7f = menina de 7'].filter(Boolean).join(' · ')}</p></div>` : ''}
+    </div>`;
+  }
+  function convTabela(ev) {
+    const todas = linhasConv(ev);
+    if (!todas.length) {
+      return `<div class="conv-vazio">${ic('pessoas')}<p><strong>A lista de convidados está vazia.</strong> Adicione um por um ou cole a lista inteira. Cada convidado recebe um link com o nome dele, e as respostas aparecem aqui.</p>
+        <div class="acoes-linha"><button type="button" class="btn ouro" data-ev-add="convidados">${ic('mais')}Adicionar convidado</button>
+        <button type="button" class="btn" data-acao="conv-colar-abrir">Colar uma lista</button></div></div>`;
+    }
+    const ls = convFiltradas(ev);
+    return `<div class="ctab">
+      <div class="ctab-cab" aria-hidden="true"><span>Convidado</span><span>Situação</span><span>Pessoas</span><span>Detalhes</span><span></span></div>
+      ${ls.length ? ls.map((x) => `<div class="ct-linha st-${x.st} ${S.convAberto.has(x.k) ? 'aberta' : ''}" data-conv-k="${esc(x.k)}">
+        <div class="ct-res" data-conv-sum="${esc(x.k)}">${resumoConv(ev, x)}</div>
+        ${S.convAberto.has(x.k) ? editorConv(ev, x) : ''}</div>`).join('')
+        : `<p class="texto vazio-cat">Ninguém ${S.convBusca ? 'com esse nome ' : ''}neste filtro.</p>`}
+      <p class="ctab-pe">${ls.length === todas.length ? plural(todas.length, 'linha', 'linhas') : `${ls.length} de ${todas.length} linhas`}</p>
+    </div>`;
+  }
+  function filtrosConv() {
+    const f = S.convF || 'todos';
+    return CONV_F.map(([k, r]) => `<button type="button" data-conv-f="${k}" aria-pressed="${f === k}">${r}</button>`).join('');
+  }
+  function refazerTabelaConv() {
+    const ev = evAtual(); if (!ev) return;
+    const t = $('#conv-tabela'); if (t) t.innerHTML = convTabela(ev);
+    document.querySelectorAll('[data-conv-f]').forEach((x) => x.setAttribute('aria-pressed', x.dataset.convF === (S.convF || 'todos')));
+  }
+  function abaConvidados(ev) {
+    const cv = ev.convite;
+    return `<div class="aba-cab"><div><h2>Convidados</h2>
+        <p class="meta">A lista e as respostas ficam juntas. Toque no lápis de uma linha para editar o convite ou a resposta.</p></div>
+        <div class="acoes-linha">
+          <button type="button" class="btn ouro" data-ev-add="convidados">${ic('mais')}Adicionar convidado</button>
+          <button type="button" class="btn" data-acao="conv-colar-abrir">Colar lista</button>
+          <button type="button" class="btn" data-acao="rsvp-novo" title="Para quem respondeu e não está na lista">Lançar resposta</button>
+          <button type="button" class="btn" data-acao="rec-abrir">${ic('check')}Recepção</button></div></div>
+      <details class="conv-cfg conv-import" id="conv-import"><summary>Colar uma lista de convidados</summary>
+        <p class="ajuda">Um convidado por linha. Pode ter o WhatsApp e quantas pessoas o convite inclui, por exemplo:<br><code>Família Souza; 63 99999-0000; 4</code><br><code>Tia Ana 63988887777 2</code></p>
+        <textarea id="conv-colar" rows="5" placeholder="Família Souza; 63 99999-0000; 4"></textarea>
+        <button type="button" class="btn" data-acao="conv-importar">${ic('mais')}Adicionar à lista</button>
+      </details>
+      <div class="cnum-grade" id="conv-nums">${convNums(ev)}</div>
+      <div class="ev-grade">
+        <div class="ev-principal">
+          <div class="ct-barra">
+            <label class="ct-busca">${ic('alvo')}<input id="conv-busca" type="search" value="${esc(S.convBusca || '')}" placeholder="Buscar convidado" aria-label="Buscar convidado"></label>
+            <div class="seg-f" role="group" aria-label="Filtrar">${filtrosConv()}</div>
+            <span class="esp"></span>
+            <div class="ct-ferr">
+              <button type="button" class="mini" data-acao="msg-abrir">${ic('zap')}Mensagem</button>
+              <button type="button" class="mini" data-acao="conv-lembrar">${ic('zap')}Lembrar</button>
+              <button type="button" class="mini" data-acao="rsvp-csv">Planilha</button>
+              <button type="button" class="mini" data-acao="rsvp-imprimir">${ic('imprimir')}Lista de presença</button>
+              <button type="button" class="mini" data-acao="rsvp-atualizar" title="Buscar respostas novas">Atualizar</button></div>
+          </div>
+          <div id="conv-tabela">${convTabela(ev)}</div>
+        </div>
+        <aside class="ev-lado">
+          <div class="orc-card conv-prazo"><h3>Prazo para confirmar</h3>
+            <label class="campo"><span class="sr">Data limite</span><input type="date" data-evc="convite.prazo" value="${esc(cv.prazo || '')}" ${ev.data ? `max="${esc(ev.data)}"` : ''}></label>
+            <label class="chk"><input type="checkbox" data-evc="convite.aceitar_apos_prazo" data-tipo="bool" ${cv.aceitar_apos_prazo ? 'checked' : ''}>Aceitar respostas depois do prazo</label>
+            <p class="prazo-st">${prazoStatus(ev)}</p></div>
+          <div class="orc-card"><h3>Lotação</h3><div id="conv-lotacao" class="lotacao">${lotacaoHtml(ev, { curto: true })}</div></div>
+        </aside>
       </div>`;
-    }).join('')}</div>`;
   }
-  function convidadosHtml(ev) {
-    return `<div class="linhas-ev conv-lista">${ev.convidados.map((cv, i) => `<div class="linha-ev conv-linha">
-        <input data-evc="convidados.${i}.nome" maxlength="80" value="${esc(cv.nome || '')}" placeholder="Nome (ex.: Família Souza)" aria-label="Nome do convidado">
-        <input class="curto" data-evc="convidados.${i}.telefone" maxlength="30" inputmode="tel" value="${esc(cv.telefone || '')}" placeholder="WhatsApp" aria-label="WhatsApp">
-        <input class="mini-num" data-evc="convidados.${i}.lugares" data-tipo="num" inputmode="numeric" value="${cv.lugares != null ? esc(cv.lugares) : ''}" placeholder="Lugares" aria-label="Lugares no convite" title="Quantas pessoas o convite inclui">
-        <span data-conv-st="${esc(cv.id)}">${statusConvidado(ev, cv)}</span>
-        <span class="conv-acoes"><a class="mini zap" href="${esc(zapConvite(ev, cv))}" target="_blank" rel="noopener" data-conv-zap="${i}">${ic('zap')}Enviar</a>
-          <button type="button" class="mini" data-conv-link="${esc(cv.id)}">Copiar link</button>
-          <button type="button" class="mini" data-conv-resp="${esc(cv.id)}" title="Lançar a resposta de quem confirmou por telefone ou pessoalmente">Lançar resposta</button></span>
-        <button type="button" class="tirar-linha" data-ev-tirar="convidados:${i}" aria-label="Remover">×</button></div>`).join('')}</div>`;
-  }
-  function secaoConvite(ev) {
+  function abaConvite(ev) {
     const cv = ev.convite;
     const auto = cv.local_auto;
-    return `<p class="meta">Monte o convite, envie o link pelo WhatsApp e acompanhe quem confirmou. O convidado responde quantos adultos e crianças vão, com a idade de cada criança.</p>
-      <div class="conv-prazo">
-        <label class="campo"><span>Prazo para confirmar presença</span><input type="date" data-evc="convite.prazo" value="${esc(cv.prazo || '')}" ${ev.data ? `max="${esc(ev.data)}"` : ''}></label>
-        <label class="chk"><input type="checkbox" data-evc="convite.aceitar_apos_prazo" data-tipo="bool" ${cv.aceitar_apos_prazo ? 'checked' : ''}>Aceitar respostas depois do prazo</label>
-        <p class="prazo-st">${prazoStatus(ev)}</p>
+    return `<div class="aba-cab"><div><h2>Convite</h2>
+        <p class="meta">O convite é uma página com os dados da festa, o mapa e a confirmação de presença. Cada convidado da lista recebe um link com o nome dele.</p></div></div>
+      <div class="conv-share">
+        <div><strong>${esc(cv.titulo || ev.nome)}</strong><small>${prazoStatus(ev)}</small></div>
+        <div class="acoes-linha">
+          <a class="btn ouro" href="${esc(linkConvite(ev))}" target="_blank" rel="noopener">${ic('olho')}Ver convite</a>
+          <a class="btn zap" href="${esc(zapConvite(ev, null))}" target="_blank" rel="noopener">${ic('zap')}Enviar no WhatsApp</a>
+          <button type="button" class="btn" data-acao="conv-copiar">Copiar link geral</button></div>
       </div>
-      <div id="conv-lotacao" class="lotacao">${lotacaoHtml(ev)}</div>
-      <details class="conv-cfg" ${cv.modelo === 'html' ? 'open' : ''}><summary>Personalizar o convite</summary>
+      <details class="conv-cfg" open><summary>Aparência e textos</summary>
         <label class="campo"><span>Aparência do convite</span><select data-evc="convite.modelo">
           <option value="" ${cv.modelo !== 'html' ? 'selected' : ''}>Modelo pronto (escolho as cores)</option>
           <option value="html" ${cv.modelo === 'html' ? 'selected' : ''}>Meu próprio HTML (design livre)</option></select></label>
@@ -2341,7 +2468,6 @@
             <button type="button" class="btn ghost" data-acao="modelo-exemplo">Começar com o modelo de exemplo</button>
             <label class="btn ghost"><input type="file" id="in-modelo" accept=".html,.htm,text/html" hidden>Carregar arquivo .html</label>
             <button type="button" class="btn ghost" data-acao="modelo-baixar">Baixar o HTML</button>
-            <a class="btn ghost" href="${esc(linkConvite(ev))}" target="_blank" rel="noopener">${ic('olho')}Ver convite</a>
           </div>
           <textarea class="codigo" data-evc="convite.modelo_html" rows="14" spellcheck="false" autocapitalize="off" placeholder="<!doctype html>…">${esc(cv.modelo_html || '')}</textarea>
           <p class="meta">${(cv.modelo_html || '').length.toLocaleString('pt-BR')} de 200.000 caracteres. ${String(cv.modelo_html || '').includes('{{confirmacao}}') ? '' : 'Sem <code>{{confirmacao}}</code>, a confirmação aparece no fim da página.'}</p>
@@ -2354,7 +2480,7 @@
           <label class="campo"><span>Endereço</span><input data-evc="convite.endereco" maxlength="200" value="${esc(cv.endereco || '')}" placeholder="${esc((auto && auto.endereco) || 'Quadra, alameda, lote')}"></label>
           <label class="campo"><span>Cores</span><select data-evc="convite.estilo">${ESTILOS_CONV.map(([k, r]) => `<option value="${k}" ${k === (cv.estilo || 'ouro') ? 'selected' : ''}>${r}</option>`).join('')}</select></label>
         </div>
-        <p class="ajuda">Data, horário e tema vêm do evento (botão Editar). O local vem do espaço marcado com a estrela, se você não preencher aqui.</p>
+        <p class="ajuda">Data, horário e tema vêm do evento (botão Editar). O local vem do espaço marcado com a estrela, se você não preencher aqui. O prazo de confirmação fica na aba Convidados.</p>
       </details>
       <details class="conv-cfg" id="rota-cfg" ${ROTA.aberta ? 'open' : ''}><summary>Local e rota no mapa ${destinoConvite(ev) ? `<small>${(cv.rota || []).length > 1 ? 'rota desenhada' : 'local marcado'}</small>` : ''}</summary>
         <p class="ajuda">O convite mostra o mapa com o local e botões para abrir no GPS (Google Maps ou Waze). Se o GPS costuma errar o caminho (condomínio, chácara, estrada de terra), desenhe a rota certa: toque em <strong>Desenhar rota</strong> e vá tocando no mapa, do ponto de partida até o local. O botão do convite manda o GPS passar pela sua rota.</p>
@@ -2383,30 +2509,7 @@
             <button type="button" class="tirar-linha" data-ev-tirar="presentes:${i}" aria-label="Remover">×</button></div>`;
         }).join('')}</div>
         <button type="button" class="btn ghost add-linha" data-ev-add="presentes">${ic('mais')}Adicionar presente</button>
-      </details>
-      <div class="acoes-linha conv-botoes">
-        <a class="btn" href="${esc(linkConvite(ev))}" target="_blank" rel="noopener">${ic('olho')}Ver convite</a>
-        <button type="button" class="btn ghost" data-acao="conv-copiar">Copiar link geral</button>
-        <a class="btn ghost" href="${esc(zapConvite(ev, null))}" target="_blank" rel="noopener">${ic('zap')}Enviar no WhatsApp</a>
-      </div>
-      <h3 class="conv-sub">Lista de convidados <small>${ev.convidados.length ? plural(ev.convidados.length, 'convite', 'convites') : ''}</small></h3>
-      <p class="meta">Cada convidado recebe um link com o nome dele. Lugares = quantas pessoas o convite inclui.</p>
-      ${convidadosHtml(ev)}
-      <div class="acoes-linha"><button type="button" class="btn ghost add-linha" data-ev-add="convidados">${ic('mais')}Adicionar convidado</button>
-        <button type="button" class="btn ghost add-linha" data-acao="conv-lembrar">${ic('zap')}Lembrar quem não respondeu</button></div>
-      <details class="conv-cfg conv-import"><summary>Colar uma lista de convidados</summary>
-        <p class="ajuda">Um convidado por linha. Pode ter o WhatsApp e quantas pessoas o convite inclui, por exemplo:<br><code>Família Souza; 63 99999-0000; 4</code><br><code>Tia Ana 63988887777 2</code></p>
-        <textarea id="conv-colar" rows="5" placeholder="Família Souza; 63 99999-0000; 4"></textarea>
-        <button type="button" class="btn" data-acao="conv-importar">${ic('mais')}Adicionar à lista</button>
-      </details>
-      <div class="conv-resp-topo"><h3 class="conv-sub">Respostas</h3><span class="esp"></span>
-        <button type="button" class="btn ghost" data-acao="rsvp-novo">${ic('mais')}<span class="lbl">Lançar resposta</span></button>
-        <button type="button" class="btn ghost" data-acao="rsvp-atualizar">Atualizar</button>
-        <button type="button" class="btn ghost" data-acao="rsvp-csv">Planilha</button>
-        <button type="button" class="btn ghost" data-acao="rsvp-imprimir">${ic('imprimir')}<span class="lbl">Lista de presença</span></button>
-        <button type="button" class="btn ghost" data-acao="msg-abrir">${ic('zap')}<span class="lbl">Mensagem</span></button>
-        <button type="button" class="btn" data-acao="rec-abrir">${ic('check')}<span class="lbl">Recepção</span></button></div>
-      <div id="conv-resp">${respostasHtml(ev)}</div>`;
+      </details>`;
   }
 
   function importarConvidados() {
@@ -2875,15 +2978,22 @@
   function atualizarConvite() {
     if (!S.paginaEv || !S.eventos[S.paginaEv]) return;
     const ev = evAtual();
-    const ativo = document.activeElement && document.activeElement.closest && document.activeElement.closest('#conv-resp');
-    const lot = $('#conv-lotacao'); if (lot && !(document.activeElement && lot.contains(document.activeElement))) lot.innerHTML = lotacaoHtml(ev);
-    const resp = $('#conv-resp'); if (resp && !ativo) resp.innerHTML = respostasHtml(ev);
-    document.querySelectorAll('[data-conv-st]').forEach((el) => { const cv = ev.convidados.find((x) => x.id === el.dataset.convSt); if (cv) el.innerHTML = statusConvidado(ev, cv); });
-    const lado = $('#pg-resumo'); if (lado) lado.innerHTML = resumoHtml(ev, contas(ev));
+    const foco = document.activeElement;
+    const dentro = (el) => el && foco && el.contains(foco);
+    const lot = $('#conv-lotacao'); if (lot && !dentro(lot)) lot.innerHTML = lotacaoHtml(ev, { curto: true });
+    const nums = $('#conv-nums'); if (nums) nums.innerHTML = convNums(ev);
+    const tab = $('#conv-tabela');
+    if (tab && !dentro(tab)) tab.innerHTML = convTabela(ev);
+    else if (tab) { // editando uma linha: atualiza só os resumos, sem tirar o foco
+      const ls = linhasConv(ev);
+      tab.querySelectorAll('[data-conv-sum]').forEach((el) => { const x = ls.find((y) => y.k === el.dataset.convSum); if (x) { el.innerHTML = resumoConv(ev, x); el.parentElement.className = `ct-linha st-${x.st} ${S.convAberto.has(x.k) ? 'aberta' : ''}`; } });
+    }
+    atualizarPainel(ev);
     const q = $('#quant-corpo'); if (q) q.innerHTML = quantHtml(ev);
     const it = $('#itens-corpo'); if (it && !it.contains(document.activeElement)) it.innerHTML = itensHtml(ev);
     if ($('#picker').open && $('#rec-lista')) { $('#rec-lista').innerHTML = listaRecepcao(); $('#rec-total').innerHTML = totalRecepcao(); }
   }
+
 
   /* ---- Página do evento ---- */
   function linhaEscolha(e, i) {
@@ -2957,18 +3067,6 @@
         `<li class="${diasAte(v.vencimento) < 0 ? 'atrasado' : ''}"><span>${dataBR(v.vencimento)}</span><strong>${brl(v.falta)}</strong><span>${esc(v.nome)}</span></li>`).join('')}</ul></div>` : ''}
       ${tarefas.length ? `<div class="orc-card"><h3>Próximas tarefas</h3><ul class="prox-tarefas">${tarefas.map((t) =>
         `<li class="${t.prazo && diasAte(t.prazo) < 0 ? 'atrasada' : ''}"><span>${esc(t.texto)}</span>${t.prazo ? `<small>${dataBR(t.prazo).slice(0, 5)}</small>` : ''}</li>`).join('')}</ul></div>` : ''}`;
-  }
-  function andamentoHtml(ev) {
-    const est = ORDEM_CATS.map((k) => {
-      const es = ev.escolhas.filter((e) => (e.cat || 'espacos') === k && e.status !== 'descartado');
-      const ok = es.some((e) => fechado(e.status));
-      return [k, ok ? 'ok' : es.length ? 'meio' : 'nada', ok ? 'Resolvido' : es.length ? `${es.length} ${es.length === 1 ? 'opção' : 'opções'}` : 'Nada ainda'];
-    });
-    const n = est.filter((x) => x[1] === 'ok').length;
-    return `<section class="andamento" aria-label="Andamento">
-      <p><strong>${n} de ${est.length}</strong> categorias resolvidas</p>
-      <ul>${est.map(([k, st, rot]) => `<li class="and-${st}"><span class="and-ic">${ic(st === 'ok' ? 'check' : CATS[k].icone)}</span><span><strong>${esc(CATS[k].curto)}</strong><small>${rot}</small></span></li>`).join('')}</ul>
-    </section>`;
   }
   function linhasEv(lista, i, conteudo) {
     return `<div class="linha-ev">${conteudo}<button type="button" class="tirar-linha" data-ev-tirar="${lista}:${i}" aria-label="Remover">×</button></div>`;
@@ -3059,6 +3157,107 @@
         <input data-evc="cronograma.${i}.oque" maxlength="200" value="${esc(x.oque || '')}" placeholder="ex.: chegada do buffet" aria-label="O que acontece">`)).join('')}</div>
       <button type="button" class="btn ghost add-linha" data-ev-add="cronograma">${ic('mais')}Adicionar horário</button>`;
   }
+  /* ---- Painel do evento: cabeçalho, cartões, abas ---- */
+  const ABAS_EV = [['geral', 'Visão geral'], ['fornecedores', 'Fornecedores'], ['convidados', 'Convidados'], ['convite', 'Convite'],
+    ['festa', 'Comida e lembrancinhas'], ['orcamento', 'Orçamento'], ['dia', 'Tarefas e o dia']];
+  function estCats(ev) {
+    return ORDEM_CATS.map((k) => {
+      const es = ev.escolhas.filter((e) => (e.cat || 'espacos') === k && e.status !== 'descartado');
+      const fe = es.filter((e) => fechado(e.status));
+      const nomes = fe.map((e) => (S.porId[e.id] && S.porId[e.id].nome) || e.nome).filter(Boolean);
+      return { k, st: fe.length ? 'ok' : es.length ? 'meio' : 'nada', n: es.length, nomes };
+    });
+  }
+  const barra = (v, tot, cls = '') => `<span class="kpi-barra ${cls}"><i style="width:${tot ? Math.min(100, (v / tot) * 100).toFixed(1) : 0}%"></i></span>`;
+  function kpisHtml(ev, c) {
+    const est = estCats(ev); const ok = est.filter((x) => x.st === 'ok').length;
+    const faltam = est.filter((x) => x.st !== 'ok').map((x) => CATS[x.k].curto);
+    const L = lotacao(ev); const prev = numV(ev.adultos) + numV(ev.criancas);
+    const orc = numV(ev.orcamento);
+    const tar = ev.tarefas.filter((t) => (t.texto || '').trim()); const feitas = tar.filter((t) => t.feito).length;
+    const prox = tar.filter((t) => !t.feito).sort((a, b) => (a.prazo || '9999').localeCompare(b.prazo || '9999'))[0];
+    const card = (aba, rot, valor, sub, bar, tom = '') => `<button type="button" class="kpi ${tom}" data-ev-aba="${aba}"><span class="kpi-rot">${rot}</span><strong class="kpi-v">${valor}</strong>${bar}<small class="kpi-sub">${sub}</small></button>`;
+    return card('fornecedores', 'Fornecedores', `${ok}<small> de ${est.length}</small>`, faltam.length ? `Falta: ${esc(faltam.join(', '))}` : 'Tudo resolvido', barra(ok, est.length, ok === est.length ? 'ok' : ''))
+      + card('convidados', 'Confirmados', `${L.total}${prev ? `<small> de ${prev}</small>` : ''}`,
+        ev.convidados.length || L.rs.length ? [L.maisTalvez > L.total ? `${L.maisTalvez - L.total} talvez` : null, L.semResposta ? `${L.semResposta} sem resposta` : null].filter(Boolean).join(' · ') || 'Todos responderam' : 'Lista vazia',
+        barra(L.total, prev || L.total), L.limites.some((x) => x.passou) ? 'ruim' : '')
+      + card('orcamento', 'Orçamento', brl(c.combinado), orc ? `${c.combinado > orc ? 'passou' : 'de'} ${brl(orc)} · ${brl(c.pago)} pago` : `${brl(c.pago)} pago`,
+        barra(c.pago, Math.max(orc, c.combinado)), orc && c.combinado > orc ? 'ruim' : '')
+      + card('dia', 'Tarefas', `${feitas}<small> de ${tar.length}</small>`, prox ? `Próxima: ${esc(prox.texto)}` : tar.length ? 'Todas feitas' : 'Nenhuma tarefa', barra(feitas, tar.length, tar.length && feitas === tar.length ? 'ok' : ''));
+  }
+  function faltaAgora(ev, c) {
+    const it = [];
+    const add = (tom, txt, sub, botao) => it.push({ tom, txt, sub, botao });
+    const est = estCats(ev);
+    if (!ev.data) add('ruim', 'Definir a data da festa', 'Sem data não dá para combinar com os fornecedores nem ver os prazos.', ['Editar evento', 'data-acao="editar-evento"']);
+    const esp = est.find((x) => x.k === 'espacos');
+    if (esp.st !== 'ok') add('ruim', 'Escolher o local', esp.n ? `${plural(esp.n, 'opção', 'opções')} em análise. Marque a escolhida com a estrela.` : 'Nenhum espaço adicionado ainda.', ['Ver espaços', 'data-ev-aba="fornecedores"']);
+    const outras = est.filter((x) => x.k !== 'espacos' && x.st !== 'ok');
+    if (outras.length) add('meio', `Resolver ${outras.map((x) => CATS[x.k].curto.toLowerCase()).join(', ').replace(/, ([^,]*)$/, ' e $1')}`, outras.some((x) => x.n) ? 'Há opções esperando decisão.' : 'Ainda sem opções.', ['Fornecedores', 'data-ev-aba="fornecedores"']);
+    const atras = c.vencimentos.filter((v) => diasAte(v.vencimento) <= 7);
+    if (atras.length) add(atras.some((v) => diasAte(v.vencimento) < 0) ? 'ruim' : 'meio', `Pagar ${brl(atras.reduce((a, v) => a + v.falta, 0))}`, atras.map((v) => `${esc(v.nome)} (${dataBR(v.vencimento).slice(0, 5)})`).join(', '), ['Orçamento', 'data-ev-aba="orcamento"']);
+    const L = lotacao(ev);
+    const passou = L.limites.find((x) => x.passou);
+    if (passou) add('ruim', `Confirmados passaram da capacidade ${passou.cat === 'buffet' ? 'do buffet' : 'do espaço'}`, `${passou.usado} para ${passou.cap} lugares.`, ['Convidados', 'data-ev-aba="convidados"']);
+    if (!ev.convidados.length && !L.rs.length) add('meio', 'Montar a lista de convidados', 'Cole a lista do WhatsApp ou adicione um por um.', ['Adicionar', 'data-ev-aba="convidados"']);
+    else if (L.semResposta) add('meio', `${plural(L.semResposta, 'convidado não respondeu', 'convidados não responderam')}`, ev.convite.prazo ? `Prazo: ${dataBR(ev.convite.prazo)}.` : 'Mande um lembrete pelo WhatsApp.', ['Lembrar', 'data-acao="conv-lembrar"']);
+    if (ev.convidados.length && !ev.convite.prazo) add('', 'Definir o prazo de confirmação', 'Ajuda a fechar o número com o buffet.', ['Definir', 'data-ev-aba="convidados"']);
+    const tAtr = ev.tarefas.filter((t) => !t.feito && t.prazo && (t.texto || '').trim() && diasAte(t.prazo) < 0);
+    if (tAtr.length) add('ruim', plural(tAtr.length, 'tarefa atrasada', 'tarefas atrasadas'), esc(tAtr.slice(0, 2).map((t) => t.texto).join(', ')), ['Tarefas', 'data-ev-aba="dia"']);
+    if (c.semValor) add('', `${plural(c.semValor, 'escolhido sem valor', 'escolhidos sem valor')} combinado`, 'Preencha para o orçamento ficar certo.', ['Fornecedores', 'data-ev-aba="fornecedores"']);
+    const d = diasAte(ev.data);
+    if (d != null && d >= 0 && d <= 30 && !ev.cronograma.length) add('', 'Montar o cronograma do dia', 'Montagem, chegada, parabéns, fim do buffet.', ['Cronograma', 'data-ev-aba="dia"']);
+    const nItens = (ev.itens_festa || []).filter((x) => x.nome && x.status !== 'pronto').length;
+    if (d != null && d >= 0 && d <= 21 && nItens) add('', `${plural(nItens, 'item da festa ainda não está pronto', 'itens da festa ainda não estão prontos')}`, 'Lembrancinhas, centros de mesa e afins.', ['Ver itens', 'data-ev-aba="festa"']);
+    return it;
+  }
+  function faltaHtml(ev, c) {
+    const it = faltaAgora(ev, c);
+    const mostra = it.slice(0, 5);
+    return `<div class="falta-cab"><h2>O que falta agora</h2>${it.length ? `<span class="falta-n">${it.length}</span>` : ''}</div>
+      ${mostra.length ? `<ol class="falta">${mostra.map((x) => `<li class="f-${x.tom || 'neutro'}"><span class="f-ponto" aria-hidden="true"></span>
+        <span class="f-txt"><strong>${x.txt}</strong><small>${x.sub}</small></span>
+        <button type="button" class="btn" ${x.botao[1]}>${x.botao[0]}</button></li>`).join('')}</ol>
+      ${it.length > 5 ? `<p class="meta">E mais ${it.length - 5}. Resolva estes primeiro.</p>` : ''}`
+      : `<p class="falta-ok">${ic('check')}Nada urgente. Tudo encaminhado por enquanto.</p>`}`;
+  }
+  function fornGrade(ev) {
+    return `<div class="forn-grade">${estCats(ev).map((x) => `<button type="button" class="forn-mini f-${x.st}" data-ev-aba="fornecedores">
+      <span class="fm-ic">${ic(x.st === 'ok' ? 'check' : CATS[x.k].icone)}</span>
+      <span class="fm-txt"><strong>${esc(CATS[x.k].curto)}</strong><small>${x.st === 'ok' ? esc(x.nomes.join(', ')) : x.n ? `${plural(x.n, 'opção', 'opções')}, nada escolhido` : 'Nada ainda'}</small></span></button>`).join('')}</div>`;
+  }
+  function convCardHtml(ev) {
+    const L = lotacao(ev);
+    return `<div class="orc-card conv-card"><h3>Convite</h3>
+      <p class="orc-sub">${ev.convidados.length ? `${plural(ev.convidados.length, 'convite na lista', 'convites na lista')} · ${L.total} confirmados` : 'Ninguém na lista ainda.'}</p>
+      <div class="conv-card-bt"><a class="btn zap" href="${esc(zapConvite(ev, null))}" target="_blank" rel="noopener">${ic('zap')}Enviar no WhatsApp</a>
+        <button type="button" class="btn" data-acao="conv-copiar">Copiar link</button></div>
+      <button type="button" class="link-btn" data-ev-aba="convite">Personalizar o convite</button></div>`;
+  }
+  function atualizarPainel(ev) {
+    const c = contas(ev);
+    const k = $('#pg-kpis'); if (k) k.innerHTML = kpisHtml(ev, c);
+    const f = $('#pg-falta'); if (f) f.innerHTML = faltaHtml(ev, c);
+    const lado = $('#pg-resumo'); if (lado) lado.innerHTML = convCardHtml(ev) + resumoHtml(ev, c);
+    document.querySelectorAll('[data-aba-n]').forEach((el) => { el.textContent = contadorAba(ev, el.dataset.abaN); });
+  }
+  function contadorAba(ev, aba) {
+    if (aba === 'fornecedores') { const e = estCats(ev); return `${e.filter((x) => x.st === 'ok').length}/${e.length}`; }
+    if (aba === 'convidados') { const n = lotacao(ev).total; return n ? String(n) : ''; }
+    if (aba === 'dia') { const n = ev.tarefas.filter((t) => !t.feito && (t.texto || '').trim()).length; return n ? String(n) : ''; }
+    return '';
+  }
+  function irAbaEv(aba, { rolar = true } = {}) {
+    if (!ABAS_EV.some((x) => x[0] === aba)) aba = 'geral';
+    S.abaEv = aba;
+    document.querySelectorAll('[data-painel]').forEach((p) => { p.hidden = p.dataset.painel !== aba; });
+    document.querySelectorAll('.ev-abas [data-ev-aba]').forEach((b) => b.setAttribute('aria-selected', b.dataset.evAba === aba));
+    const atual = document.querySelector(`.ev-abas [data-ev-aba="${aba}"]`);
+    if (atual) atual.scrollIntoView({ block: 'nearest', inline: 'center' });
+    if (aba === 'convite' && ROTA.aberta) iniciarMapaRota();
+    const nav = $('.ev-abas');
+    if (rolar && nav) { const y = nav.getBoundingClientRect().top + window.scrollY - (parseFloat(getComputedStyle(nav).top) || 0); if (window.scrollY > y) window.scrollTo({ top: y }); }
+  }
   function renderPagina() {
     const el = $('#pagina');
     const bruto = S.eventos[S.paginaEv];
@@ -3075,51 +3274,74 @@
     const auto = lLocal ? { nome: lLocal.nome, endereco: lLocal.endereco || lLocal.bairro || '', mapa: mapaUrl(lLocal), ...(cc ? { coord: cc } : {}) } : null;
     if (JSON.stringify(auto) !== JSON.stringify(ev.convite.local_auto || null)) { ev.convite.local_auto = auto; salvarEvento(ev, { render: false }); }
     if (!S.rsvpPedido[ev.id]) { S.rsvpPedido[ev.id] = true; carregarRsvp(ev.id); }
+    if (S.abaEvDe !== ev.id) { S.abaEvDe = ev.id; S.abaEv = 'geral'; S.convF = 'todos'; S.convBusca = ''; S.convAberto = new Set(); }
+    const aba = S.abaEv || 'geral';
+    const d = diasAte(ev.data);
+    const conta = d == null ? '' : d > 0 ? `<div class="ev-conta"><strong>${d}</strong><span>${d === 1 ? 'dia para a festa' : 'dias para a festa'}</span></div>`
+      : d === 0 ? '<div class="ev-conta"><strong>Hoje</strong><span>é o dia da festa</span></div>'
+        : `<div class="ev-conta passou"><strong>${-d}</strong><span>${d === -1 ? 'dia' : 'dias'} desde a festa</span></div>`;
+    const localTxt = (ev.convite.local_nome || (lLocal && lLocal.nome) || '').trim();
+    const meta = [
+      ev.data ? `<span>${ic('quero')}${esc(dataLonga(ev.data))}</span>` : `<span class="fraco">${ic('quero')}Data a definir</span>`,
+      horario(ev) ? `<span>${ic('relogio')}${esc(horario(ev))}</span>` : '',
+      localTxt ? `<span>${ic('pin')}${lLocal ? `<button type="button" class="link-btn" data-abrir="${lLocal.id}">${esc(localTxt)}</button>` : esc(localTxt)}</span>` : `<span class="fraco">${ic('pin')}Local a definir</span>`,
+      ev.tema ? `<span class="ev-tema">Tema ${esc(ev.tema)}</span>` : '',
+    ].filter(Boolean).join('');
     const conv = [numV(ev.adultos) ? `${ev.adultos} adultos` : null, numV(ev.criancas) ? `${ev.criancas} crianças` : null].filter(Boolean).join(' + ');
     const fatos = [
       ['Para quem', esc([ev.para_quem, ev.idade].filter(Boolean).join(', '))],
       ['Quem organiza', esc([ev.organiza, ev.contato].filter(Boolean).join(' · '))],
-      ['Convidados', conv ? esc(conv) + (c.pessoas && conv.includes('+') ? ` <small>(${c.pessoas})</small>` : '') : ''],
-      ['Tema', esc(ev.tema)],
-      ['Local', lLocal ? `<button type="button" class="link-btn" data-abrir="${lLocal.id}">${esc(lLocal.nome)}</button>${lLocal.endereco || lLocal.bairro ? ` <small>${esc(lLocal.endereco || lLocal.bairro)}</small>` : ''}` : '<span class="fraco">a definir</span>'],
+      ['Convidados previstos', conv ? esc(conv) : ''],
+      ['Endereço', lLocal && (lLocal.endereco || lLocal.bairro) ? esc(lLocal.endereco || lLocal.bairro) : ''],
     ].filter(([, v]) => v);
+    const painel = (k, html) => `<div class="ev-painel" data-painel="${k}" role="tabpanel" aria-label="${esc(ABAS_EV.find((x) => x[0] === k)[1])}" ${k === aba ? '' : 'hidden'}>${html}</div>`;
     el.innerHTML = `
-      <div class="pg-topo">
-        <a class="btn ghost" href="#eventos">${ic('voltar')}Eventos</a>
-        <span class="esp"></span>
-        <button type="button" class="btn" data-acao="editar-evento">${ic('editar')}<span class="lbl">Editar</span></button>
-        <button type="button" class="btn" data-acao="imprimir">${ic('imprimir')}<span class="lbl">Imprimir</span></button>
-      </div>
-      <header class="pg-cab">
-        <p class="sobretitulo">${esc(ev.tipo || 'Evento')} · ${esc(evStRot(ev.status))}</p>
-        <h1>${esc(ev.nome)}</h1>
-        <p class="pg-quando">${ev.data ? `<span>${ic('quero')}${esc(dataLonga(ev.data))}</span>` : '<span>Data a definir</span>'}
-          ${horario(ev) ? `<span>${ic('relogio')}${esc(horario(ev))}</span>` : ''}
-          ${ev.data ? `<span class="contagem">${esc(contagem(ev.data))}</span>` : ''}</p>
-        ${fatos.length ? `<dl class="pg-fatos">${fatos.map(([r, v]) => `<div><dt>${r}</dt><dd>${v}</dd></div>`).join('')}</dl>` : ''}
-        ${ev.descricao ? `<p class="pg-desc">${esc(ev.descricao)}</p>` : ''}
+      <header class="ev-cab">
+        <a class="ev-voltar" href="#eventos">${ic('voltar')}Meus eventos</a>
+        <div class="ev-cab-grade">
+          <div class="ev-cab-txt">
+            <p class="sobretitulo">${esc(ev.tipo || 'Evento')} <span class="ev-st ev-st-${esc(ev.status || 'planejando')}">${esc(evStRot(ev.status))}</span></p>
+            <h1>${esc(ev.nome)}</h1>
+            <p class="ev-meta">${meta}</p>
+          </div>
+          <div class="ev-cab-dir">${conta}
+            <div class="ev-acoes">
+              <a class="btn ouro" href="${esc(linkConvite(ev))}" target="_blank" rel="noopener">${ic('olho')}Ver convite</a>
+              <button type="button" class="btn" data-acao="editar-evento">${ic('editar')}Editar</button>
+              <button type="button" class="btn icone-so" data-acao="imprimir" title="Imprimir" aria-label="Imprimir">${ic('imprimir')}</button>
+            </div></div>
+        </div>
       </header>
-      ${andamentoHtml(ev)}
-      <div class="pg-grade">
-      <div class="pg-principal">
-      <section class="pg-sec"><h2>Fornecedores</h2>
-        <p class="meta">Adicione as opções que está considerando e marque com a estrela as melhores. Pode haver mais de uma escolhida por categoria (buffet e bolo, por exemplo).</p>
-        ${ORDEM_CATS.map((k) => blocoCat(ev, k)).join('')}
-      </section>
-      <section class="pg-sec" id="sec-convite"><h2>Convite e confirmações</h2>${secaoConvite(ev)}</section>
-      <section class="pg-sec" id="sec-quant"><h2>Comida e bebida</h2><div id="quant-corpo">${quantHtml(ev)}</div></section>
-      <section class="pg-sec" id="sec-itens"><h2>Lembrancinhas e itens da festa</h2><div id="itens-corpo">${itensHtml(ev)}</div></section>
-      <section class="pg-sec"><div class="orc-cab"><h2>Orçamento detalhado</h2>
+      <div class="kpis" id="pg-kpis">${kpisHtml(ev, c)}</div>
+      <nav class="ev-abas" role="tablist" aria-label="Partes do evento">${ABAS_EV.map(([k, r]) => `<button type="button" role="tab" data-ev-aba="${k}" aria-selected="${k === aba}">${r}<span class="aba-n" data-aba-n="${k}">${contadorAba(ev, k)}</span></button>`).join('')}</nav>
+      ${painel('geral', `<div class="ev-grade">
+        <div class="ev-principal">
+          <section class="ev-bloco" id="pg-falta">${faltaHtml(ev, c)}</section>
+          <section class="ev-bloco"><div class="bloco-cab"><h2>Fornecedores</h2><button type="button" class="link-btn" data-ev-aba="fornecedores">Ver todos</button></div>${fornGrade(ev)}</section>
+          ${fatos.length || ev.descricao ? `<section class="ev-bloco"><div class="bloco-cab"><h2>Sobre o evento</h2><button type="button" class="link-btn" data-acao="editar-evento">Editar</button></div>
+            ${fatos.length ? `<dl class="pg-fatos">${fatos.map(([r, v]) => `<div><dt>${r}</dt><dd>${v}</dd></div>`).join('')}</dl>` : ''}
+            ${ev.descricao ? `<p class="pg-desc">${esc(ev.descricao)}</p>` : ''}</section>` : ''}
+        </div>
+        <aside class="ev-lado" id="pg-resumo" aria-label="Resumo">${convCardHtml(ev)}${resumoHtml(ev, c)}</aside>
+      </div>`)}
+      ${painel('fornecedores', `<div class="aba-cab"><div><h2>Fornecedores</h2>
+        <p class="meta">Adicione as opções que está considerando e marque com a estrela as escolhidas. Pode haver mais de uma por categoria (buffet e bolo, por exemplo).</p></div></div>
+        ${ORDEM_CATS.map((k) => blocoCat(ev, k)).join('')}`)}
+      ${painel('convidados', abaConvidados(ev))}
+      ${painel('convite', abaConvite(ev))}
+      ${painel('festa', `<section class="ev-bloco" id="sec-quant"><h2>Comida e bebida</h2><div id="quant-corpo">${quantHtml(ev)}</div></section>
+        <section class="ev-bloco" id="sec-itens"><h2>Lembrancinhas e itens da festa</h2><div id="itens-corpo">${itensHtml(ev)}</div></section>`)}
+      ${painel('orcamento', `<div class="aba-cab orc-cab"><div><h2>Orçamento detalhado</h2></div>
         <div class="seg-f" role="group" aria-label="Mostrar">${[['todos', 'Todos'], ['rascunho', 'Rascunho'], ['aprovado', 'Aprovados']].map(([k, r]) =>
           `<button type="button" data-orc-f="${k}" aria-pressed="${(S.orcF || 'todos') === k}">${r}</button>`).join('')}</div></div>
-        <div id="orc-lista" class="orc-f-${S.orcF || 'todos'}">${listaOrc(ev)}</div></section>
-      <section class="pg-sec"><h2>Tarefas</h2>${listaTarefas(ev)}</section>
-      <section class="pg-sec"><h2>Cronograma do dia</h2>${listaCrono(ev)}</section>
-      <p class="meta pg-priv">${privTxt()}</p>
-      </div>
-      <aside class="pg-lado" id="pg-resumo" aria-label="Resumo do orçamento">${resumoHtml(ev, c)}</aside>
-      </div>`;
-    if (ROTA.aberta) iniciarMapaRota();
+        <div id="orc-lista" class="orc-f-${S.orcF || 'todos'}">${listaOrc(ev)}</div>`)}
+      ${painel('dia', `<div class="ev-grade metade">
+        <section class="ev-bloco"><h2>Tarefas</h2>${listaTarefas(ev)}</section>
+        <section class="ev-bloco"><h2>Cronograma do dia</h2>${listaCrono(ev)}</section></div>`)}
+      <p class="meta pg-priv">${privTxt()}</p>`;
+    const sw = document.querySelector('.secoes-wrap');
+    document.documentElement.style.setProperty('--topo-fixo', `${sw && getComputedStyle(sw).position === 'sticky' ? sw.offsetHeight : 0}px`);
+    if (ROTA.aberta && aba === 'convite') iniciarMapaRota();
   }
 
   /* ---- Edição na própria página ---- */
