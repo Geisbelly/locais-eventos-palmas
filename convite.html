@@ -53,6 +53,7 @@
     input:focus, select:focus, textarea:focus { outline: 2px solid var(--cor); outline-offset: 1px; border-color: var(--cor); }
     .escolha { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px; }
     .escolha button { min-height: 52px; padding: 6px; border-radius: 12px; border: 1.5px solid var(--linha); background: #fff; font: 600 1rem var(--texto); color: var(--tinta); cursor: pointer; }
+    @media (max-width: 400px) { .escolha { grid-template-columns: 1fr; } .escolha button { min-height: 46px; } }
     .escolha button[aria-pressed="true"] { border-color: var(--cor); background: var(--cor-fundo); color: var(--cor-escura); }
     .duplo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .contador { display: flex; align-items: center; border: 1px solid var(--linha); border-radius: 10px; background: #fff; overflow: hidden; }
@@ -266,10 +267,40 @@
       raiz.replace(/(--[a-z-]+)\s*:\s*([^;]+);/g, (_, k, v) => { pad[k] = v.trim(); return ''; });
       // Cor do texto e fontes ficam sem padrão de propósito: herdam do modelo.
       ['--tinta', '--texto', '--titulo', '--bg', '--papel'].forEach((k) => delete pad[k]);
-      CSS_BLOCO = ':host { display: block; } * { box-sizing: border-box; } .rsvp { border-top: 0; padding: 8px 0; }\n'
+      CSS_BLOCO = ':host { display: block; } * { box-sizing: border-box; }\n'
         + base.replace(/:root\s*\{[^}]*\}/, '').replace(/body\[data-estilo[^}]*\}/g, '')
-          .replace(/var\((--[a-z-]+)\)/g, (m, k) => (pad[k] ? `var(${k}, ${pad[k]})` : m));
+          .replace(/var\((--[a-z-]+)\)/g, (m, k) => (pad[k] ? `var(${k}, ${pad[k]})` : m))
+        // No modelo próprio, quem desenha divisórias e margens é o modelo.
+        + '\n.rsvp { border-top: 0; padding: 8px 0 0; } .presentes { border-top: 0; }';
       return CSS_BLOCO;
+    }
+    // Some com a linha cujos campos ficaram todos vazios ("Confirme até {{prazo}}" sem prazo) e com o que ficar oco.
+    function tirarVazios(doc) {
+      const BLOCO = 'p,li,h1,h2,h3,h4,h5,h6,small,figcaption,dt,dd,td,th,blockquote,a,button,strong,b,em,i,span,label';
+      const textos = []; const w = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT);
+      while (w.nextNode()) if (/[\uE000\uE001]/.test(w.currentNode.nodeValue)) textos.push(w.currentNode);
+      const remover = new Set();
+      textos.forEach((t) => {
+        if (!t.nodeValue.includes('\uE000')) return;
+        let el = t.parentElement;
+        // Sobe enquanto o elemento só tem campos vazios; para no primeiro que tem campo preenchido.
+        while (el && el !== doc.body && el.matches(BLOCO) && !el.textContent.includes('\uE001')) {
+          const pai = el.parentElement;
+          if (!pai || pai === doc.body || !pai.matches(BLOCO) || pai.textContent.includes('\uE001')) break;
+          el = pai;
+        }
+        if (el && el !== doc.body && !el.textContent.includes('\uE001') && !el.querySelector('img,svg,video,iframe,[data-convite]')) remover.add(el);
+      });
+      remover.forEach((el) => {
+        let pai = el.parentElement; el.remove();
+        while (pai && pai !== doc.body && !pai.textContent.replace(/[\uE000\uE001\s]/g, '') && !pai.querySelector('img,svg,video,iframe,[data-convite]') && !pai.className.match(/sol|faixa|deco/)) {
+          const p2 = pai.parentElement; pai.remove(); pai = p2;
+        }
+      });
+      const tw = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT);
+      while (tw.nextNode()) tw.currentNode.nodeValue = tw.currentNode.nodeValue.replace(/[\uE000\uE001]/g, '');
+      doc.querySelectorAll('*').forEach((el) => [...el.attributes].forEach((a) => { if (/[\uE000\uE001]/.test(a.value)) el.setAttribute(a.name, a.value.replace(/[\uE000\uE001]/g, '')); }));
+      doc.querySelectorAll('title').forEach((t) => { t.textContent = t.textContent.replace(/[\uE000\uE001]/g, ''); });
     }
     function renderProprio(ev, vals, x) {
       let html = String(ev.convite.modelo_html);
@@ -277,10 +308,13 @@
       html = html.replace(/\{\{\s*([a-z_]+)\s*\}\}/gi, (m, k) => {
         k = k.toLowerCase();
         if (blocos[k]) return `<div data-convite="${blocos[k]}"></div>`;
-        return k in vals ? esc(vals[k]) : m;
+        if (!(k in vals)) return m;
+        // Marcadores invisíveis: \uE000 = campo vazio, \uE001 = campo preenchido. Saem antes de mostrar.
+        return String(vals[k]).trim() ? '\uE001' + esc(vals[k]) : '\uE000';
       });
       const doc = new DOMParser().parseFromString(html, 'text/html');
       limparModelo(doc);
+      tirarVazios(doc);
       if (!doc.querySelector('[data-convite="rsvp"]')) { const r = doc.createElement('div'); r.dataset.convite = 'rsvp'; doc.body.appendChild(r); }
       cssDosBlocos();
       document.getElementById('base-css').remove();
