@@ -190,13 +190,14 @@
         }
       ],
       "fontes": [
+        "https://wa.me/c/556392064699",
         "https://www.instagram.com/palmas_kids_fest_locacoes/p/DbTa3VXOKtA/",
         "Conversa de WhatsApp com a empresa (out/2026)",
         "https://www.google.com/maps/place/D.L.A+locações+e+palmas+kids+fest/data=!4m2!3m1!1s0x933b3546219e979d:0xa9afecaa5da9b779"
       ],
       "conferido_em": "2026-10-15",
       "status": "Informado pelo local",
-      "atualizado_em": "2026-11-14T00:34:36Z",
+      "atualizado_em": "2026-11-14T00:53:02Z",
       "detalhes": {
         "duracao": "24 horas"
       },
@@ -229,10 +230,10 @@
           "qtd": null,
           "obs": "Tatame, mesinhas, gangorrinhas, piscina de bolinhas e pula-pula de 2 m. O cercadinho não comporta mais de um pula-pula; o pula-pula grande fica fora",
           "foto": {
-            "url": "fotos/palmas-kids-fest/ig-DcHOAftNpGJ.jpg",
+            "url": "fotos/palmas-kids-fest/wa-espaco-recreativo.jpg",
             "credito": {
-              "nome": "Instagram @palmas_kids_fest_locacoes",
-              "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/DcHOAftNpGJ/"
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556392064699"
             }
           }
         },
@@ -242,12 +243,12 @@
           "valor": 190,
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Montado fora do espaço recreativo. Promoção de segunda a quinta: R$ 160 (flyer de jul/2026)",
+          "obs": "Aço reforçado, suporta até 300 kg. Montado fora do espaço recreativo. Promoção de segunda a quinta: R$ 160 (flyer de jul/2026)",
           "foto": {
-            "url": "fotos/palmas-kids-fest/ig-DXMilIAtp-4.jpg",
+            "url": "fotos/palmas-kids-fest/wa-pula-305.jpg",
             "credito": {
-              "nome": "Instagram @palmas_kids_fest_locacoes",
-              "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/DXMilIAtp-4/"
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556392064699"
             }
           }
         },
@@ -257,12 +258,12 @@
           "valor": 175,
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Promoção de segunda a quinta: R$ 140 (flyer de jul/2026)",
+          "obs": "Suporta até 200 kg. Promoção de segunda a quinta: R$ 140 (flyer de jul/2026)",
           "foto": {
-            "url": "fotos/palmas-kids-fest/ig-DXMilIAtp-4.jpg",
+            "url": "fotos/palmas-kids-fest/wa-pula-244.jpg",
             "credito": {
-              "nome": "Instagram @palmas_kids_fest_locacoes",
-              "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/DXMilIAtp-4/"
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556392064699"
             }
           }
         },
@@ -272,42 +273,146 @@
           "valor": 150,
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Promoção de segunda a quinta: R$ 130 (flyer de jul/2026)",
+          "obs": "Suporta até 100 kg. Promoção de segunda a quinta: R$ 130 (flyer de jul/2026)",
           "foto": {
-            "url": "fotos/palmas-kids-fest/ig-DXMilIAtp-4.jpg",
+            "url": "fotos/palmas-kids-fest/wa-pula-200.jpg",
             "credito": {
-              "nome": "Instagram @palmas_kids_fest_locacoes",
-              "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/DXMilIAtp-4/"
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556392064699"
             }
           }
         },
         {
-          "nome": "Piscina de bolinhas",
+          "nome": "Piscina de bolinhas 1,5 x 1,5 m",
           "tipo": "Piscina de bolinhas",
-          "valor": "Sob consulta",
+          "valor": 160,
           "unidade": "por evento",
           "qtd": null,
-          "obs": null,
+          "obs": "Forro macio de tatame e 2 mil bolinhas",
           "foto": {
-            "url": "fotos/palmas-kids-fest/ig-DXXlAriNa6t.jpg",
+            "url": "fotos/palmas-kids-fest/wa-piscina-15.jpg",
             "credito": {
-              "nome": "Instagram @palmas_kids_fest_locacoes",
-              "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/DXXlAriNa6t/"
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556392064699"
             }
           }
         },
         {
-          "nome": "Escorregador",
-          "tipo": "Escorregador / gangorra",
+          "nome": "Piscina de bolinhas 1 x 1 m",
+          "tipo": "Piscina de bolinhas",
+          "valor": 120,
+          "unidade": "por evento",
+          "qtd": null,
+          "foto": {
+            "url": "fotos/palmas-kids-fest/wa-piscina-1x1.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556392064699"
+            }
+          }
+        },
+        {
+          "nome": "Escorregador grande (4 degraus)",
+          "tipo": "Escorregador",
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": null,
+          "obs": "Recomendado até 13 anos. O catálogo não mostra o preço",
           "foto": {
-            "url": "fotos/palmas-kids-fest/ig-DbTNPy0urFV.jpg",
+            "url": "fotos/palmas-kids-fest/wa-escorregador.jpg",
             "credito": {
-              "nome": "Instagram @palmas_kids_fest_locacoes",
-              "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/DbTNPy0urFV/"
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556392064699"
+            }
+          }
+        },
+        {
+          "nome": "Tombo Legal compacto",
+          "tipo": "Piscina de bolinhas com escorregador",
+          "valor": 380,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Até 100 kg. No catálogo, de R$ 400 por R$ 380",
+          "foto": {
+            "url": "fotos/palmas-kids-fest/wa-tombo-legal.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556392064699"
+            }
+          }
+        },
+        {
+          "nome": "Kit Brink Fest mini",
+          "tipo": "Kit",
+          "valor": 250,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Piscina de bolinhas, escorregador e gangorrinha",
+          "foto": {
+            "url": "fotos/palmas-kids-fest/wa-kit-mini.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556392064699"
+            }
+          }
+        },
+        {
+          "nome": "Kit Brink Fest (pula-pula 2,44 m)",
+          "tipo": "Kit",
+          "valor": 350,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Pula-pula 2,44 m, piscina de bolinhas 1,5 x 1,5 m, escorregador e gangorrinha (cavalinho ou motinha)",
+          "foto": {
+            "url": "fotos/palmas-kids-fest/wa-kit-244.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556392064699"
+            }
+          }
+        },
+        {
+          "nome": "Kit Brink Fest master (pula-pula 3,05 m)",
+          "tipo": "Kit",
+          "valor": 380,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Pula-pula 3,05 m, piscina de bolinhas 1,5 x 1,5 m, escorregador de 4 degraus e gangorrinha (cavalinho ou minhoquinha)",
+          "foto": {
+            "url": "fotos/palmas-kids-fest/wa-kit-305.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556392064699"
+            }
+          }
+        },
+        {
+          "nome": "Kit Fest Master",
+          "tipo": "Kit",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Pula-pula 3,05 m, pula-pula 2,44 m, piscina de bolinhas 1,5 x 1,5 m, escorregador e gangorrinha. Indicado para espaços grandes",
+          "foto": {
+            "url": "fotos/palmas-kids-fest/wa-kit-fest-master.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556392064699"
+            }
+          }
+        },
+        {
+          "nome": "Mesinhas infantis",
+          "tipo": "Mesas e cadeiras",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Mesinha com cadeirinhas coloridas",
+          "foto": {
+            "url": "fotos/palmas-kids-fest/wa-mesinhas.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556392064699"
             }
           }
         },
@@ -317,7 +422,6 @@
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": null,
           "foto": {
             "url": "fotos/palmas-kids-fest/maps-5.jpg",
             "credito": {
