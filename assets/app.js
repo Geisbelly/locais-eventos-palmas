@@ -156,7 +156,7 @@
       exemplo: 'Pipoca da Festa',
       porObjeto: { rot: 'Itens para alugar', um: 'item', varios: 'itens', tipoRot: 'Tipo de item', ex: 'ex.: Carrinho de pipoca', grupoEx: 'ex.: Carrinho de pipoca' },
       subtipos: ['Carrinho de pipoca', 'Algodão-doce', 'Crepe', 'Churros', 'Hot dog', 'Sorvete / açaí', 'Food truck', 'Barraquinhas temáticas',
-        'Mesas e cadeiras', 'Louças e talheres', 'Toalhas e tecidos', 'Tendas', 'Som e iluminação', 'Gerador', 'Freezer / chopeira', 'Pegue e monte (decoração)', 'Itens de bebê', 'Brinquedos de bebê'],
+        'Mesas e cadeiras', 'Louças e talheres', 'Toalhas e tecidos', 'Tendas', 'Som e iluminação', 'Gerador', 'Freezer / chopeira', 'Pegue e monte (decoração)', 'Decoração montada', 'Itens de bebê', 'Brinquedos de bebê'],
       unidades: ['por hora', 'por evento', 'diária', 'por unidade', 'por porção', 'pacote'],
       inclusos: [['atendente', 'Atendente / operador', 'num'], ['insumos', 'Insumos inclusos'], ['porcoes_livres', 'Porções à vontade'],
         ['embalagens', 'Embalagens / guardanapos'], ['frete', 'Frete (entrega e retirada)'], ['montagem', 'Montagem e desmontagem'],

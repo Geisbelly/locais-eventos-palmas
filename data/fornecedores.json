@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-14T06:20:00Z",
+  "atualizado_em": "2026-11-14T07:30:00Z",
   "observacao": "Buffet, brinquedos, serviços e aluguéis. Cada item tem cat (buffet | brinquedos | servicos | alugueis). Também dá para cadastrar pelo site.",
   "itens": [
     {
@@ -3606,7 +3606,7 @@
         {
           "nome": "Pula-pula com rede",
           "grupo": "Pula-pula",
-          "tipo": "Pula-pula",
+          "tipo": "Pula-pula / cama elástica",
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
@@ -4457,7 +4457,7 @@
       "objetos": [
         {
           "nome": "Pula-pula",
-          "tipo": "Pula-pula",
+          "tipo": "Pula-pula / cama elástica",
           "valor": 160,
           "unidade": "por evento",
           "qtd": null,
@@ -4470,6 +4470,530 @@
       "id": "playgrounds-locacao",
       "cat": "brinquedos",
       "nome": "Playgrounds Locação"
+    },
+    {
+      "descricao": "Pula-pula, piscina de bolinhas, tobogã e escorregador infláveis, futebol de sabão, tenda e freezer. Empresa de empreendedoras.",
+      "atende_em": "Palmas e região",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil",
+        "Evento ao ar livre"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "https://wa.me/c/556391254683",
+        "Google Maps: Lelê Brink - Locação de Brinquedos (5,0, 9 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no WhatsApp",
+      "atualizado_em": "2026-11-14T07:30:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [],
+      "precos": [],
+      "observacoes": "Atende sem endereço fixo publicado. A tenda tem taxa de entrega a verificar. O catálogo pode ter mais itens.",
+      "objetos": [
+        {
+          "nome": "Pula-pula grande 3,66 m",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": 250,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null,
+          "grupo": "Pula-pula 3,66 m"
+        },
+        {
+          "nome": "Pula-pula médio 3,05 m",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": 200,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null,
+          "grupo": "Pula-pula 3,05 m"
+        },
+        {
+          "nome": "Combo pula-pula 3 m + piscina de bolinhas",
+          "tipo": "Kit",
+          "valor": 380,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Pula-pula de 3 m ou menor.",
+          "duracao": null
+        },
+        {
+          "nome": "Casinha de bolinhas 1,5 m",
+          "tipo": "Piscina de bolinhas",
+          "valor": 200,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "2.000 bolinhas.",
+          "duracao": null,
+          "grupo": "Piscina de bolinhas 1,5 x 1,5 m"
+        },
+        {
+          "nome": "Futebol de sabão 10 x 5 m",
+          "tipo": "Futebol de sabão",
+          "valor": 1000,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null,
+          "grupo": "Futebol de sabão 10 x 5 m"
+        },
+        {
+          "nome": "Escorregador inflável",
+          "tipo": "Inflável / tobogã",
+          "valor": 650,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null,
+          "grupo": "Escorregador inflável"
+        },
+        {
+          "nome": "Tobogã jacaré grande",
+          "tipo": "Inflável / tobogã",
+          "valor": 850,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Tobogã inflável temático de crocodilo.",
+          "duracao": null,
+          "grupo": "Tobogã inflável"
+        },
+        {
+          "nome": "Tenda piramidal 6 x 6 m",
+          "tipo": "Mesas e cadeiras",
+          "valor": 600,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "R$ 500 a diária, mais taxa de entrega.",
+          "duracao": null
+        },
+        {
+          "nome": "Freezer horizontal 220 litros",
+          "tipo": "Mesas e cadeiras",
+          "valor": 200,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 99125-4683",
+      "id": "lele-brink",
+      "cat": "brinquedos",
+      "nome": "Lelê Brink Locação de Brinquedos"
+    },
+    {
+      "descricao": "Mini festa na mesa e kits pegue e monte luxo para aniversário infantil, adulto e chá revelação.",
+      "atende_em": "Palmas",
+      "endereco": "1106 Sul (ARSE 112), Alameda 43, QI 34, Lote 1-A",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil",
+        "Aniversário adulto",
+        "Chá revelação"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/lidy-festeira/zap-kit-luxo.jpg",
+          "legenda": "Mini festa luxo",
+          "credito": {
+            "nome": "Catálogo do WhatsApp da Lidy Festeira",
+            "url": "https://wa.me/c/556385113472"
+          }
+        }
+      ],
+      "fontes": [
+        "https://wa.me/c/556385113472",
+        "Google Maps: Mini festa Lidy festeira (5,0, 6 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no WhatsApp",
+      "atualizado_em": "2026-11-14T07:30:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Pegue e monte (decoração)"
+      ],
+      "precos": [],
+      "observacoes": null,
+      "objetos": [
+        {
+          "nome": "Mini festa na mesa",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 89.9,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Valor inicial; muda conforme o modelo (infantil, feminino ou masculino).",
+          "duracao": null,
+          "grupo": "Mini festa na mesa"
+        },
+        {
+          "nome": "Kit mini festa luxo",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 120,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Valor inicial; consulte modelos.",
+          "duracao": null,
+          "foto": {
+            "url": "fotos/lidy-festeira/zap-kit-luxo.jpg",
+            "legenda": "Mini festa luxo",
+            "credito": {
+              "nome": "Catálogo do WhatsApp da Lidy Festeira",
+              "url": "https://wa.me/c/556385113472"
+            }
+          }
+        },
+        {
+          "nome": "Chá revelação",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 98511-3472",
+      "id": "lidy-festeira",
+      "cat": "alugueis",
+      "nome": "Mini Festa Lidy Festeira"
+    },
+    {
+      "descricao": "Locação de mesas e cadeiras.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 1006 Sul, Alameda 16, 28",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "https://wa.me/c/556392708844",
+        "Google Maps: Elite Locações (4,9, 16 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no WhatsApp",
+      "atualizado_em": "2026-11-14T07:30:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Mesas e cadeiras"
+      ],
+      "precos": [],
+      "observacoes": null,
+      "objetos": [
+        {
+          "nome": "Jogo de mesa com cadeiras",
+          "tipo": "Mesas e cadeiras",
+          "valor": 14,
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null,
+          "grupo": "Jogo de mesa com 4 cadeiras"
+        },
+        {
+          "nome": "Mesa avulsa",
+          "tipo": "Mesas e cadeiras",
+          "valor": 8,
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Cadeira avulsa",
+          "tipo": "Mesas e cadeiras",
+          "valor": 3,
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null,
+          "grupo": "Cadeira avulsa"
+        }
+      ],
+      "whatsapp": "(63) 99270-8844",
+      "id": "elite-locacoes",
+      "cat": "alugueis",
+      "nome": "Elite Locações"
+    },
+    {
+      "descricao": "Mesas, cadeiras, forros e varal de luz.",
+      "atende_em": "Palmas",
+      "endereco": "Rua Cerejeiras, Qd 06, Lt 04, Morada do Sol",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "https://wa.me/c/556392456973",
+        "Google Maps: Boa Festa Locações (5,0, 6 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no WhatsApp",
+      "atualizado_em": "2026-11-14T07:30:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Mesas e cadeiras",
+        "Toalhas e tecidos",
+        "Som e iluminação"
+      ],
+      "precos": [],
+      "observacoes": null,
+      "objetos": [
+        {
+          "nome": "Kit 1 mesa e 4 cadeiras",
+          "tipo": "Mesas e cadeiras",
+          "valor": 15,
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null,
+          "grupo": "Jogo de mesa com 4 cadeiras"
+        },
+        {
+          "nome": "Mesa tampo 1,80 m",
+          "tipo": "Mesas e cadeiras",
+          "valor": 25,
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Forro Oxford 1,50 x 1,50",
+          "tipo": "Toalhas e tecidos",
+          "valor": 5,
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Varal de luz 100 m",
+          "tipo": "Som e iluminação",
+          "valor": 800,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 99245-6973",
+      "id": "boa-festa",
+      "cat": "alugueis",
+      "nome": "Boa Festa Locações"
+    },
+    {
+      "descricao": "Mesas, cadeiras, toalhas, réchauds, freezer, aparador e trio de mesas.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 804 Sul, Alameda 14, Lote 45, Casa 02",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "https://wa.me/c/556384860710",
+        "Google Maps: Sonho Meu Locações de Mesas e Cadeiras (4,7, 18 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no WhatsApp",
+      "atualizado_em": "2026-11-14T07:30:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Mesas e cadeiras",
+        "Toalhas e tecidos",
+        "Louças e talheres",
+        "Freezer / chopeira"
+      ],
+      "precos": [],
+      "observacoes": "O catálogo não mostra preços.",
+      "objetos": [
+        {
+          "nome": "Mesas e cadeiras",
+          "tipo": "Mesas e cadeiras",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Toalhas de 4 e 6 lugares (lisa, jacquard, xadrez, chitão)",
+          "tipo": "Toalhas e tecidos",
+          "valor": "Sob consulta",
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Réchaud com 3 cubas",
+          "tipo": "Louças e talheres",
+          "valor": "Sob consulta",
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Freezer 309 litros",
+          "tipo": "Freezer / chopeira",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Trio de mesas e aparador de servir",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 98486-0710",
+      "id": "sonho-meu-locacoes",
+      "cat": "alugueis",
+      "nome": "Sonho Meu Locações de Mesas e Cadeiras"
+    },
+    {
+      "descricao": "Decoração completa de festas e locação de peças: painéis sublimados, cadeiras Dior e Tiffany, cortina de LED, arcos, aparadores, mesas e arranjos.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 103 Sul, Rua SO 7, 22",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário adulto",
+        "15 anos",
+        "Casamento",
+        "Aniversário infantil"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": "https://celebratelocadora.estoquenow.site/",
+      "fotos": [],
+      "fontes": [
+        "https://celebratelocadora.estoquenow.site/",
+        "https://wa.me/c/556399542102",
+        "Google Maps: Celebrate Locfest | Decoração para Eventos (4,8, 24 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no site e no WhatsApp",
+      "atualizado_em": "2026-11-14T07:30:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Pegue e monte (decoração)",
+        "Mesas e cadeiras"
+      ],
+      "precos": [],
+      "observacoes": "As peças avulsas do site estão sob consulta. Também tem salão de eventos próprio.",
+      "objetos": [
+        {
+          "nome": "Decoração aniversário feminino 40 anos",
+          "tipo": "Decoração montada",
+          "valor": 990,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Decoração montada.",
+          "duracao": null
+        },
+        {
+          "nome": "Decoração festa circo vintage",
+          "tipo": "Decoração montada",
+          "valor": 1550,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Decoração 15 anos moderno",
+          "tipo": "Decoração montada",
+          "valor": 2290,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Há opções a partir de R$ 1.500.",
+          "duracao": null
+        },
+        {
+          "nome": "Decoração casamento minimalista",
+          "tipo": "Decoração montada",
+          "valor": 2900,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Há opções a partir de R$ 1.900, conforme data e local.",
+          "duracao": null
+        },
+        {
+          "nome": "Decoração festa tropical",
+          "tipo": "Decoração montada",
+          "valor": 3590,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Peças avulsas (painéis, cadeiras, LED, arcos, mesas)",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 99954-2102",
+      "id": "celebrate-festas",
+      "cat": "alugueis",
+      "nome": "Celebrate Festas (Locfest)"
     }
   ]
 }
