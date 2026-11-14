@@ -2523,6 +2523,371 @@
       "cat": "brinquedos",
       "nome": "Carreta Brinquedão",
       "whatsapp": "(63) 99254-3700"
+    },
+    {
+      "descricao": "Decoração infantil e adulta, montada ou no formato pegue e monte, com vários temas. Parcela em até 4x no cartão.",
+      "atende_em": "Palmas",
+      "endereco": "405 Norte, Alameda 7, Lote 05",
+      "taxas": [],
+      "pagamento": "Cartão em até 4x sem juros",
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": "titikidsfestas",
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/titi-kids/ig-DfhK1FMxWRX.jpg",
+          "legenda": null,
+          "credito": {
+            "nome": "Instagram @titikidsfestas",
+            "url": "https://www.instagram.com/titikidsfestas/p/DfhK1FMxWRX/"
+          }
+        }
+      ],
+      "fontes": [
+        "https://www.instagram.com/titikidsfestas/",
+        "https://linktr.ee/titikidsfestas",
+        "https://www.instagram.com/titikidsfestas/p/DfhK1FMxWRX/",
+        "https://www.instagram.com/titikidsfestas/p/DfhKrZOxPYk/",
+        "https://www.instagram.com/titikidsfestas/p/DfhKejCx4o6/"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Divulgado no Instagram",
+      "atualizado_em": "2026-11-14T04:10:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Pegue e monte (decoração)"
+      ],
+      "precos": [],
+      "observacoes": "Não tem catálogo no WhatsApp.",
+      "objetos": [
+        {
+          "nome": "Decoração tema Jardim Encantado das Borboletas",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 350,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Promoção divulgada no Instagram (nov/2026). Montada ou pegue e monte.",
+          "duracao": null,
+          "foto": {
+            "url": "fotos/titi-kids/ig-DfhK1FMxWRX.jpg",
+            "legenda": null,
+            "credito": {
+              "nome": "Instagram @titikidsfestas",
+              "url": "https://www.instagram.com/titikidsfestas/p/DfhK1FMxWRX/"
+            }
+          }
+        },
+        {
+          "nome": "Decoração tema Princesas",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 350,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Promoção divulgada no Instagram (nov/2026). Montada ou pegue e monte.",
+          "duracao": null
+        },
+        {
+          "nome": "Decoração tema Guerreira K-pop",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 499,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Promoção divulgada no Instagram (nov/2026).",
+          "duracao": null
+        },
+        {
+          "nome": "Outros temas (Lego, baby, Sonic, Roblox, fazendinha…)",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "A tabela \"Temas e valores\" do Linktree está fora do ar; pedir os valores pelo WhatsApp.",
+          "duracao": null
+        }
+      ],
+      "id": "titi-kids",
+      "cat": "alugueis",
+      "nome": "Titi Kids Decorações",
+      "whatsapp": "(63) 99110-4556"
+    },
+    {
+      "descricao": "Kits pegue e monte, mini festas na mesa e arco de balões. O cliente retira o kit na loja e monta.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 307 Norte",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": "vem_festejarpmw",
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/vem-festejar/ig-DfiXsndPoB8.jpg",
+          "legenda": null,
+          "credito": {
+            "nome": "Instagram @vem_festejarpmw",
+            "url": "https://www.instagram.com/vem_festejarpmw/p/DfiXsndPoB8/"
+          }
+        }
+      ],
+      "fontes": [
+        "https://www.instagram.com/vem_festejarpmw/",
+        "https://www.instagram.com/vem_festejarpmw/p/De-L7PSic8l/",
+        "https://www.instagram.com/vem_festejarpmw/p/DfHgVQXElrT/",
+        "https://www.instagram.com/vem_festejarpmw/p/DfC9w26E8-y/",
+        "https://www.instagram.com/vem_festejarpmw/p/DfiXsndPoB8/"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Divulgado no Instagram",
+      "atualizado_em": "2026-11-14T04:10:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Pegue e monte (decoração)"
+      ],
+      "precos": [],
+      "observacoes": "Retirada na loja. Não tem catálogo no WhatsApp.",
+      "objetos": [
+        {
+          "nome": "Kit Festejar",
+          "grupo": "Kit pegue e monte com painel e mesas",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 200,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Painel redondo de 1,5 m com capa, 3 mesas cilindro com capas, boleira, 4 a 6 bandejas, vaso com arranjo, tapete e itens decorativos. Post antigo: de R$ 280 por R$ 200; um post de nov/2026 mostra \"de R$ 200 por\" um valor que não aparece. Confirmar.",
+          "duracao": null,
+          "foto": {
+            "url": "fotos/vem-festejar/ig-DfiXsndPoB8.jpg",
+            "legenda": null,
+            "credito": {
+              "nome": "Instagram @vem_festejarpmw",
+              "url": "https://www.instagram.com/vem_festejarpmw/p/DfiXsndPoB8/"
+            }
+          }
+        },
+        {
+          "nome": "Kits pegue e monte (outros)",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 150,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "A partir de R$ 150, segundo o Instagram.",
+          "duracao": null
+        },
+        {
+          "nome": "Kit Comemores",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Promoção no Instagram partindo de R$ 280; o valor final não aparece na arte.",
+          "duracao": null
+        },
+        {
+          "nome": "Kit Festão",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Promoção no Instagram partindo de R$ 350; o valor final não aparece na arte.",
+          "duracao": null
+        },
+        {
+          "nome": "Mini festa na mesa Parabéns (sem balões)",
+          "grupo": "Mini festa na mesa",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 80,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Passou de R$ 75 para R$ 80 em 01/11/2026.",
+          "duracao": null
+        },
+        {
+          "nome": "Arco de balões",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "id": "vem-festejar",
+      "cat": "alugueis",
+      "nome": "Vem Festejar Palmas",
+      "whatsapp": "(63) 99994-1992"
+    },
+    {
+      "descricao": "Loja de locação de artigos para festas: pegue e monte, festa na mesa, balões, toalhas de mesa e pula-pula.",
+      "atende_em": "Palmas",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": "festaencantadapalmas",
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/festa-encantada/ig-DeIdfc8xjAw.jpg",
+          "legenda": null,
+          "credito": {
+            "nome": "Instagram @festaencantadapalmas",
+            "url": "https://www.instagram.com/festaencantadapalmas/p/DeIdfc8xjAw/"
+          }
+        }
+      ],
+      "fontes": [
+        "https://www.instagram.com/festaencantadapalmas/",
+        "https://www.instagram.com/festaencantadapalmas/p/DeIdfc8xjAw/",
+        "https://www.instagram.com/festaencantadapalmas/p/DWnRCn0DCTH/",
+        "https://www.instagram.com/festaencantadapalmas/p/DffsxHhCyAf/",
+        "https://www.instagram.com/festaencantadapalmas/p/DVSAFKuEbGC/"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Divulgado no Instagram",
+      "atualizado_em": "2026-11-14T04:10:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Brinquedos",
+        "Pegue e monte (decoração)",
+        "Toalhas e tecidos"
+      ],
+      "precos": [],
+      "observacoes": "Não tem catálogo no WhatsApp.",
+      "objetos": [
+        {
+          "nome": "Festa na mesa simples",
+          "grupo": "Mini festa na mesa",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 90,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Painel com capa ou letreiro, balões, boleira, doceira e letra ou número.",
+          "duracao": null,
+          "foto": {
+            "url": "fotos/festa-encantada/ig-DeIdfc8xjAw.jpg",
+            "legenda": null,
+            "credito": {
+              "nome": "Instagram @festaencantadapalmas",
+              "url": "https://www.instagram.com/festaencantadapalmas/p/DeIdfc8xjAw/"
+            }
+          }
+        },
+        {
+          "nome": "Festa na mesa com arco de balões",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 150,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "1 painel com capa, 1 arco de balões, 1 mesa grande e 5 itens (boleira, doceira…).",
+          "duracao": null
+        },
+        {
+          "nome": "Kit de decoração com balões",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 350,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Kit R$ 350; os balões custam R$ 450 à parte (post do Instagram).",
+          "duracao": null
+        },
+        {
+          "nome": "Toalha de mesa",
+          "tipo": "Toalhas e tecidos",
+          "valor": 8.5,
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": "Tecido Oxford com bainha, várias cores.",
+          "duracao": null
+        },
+        {
+          "nome": "Pula-pula",
+          "tipo": "Brinquedos",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "A loja também aluga pula-pula.",
+          "duracao": null
+        }
+      ],
+      "id": "festa-encantada",
+      "cat": "alugueis",
+      "nome": "Festa Encantada",
+      "whatsapp": "(63) 98503-7864"
+    },
+    {
+      "descricao": "Kits pegue e monte, com foco em kits de casamento; também faz festas infantis e de 15 anos.",
+      "atende_em": "Palmas e Taquaralto",
+      "endereco": "Taquaralto",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": "fabricadesonhoslocacoes",
+      "telefone": "(63) 98448-7180",
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "https://www.instagram.com/fabricadesonhoslocacoes/"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Dados mínimos",
+      "atualizado_em": "2026-11-14T04:10:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Pegue e monte (decoração)"
+      ],
+      "precos": [],
+      "observacoes": "Sem valores publicados. O catálogo do WhatsApp existe mas está vazio. As fotos do perfil mostram pessoas, por isso não foram usadas.",
+      "objetos": [
+        {
+          "nome": "Kits pegue e monte de casamento",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Kits pegue e monte infantis e de 15 anos",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "id": "fabrica-de-sonhos",
+      "cat": "alugueis",
+      "nome": "Fábrica de Sonhos Locações",
+      "whatsapp": "(63) 98106-8758"
     }
   ]
 }
