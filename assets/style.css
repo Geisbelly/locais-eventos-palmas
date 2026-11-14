@@ -1461,3 +1461,15 @@ button.cnum-card:hover { border-color: var(--ouro); }
   .esc-dir { flex-direction: row; align-items: center; margin-left: 46px; flex: 1; justify-content: flex-start; flex-wrap: wrap; }
   .esc-obs { margin-left: 0; }
 }
+
+/* v54 */
+.base-festa { display: flex; align-items: flex-end; gap: 10px 18px; flex-wrap: wrap; padding: 14px 16px; border: 1px solid var(--linha); border-radius: var(--raio); background: var(--card); margin-bottom: 24px; }
+.base-festa .campo { flex: 0 0 260px; max-width: 100%; margin: 0; }
+.base-festa .meta { flex: 1 1 280px; margin: 0; }
+.orc-nums { margin: 6px 0 16px; }
+.orc-nums .cnum-card { cursor: default; }
+.orc-nums .cnum-card strong { font-size: 1.3rem; }
+.esc-descartados { margin-top: 10px; border-top: 1px solid var(--linha); padding-top: 8px; }
+.esc-descartados > summary { cursor: pointer; font-size: .84rem; color: var(--suave); padding: 4px 0; }
+.esc-descartados > summary:hover { color: var(--tinta); }
+@media (max-width: 640px) { .base-festa .campo { flex-basis: 100%; } }

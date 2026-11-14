@@ -2685,10 +2685,34 @@
     { k: 'gelo', rot: 'Gelo', un: 'kg', ad: 0.5, cr: 0.3, arred: 5, fmt: (n) => `${n} kg (${plural(Math.ceil(n / 5), 'saco', 'sacos')} de 5 kg)`, horas: true },
     { k: 'descart', rot: 'Copos, pratos e guardanapos', un: 'unid.', ad: 3, cr: 3, arred: 10, fmt: (n) => `${n} copos · ${Math.ceil(n / 2)} pratinhos · ${n * 2} guardanapos` },
   ];
-  function quantHtml(ev) {
+  // Base das contas de comida e lembrancinhas: previsto enquanto as respostas chegam; confirmados quando fecha.
+  const BASES_FESTA = [['', 'Automático'], ['previsto', 'Previsto no evento'], ['confirmados', 'Confirmados'], ['talvez', 'Confirmados + talvez']];
+  function baseFesta(ev) {
     const L = lotacao(ev);
-    const usaConf = L.total > 0;
-    const ad = usaConf ? L.adultos : numV(ev.adultos), cr = usaConf ? L.criancas : numV(ev.criancas);
+    const prev = numV(ev.adultos) + numV(ev.criancas);
+    const esc0 = ev.base_quant;
+    if (esc0 === 'previsto' && prev) return { fonte: 'previsto', L };
+    if (esc0 === 'confirmados' && L.total) return { fonte: 'confirmados', L };
+    if (esc0 === 'talvez' && L.maisTalvez) return { fonte: 'talvez', L };
+    if (!L.total) return { fonte: 'previsto', L, auto: true };
+    if (!prev) return { fonte: 'confirmados', L, auto: true };
+    const p = ev.convite.prazo; const fechou = (p && diasAte(p) < 0) || (ev.convidados.length && !L.semResposta) || L.total >= prev;
+    return { fonte: fechou ? 'confirmados' : 'previsto', L, auto: true, fechou };
+  }
+  function baseFestaHtml(ev) {
+    const B = baseFesta(ev); const L = B.L; const prev = numV(ev.adultos) + numV(ev.criancas);
+    const n = { previsto: prev, confirmados: L.total, talvez: L.maisTalvez };
+    const rot = { previsto: 'previsto no evento', confirmados: 'confirmados', talvez: 'confirmados + talvez' }[B.fonte];
+    const porque = B.auto ? (B.fonte === 'previsto' ? (L.total ? ` Ainda faltam respostas, então uso o previsto. Quando todos responderem ou o prazo passar, passa a usar os confirmados.` : '') : B.fechou ? ' As respostas fecharam, então uso os confirmados.' : '') : '';
+    return `<div class="base-festa"><label class="campo"><span>Calcular para</span><select data-evc="base_quant">${BASES_FESTA.map(([k, r]) => `<option value="${k}" ${k === (ev.base_quant || '') ? 'selected' : ''}>${r}${k ? ` (${n[k] || 0} pessoas)` : ''}</option>`).join('')}</select></label>
+      <p class="meta">As contas abaixo usam <strong>${n[B.fonte] || 0} pessoas</strong> (${rot}).${porque}</p></div>`;
+  }
+  function quantHtml(ev) {
+    const B = baseFesta(ev); const L = B.L;
+    const usaConf = B.fonte !== 'previsto';
+    const soma = (l, k) => l.reduce((a, r) => a + (Number(r[k]) || 0), 0);
+    const ad = !usaConf ? numV(ev.adultos) : L.adultos + (B.fonte === 'talvez' ? soma(L.talvez, 'adultos') : 0);
+    const cr = !usaConf ? numV(ev.criancas) : L.criancas + (B.fonte === 'talvez' ? soma(L.talvez, 'criancas') : 0);
     if (!ad && !cr) return '<p class="texto vazio-cat">Informe quantos adultos e crianças vão (botão Editar) ou receba confirmações pelo convite para calcular.</p>';
     // Bebês de até 2 anos quase não comem salgados e docinhos.
     const bebes = usaConf ? L.idades.filter((x) => x <= 2).length : 0;
@@ -2701,8 +2725,8 @@
       v = Math.round(v * 100) / 100;
       return `<tr><th>${esc(q.rot)}</th><td>${esc(q.fmt(v))}</td></tr>`;
     }).join('');
-    const base = `${usaConf ? 'Confirmados' : 'Previsto no evento'}: ${plural(ad, 'adulto', 'adultos')} e ${plural(cr, 'criança', 'crianças')}${bebes ? ` (${bebes} de até 2 anos)` : ''}${h ? ` · festa de ${String(Math.round(h * 10) / 10).replace('.', ',')} h` : ''}.`;
-    return `<p class="meta">${esc(base)}${usaConf && L.maisTalvez > L.total ? ' Os “talvez” não entram na conta.' : ''}</p>
+    const base = `${B.fonte === 'talvez' ? 'Confirmados + talvez' : usaConf ? 'Confirmados' : 'Previsto no evento'}: ${plural(ad, 'adulto', 'adultos')} e ${plural(cr, 'criança', 'crianças')}${bebes ? ` (${bebes} de até 2 anos)` : ''}${h ? ` · festa de ${String(Math.round(h * 10) / 10).replace('.', ',')} h` : ''}.`;
+    return `<p class="meta">${esc(base)}${B.fonte === 'confirmados' && L.maisTalvez > L.total ? ' Os “talvez” não entram na conta.' : ''}</p>
       <table class="quant"><tbody>${linhas}</tbody></table>
       <p class="ajuda">Estimativa com médias de festa (cerca de 12 salgados por adulto em 4 horas, 100 g de bolo por pessoa, 600 ml de refrigerante por adulto), já arredondada para cima. Se o buffet já inclui comida e bebida, use só para conferir o que ele vai servir.</p>`;
   }
@@ -2886,8 +2910,9 @@
   // Quem vai, com idade e sexo de cada criança. Sem respostas ainda, usa o previsto no evento.
   function publicoFesta(ev) {
     const rs = rsvpsDe(ev.id);
-    const sim = rs.filter((r) => r.resposta === 'sim');
-    if (sim.length) {
+    const B = baseFesta(ev);
+    const sim = rs.filter((r) => r.resposta === 'sim' || (B.fonte === 'talvez' && r.resposta === 'talvez'));
+    if (sim.length && B.fonte !== 'previsto') {
       const kids = sim.flatMap((r) => Array.from({ length: Number(r.criancas) || 0 }, (_, i) => ({
         idade: Array.isArray(r.idades) && r.idades[i] != null ? r.idades[i] : null, sexo: Array.isArray(r.sexos) ? r.sexos[i] || null : null })));
       return { fonte: 'confirmados', adultos: sim.reduce((a, r) => a + (Number(r.adultos) || 0), 0), kids, convites: sim.length };
@@ -3003,6 +3028,7 @@
     }
     atualizarPainel(ev);
     const q = $('#quant-corpo'); if (q) q.innerHTML = quantHtml(ev);
+    const bf = $('#base-festa'); if (bf && !bf.contains(document.activeElement)) bf.innerHTML = baseFestaHtml(ev);
     const it = $('#itens-corpo'); if (it && !it.contains(document.activeElement)) it.innerHTML = itensHtml(ev);
     if ($('#picker').open && $('#rec-lista')) { $('#rec-lista').innerHTML = listaRecepcao(); $('#rec-total').innerHTML = totalRecepcao(); }
   }
@@ -3051,7 +3077,8 @@
       <div class="pg-cat-topo"><h3>${ic(C.icone)}${esc(C.rot)}</h3>
         <span class="n">${nF ? `${nF} escolhido${nF > 1 ? 's' : ''}` : 'nada escolhido'}${nO ? ` · ${nO} ${nO === 1 ? 'opção' : 'opções'}` : ''}</span>
         <button type="button" class="btn ghost" data-picker="${k}">${ic('mais')}<span class="lbl">Adicionar opção</span></button></div>
-      ${idx.length ? idx.map(([e, i]) => linhaEscolha(e, i)).join('')
+      ${idx.length ? idx.filter(([e]) => e.status !== 'descartado').map(([e, i]) => linhaEscolha(e, i)).join('')
+          + (idx.some(([e]) => e.status === 'descartado') ? `<details class="esc-descartados" ${idx.some(([e]) => e.status === 'descartado' && S.escAberto.has(escK(e))) ? 'open' : ''}><summary>${plural(idx.filter(([e]) => e.status === 'descartado').length, 'descartado', 'descartados')}</summary>${idx.filter(([e]) => e.status === 'descartado').map(([e, i]) => linhaEscolha(e, i)).join('')}</details>` : '')
         : `<p class="texto vazio-cat">Nenhuma opção ainda. <button type="button" class="link-btn" data-picker="${k}">Escolher do catálogo</button></p>`}
     </div>`;
   }
@@ -3253,8 +3280,18 @@
         <button type="button" class="btn" data-acao="conv-copiar">Copiar link</button></div>
       <button type="button" class="link-btn" data-ev-aba="convite">Personalizar o convite</button></div>`;
   }
+  function orcNums(ev, c) {
+    const orc = numV(ev.orcamento);
+    const box = (cls, rot, v, sub) => `<div class="cnum-card ${cls}"><span>${rot}</span><strong>${v}</strong><small>${sub}</small></div>`;
+    return box('c-cap', 'Previsto', orc ? brl(orc) : '—', orc ? 'definido no evento' : 'defina em Editar')
+      + box(orc && c.combinado > orc ? 'c-nao' : 'c-sim', 'Combinado', brl(c.combinado), orc ? (c.combinado > orc ? `passou ${brl(c.combinado - orc)}` : `cabe mais ${brl(orc - c.combinado)}`) : 'fornecedores e itens aprovados')
+      + box('c-sim', 'Pago', brl(c.pago), c.combinado ? `${Math.round((c.pago / c.combinado) * 100)}% do combinado` : '')
+      + box('c-talvez', 'Falta pagar', brl(c.falta), c.vencimentos.length ? `próximo em ${dataBR(c.vencimentos[0].vencimento).slice(0, 5)}` : 'sem vencimento marcado')
+      + box('c-pend', 'Em rascunho', brl(c.rascunho), plural(c.nRasc, 'item', 'itens') + (c.rascunho < 1 && c.nRasc ? ' sem valor' : ''));
+  }
   function atualizarPainel(ev) {
     const c = contas(ev);
+    const on = $('#orc-nums'); if (on) on.innerHTML = orcNums(ev, c);
     const k = $('#pg-kpis'); if (k) k.innerHTML = kpisHtml(ev, c);
     const f = $('#pg-falta'); if (f) f.innerHTML = faltaHtml(ev, c);
     const lado = $('#pg-resumo'); if (lado) lado.innerHTML = convCardHtml(ev) + resumoHtml(ev, c);
@@ -3349,11 +3386,12 @@
         ${ORDEM_CATS.map((k) => blocoCat(ev, k)).join('')}`)}
       ${painel('convidados', abaConvidados(ev))}
       ${painel('convite', abaConvite(ev))}
-      ${painel('festa', `<section class="ev-bloco" id="sec-quant"><h2>Comida e bebida</h2><div id="quant-corpo">${quantHtml(ev)}</div></section>
+      ${painel('festa', `<div id="base-festa">${baseFestaHtml(ev)}</div><section class="ev-bloco" id="sec-quant"><h2>Comida e bebida</h2><div id="quant-corpo">${quantHtml(ev)}</div></section>
         <section class="ev-bloco" id="sec-itens"><h2>Lembrancinhas e itens da festa</h2><div id="itens-corpo">${itensHtml(ev)}</div></section>`)}
       ${painel('orcamento', `<div class="aba-cab orc-cab"><div><h2>Orçamento detalhado</h2></div>
         <div class="seg-f" role="group" aria-label="Mostrar">${[['todos', 'Todos'], ['rascunho', 'Rascunho'], ['aprovado', 'Aprovados']].map(([k, r]) =>
           `<button type="button" data-orc-f="${k}" aria-pressed="${(S.orcF || 'todos') === k}">${r}</button>`).join('')}</div></div>
+        <div class="cnum-grade orc-nums" id="orc-nums">${orcNums(ev, c)}</div>
         <div id="orc-lista" class="orc-f-${S.orcF || 'todos'}">${listaOrc(ev)}</div>`)}
       ${painel('dia', `<div class="ev-grade metade">
         <section class="ev-bloco"><h2>Tarefas</h2>${listaTarefas(ev)}</section>
