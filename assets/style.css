@@ -1141,3 +1141,9 @@ span.foto-credito:hover { text-decoration: none; }
   .rsvp-linha .r-idades { grid-column: 1 / -1; }
 }
 @media print { .conv-cfg, .conv-botoes, .conv-acoes, .conv-resp-topo button { display: none; } }
+
+/* Convite: ações extras */
+.acoes-linha { display: flex; flex-wrap: wrap; gap: 8px; }
+.conv-import textarea { width: 100%; font: inherit; padding: 8px 10px; border: 1px solid var(--linha); background: var(--fundo-campo, transparent); color: inherit; border-radius: 8px; margin: 6px 0 8px; resize: vertical; }
+.conv-import code { font-size: .85em; }
+.lot-prev { margin: 10px 0 0; font-size: .92rem; }

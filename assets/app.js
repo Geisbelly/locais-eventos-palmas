@@ -1762,6 +1762,15 @@
       if (a === 'conv-copiar') copiar(linkConvite(evAtual()), 'Link do convite copiado.');
       if (a === 'rsvp-atualizar') carregarRsvp(S.paginaEv, { avisar: true });
       if (a === 'rsvp-novo') novaResposta(null);
+      if (a === 'conv-importar') importarConvidados();
+      if (a === 'conv-lembrar') abrirLembretes();
+      if (a === 'rsvp-csv') exportarRespostas();
+      if (a === 'rsvp-imprimir') imprimirPresenca();
+      if (a === 'conv-usar') {
+        const ev = evAtual(); const L = lotacao(ev);
+        ev.adultos = L.adultos; ev.criancas = L.criancas; salvarEvento(ev);
+        toast(`Convidados do evento: ${L.adultos} adultos e ${L.criancas} crianças.`);
+      }
       if (a === 'pick-cadastrar') { const cat = PK.cat; $('#picker').close(); abrirEditor(null, cat); ED.addEv = S.paginaEv; }
       if (a === 'pick-novo-evento') { const it = PK.itemId; $('#picker').close(); abrirEditorEvento(null); ED.addItem = it; }
       if (a === 'cancelar-editor') fecharEditor();
@@ -2225,6 +2234,12 @@
           <span>${ic(x.cat === 'buffet' ? 'buffet' : 'salao')}<strong>${esc(x.nome)}</strong></span>
           <span>${x.cap ? `${x.usado} de ${x.cap} ${x.cat === 'buffet' ? 'no buffet' : 'pessoas'}${x.passou ? ` · <b>passou ${x.usado - x.cap}</b>` : ` · sobram ${x.sobra}`}` : 'capacidade não informada'}</span></li>`).join('')}</ul>`
         : '<p class="meta">Marque com a estrela o espaço e o buffet escolhidos para comparar os confirmados com o que eles comportam.</p>'}
+      ${(() => {
+        const pa = numV(ev.adultos), pc = numV(ev.criancas);
+        const prev = pa || pc ? `Previsto no evento: ${plural(pa, 'adulto', 'adultos')} e ${plural(pc, 'criança', 'crianças')}.` : 'O evento ainda não tem número de convidados previsto.';
+        const dif = L.total && (pa !== L.adultos || pc !== L.criancas);
+        return `<p class="lot-prev">${prev}${dif ? ` <button type="button" class="link-btn" data-acao="conv-usar">Usar os confirmados (${L.adultos} + ${L.criancas})</button>` : ''}</p>`;
+      })()}
       <label class="campo lot-isento"><span>No buffet, crianças até quantos anos não contam?</span>
         <input data-evc="buffet_isento_ate" data-tipo="num" inputmode="numeric" value="${L.lim != null ? L.lim : ''}" placeholder="ex.: 5 (vazio = todas contam)"></label>
       ${avisosLotacao(L)}`;
@@ -2275,6 +2290,7 @@
           <label class="campo"><span>Nome do local</span><input data-evc="convite.local_nome" maxlength="120" value="${esc(cv.local_nome || '')}" placeholder="${esc((auto && auto.nome) || 'Espaço escolhido')}"></label>
           <label class="campo"><span>Endereço</span><input data-evc="convite.endereco" maxlength="200" value="${esc(cv.endereco || '')}" placeholder="${esc((auto && auto.endereco) || 'Quadra, alameda, lote')}"></label>
           <label class="campo"><span>Confirmar até</span><input type="date" data-evc="convite.prazo" value="${esc(cv.prazo || '')}"></label>
+          <label class="chk largo"><input type="checkbox" data-evc="convite.aceitar_apos_prazo" data-tipo="bool" ${cv.aceitar_apos_prazo ? 'checked' : ''}>Aceitar respostas depois do prazo</label>
           <label class="campo"><span>Cores</span><select data-evc="convite.estilo">${ESTILOS_CONV.map(([k, r]) => `<option value="${k}" ${k === (cv.estilo || 'ouro') ? 'selected' : ''}>${r}</option>`).join('')}</select></label>
         </div>
         <p class="ajuda">Data, horário e tema vêm do evento (botão Editar). O local vem do espaço marcado com a estrela, se você não preencher aqui.</p>
@@ -2287,11 +2303,101 @@
       <h3 class="conv-sub">Lista de convidados <small>${ev.convidados.length ? plural(ev.convidados.length, 'convite', 'convites') : ''}</small></h3>
       <p class="meta">Cada convidado recebe um link com o nome dele. Lugares = quantas pessoas o convite inclui.</p>
       ${convidadosHtml(ev)}
-      <button type="button" class="btn ghost add-linha" data-ev-add="convidados">${ic('mais')}Adicionar convidado</button>
+      <div class="acoes-linha"><button type="button" class="btn ghost add-linha" data-ev-add="convidados">${ic('mais')}Adicionar convidado</button>
+        <button type="button" class="btn ghost add-linha" data-acao="conv-lembrar">${ic('zap')}Lembrar quem não respondeu</button></div>
+      <details class="conv-cfg conv-import"><summary>Colar uma lista de convidados</summary>
+        <p class="ajuda">Um convidado por linha. Pode ter o WhatsApp e quantas pessoas o convite inclui, por exemplo:<br><code>Família Souza; 63 99999-0000; 4</code><br><code>Tia Ana 63988887777 2</code></p>
+        <textarea id="conv-colar" rows="5" placeholder="Família Souza; 63 99999-0000; 4"></textarea>
+        <button type="button" class="btn" data-acao="conv-importar">${ic('mais')}Adicionar à lista</button>
+      </details>
       <div class="conv-resp-topo"><h3 class="conv-sub">Respostas</h3><span class="esp"></span>
         <button type="button" class="btn ghost" data-acao="rsvp-novo">${ic('mais')}<span class="lbl">Lançar resposta</span></button>
-        <button type="button" class="btn ghost" data-acao="rsvp-atualizar">Atualizar</button></div>
+        <button type="button" class="btn ghost" data-acao="rsvp-atualizar">Atualizar</button>
+        <button type="button" class="btn ghost" data-acao="rsvp-csv">Planilha</button>
+        <button type="button" class="btn ghost" data-acao="rsvp-imprimir">${ic('imprimir')}<span class="lbl">Lista de presença</span></button></div>
       <div id="conv-resp">${respostasHtml(ev)}</div>`;
+  }
+
+  function importarConvidados() {
+    const ev = evAtual(); const ta = $('#conv-colar');
+    const linhas = (ta ? ta.value : '').split(/\n+/).map((x) => x.trim()).filter(Boolean);
+    const tem = new Set(ev.convidados.map((c) => norm(c.nome)));
+    let n = 0, rep = 0;
+    for (const lin of linhas.slice(0, 300)) {
+      let resto = lin;
+      const tel = (resto.match(/(?:\+?55\s*)?\(?\d{2}\)?\s*9?\s*\d{4}[\s.-]?\d{4}/) || [])[0] || '';
+      if (tel) resto = resto.replace(tel, ' ');
+      const lug = (resto.match(/(?:^|[\s;,|-])(\d{1,2})\s*(?:pessoas?|lugares?)?\s*$/i) || [])[1];
+      if (lug) resto = resto.replace(/(?:^|[\s;,|-])\d{1,2}\s*(?:pessoas?|lugares?)?\s*$/i, ' ');
+      const nome = resto.replace(/(^|\s)[-–]+(?=\s|$)/g, ' ').replace(/[;,|\t]+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 80);
+      if (!nome) continue;
+      if (tem.has(norm(nome))) { rep++; continue; }
+      tem.add(norm(nome));
+      ev.convidados.push({ id: idCurto(), nome, telefone: digitos(tel) ? tel.trim() : '', lugares: lug ? Number(lug) : null });
+      n++;
+    }
+    if (!n) { toast(rep ? 'Esses nomes já estão na lista.' : 'Cole um convidado por linha.'); return; }
+    salvarEvento(ev);
+    toast(`${plural(n, 'convidado adicionado', 'convidados adicionados')}${rep ? ` (${rep} já estavam na lista)` : ''}.`);
+  }
+  function pendentes(ev) {
+    const respondeu = new Set(rsvpsDe(ev.id).map((r) => r.convidado).filter(Boolean));
+    return ev.convidados.filter((c) => c.nome && !respondeu.has(c.id));
+  }
+  function textoLembrete(ev, cv) {
+    const tit = ev.convite.titulo || ev.nome;
+    const prazo = ev.convite.prazo ? ` até ${dataBR(ev.convite.prazo).slice(0, 5)}` : '';
+    return `Oi, ${cv.nome}! Passando para lembrar do convite para ${tit}${ev.data ? `, dia ${dataBR(ev.data).slice(0, 5)}` : ''}. Você consegue confirmar${prazo} se vai e quantas pessoas? É rapidinho por aqui: ${linkConvite(ev, cv)}`;
+  }
+  function abrirLembretes() {
+    const ev = evAtual(); const ps = pendentes(ev);
+    if (!ps.length) { toast(ev.convidados.length ? 'Todos da lista já responderam.' : 'Adicione convidados à lista primeiro.'); return; }
+    PK = null;
+    const d = $('#picker');
+    d.innerHTML = `<div class="folha-corpo">
+      <h2>Lembrar quem não respondeu</h2>
+      <p>${plural(ps.length, 'convidado ainda não respondeu', 'convidados ainda não responderam')}. Toque em cada um para abrir o WhatsApp com o lembrete pronto.</p>
+      <div class="pick-lista">${ps.map((cv) => {
+        const tel = digitos(cv.telefone);
+        const href = `https://wa.me/${tel ? (tel.length <= 11 ? '55' + tel : tel) : ''}?text=${encodeURIComponent(textoLembrete(ev, cv))}`;
+        return `<a class="pick-item" href="${esc(href)}" target="_blank" rel="noopener" data-lembrete>${ic('zap')}<span><strong>${esc(cv.nome)}</strong><small>${tel ? esc(cv.telefone) : 'sem WhatsApp: você escolhe o contato'}</small></span></a>`;
+      }).join('')}</div>
+      <div class="acoes"><span class="esp"></span><button type="button" class="btn primario" data-fechar>Pronto</button></div></div>`;
+    d.showModal();
+  }
+  function linhasRespostas(ev) {
+    return rsvpsDe(ev.id).slice().sort((a, b) => ['sim', 'talvez', 'nao'].indexOf(a.resposta) - ['sim', 'talvez', 'nao'].indexOf(b.resposta) || String(a.nome).localeCompare(String(b.nome), 'pt-BR'))
+      .map((r) => ({ nome: r.nome || '', situacao: respRot(r.resposta), adultos: Number(r.adultos) || 0, criancas: Number(r.criancas) || 0,
+        idades: (r.idades || []).filter((x) => x != null).map((x) => (x === 0 ? 'menos de 1' : x)).join(', '), contato: r.contato || '', recado: r.mensagem || '' }));
+  }
+  function exportarRespostas() {
+    const ev = evAtual(); const ls = linhasRespostas(ev);
+    if (!ls.length) { toast('Ainda não há respostas.'); return; }
+    const cab = ['Nome', 'Situação', 'Adultos', 'Crianças', 'Idades das crianças', 'Contato', 'Recado'];
+    const cel = (v) => `"${String(v).replace(/"/g, '""')}"`;
+    const csv = '﻿' + [cab, ...ls.map((r) => [r.nome, r.situacao, r.adultos, r.criancas, r.idades, r.contato, r.recado])].map((l) => l.map(cel).join(';')).join('\r\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+    a.download = `confirmacoes-${ev.id}.csv`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  }
+  function imprimirPresenca() {
+    const ev = evAtual(); const L = lotacao(ev);
+    const ls = linhasRespostas(ev).filter((r) => r.situacao !== 'Não vai');
+    if (!ls.length) { toast('Ainda não há confirmados.'); return; }
+    const w = window.open('', '_blank');
+    if (!w) { toast('Permita a janela para imprimir.'); return; }
+    w.document.write(`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Lista de presença: ${esc(ev.nome)}</title>
+      <style>body{font:14px/1.4 system-ui,sans-serif;margin:24px;color:#111}h1{font-size:20px;margin:0 0 4px}p{margin:0 0 14px;color:#555}
+      table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccc;padding:6px 8px;text-align:left;vertical-align:top}th{background:#f2f2f2}
+      td.c{text-align:center}.chk{width:60px}tfoot td{font-weight:600}</style></head><body>
+      <h1>${esc(ev.nome)}</h1><p>${esc([ev.data ? dataBR(ev.data) : null, `${L.adultos} adultos e ${L.criancas} crianças confirmados`, L.talvez.length ? `${L.maisTalvez - L.total} talvez` : null].filter(Boolean).join(' · '))}</p>
+      <table><thead><tr><th>Nome</th><th>Situação</th><th>Adultos</th><th>Crianças</th><th>Idades</th><th>Recado</th><th class="chk">Chegou</th></tr></thead><tbody>
+      ${ls.map((r) => `<tr><td>${esc(r.nome)}</td><td>${esc(r.situacao)}</td><td class="c">${r.adultos}</td><td class="c">${r.criancas}</td><td>${esc(r.idades)}</td><td>${esc(r.recado)}</td><td></td></tr>`).join('')}
+      </tbody><tfoot><tr><td colspan="2">Total</td><td class="c">${ls.reduce((a, r) => a + r.adultos, 0)}</td><td class="c">${ls.reduce((a, r) => a + r.criancas, 0)}</td><td colspan="3"></td></tr></tfoot></table>
+      <script>window.onload=()=>window.print()<\/script></body></html>`);
+    w.document.close();
   }
   function atualizarConvite() {
     if (!S.paginaEv || !S.eventos[S.paginaEv]) return;

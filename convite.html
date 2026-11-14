@@ -164,7 +164,9 @@
           <p class="imprimir-rsvp">Confirme sua presença pelo link do convite${ev.organiza ? ` ou com ${esc(ev.organiza)}` : ''}.</p>
         </article>
         <div class="rodape"><button type="button" onclick="window.print()">Imprimir ou salvar em PDF</button></div>`;
-      formRsvp(ev, { convidado, nome, lugares, pedirIdade });
+      const fim = prazo ? new Date(prazo.getFullYear(), prazo.getMonth(), prazo.getDate() + 1) : null;
+      const encerrado = !!(fim && new Date() >= fim && !cv.aceitar_apos_prazo);
+      formRsvp(ev, { convidado, nome, lugares, pedirIdade, encerrado });
     }
 
     function formRsvp(ev, ctx) {
@@ -172,6 +174,11 @@
       const salvo = lsGet();
       const ant = salvo && (!ctx.convidado || salvo.convidado === ctx.convidado.id) ? salvo : null;
       if (ant && ant.enviado) return obrigado(ev, ctx, ant);
+      if (ctx.encerrado) {
+        box.innerHTML = `<div class="feito"><h2>Confirmações encerradas</h2>
+          <p class="sub">O prazo para responder por aqui já passou.${ev.organiza ? ` Se precisar, fale com ${esc(ev.organiza)}.` : ' Se precisar, fale direto com quem te convidou.'}</p></div>`;
+        return;
+      }
       const st = {
         resposta: ant ? ant.resposta : '',
         nome: (ant && ant.nome) || ctx.nome || '',
@@ -299,7 +306,8 @@
         <span class="ok" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
         <h2>${vai ? 'Presença confirmada!' : 'Resposta enviada'}</h2>
         <p class="sub">${talvez ? `Anotado, ${esc(reg.nome)}: talvez ${esc(partes)}. Se puder, confirme depois por este mesmo link.` : vai ? `${esc(reg.nome)}: ${esc(partes)}${idades.length ? ` (${esc(idades.join(', '))})` : ''}. Até lá!` : `Obrigado por avisar, ${esc(reg.nome)}. Vamos sentir sua falta.`}</p>
-        <button type="button" class="link-btn" id="mudar">Mudar minha resposta</button></div>`;
+        ${ctx.encerrado ? '' : '<button type="button" class="link-btn" id="mudar">Mudar minha resposta</button>'}</div>`;
+      if (ctx.encerrado) return;
       document.getElementById('mudar').onclick = () => { lsSet({ ...reg, enviado: false }); formRsvp(ev, ctx); };
     }
 
