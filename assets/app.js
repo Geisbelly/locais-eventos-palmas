@@ -674,7 +674,7 @@
   }
   const numHash = (s) => [...String(s)].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
   function miniCapa(l) {
-    const f = (l.fotos || []).find((x) => urlSegura(x.url || x));
+    const f = (l.fotos || []).find((x) => urlSegura(x.url || x)) || (l.objetos || []).map((o) => o && o.foto).find((x) => x && urlSegura(x.url || x));
     if (f) return `<img class="mini-capa" src="${esc(f.url || f)}" alt="" loading="lazy">`;
     const sig = iniciais(l.nome.replace(/^espa[çc]o\s+/i, '')) || l.nome.slice(0, 1).toUpperCase();
     return `<span class="mini-capa mono mono-${numHash(l.id) % 5}" aria-hidden="true">${esc(sig.slice(0, 2))}</span>`;
@@ -2053,6 +2053,8 @@
           const ok = es.some((e) => fechado(e.status));
           return `<li class="${ok ? 'ok' : es.length ? 'meio' : ''}" title="${esc(CATS[k].rot)}: ${ok ? 'escolhido' : es.length ? es.length + ' opções' : 'nada ainda'}">${ic(ok ? 'check' : CATS[k].icone)}<span>${esc(CATS[k].curto)}</span></li>`;
         }).join('')}</ul>
+        ${(() => { const ls = ev.escolhas.filter((e) => e.status !== 'descartado').sort((a, b) => (fechado(b.status) ? 1 : 0) - (fechado(a.status) ? 1 : 0)).map((e) => S.porId[e.id]).filter(Boolean);
+          return ls.length ? `<div class="ev-fotos" aria-label="Fornecedores do evento">${ls.slice(0, 6).map((l) => `<span title="${esc(l.nome)}">${miniCapa(l)}</span>`).join('')}${ls.length > 6 ? `<span class="ev-mais">+${ls.length - 6}</span>` : ''}</div>` : ''; })()}
         <div class="preco"><span class="valor">${brl(c.combinado)} <small>combinado${numV(ev.orcamento) ? ` de ${brl(ev.orcamento)}` : ''}</small></span>
           <span class="cond">${esc([c.pessoas ? `${c.pessoas} convidados` : 'Convidados a definir', ev.para_quem ? `para ${ev.para_quem}` : null].filter(Boolean).join(' · '))}</span></div>
         ${numV(ev.orcamento) ? barraOrc(c.combinado, ev.orcamento) : ''}
@@ -2081,6 +2083,7 @@
     return `<div class="esc st-${e.status}">
       <div class="esc-topo">
         <button type="button" class="esc-estrela" data-esc-melhor="${i}" aria-pressed="${fechado(e.status)}" title="${fechado(e.status) ? 'Tirar dos escolhidos' : 'Marcar como escolhido'}" aria-label="${fechado(e.status) ? 'Tirar dos escolhidos' : 'Marcar como escolhido'}">${ic('estrela')}</button>
+        ${l ? `<button type="button" class="mini-capa-btn esc-capa" data-abrir="${l.id}" aria-label="Ver ${esc(l.nome)}">${miniCapa(l)}</button>` : ''}
         <div class="esc-nome">${l ? `<button type="button" data-abrir="${l.id}">${esc(l.nome)}</button>` : `<span>${esc(e.nome || 'Sem nome')}</span>`}
           <small>${esc([l ? tiposDe(l)[0] : null, ref, v && v.nota ? `sua nota ${v.nota}/5` : null].filter(Boolean).join(' · '))}</small></div>
         <span class="selo-esc">${esc(escRot(e.status))}</span>
@@ -2343,7 +2346,7 @@
       const v = visita(l.id);
       const tem = ja.has(l.id);
       const mp = menorPreco(l);
-      return `<button type="button" class="pick-item ${tem ? 'ok' : ''}" data-pick="${l.id}" ${tem ? 'disabled' : ''}>${ic(tem ? 'check' : 'mais')}
+      return `<button type="button" class="pick-item ${tem ? 'ok' : ''}" data-pick="${l.id}" ${tem ? 'disabled' : ''}>${ic(tem ? 'check' : 'mais')}${miniCapa(l)}
         <span><strong>${esc(l.nome)}</strong><small>${esc([tiposDe(l)[0], mp != null ? `a partir de ${brl(mp)}` : 'sob consulta',
           v.favorito ? 'favorito' : null, v.nota ? `nota ${v.nota}/5` : null, tem ? 'já está no evento' : null].filter(Boolean).join(' · '))}</small></span></button>`;
     }).join('');

@@ -1079,3 +1079,12 @@ span.foto-credito:hover { text-decoration: none; }
   background: var(--card); color: var(--tinta); font: inherit; font-size: .82rem; font-weight: 600; text-decoration: none; cursor: pointer; }
 .of-btn svg { width: 15px; height: 15px; }
 .of-btn.zap { border-color: transparent; background: #1f8f4e; color: #fff; }
+
+/* Fotos na montagem do evento */
+.esc-capa .mini-capa { width: 52px; height: 52px; border-radius: 10px; font-size: .9rem; }
+.pick-item .mini-capa { width: 44px; height: 44px; border-radius: 10px; font-size: .8rem; }
+.pick-item.ok .mini-capa { filter: grayscale(.6); }
+.ev-fotos { display: flex; align-items: center; margin: 2px 0 10px; }
+.ev-fotos > span { margin-right: -8px; }
+.ev-fotos .mini-capa { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--card); font-size: .7rem; }
+.ev-fotos .ev-mais { margin-left: 14px; font-size: .8rem; color: var(--suave); }
