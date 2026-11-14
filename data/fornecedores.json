@@ -33,16 +33,18 @@
         "Kit festa",
         "Salgados"
       ],
-      "precos": [
+      "precos": [],
+      "whatsapp": "(63) 98115-7681",
+      "observacoes": "Quem pesquisou achou o valor acessível. Pedir os pacotes por escrito.",
+      "objetos": [
         {
+          "nome": "Pacotes de kit festa",
+          "tipo": "Kit festa",
           "valor": "Sob consulta",
           "unidade": "pacote",
-          "condicao": "Tem mais de um pacote; os valores vieram em imagem",
-          "inclui": null
+          "obs": "Tem mais de um pacote; os valores vieram em imagem. Pedir por escrito."
         }
-      ],
-      "whatsapp": "(63) 98115-7681",
-      "observacoes": "Quem pesquisou achou o valor acessível. Pedir os pacotes por escrito."
+      ]
     },
     {
       "descricao": "Cardápio volante para festa infantil.",
@@ -81,16 +83,19 @@
         "Coquetel / finger food",
         "Salgados"
       ],
-      "precos": [
+      "precos": [],
+      "whatsapp": null,
+      "observacoes": "Contato ainda não informado: o número que apareceu junto é o do Espaço Aurora. Crianças até 7 anos não pagam.",
+      "objetos": [
         {
+          "nome": "Buffet volante para cerca de 70 pessoas",
+          "tipo": "Coquetel / finger food",
           "valor": 3500,
           "unidade": "pacote",
-          "condicao": "Orçamento de out/2026 para cerca de 70 pessoas; confirmar se já tem desconto",
-          "inclui": "Cardápio abaixo, com escolha de 2 finger foods, 2 sobremesas e 2 sucos"
+          "qtd": 70,
+          "obs": "Orçamento de out/2026; confirmar se já tem desconto. Inclui o cardápio do cadastro, com escolha de 2 finger foods, 2 sobremesas e 2 sucos. Crianças até 7 anos não pagam."
         }
-      ],
-      "whatsapp": null,
-      "observacoes": "Contato ainda não informado: o número que apareceu junto é o do Espaço Aurora. Crianças até 7 anos não pagam."
+      ]
     },
     {
       "descricao": "Kits de área recreativa (cercadinho com tatame, mesinhas, gangorrinhas, piscina de bolinhas e pula-pula de 2 m), pula-pulas e escorregadores. Também aluga mesas e cadeiras (D.L.A Locações).",
@@ -1865,16 +1870,17 @@
       "subtipos": [
         "Salgados"
       ],
-      "precos": [
+      "precos": [],
+      "observacoes": "Disse que não sabe se vai estar atendendo na data do evento; combinar de novo mais perto. Não achei fotos públicas desta empresa.",
+      "objetos": [
         {
+          "nome": "Cento de salgados",
+          "tipo": "Salgados",
           "valor": "Sob consulta",
           "unidade": "por cento",
-          "condicao": "Ainda sem valores.",
-          "inclui": null
+          "obs": "Ainda sem valores."
         }
       ],
-      "observacoes": "Disse que não sabe se vai estar atendendo na data do evento; combinar de novo mais perto. Não achei fotos públicas desta empresa.",
-      "objetos": [],
       "id": "zil-lanches",
       "cat": "buffet",
       "nome": "Zil Lanches",

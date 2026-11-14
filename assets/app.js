@@ -104,6 +104,9 @@
     buffet: {
       rot: 'Buffet e comida', curto: 'Buffet', icone: 'buffet', um: 'fornecedor', varios: 'fornecedores', criterios: CRIT_F,
       exemplo: 'Buffet Sabor da Casa',
+      porObjeto: { rot: 'Cardápios e opções', um: 'opção', varios: 'opções', tipoRot: 'Tipo de buffet', ex: 'ex.: Buffet completo para 50 pessoas', grupoEx: 'ex.: Cento de salgados fritos',
+        tempoRot: 'Duração', qtdRot: 'Serve (pessoas)', qtdPre: 'serve', qtdUm: 'pessoa', qtdVarios: 'pessoas', pacoteEx: 'ex.: taxa de garçom R$ 150',
+        obsEx: 'o que inclui, regra para crianças, mínimo de convidados…' },
       subtipos: ['Buffet completo', 'Churrasco', 'Coquetel / finger food', 'Jantar servido', 'Salgados', 'Doces', 'Bolo', 'Kit festa', 'Bebidas / bar', 'Chopp'],
       unidades: ['por pessoa', 'por cento', 'por kg', 'pacote', 'por evento'],
       inclusos: [['garcons', 'Garçons', 'num'], ['copeira', 'Copeira / cozinheira'], ['louca', 'Louça e talheres'], ['toalhas', 'Toalhas e mesa posta'],
@@ -696,7 +699,7 @@
   function precoCard(l) {
     const p = precoInfo(l);
     if (p.consulta) return `<div class="preco consulta"><p class="pv"><strong>${esc(p.valor)}</strong></p>${p.cond ? `<p class="pc">${esc(p.cond)}</p>` : ''}</div>`;
-    return `<div class="preco"><p class="pp">${p.prefixo}</p><p class="pv"><strong>${esc(p.valor)}</strong><span>/ ${esc(p.unidade)}</span></p>${p.cond ? `<p class="pc">${esc(p.cond)}</p>` : ''}</div>`;
+    return `<div class="preco"><p class="pp">${p.prefixo}</p><p class="pv"><strong>${esc(p.valor)}</strong><span>${esc(porUn(p.unidade))}</span></p>${p.cond ? `<p class="pc">${esc(p.cond)}</p>` : ''}</div>`;
   }
   function estrelas(n) {
     return `<span class="estrelas" aria-label="${n} de 5">${'★'.repeat(n)}<span class="apagada">${'★'.repeat(5 - n)}</span></span>`;
@@ -762,7 +765,7 @@
   // O que junta itens de empresas diferentes é o campo "grupo" (ex.: Pula-pula 3,05 m); sem ele, vale o nome sem o que está entre parênteses.
   const grupoDe = (o) => String(o.grupo || '').trim() || String(o.nome || o.tipo || '').replace(/\s*\([^)]*\)\s*/g, ' ').trim();
   const porUn = (u) => { const t = String(u || 'evento').trim(); return /^por\b/i.test(t) ? t : `/ ${t}`; };
-  const qtdTxt = (l, o) => { const P = catDe(l).porObjeto || {}; return `${o.qtd} ${o.qtd === 1 ? P.qtdUm || 'disponível' : P.qtdVarios || 'disponíveis'}`; };
+  const qtdTxt = (l, o) => { const P = catDe(l).porObjeto || {}; return `${P.qtdPre ? `${P.qtdPre} ` : ''}${o.qtd} ${o.qtd === 1 ? P.qtdUm || 'disponível' : P.qtdVarios || 'disponíveis'}`; };
   const valNum = (o) => (typeof o.valor === 'number' ? o.valor : Infinity);
   function objetosFiltrados(empresas) {
     const q = norm(S.f.busca.trim()).split(/\s+/).filter(Boolean);
@@ -918,7 +921,7 @@
     const esp = ehEspaco(l);
     const u = usoDe(l);
     const fatos = [
-      ['Menor valor', pi.consulta ? pi.valor : brl(menorPreco(l)), pi.consulta ? '' : `/ ${pi.unidade}`],
+      ['Menor valor', pi.consulta ? pi.valor : brl(menorPreco(l)), pi.consulta ? '' : porUn(pi.unidade)],
       esp ? ['Capacidade', l.capacidade ? `até ${l.capacidade}` : 'Não informada', l.capacidade ? 'pessoas' : '']
         : mostraTempo(l) ? ['Tempo de uso', tempoDe(l) || 'Não informado', '']
         : ['Atende', l.atende_em || l.bairro || 'Palmas', ''],
@@ -984,7 +987,7 @@
     const precos = (l.precos || []).length
       ? `<div class="cartao">${l.precos.map((p) => `
           <div class="linha-preco ${typeof p.valor === 'number' && p.valor === menorPreco(l) && l.precos.length > 1 ? 'menor' : ''}">
-            <span class="v">${typeof p.valor === 'number' ? brl(p.valor) : esc(p.valor || 'Sob consulta')}${p.unidade ? ` <small>/ ${esc(p.unidade)}</small>` : ''}</span>
+            <span class="v">${typeof p.valor === 'number' ? brl(p.valor) : esc(p.valor || 'Sob consulta')}${p.unidade ? ` <small>${esc(porUn(p.unidade))}</small>` : ''}</span>
             <span class="c">${typeof p.valor === 'number' && p.valor === menorPreco(l) && l.precos.length > 1 ? '<span class="selo-menor">Menor</span>' : ''}${esc(p.condicao || 'Condição não informada')}</span>
             ${p.inclui ? `<span class="i">Inclui: ${esc(p.inclui)}</span>` : ''}
           </div>`).join('')}</div>`
@@ -1263,7 +1266,7 @@
         if (P && k === 'nome') ph = P.ex;
         if (P && k === 'obs' && P.obsEx) ph = P.obsEx;
         if (P && k === 'duracao' && P.tempoRot) rot = P.tempoRot;
-        if (P && k === 'qtd' && P.qtdRot) { rot = P.qtdRot; ph = 'ex.: 2'; }
+        if (P && k === 'qtd' && P.qtdRot) { rot = P.qtdRot; ph = P.qtdPre ? 'ex.: 50' : 'ex.: 2'; }
         return `<label class="campo c-${k}"><span>${rot}</span><input data-k="${k}" ${k === 'unidade' ? 'list="dl-unidades"' : tipo === 'objetos' && k === 'tipo' ? 'list="dl-subtipos"' : tipo === 'objetos' && k === 'grupo' ? 'list="dl-grupos"' : ''} value="${esc(k === 'valor' ? valorTxt(d[k]) : d[k] || '')}" placeholder="${esc(ph)}"></label>`; }).join('')}
       <button type="button" class="tirar-linha" data-tirar-linha aria-label="Remover ${REP[tipo].rot}">×</button>
     </div>`;
