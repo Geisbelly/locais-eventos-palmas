@@ -2696,7 +2696,9 @@
     if (esc0 === 'talvez' && L.maisTalvez) return { fonte: 'talvez', L };
     if (!L.total) return { fonte: 'previsto', L, auto: true };
     if (!prev) return { fonte: 'confirmados', L, auto: true };
-    const p = ev.convite.prazo; const fechou = (p && diasAte(p) < 0) || (ev.convidados.length && !L.semResposta) || L.total >= prev;
+    // "Todos responderam" só vale se a lista cobre quase todo o previsto (lugares de cada convite, ou 1 se vazio).
+    const cobre = ev.convidados.filter((c) => c.nome).reduce((a, c) => a + (numV(c.lugares) || 1), 0) >= prev * 0.8;
+    const p = ev.convite.prazo; const fechou = (p && diasAte(p) < 0) || (cobre && ev.convidados.length && !L.semResposta) || L.total >= prev;
     return { fonte: fechou ? 'confirmados' : 'previsto', L, auto: true, fechou };
   }
   function baseFestaHtml(ev) {
