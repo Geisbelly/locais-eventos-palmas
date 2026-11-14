@@ -576,8 +576,7 @@
     const badge = (n, cls = '') => (n ? `<span class="nav-n ${cls}">${n}</span>` : '');
     $('#nav-principal').innerHTML = `
       <a href="#${cat}" ${emCat ? 'aria-current="page"' : ''}>Catálogo</a>
-      <a href="#eventos" ${emEv ? 'aria-current="page"' : ''}>Meus eventos${badge(nEv, 'ouro')}</a>
-      <button type="button" data-acao="abrir-comparar">Comparar${badge(S.cmp.size, 'escuro')}</button>`;
+      <a href="#eventos" ${emEv ? 'aria-current="page"' : ''}>Meus eventos${badge(nEv, 'ouro')}</a>`;
     $('#nav-baixo').innerHTML = `
       <a href="#${cat}" ${emCat && S.aba !== 'favoritos' ? 'aria-current="page"' : ''}>${ic('catalogo')}<span>Catálogo</span></a>
       <button type="button" data-acao="ver-favoritos" ${emCat && S.aba === 'favoritos' ? 'aria-current="page"' : ''}>${ic('coracao')}<span>Favoritos</span></button>
