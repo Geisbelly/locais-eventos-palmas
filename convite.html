@@ -89,6 +89,8 @@
     .gps a.gps-principal { background: var(--cor); border-color: var(--cor); color: #fff; flex: 1 1 100%; text-align: center; }
     .rota .nota { font-size: .8rem; color: var(--suave); margin: 8px 0 0; text-align: center; }
     @media print { .gps, .rota .nota { display: none; } }
+    .falta { margin: 4px 0 0; font-size: .95rem; color: var(--cor-escura); }
+    .falta strong { font-size: 1.15rem; }
     .agenda { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 16px 0 0; }
     .agenda a, .agenda button { border: 1px solid var(--linha); border-radius: 999px; padding: 8px 14px; font: 600 .88rem var(--texto); color: var(--cor-escura); background: none; text-decoration: none; cursor: pointer; }
     .presentes { margin: 22px 0 0; padding: 16px 0 0; border-top: 1px dashed var(--linha); }
@@ -280,6 +282,7 @@
             ${d ? `<div class="quando"><span class="lado">${esc(SEMANA[d.getDay()].split('-')[0])}</span>
                 <span><span class="dia">${d.getDate()}</span><br><span class="mes">${esc(MESES[d.getMonth()])}</span></span>
                 <span class="lado">${esc(horario || d.getFullYear())}</span></div>
+              ${(() => { const h = new Date(); h.setHours(0, 0, 0, 0); const n = Math.round((d - h) / 864e5); return n > 1 ? `<p class="falta">Faltam <strong>${n}</strong> dias</p>` : n === 1 ? '<p class="falta"><strong>É amanhã!</strong></p>' : n === 0 ? '<p class="falta"><strong>É hoje!</strong></p>' : ''; })()}
               <p class="data-longa">${esc(`${SEMANA[d.getDay()]}, ${d.getDate()} de ${MESES[d.getMonth()]} de ${d.getFullYear()}`)}${horario ? ` · ${esc(horario)}` : ''}</p>` : ''}
             ${local || endereco || dest ? `<div class="local">${local ? `<strong>${esc(local)}</strong>` : ''}${endereco ? `<span>${esc(endereco)}</span>` : ''}
               ${!dest && mapa ? `<a href="${esc(mapa)}" target="_blank" rel="noopener">Como chegar</a>` : ''}</div>` : ''}

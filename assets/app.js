@@ -1766,6 +1766,7 @@
       if (a === 'rsvp-novo') novaResposta(null);
       if (a === 'conv-importar') importarConvidados();
       if (a === 'rec-abrir') abrirRecepcao();
+      if (a === 'msg-abrir') abrirMensagens();
       if (a === 'rec-novo') chegouSemConfirmar();
       if (a === 'conv-lembrar') abrirLembretes();
       if (a === 'rsvp-csv') exportarRespostas();
@@ -1842,6 +1843,7 @@
   const timersCampo = {};
   document.addEventListener('input', (e) => {
     const t = e.target;
+    if (t.id === 'msg-texto') { MSG.texto = t.value; MSG.editado = true; $('#msg-lista').innerHTML = listaMensagens(); return; }
     if (t.id === 'rec-busca') { REC.busca = t.value; $('#rec-lista').innerHTML = listaRecepcao(); return; }
     if (t.id === 'pick-busca' && PK) { PK.busca = t.value; $('#pick-lista').innerHTML = listaPick(); return; }
     if (!t.matches('[data-campo]') || !S.detalheId) return;
@@ -2352,6 +2354,7 @@
         <button type="button" class="btn ghost" data-acao="rsvp-atualizar">Atualizar</button>
         <button type="button" class="btn ghost" data-acao="rsvp-csv">Planilha</button>
         <button type="button" class="btn ghost" data-acao="rsvp-imprimir">${ic('imprimir')}<span class="lbl">Lista de presença</span></button>
+        <button type="button" class="btn ghost" data-acao="msg-abrir">${ic('zap')}<span class="lbl">Mensagem</span></button>
         <button type="button" class="btn" data-acao="rec-abrir">${ic('check')}<span class="lbl">Recepção</span></button></div>
       <div id="conv-resp">${respostasHtml(ev)}</div>`;
   }
@@ -2643,6 +2646,70 @@
     if (dias === 0) return 'O prazo termina <strong>hoje</strong>.';
     return `Faltam <strong>${plural(dias, 'dia', 'dias')}</strong> para o prazo (${dataBR(p)}). O convite mostra a data e encerra as respostas depois dela.`;
   }
+
+  /* ---- Mensagens em grupo pelo WhatsApp (você toca em cada contato; nada é enviado sozinho) ---- */
+  const MSG = { tipo: 'vespera', grupo: 'sim', texto: '', editado: false };
+  const MSG_TIPOS = [['vespera', 'Lembrete da véspera'], ['obrigado', 'Agradecimento depois da festa'], ['livre', 'Mensagem livre']];
+  const MSG_GRUPOS = [['sim', 'Confirmados'], ['chegou', 'Quem chegou na festa'], ['talvez', 'Quem marcou talvez'], ['pendentes', 'Quem não respondeu'], ['todos', 'Todos da lista']];
+  function modeloMsg(ev, tipo) {
+    const tit = ev.convite.titulo || ev.nome;
+    const cv = ev.convite;
+    const local = cv.local_nome || (cv.local_auto && cv.local_auto.nome) || '';
+    if (tipo === 'vespera') return `Oi, {nome}! Amanhã é dia de ${tit}!${ev.hora_inicio ? ` Começa às ${ev.hora_inicio}` : ''}${local ? ` em ${local}` : ''}. O convite tem o mapa e o caminho: {link}. Esperamos vocês!`;
+    if (tipo === 'obrigado') return `Oi, {nome}! Muito obrigado por ter vindo em ${tit}. Foi muito especial ter vocês com a gente!`;
+    return 'Oi, {nome}! ';
+  }
+  function destinatarios(ev) {
+    const rs = rsvpsDe(ev.id);
+    const daLista = (r) => r.convidado && ev.convidados.find((c) => c.id === r.convidado);
+    const deResp = (r) => { const cv = daLista(r); return { nome: r.nome || (cv && cv.nome) || '', tel: (cv && cv.telefone) || r.contato || '', cv }; };
+    if (MSG.grupo === 'pendentes') return pendentes(ev).map((cv) => ({ nome: cv.nome, tel: cv.telefone, cv }));
+    if (MSG.grupo === 'todos') {
+      const vistos = new Set();
+      const l = ev.convidados.filter((c) => c.nome).map((cv) => { vistos.add(cv.id); return { nome: cv.nome, tel: cv.telefone, cv }; });
+      rs.filter((r) => !r.convidado || !vistos.has(r.convidado)).forEach((r) => l.push(deResp(r)));
+      return l;
+    }
+    const f = MSG.grupo === 'chegou' ? (r) => r.chegou : (r) => r.resposta === MSG.grupo;
+    return rs.filter(f).map(deResp);
+  }
+  function listaMensagens() {
+    const ev = evAtual(); const ds = destinatarios(ev);
+    if (!ds.length) return `<p class="texto vazio-cat">${MSG.grupo === 'chegou' ? 'Ninguém foi marcado como chegou na Recepção.' : 'Ninguém neste grupo.'}</p>`;
+    return ds.map((d) => {
+      const tel = digitos(d.tel);
+      const txt = MSG.texto.replace(/\{nome\}/g, d.nome).replace(/\{link\}/g, linkConvite(ev, d.cv || null));
+      const href = `https://wa.me/${tel ? (tel.length <= 11 ? '55' + tel : tel) : ''}?text=${encodeURIComponent(txt)}`;
+      return `<a class="pick-item" href="${esc(href)}" target="_blank" rel="noopener">${ic('zap')}<span><strong>${esc(d.nome || 'Sem nome')}</strong><small>${tel ? esc(d.tel) : 'sem WhatsApp: você escolhe o contato'}</small></span></a>`;
+    }).join('');
+  }
+  function abrirMensagens() {
+    const ev = evAtual();
+    PK = null;
+    if (!MSG.editado) MSG.texto = modeloMsg(ev, MSG.tipo);
+    const d = $('#picker');
+    const sel = (id, ops, v) => `<select id="${id}">${ops.map(([k, r]) => `<option value="${k}" ${k === v ? 'selected' : ''}>${r}</option>`).join('')}</select>`;
+    d.innerHTML = `<div class="folha-corpo">
+      <h2>Mensagem para os convidados</h2>
+      <div class="grade-2">
+        <label class="campo"><span>Mensagem</span>${sel('msg-tipo', MSG_TIPOS, MSG.tipo)}</label>
+        <label class="campo"><span>Para</span>${sel('msg-grupo', MSG_GRUPOS, MSG.grupo)}</label>
+      </div>
+      <label class="campo"><span>Texto ({nome} vira o nome de cada um; {link} vira o link do convite)</span>
+        <textarea id="msg-texto" rows="4" maxlength="1000">${esc(MSG.texto)}</textarea></label>
+      <p class="ajuda">Toque em cada nome para abrir o WhatsApp com a mensagem pronta. Nada é enviado sem você tocar em enviar.</p>
+      <div class="pick-lista" id="msg-lista">${listaMensagens()}</div>
+      <div class="acoes"><span class="esp"></span><button type="button" class="btn primario" data-fechar>Pronto</button></div></div>`;
+    d.showModal();
+  }
+  document.addEventListener('change', (e) => {
+    if (e.target.id === 'msg-tipo') {
+      MSG.tipo = e.target.value; MSG.editado = false;
+      if (MSG.tipo === 'obrigado' && MSG.grupo === 'sim' && rsvpsDe(S.paginaEv).some((r) => r.chegou)) { MSG.grupo = 'chegou'; }
+      abrirMensagens();
+    }
+    if (e.target.id === 'msg-grupo') { MSG.grupo = e.target.value; $('#msg-lista').innerHTML = listaMensagens(); }
+  });
   function atualizarConvite() {
     if (!S.paginaEv || !S.eventos[S.paginaEv]) return;
     const ev = evAtual();
