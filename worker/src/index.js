@@ -2,13 +2,14 @@
 // GET  /visitas            -> lista pública de visitas
 // GET  /verificar          -> 204 se a chave (header X-Chave) estiver certa
 // PUT  /visitas/:local_id  -> grava a visita (sem chave)
-// GET  /dados/:colecao     -> locais, fornecedores e eventos (público)
+// GET  /dados/:colecao     -> locais, fornecedores, eventos e confirmacoes (público; ?evento=id filtra confirmações)
 // PUT  /dados/:colecao/:id -> cadastra ou edita sem chave. Excluir (removido: true) exige X-Chave
 
 const MAX_BYTES = 20_000;
 const MAX_BYTES_DADOS = 100_000;
 // publica = qualquer um lê e grava. A chave só vale para excluir.
-const COLECOES = { locais: { publica: true }, fornecedores: { publica: true }, eventos: { publica: true } };
+// confirmacoes = respostas dos convidados aos convites (uma por convidado, filtráveis por ?evento=).
+const COLECOES = { locais: { publica: true }, fornecedores: { publica: true }, eventos: { publica: true }, confirmacoes: { publica: true } };
 const CRITERIOS = ['preco', 'estrutura', 'localizacao', 'atendimento', 'ambiente', 'qualidade', 'confianca', 'flexibilidade'];
 
 function cors(env, req) {
@@ -127,7 +128,10 @@ export default {
       const col = partes[1];
       if (req.method === 'GET' && partes.length === 2) {
         if (!COLECOES[col].publica && !(await chaveOk(req, env))) return json({ erro: 'chave inválida' }, 401, h);
-        const { results } = await env.DB.prepare('SELECT id, dados, atualizado_em FROM registros WHERE colecao = ?1').bind(col).all();
+        const ev = url.searchParams.get('evento');
+        const { results } = ev && /^[a-z0-9-]{1,80}$/.test(ev)
+          ? await env.DB.prepare("SELECT id, dados, atualizado_em FROM registros WHERE colecao = ?1 AND json_extract(dados, '$.evento') = ?2").bind(col, ev).all()
+          : await env.DB.prepare('SELECT id, dados, atualizado_em FROM registros WHERE colecao = ?1').bind(col).all();
         return json(results.map((r) => ({ ...r, dados: JSON.parse(r.dados) })), 200, { ...h, 'Cache-Control': 'no-store' });
       }
       if (req.method === 'PUT' && partes.length === 3) {

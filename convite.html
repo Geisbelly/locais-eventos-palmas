@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Convite</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23b4781f'/><path d='M32 14l5 11 12 1-9 8 3 12-11-6-11 6 3-12-9-8 12-1z' fill='%23fff'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,650;1,9..144,500&family=Inter:wght@400;500;600&display=swap">
+  <style>
+    :root {
+      --bg: #f6f1e9; --papel: #fffdf9; --tinta: #2a241d; --suave: #6f665b; --linha: #e6ddd0;
+      --cor: #b4781f; --cor-escura: #8a5a12; --cor-fundo: #f7ecd9;
+      --titulo: 'Fraunces', Georgia, serif; --texto: 'Inter', system-ui, sans-serif;
+      color-scheme: light;
+    }
+    body[data-estilo="rosa"] { --cor: #c05a7e; --cor-escura: #9a3d60; --cor-fundo: #f9e6ec; --bg: #f8eef0; }
+    body[data-estilo="azul"] { --cor: #3f74b5; --cor-escura: #2a5590; --cor-fundo: #e4eef9; --bg: #edf2f8; }
+    body[data-estilo="verde"] { --cor: #4c8a5c; --cor-escura: #336944; --cor-fundo: #e3f1e6; --bg: #eef4ef; }
+    body[data-estilo="lilas"] { --cor: #8460b0; --cor-escura: #634390; --cor-fundo: #eee6f8; --bg: #f2eef7; }
+    body[data-estilo="sol"] { --cor: #d97a1e; --cor-escura: #a95a0d; --cor-fundo: #fcebd6; --bg: #fbf2e6; }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: var(--bg); color: var(--tinta); font: 16px/1.5 var(--texto); min-height: 100vh; }
+    .wrap { max-width: 560px; margin: 0 auto; padding: 24px 16px 48px; }
+    .cartao { background: var(--papel); border-radius: 22px; box-shadow: 0 1px 2px rgba(40,30,15,.06), 0 18px 50px -20px rgba(40,30,15,.25); overflow: hidden; position: relative; }
+    .faixa { height: 10px; background: repeating-linear-gradient(90deg, var(--cor) 0 26px, var(--cor-fundo) 26px 52px); }
+    .conteudo { padding: 34px 28px 30px; text-align: center; }
+    .ola { margin: 0 0 4px; font-size: .95rem; color: var(--cor-escura); font-weight: 600; letter-spacing: .02em; }
+    .chamada { margin: 0 0 18px; color: var(--suave); font-size: .95rem; }
+    .enfeite { display: block; margin: 0 auto 14px; width: 54px; height: 54px; color: var(--cor); }
+    h1 { font-family: var(--titulo); font-weight: 650; font-size: clamp(1.9rem, 7vw, 2.6rem); line-height: 1.08; margin: 0 0 8px; overflow-wrap: anywhere; }
+    .tema { font-family: var(--titulo); font-style: italic; color: var(--cor-escura); margin: 0 0 22px; font-size: 1.1rem; }
+    .quando { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; margin: 0 auto 22px; max-width: 380px; }
+    .quando .lado { border-top: 1px solid var(--linha); border-bottom: 1px solid var(--linha); padding: 8px 0; font-size: .85rem; text-transform: uppercase; letter-spacing: .1em; color: var(--suave); }
+    .quando .dia { font-family: var(--titulo); font-size: 3rem; line-height: 1; color: var(--cor-escura); font-weight: 650; }
+    .quando .mes { font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; color: var(--suave); }
+    .data-longa { margin: -10px 0 20px; color: var(--suave); font-size: .9rem; }
+    .local { background: var(--cor-fundo); border-radius: 14px; padding: 14px 16px; margin: 0 0 20px; }
+    .local strong { display: block; font-size: 1.02rem; }
+    .local span { display: block; color: var(--suave); font-size: .9rem; }
+    .local a { display: inline-block; margin-top: 8px; color: var(--cor-escura); font-weight: 600; font-size: .9rem; }
+    .mensagem { white-space: pre-line; margin: 0 0 8px; font-size: 1rem; }
+    .prazo { color: var(--suave); font-size: .88rem; margin: 14px 0 0; }
+    .rsvp { border-top: 1px dashed var(--linha); padding: 26px 24px 28px; }
+    .rsvp h2 { font-family: var(--titulo); font-weight: 650; font-size: 1.45rem; margin: 0 0 4px; text-align: center; }
+    .rsvp .sub { text-align: center; color: var(--suave); margin: 0 0 18px; font-size: .92rem; }
+    .campo { display: block; margin-bottom: 14px; }
+    .campo > span { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 5px; }
+    input, select, textarea { width: 100%; font: inherit; color: inherit; background: #fff; border: 1px solid var(--linha); border-radius: 10px; padding: 10px 12px; min-height: 44px; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--cor); outline-offset: 1px; border-color: var(--cor); }
+    .escolha { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+    .escolha button { min-height: 52px; padding: 6px; border-radius: 12px; border: 1.5px solid var(--linha); background: #fff; font: 600 1rem var(--texto); color: var(--tinta); cursor: pointer; }
+    .escolha button[aria-pressed="true"] { border-color: var(--cor); background: var(--cor-fundo); color: var(--cor-escura); }
+    .duplo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .contador { display: flex; align-items: center; border: 1px solid var(--linha); border-radius: 10px; background: #fff; overflow: hidden; }
+    .contador button { width: 44px; min-height: 44px; border: 0; background: none; font-size: 1.3rem; color: var(--cor-escura); cursor: pointer; }
+    .contador input { border: 0; text-align: center; min-height: 44px; padding: 0; outline-offset: -2px; }
+    .idades { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin: -4px 0 14px; }
+    .idades label span { font-size: .8rem; color: var(--suave); display: block; margin-bottom: 3px; }
+    .enviar { width: 100%; min-height: 52px; border: 0; border-radius: 12px; background: var(--cor); color: #fff; font: 600 1.05rem var(--texto); cursor: pointer; margin-top: 4px; }
+    .enviar:disabled { opacity: .6; cursor: wait; }
+    .aviso { text-align: center; font-size: .9rem; margin: 12px 0 0; min-height: 1.2em; }
+    .aviso.erro { color: #b3261e; }
+    .feito { text-align: center; padding: 8px 0 4px; }
+    .feito .ok { width: 56px; height: 56px; border-radius: 50%; background: var(--cor-fundo); color: var(--cor-escura); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .feito h2 { margin-bottom: 6px; }
+    .link-btn { background: none; border: 0; color: var(--cor-escura); font: 600 .95rem var(--texto); text-decoration: underline; cursor: pointer; padding: 8px; }
+    .rodape { text-align: center; margin-top: 18px; font-size: .8rem; color: var(--suave); }
+    .rodape button { background: none; border: 1px solid var(--linha); border-radius: 999px; padding: 8px 14px; font: inherit; color: var(--suave); cursor: pointer; }
+    .carregando, .erro-total { text-align: center; padding: 80px 16px; color: var(--suave); }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    @media print {
+      body { background: #fff; }
+      .wrap { padding: 0; }
+      .cartao { box-shadow: none; }
+      .rsvp, .rodape { display: none; }
+      .imprimir-rsvp { display: block !important; }
+    }
+    .imprimir-rsvp { display: none; text-align: center; padding: 0 24px 24px; color: var(--suave); font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <main class="wrap" id="app"><p class="carregando">Abrindo o convite…</p></main>
+  <script src="config.js"></script>
+  <script>
+  (() => {
+    const API = ((window.LEP_CONFIG || {}).apiUrl || '').replace(/\/+$/, '');
+    const qs = new URLSearchParams(location.search);
+    const evId = (qs.get('e') || '').trim();
+    const convId = (qs.get('c') || '').trim();
+    const nomeUrl = (qs.get('p') || '').trim().slice(0, 80);
+    const app = document.getElementById('app');
+    const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+    const SEMANA = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
+    const ESTILOS = ['ouro', 'rosa', 'azul', 'verde', 'lilas', 'sol'];
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const urlOk = (u) => /^https?:\/\//i.test(String(u || ''));
+    const dataLocal = (iso) => { const [a, m, d] = String(iso).split('-').map(Number); return new Date(a, m - 1, d); };
+    const hora = (h) => (h ? String(h).replace(':', 'h').replace(/h00$/, 'h') : '');
+    const lsKey = `lep.rsvp.${evId}`;
+    const lsGet = () => { try { return JSON.parse(localStorage.getItem(lsKey) || 'null'); } catch { return null; } };
+    const lsSet = (v) => { try { localStorage.setItem(lsKey, JSON.stringify(v)); } catch { /* sem armazenamento */ } };
+    const idAleatorio = () => Math.random().toString(36).slice(2, 10);
+    const estrela = '<svg class="enfeite" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M32 8l6.5 14.2 15.5 1.6-11.6 10.4 3.3 15.3L32 41.7l-13.7 7.8 3.3-15.3L10 23.8l15.5-1.6z"/><circle cx="52" cy="10" r="2.2" fill="currentColor" stroke="none"/><circle cx="10" cy="50" r="1.8" fill="currentColor" stroke="none"/><circle cx="56" cy="46" r="1.4" fill="currentColor" stroke="none"/></svg>';
+
+    function erro(msg) { app.innerHTML = `<p class="erro-total">${esc(msg)}</p>`; }
+
+    async function iniciar() {
+      if (!evId || !/^[a-z0-9-]{1,80}$/.test(evId)) return erro('Este link de convite está incompleto. Peça um novo link a quem convidou.');
+      if (!API) return erro('O convite não está disponível agora.');
+      let ev = null;
+      try {
+        const r = await fetch(`${API}/dados/eventos`, { cache: 'no-store' });
+        if (!r.ok) throw new Error(r.status);
+        const lista = await r.json();
+        const item = lista.find((x) => x.id === evId);
+        ev = item && !item.dados.removido ? item.dados : null;
+      } catch { return erro('Não consegui abrir o convite. Verifique a internet e tente de novo.'); }
+      if (!ev) return erro('Este convite não existe mais.');
+      render(ev);
+    }
+
+    function render(ev) {
+      const cv = ev.convite || {};
+      const convidado = (ev.convidados || []).find((c) => c && c.id === convId) || null;
+      const nome = (convidado && convidado.nome) || nomeUrl;
+      const estilo = ESTILOS.includes(cv.estilo) ? cv.estilo : 'ouro';
+      document.body.dataset.estilo = estilo;
+      const titulo = cv.titulo || ev.nome || 'Você está convidado';
+      document.title = `Convite: ${titulo}`;
+      const d = ev.data ? dataLocal(ev.data) : null;
+      const horario = [hora(ev.hora_inicio), hora(ev.hora_fim)].filter(Boolean).join(' às ');
+      const local = cv.local_nome || (cv.local_auto && cv.local_auto.nome) || '';
+      const endereco = cv.endereco || (cv.local_auto && cv.local_auto.endereco) || '';
+      const mapa = (cv.local_auto && urlOk(cv.local_auto.mapa) && !cv.endereco && cv.local_auto.mapa)
+        || (endereco || local ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([local, endereco, 'Palmas - TO'].filter(Boolean).join(', '))}` : '');
+      const prazo = cv.prazo ? dataLocal(cv.prazo) : null;
+      const lugares = convidado && Number(convidado.lugares) > 0 ? Number(convidado.lugares) : null;
+      const pedirIdade = cv.pedir_idade !== false;
+
+      app.innerHTML = `
+        <article class="cartao">
+          <div class="faixa" aria-hidden="true"></div>
+          <div class="conteudo">
+            ${nome ? `<p class="ola">Olá, ${esc(nome)}!</p>` : ''}
+            <p class="chamada">${esc(cv.chamada || 'Você é nosso convidado especial para')}</p>
+            ${estrela}
+            <h1>${esc(titulo)}</h1>
+            ${ev.tema ? `<p class="tema">${esc(ev.tema)}</p>` : ''}
+            ${d ? `<div class="quando"><span class="lado">${esc(SEMANA[d.getDay()].split('-')[0])}</span>
+                <span><span class="dia">${d.getDate()}</span><br><span class="mes">${esc(MESES[d.getMonth()])}</span></span>
+                <span class="lado">${esc(horario || d.getFullYear())}</span></div>
+              <p class="data-longa">${esc(`${SEMANA[d.getDay()]}, ${d.getDate()} de ${MESES[d.getMonth()]} de ${d.getFullYear()}`)}${horario ? ` · ${esc(horario)}` : ''}</p>` : ''}
+            ${local || endereco ? `<div class="local">${local ? `<strong>${esc(local)}</strong>` : ''}${endereco ? `<span>${esc(endereco)}</span>` : ''}
+              ${mapa ? `<a href="${esc(mapa)}" target="_blank" rel="noopener">Como chegar</a>` : ''}</div>` : ''}
+            ${cv.mensagem ? `<p class="mensagem">${esc(cv.mensagem)}</p>` : ''}
+            ${lugares ? `<p class="prazo">Este convite vale para até ${lugares} ${lugares === 1 ? 'pessoa' : 'pessoas'}.</p>` : ''}
+            ${prazo ? `<p class="prazo">Por favor, confirme até ${prazo.getDate()} de ${MESES[prazo.getMonth()]}.</p>` : ''}
+          </div>
+          <section class="rsvp" id="rsvp" aria-labelledby="rsvp-tit"></section>
+          <p class="imprimir-rsvp">Confirme sua presença pelo link do convite${ev.organiza ? ` ou com ${esc(ev.organiza)}` : ''}.</p>
+        </article>
+        <div class="rodape"><button type="button" onclick="window.print()">Imprimir ou salvar em PDF</button></div>`;
+      formRsvp(ev, { convidado, nome, lugares, pedirIdade });
+    }
+
+    function formRsvp(ev, ctx) {
+      const box = document.getElementById('rsvp');
+      const salvo = lsGet();
+      const ant = salvo && (!ctx.convidado || salvo.convidado === ctx.convidado.id) ? salvo : null;
+      if (ant && ant.enviado) return obrigado(ev, ctx, ant);
+      const st = {
+        resposta: ant ? ant.resposta : '',
+        nome: (ant && ant.nome) || ctx.nome || '',
+        adultos: ant ? ant.adultos : 1,
+        criancas: ant ? ant.criancas : 0,
+        idades: ant ? ant.idades || [] : [],
+        contato: (ant && ant.contato) || '',
+        mensagem: (ant && ant.mensagem) || '',
+      };
+      const opcoesIdade = (v) => ['<option value="">Idade</option>', `<option value="0" ${v === 0 ? 'selected' : ''}>Menos de 1 ano</option>`,
+        ...Array.from({ length: 17 }, (_, i) => i + 1).map((n) => `<option value="${n}" ${v === n ? 'selected' : ''}>${n} ${n === 1 ? 'ano' : 'anos'}</option>`)].join('');
+      function idadesHtml() {
+        if (!ctx.pedirIdade || !st.criancas) return '';
+        return `<div class="idades">${Array.from({ length: st.criancas }, (_, i) => `<label><span>Criança ${i + 1}</span>
+          <select data-idade="${i}" aria-label="Idade da criança ${i + 1}">${opcoesIdade(st.idades[i])}</select></label>`).join('')}</div>`;
+      }
+      function desenhar() {
+        const vai = st.resposta === 'sim' || st.resposta === 'talvez';
+        box.innerHTML = `
+          <h2 id="rsvp-tit">Confirme sua presença</h2>
+          <p class="sub">Sua resposta ajuda a organizar a festa.</p>
+          <div class="escolha" role="group" aria-label="Você vai?">
+            <button type="button" data-resp="sim" aria-pressed="${st.resposta === 'sim'}">Vou sim</button>
+            <button type="button" data-resp="talvez" aria-pressed="${st.resposta === 'talvez'}">Talvez</button>
+            <button type="button" data-resp="nao" aria-pressed="${st.resposta === 'nao'}">Não poderei ir</button>
+          </div>
+          <form id="f-rsvp" novalidate ${st.resposta ? '' : 'hidden'}>
+            <label class="campo"><span>${vai ? 'Seu nome ou da família' : 'Seu nome'}</span>
+              <input name="nome" maxlength="80" autocomplete="name" required value="${esc(st.nome)}"></label>
+            ${vai ? `<div class="duplo">
+                <label class="campo"><span>Adultos</span>${contador('adultos', st.adultos, 1)}</label>
+                <label class="campo"><span>Crianças</span>${contador('criancas', st.criancas, 0)}</label>
+              </div>
+              <div id="idades">${idadesHtml()}</div>` : ''}
+            <label class="campo"><span>WhatsApp (opcional)</span><input name="contato" maxlength="30" inputmode="tel" autocomplete="tel" value="${esc(st.contato)}"></label>
+            <label class="campo"><span>Recado (opcional)</span><textarea name="mensagem" rows="2" maxlength="300" placeholder="${vai ? 'Alergia alimentar, horário de chegada…' : 'Deixe um recado'}">${esc(st.mensagem)}</textarea></label>
+            <button class="enviar" type="submit">${st.resposta === 'sim' ? 'Confirmar presença' : 'Enviar resposta'}</button>
+            <p class="aviso" id="aviso" role="status"></p>
+          </form>`;
+      }
+      function contador(k, v, min) {
+        return `<span class="contador"><button type="button" data-menos="${k}" aria-label="Menos">−</button>
+          <input name="${k}" type="number" inputmode="numeric" min="${min}" max="30" value="${v}" aria-label="${k === 'adultos' ? 'Adultos' : 'Crianças'}">
+          <button type="button" data-mais="${k}" aria-label="Mais">+</button></span>`;
+      }
+      function lerCampos() {
+        const f = document.getElementById('f-rsvp');
+        if (!f) return;
+        st.nome = f.nome.value.trim();
+        st.contato = f.contato.value.trim();
+        st.mensagem = f.mensagem.value.trim();
+        if (f.adultos) st.adultos = Math.max(0, Math.min(30, parseInt(f.adultos.value, 10) || 0));
+        if (f.criancas) st.criancas = Math.max(0, Math.min(30, parseInt(f.criancas.value, 10) || 0));
+      }
+      function mudarCriancas(n) {
+        st.criancas = Math.max(0, Math.min(30, n));
+        st.idades = st.idades.slice(0, st.criancas);
+        const f = document.getElementById('f-rsvp');
+        f.criancas.value = st.criancas;
+        document.getElementById('idades').innerHTML = idadesHtml();
+      }
+      box.onclick = (e) => {
+        const b = e.target.closest('button');
+        if (!b) return;
+        if (b.dataset.resp) { lerCampos(); st.resposta = b.dataset.resp; desenhar(); const n = box.querySelector('[name=nome]'); if (n && !n.value) n.focus(); return; }
+        const k = b.dataset.mais || b.dataset.menos;
+        if (k) {
+          lerCampos();
+          const d = b.dataset.mais ? 1 : -1;
+          if (k === 'criancas') mudarCriancas(st.criancas + d);
+          else { st.adultos = Math.max(0, Math.min(30, st.adultos + d)); document.getElementById('f-rsvp').adultos.value = st.adultos; }
+        }
+      };
+      box.oninput = (e) => {
+        if (e.target.name === 'criancas') { lerCampos(); mudarCriancas(st.criancas); e.target.focus(); }
+      };
+      box.onchange = (e) => {
+        const i = e.target.dataset.idade;
+        if (i != null) st.idades[Number(i)] = e.target.value === '' ? null : Number(e.target.value);
+      };
+      box.onsubmit = async (e) => {
+        e.preventDefault();
+        lerCampos();
+        const av = document.getElementById('aviso');
+        av.className = 'aviso';
+        if (!st.nome) { av.textContent = 'Escreva seu nome.'; av.classList.add('erro'); box.querySelector('[name=nome]').focus(); return; }
+        if (st.resposta !== 'nao' && st.adultos + st.criancas < 1) { av.textContent = 'Informe quantas pessoas vão.'; av.classList.add('erro'); return; }
+        if (st.resposta === 'sim' && ctx.lugares && st.adultos + st.criancas > ctx.lugares
+          && !confirm(`O convite é para até ${ctx.lugares} pessoas. Enviar com ${st.adultos + st.criancas} mesmo assim?`)) return;
+        const id = ctx.convidado ? `${evId}-${ctx.convidado.id}` : (ant && ant.id) || `${evId}-r${idAleatorio()}`;
+        const vai = st.resposta !== 'nao';
+        const dados = {
+          evento: evId, convidado: ctx.convidado ? ctx.convidado.id : null, nome: st.nome, resposta: st.resposta,
+          adultos: vai ? st.adultos : 0, criancas: vai ? st.criancas : 0,
+          idades: vai && ctx.pedirIdade ? st.idades.slice(0, st.criancas).map((x) => (x == null ? null : x)) : [],
+          contato: st.contato, mensagem: st.mensagem, atualizado_em: new Date().toISOString(),
+        };
+        const btn = box.querySelector('.enviar');
+        btn.disabled = true; av.textContent = 'Enviando…';
+        try {
+          const r = await fetch(`${API}/dados/confirmacoes/${encodeURIComponent(id)}`, {
+            method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dados),
+          });
+          if (!r.ok) throw new Error(r.status);
+          const reg = { ...dados, id, enviado: true };
+          lsSet(reg);
+          obrigado(ev, ctx, reg);
+        } catch {
+          btn.disabled = false;
+          av.textContent = 'Não consegui enviar. Verifique a internet e tente de novo.';
+          av.classList.add('erro');
+        }
+      };
+      desenhar();
+    }
+
+    function obrigado(ev, ctx, reg) {
+      const box = document.getElementById('rsvp');
+      const vai = reg.resposta === 'sim';
+      const talvez = reg.resposta === 'talvez';
+      const partes = [reg.adultos ? `${reg.adultos} ${reg.adultos === 1 ? 'adulto' : 'adultos'}` : null,
+        reg.criancas ? `${reg.criancas} ${reg.criancas === 1 ? 'criança' : 'crianças'}` : null].filter(Boolean).join(' e ');
+      const idades = (reg.idades || []).filter((x) => x != null).map((x) => (x === 0 ? 'menos de 1 ano' : `${x} ${x === 1 ? 'ano' : 'anos'}`));
+      box.innerHTML = `<div class="feito">
+        <span class="ok" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+        <h2>${vai ? 'Presença confirmada!' : 'Resposta enviada'}</h2>
+        <p class="sub">${talvez ? `Anotado, ${esc(reg.nome)}: talvez ${esc(partes)}. Se puder, confirme depois por este mesmo link.` : vai ? `${esc(reg.nome)}: ${esc(partes)}${idades.length ? ` (${esc(idades.join(', '))})` : ''}. Até lá!` : `Obrigado por avisar, ${esc(reg.nome)}. Vamos sentir sua falta.`}</p>
+        <button type="button" class="link-btn" id="mudar">Mudar minha resposta</button></div>`;
+      document.getElementById('mudar').onclick = () => { lsSet({ ...reg, enviado: false }); formRsvp(ev, ctx); };
+    }
+
+    iniciar();
+  })();
+  </script>
+</body>
+</html>

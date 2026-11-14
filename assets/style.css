@@ -1088,3 +1088,56 @@ span.foto-credito:hover { text-decoration: none; }
 .ev-fotos > span { margin-right: -8px; }
 .ev-fotos .mini-capa { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--card); font-size: .7rem; }
 .ev-fotos .ev-mais { margin-left: 14px; font-size: .8rem; color: var(--suave); }
+
+/* Convite e confirmações */
+.lotacao { border: 1px solid var(--linha); border-radius: 14px; padding: 14px; margin: 6px 0 14px; background: var(--card); }
+.lot-nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 10px; margin: 0 0 12px; }
+.lot-nums > div { background: var(--bg-2); border-radius: 10px; padding: 8px 10px; min-width: 0; }
+.lot-nums dt { font-size: .74rem; color: var(--suave); text-transform: uppercase; letter-spacing: .04em; }
+.lot-nums dd { margin: 0; font-family: var(--titulo); font-size: 1.5rem; font-weight: 650; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.lot-nums small { display: block; color: var(--suave); font-size: .74rem; line-height: 1.3; }
+.lot-limites { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 6px; }
+.lot-limites li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; padding: 8px 10px; border-radius: 10px; background: var(--bg-2); font-size: .88rem; }
+.lot-limites li > span:first-child { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.lot-limites li svg { width: 16px; height: 16px; flex: none; }
+.lot-limites li.ok { box-shadow: inset 3px 0 0 var(--verde); }
+.lot-limites li.meio { box-shadow: inset 3px 0 0 var(--ambar); }
+.lot-limites li.ruim { box-shadow: inset 3px 0 0 #c0392b; color: #c0392b; }
+.lot-isento { max-width: 420px; margin-bottom: 0; }
+.nota-aviso.ruim { color: #b3261e; background: rgba(192, 57, 43, .1); }
+.nota-aviso.neutro { color: var(--suave); background: var(--bg-2); }
+.lot-linha { display: flex; justify-content: space-between; font-size: .85rem; margin-top: 10px; }
+.lot-linha.ruim { color: #c0392b; }
+.orc-barra .b-passou { background: #c0392b; }
+.conv-cfg { border: 1px solid var(--linha); border-radius: 12px; padding: 10px 14px; margin-bottom: 12px; }
+.conv-cfg summary { cursor: pointer; font-weight: 600; padding: 4px 0; }
+.conv-cfg .grade-2 { margin-top: 10px; }
+.conv-botoes { margin-bottom: 18px; }
+.conv-sub { font-size: 1.02rem; margin: 18px 0 4px; }
+.conv-sub small { color: var(--suave); font-weight: 400; font-size: .85rem; }
+.conv-linha { flex-wrap: wrap; }
+.conv-linha > input:first-child { flex: 2 1 180px; }
+.conv-linha .curto { flex: 1 1 130px; }
+.conv-linha .mini-num { flex: 0 0 84px; width: 84px; }
+.conv-acoes { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip-st { display: inline-block; font-size: .76rem; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: var(--bg-2); color: var(--suave); white-space: nowrap; }
+.chip-st.st-sim { background: rgba(46, 125, 80, .14); color: var(--verde); }
+.chip-st.st-talvez { background: var(--ambar-fundo); color: var(--ambar); }
+.chip-st.st-nao { background: rgba(192, 57, 43, .1); color: #c0392b; }
+.conv-resp-topo { display: flex; align-items: center; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+.conv-resp-topo .conv-sub { margin: 0; }
+.rsvp-lista { display: grid; gap: 8px; margin-top: 8px; }
+.rsvp-linha { display: grid; grid-template-columns: minmax(140px, 2fr) 130px 84px 84px minmax(100px, 1fr); gap: 8px; align-items: end; padding: 10px; border: 1px solid var(--linha); border-radius: 12px; background: var(--card); }
+.rsvp-linha.st-sim { box-shadow: inset 3px 0 0 var(--verde); }
+.rsvp-linha.st-talvez { box-shadow: inset 3px 0 0 var(--ambar); }
+.rsvp-linha.st-nao { box-shadow: inset 3px 0 0 #c0392b; opacity: .8; }
+.rsvp-linha input, .rsvp-linha select { width: 100%; min-height: 40px; font: inherit; color: inherit; background: var(--bg); border: 1px solid var(--linha); border-radius: 8px; padding: 6px 8px; }
+.rsvp-linha label span { display: block; font-size: .72rem; color: var(--suave); margin-bottom: 2px; }
+.rsvp-linha .r-info { grid-column: 1 / -1; font-size: .78rem; color: var(--suave); }
+.rsvp-linha .r-info em { display: block; color: var(--tinta); font-style: italic; margin-top: 2px; }
+@media (max-width: 640px) {
+  .rsvp-linha { grid-template-columns: 1fr 1fr; }
+  .rsvp-linha .r-nome { grid-column: 1 / -1; }
+  .rsvp-linha .r-idades { grid-column: 1 / -1; }
+}
+@media print { .conv-cfg, .conv-botoes, .conv-acoes, .conv-resp-topo button { display: none; } }
