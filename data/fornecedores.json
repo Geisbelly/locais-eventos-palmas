@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-14T00:34:36Z",
+  "atualizado_em": "2026-11-14T01:32:54Z",
   "observacao": "Buffet, brinquedos, serviços e aluguéis. Cada item tem cat (buffet | brinquedos | servicos | alugueis). Também dá para cadastrar pelo site.",
   "itens": [
     {
@@ -530,7 +530,7 @@
       ],
       "conferido_em": "2026-10-14",
       "status": "Informado pelo local",
-      "atualizado_em": "2026-11-14T00:34:36Z",
+      "atualizado_em": "2026-11-14T01:32:54Z",
       "detalhes": {
         "duracao": "Até 4 horas (infláveis e futebol de sabão)"
       },
@@ -552,7 +552,7 @@
           "inclui": "1 monitor"
         }
       ],
-      "observacoes": "Para orçar pedem a data e a quadra da montagem. Catálogo no WhatsApp: wa.me/c/556384069232.",
+      "observacoes": "Para orçar pedem a data e a quadra da montagem. O link do catálogo no WhatsApp (wa.me/c/556384069232) abre com erro: a empresa não tem itens publicados (conferido em 13/11/2026).",
       "objetos": [
         {
           "nome": "Futebol de sabão (até 13 anos)",
@@ -650,7 +650,7 @@
       }
     },
     {
-      "descricao": "Locação de brinquedos para festas: infláveis, pula-pula e piscina de bolinhas, com catálogo no WhatsApp.",
+      "descricao": "Aluga tobogãs e castelinhos infláveis, futebol de sabão, multiplay, canhão de espuma, cama elástica, air game e pebolim. Os infláveis são por 5 horas, com monitor.",
       "atende_em": "Palmas",
       "endereco": null,
       "taxas": [],
@@ -715,58 +715,257 @@
         }
       ],
       "fontes": [
+        "https://wa.me/c/556384320373",
         "Conversa de WhatsApp com a empresa (out/2026)",
         "https://www.google.com/maps/place/Brinque+Já/data=!4m2!3m1!1s0x933b37d978236b3b:0x67ce3706fcd86a79"
       ],
-      "conferido_em": "2026-10-14",
-      "status": "Dados mínimos",
-      "atualizado_em": "2026-11-14T00:34:36Z",
+      "conferido_em": "2026-11-13",
+      "status": "Informado pelo local",
+      "atualizado_em": "2026-11-14T01:32:54Z",
       "detalhes": {},
-      "itens": {},
+      "itens": {
+        "monitor": 1
+      },
       "subtipos": [
         "Inflável / tobogã",
         "Pula-pula / cama elástica",
-        "Piscina de bolinhas"
+        "Piscina de bolinhas",
+        "Futebol de sabão",
+        "Games / fliperama"
       ],
       "precos": [
         {
           "valor": "Sob consulta",
           "unidade": "por evento",
-          "condicao": "Os valores vieram em mensagem interativa e áudio, que não aparecem na conversa exportada. Peça de novo por escrito.",
-          "inclui": null
+          "condicao": "O catálogo do WhatsApp lista os brinquedos, mas não mostra preços (conferido em 13/11/2026). Os valores vieram em mensagem interativa e áudio, que não aparecem na conversa exportada. Peça de novo por escrito.",
+          "inclui": "Monitor nos infláveis"
         }
       ],
-      "observacoes": "Para orçar pedem nome, data, local e quais brinquedos. Catálogo no WhatsApp: wa.me/c/556384320373.",
+      "observacoes": "Para orçar pedem nome, data, local e quais brinquedos. Também montam combos. Catálogo no WhatsApp: wa.me/c/556384320373.",
       "objetos": [
         {
-          "nome": "Castelinho inflável com escorregador",
+          "nome": "Tobogã Premium",
           "tipo": "Inflável / tobogã",
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Visto nas fotos da empresa; peça o valor",
+          "obs": "5,00 x 3,00 x 4,00 m (C x L x A). Suporta até 250 kg. Monitor incluso",
+          "duracao": "5 horas",
           "foto": {
-            "url": "fotos/brinque-ja/ig-DfrySh4lReI.jpg",
+            "url": "fotos/brinque-ja/wa-toboga-premium.jpg",
             "credito": {
-              "nome": "Instagram @brinquejapalmas",
-              "url": "https://www.instagram.com/brinquejapalmas/p/DfrySh4lReI/"
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556384320373"
             }
           }
         },
         {
-          "nome": "Quadra inflável",
+          "nome": "Tobogã Premium para piscina",
           "tipo": "Inflável / tobogã",
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Visto nas fotos da empresa; peça o valor",
+          "obs": "5,00 x 3,00 x 4,00 m (C x L x A). Suporta 250 kg. Monitor incluso",
+          "duracao": "5 horas",
           "foto": {
-            "url": "fotos/brinque-ja/ig-Dffd0zENZ8U.jpg",
+            "url": "fotos/brinque-ja/wa-toboga-piscina.jpg",
             "credito": {
-              "nome": "Instagram @brinquejapalmas",
-              "url": "https://www.instagram.com/brinquejapalmas/reel/Dffd0zENZ8U/"
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556384320373"
             }
           }
+        },
+        {
+          "nome": "Tobogã Premium com piscina",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "8,00 x 3,00 x 4,00 m (C x L x A). Pode ser com água ou com bolinhas. Monitor incluso",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/brinque-ja/wa-toboga-com-piscina.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556384320373"
+            }
+          }
+        },
+        {
+          "nome": "Castelinho pula-pula com escorregador",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "5 x 3 x 2,50 m (C x L x A). Suporta até 200 kg. Indicado até 10 anos. Monitor incluso",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/brinque-ja/wa-castelinho.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556384320373"
+            }
+          }
+        },
+        {
+          "nome": "Multiplay 3x1",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "4,00 m de comprimento, 3,30 m de largura e 1,80 m de altura. Suporta 250 kg. Monitor incluso",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/brinque-ja/wa-multiplay-3x1.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556384320373"
+            }
+          }
+        },
+        {
+          "nome": "Multiplay 3x1 (até 6 anos)",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Pula-pula, piscina de bolinhas e escorregador. 4,25 m de comprimento e 1,90 m de altura. Só para crianças até 6 anos. Monitor incluso",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/brinque-ja/wa-multiplay-ate-6-anos.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556384320373"
+            }
+          }
+        },
+        {
+          "nome": "Futebol de sabão pequeno 8 x 4 m",
+          "tipo": "Futebol de sabão",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Suporta 300 kg. Monitor incluso",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/brinque-ja/wa-futebol-sabao-8x4.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556384320373"
+            }
+          }
+        },
+        {
+          "nome": "Futebol de sabão médio 10 x 5 m",
+          "tipo": "Futebol de sabão",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Suporta 400 kg. Monitor incluso",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/brinque-ja/wa-futebol-sabao-10x5.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556384320373"
+            }
+          }
+        },
+        {
+          "nome": "Futebol de sabão médio com redinha 10 x 5 m",
+          "tipo": "Futebol de sabão",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Suporta 400 kg. Monitor incluso",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/brinque-ja/wa-futebol-sabao-redinha-10x5.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556384320373"
+            }
+          }
+        },
+        {
+          "nome": "Futebol de sabão grande 12 x 6 m",
+          "tipo": "Futebol de sabão",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Suporta 600 kg; podem brincar crianças e adultos. Monitor incluso",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/brinque-ja/wa-futebol-sabao-12x6.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556384320373"
+            }
+          }
+        },
+        {
+          "nome": "Canhão de espuma turbo",
+          "tipo": "Canhão de espuma",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Monitor incluso",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/brinque-ja/wa-canhao-espuma.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556384320373"
+            }
+          }
+        },
+        {
+          "nome": "Cama elástica 3,05 m",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Suporta até 100 kg",
+          "foto": {
+            "url": "fotos/brinque-ja/wa-cama-elastica-305.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556384320373"
+            }
+          }
+        },
+        {
+          "nome": "Cama elástica 3,66 m",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Suporta até 130 kg",
+          "foto": {
+            "url": "fotos/brinque-ja/wa-cama-elastica-366.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556384320373"
+            }
+          }
+        },
+        {
+          "nome": "Air Game S3",
+          "tipo": "Games / fliperama",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Mesa de 1,63 m de comprimento, 0,88 m de largura e 0,80 m de altura",
+          "duracao": "5 horas"
+        },
+        {
+          "nome": "Pebolim",
+          "tipo": "Games / fliperama",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Mesa de 1,38 m de comprimento, 1,17 m de largura e 0,89 m de altura",
+          "duracao": "5 horas"
         },
         {
           "nome": "Piscina de bolinhas inflável",
@@ -794,7 +993,7 @@
       }
     },
     {
-      "descricao": "Locação de brinquedos para festas. Trabalha com eventos de 5 horas.",
+      "descricao": "Aluga tobogãs, castelinho, multiplay, futebol de sabão, canhão de espuma, cama elástica e pebolim. Trabalha com eventos de 5 horas, com monitor nos infláveis.",
       "atende_em": "Palmas",
       "endereco": "ARSO 132A (1305 Sul), Alameda 1 - Plano Diretor Sul",
       "taxas": [],
@@ -859,19 +1058,25 @@
         }
       ],
       "fontes": [
+        "https://wa.me/c/556399365258",
         "Conversa de WhatsApp com a empresa (out/2026)",
         "https://www.google.com/maps/place/Kaio+Locações+de+Brinquedos/data=!4m2!3m1!1s0x933b35005837530b:0x3a68994317ea5f8b"
       ],
-      "conferido_em": "2026-10-14",
+      "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
-      "atualizado_em": "2026-11-14T00:34:36Z",
+      "atualizado_em": "2026-11-14T01:32:54Z",
       "detalhes": {
         "duracao": "5 horas"
       },
-      "itens": {},
+      "itens": {
+        "monitor": 1
+      },
       "subtipos": [
         "Inflável / tobogã",
-        "Pula-pula / cama elástica"
+        "Pula-pula / cama elástica",
+        "Futebol de sabão",
+        "Touro mecânico",
+        "Games / fliperama"
       ],
       "precos": [
         {
@@ -881,8 +1086,250 @@
           "inclui": null
         }
       ],
-      "observacoes": "Os valores dos outros brinquedos vieram em mensagem interativa, que não aparece na conversa exportada. Catálogo no WhatsApp: wa.me/c/556399365258.",
+      "observacoes": "O catálogo do WhatsApp lista os brinquedos, mas não mostra preços (conferido em 13/11/2026). Os valores vieram em mensagem interativa, que não aparece na conversa exportada. Catálogo: wa.me/c/556399365258.",
       "objetos": [
+        {
+          "nome": "Tobogã Premium Grande",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "6,5 m de altura, 3,5 m de largura e 8 m de comprimento",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/kaio-locacoes/wa-toboga-premium-grande.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556399365258"
+            }
+          }
+        },
+        {
+          "nome": "Tobogã Premium 2x1",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "5 m de altura, 2,80 m de largura e 5 m de comprimento",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/kaio-locacoes/wa-toboga-2x1.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556399365258"
+            }
+          }
+        },
+        {
+          "nome": "Tobogã Premium",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "5,00 x 3,00 x 4,00 m (C x L x A). Suporta até 250 kg. Monitor incluso",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/kaio-locacoes/wa-toboga-premium.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556399365258"
+            }
+          }
+        },
+        {
+          "nome": "Tobogã Premium com piscina",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "8,00 x 3,00 x 4,00 m (C x L x A). Suporta até 250 kg. Monitor incluso",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/kaio-locacoes/wa-toboga-com-piscina.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556399365258"
+            }
+          }
+        },
+        {
+          "nome": "Tobogã Premium para piscina",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "5,00 x 3,00 x 4,00 m (C x L x A). Suporta até 250 kg. Monitor incluso",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/kaio-locacoes/wa-toboga-para-piscina.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556399365258"
+            }
+          }
+        },
+        {
+          "nome": "Tobogã azul com piscina",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Para crianças até 8 anos",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/kaio-locacoes/wa-toboga-azul.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556399365258"
+            }
+          }
+        },
+        {
+          "nome": "Mini tobogã com escalada",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "4,00 x 3,00 x 2,80 m (C x L x A). Suporta até 150 kg. Monitor incluso",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/kaio-locacoes/wa-mini-toboga-escalada.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556399365258"
+            }
+          }
+        },
+        {
+          "nome": "Castelinho escorregador",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "4,5 m de comprimento, 2,80 m de largura e 2,5 m de altura",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/kaio-locacoes/wa-castelinho-escorregador.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556399365258"
+            }
+          }
+        },
+        {
+          "nome": "Multiplay home 3x1",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "4,25 m de largura, 2,5 m de comprimento e 1,90 m de altura",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/kaio-locacoes/wa-multiplay-home.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556399365258"
+            }
+          }
+        },
+        {
+          "nome": "Multiplay aquático",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "5,50 x 2,80 x 2,50 m (C x L x A). Para crianças até 10 anos. Monitor incluso",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/kaio-locacoes/wa-multiplay-aquatico.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556399365258"
+            }
+          }
+        },
+        {
+          "nome": "Futebol de sabão 10 x 5 m",
+          "tipo": "Futebol de sabão",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": 2,
+          "obs": "Suporta até 500 kg. Monitor incluso. O catálogo mostra dois modelos",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/kaio-locacoes/wa-futebol-sabao-a.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556399365258"
+            }
+          }
+        },
+        {
+          "nome": "Canhão de espuma",
+          "tipo": "Canhão de espuma",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": "5 horas"
+        },
+        {
+          "nome": "Canhão de espuma + futebol de sabão",
+          "tipo": "Kit",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": "5 horas"
+        },
+        {
+          "nome": "Cama elástica 2,44 m",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Suporta até 80 kg",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/kaio-locacoes/wa-cama-elastica-244.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556399365258"
+            }
+          }
+        },
+        {
+          "nome": "Cama elástica 3,05 m",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Suporta até 100 kg",
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/kaio-locacoes/wa-cama-elastica-305.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556399365258"
+            }
+          }
+        },
+        {
+          "nome": "Pebolim tradicional",
+          "tipo": "Games / fliperama",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": "5 horas",
+          "foto": {
+            "url": "fotos/kaio-locacoes/wa-pebolim.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556399365258"
+            }
+          }
+        },
         {
           "nome": "Brinquedo novo (mostrado em vídeo)",
           "tipo": "Inflável / tobogã",
@@ -893,24 +1340,8 @@
           "duracao": "5 horas"
         },
         {
-          "nome": "Tobogã inflável",
-          "tipo": "Inflável / tobogã",
-          "valor": "Sob consulta",
-          "unidade": "por evento",
-          "qtd": null,
-          "obs": "Visto nas fotos da empresa; peça o valor",
-          "foto": {
-            "url": "fotos/kaio-locacoes/ig-DfruXESlUr6.jpg",
-            "credito": {
-              "nome": "Instagram @kaio.locacoesdebrinquedos",
-              "url": "https://www.instagram.com/kaio.locacoesdebrinquedos/p/DfruXESlUr6/"
-            }
-          },
-          "duracao": "5 horas"
-        },
-        {
           "nome": "Touro mecânico inflável",
-          "tipo": "Inflável / tobogã",
+          "tipo": "Touro mecânico",
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
@@ -920,38 +1351,6 @@
             "credito": {
               "nome": "Instagram @kaio.locacoesdebrinquedos",
               "url": "https://www.instagram.com/kaio.locacoesdebrinquedos/reel/Dez20uPv72b/"
-            }
-          },
-          "duracao": "5 horas"
-        },
-        {
-          "nome": "Escorregador inflável",
-          "tipo": "Inflável / tobogã",
-          "valor": "Sob consulta",
-          "unidade": "por evento",
-          "qtd": null,
-          "obs": "Visto nas fotos da empresa; peça o valor",
-          "foto": {
-            "url": "fotos/kaio-locacoes/maps-2.jpg",
-            "credito": {
-              "nome": "Google Maps",
-              "url": "https://www.google.com/maps/place/Kaio+Locações+de+Brinquedos/data=!4m2!3m1!1s0x933b35005837530b:0x3a68994317ea5f8b"
-            }
-          },
-          "duracao": "5 horas"
-        },
-        {
-          "nome": "Pula-pula com rede",
-          "tipo": "Pula-pula / cama elástica",
-          "valor": "Sob consulta",
-          "unidade": "por evento",
-          "qtd": null,
-          "obs": "Visto nas fotos da empresa; peça o valor",
-          "foto": {
-            "url": "fotos/kaio-locacoes/maps-4.jpg",
-            "credito": {
-              "nome": "Google Maps",
-              "url": "https://www.google.com/maps/place/Kaio+Locações+de+Brinquedos/data=!4m2!3m1!1s0x933b35005837530b:0x3a68994317ea5f8b"
             }
           },
           "duracao": "5 horas"
@@ -1054,7 +1453,7 @@
       }
     },
     {
-      "descricao": "Combos de brinquedos e infláveis. Os infláveis são por 4 horas, com um monitor para cada inflável.",
+      "descricao": "Infláveis (tobogãs, castelinhos, mult park, futebol de sabão), pula-pulas, combos, espaço baby e mesinhas. Os infláveis são por 4 horas, com um monitor para cada inflável.",
       "atende_em": "Palmas",
       "endereco": null,
       "taxas": [],
@@ -1079,11 +1478,12 @@
         }
       ],
       "fontes": [
+        "https://wa.me/c/556391058599",
         "Conversa de WhatsApp com a empresa (out/2026)"
       ],
-      "conferido_em": "2026-10-15",
+      "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
-      "atualizado_em": "2026-11-14T00:34:36Z",
+      "atualizado_em": "2026-11-14T01:32:54Z",
       "detalhes": {
         "duracao": "4 horas nos infláveis; pula-pula a combinar"
       },
@@ -1092,42 +1492,310 @@
       },
       "subtipos": [
         "Inflável / tobogã",
-        "Pula-pula / cama elástica"
+        "Pula-pula / cama elástica",
+        "Piscina de bolinhas",
+        "Área baby",
+        "Futebol de sabão"
       ],
       "precos": [
         {
           "valor": "Sob consulta",
           "unidade": "por evento",
-          "condicao": "Os valores de cada brinquedo estão no catálogo do WhatsApp (toque em mostrar detalhes). O deslocamento é cobrado conforme a distância.",
+          "condicao": "O catálogo do WhatsApp lista os brinquedos, mas não mostra preços (conferido em 13/11/2026); peça o valor de cada um. O deslocamento é cobrado conforme a distância.",
           "inclui": "1 monitor por inflável"
         }
       ],
-      "observacoes": "Catálogo no WhatsApp: wa.me/c/556391058599. Não achei fotos públicas (Google Maps) desta empresa.",
+      "observacoes": "Também aluga mesas e cadeiras. Catálogo no WhatsApp: wa.me/c/556391058599.",
       "objetos": [
         {
-          "nome": "Infláveis",
+          "nome": "Tobogã 2 em 1",
           "tipo": "Inflável / tobogã",
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": "1 monitor por inflável",
+          "obs": "6,5 x 3,5 x 5,0 m (C x L x A). Para crianças de todas as idades. Monitor incluso",
           "duracao": "4 horas",
           "foto": {
-            "url": "fotos/liz-brinquedos/ig-DeJlMbnMF58.jpg",
+            "url": "fotos/liz-brinquedos/wa-toboga-2em1.jpg",
             "credito": {
-              "nome": "Instagram @lizbrinquedoslocacoes",
-              "url": "https://www.instagram.com/lizbrinquedoslocacoes/reel/DeJlMbnMF58/"
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
             }
           }
         },
         {
-          "nome": "Pula-pula",
+          "nome": "Tobogã / escorregador 5 m",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "5 x 2,80 x 4 m (C x L x A)",
+          "duracao": "4 horas",
+          "foto": {
+            "url": "fotos/liz-brinquedos/wa-toboga-5m.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
+            }
+          }
+        },
+        {
+          "nome": "Mini tobogã",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "3 x 2,5 x 2,8 m (C x L x A). Até 8 anos. Bom para lugares com menos espaço. Monitor incluso",
+          "duracao": "4 horas",
+          "foto": {
+            "url": "fotos/liz-brinquedos/wa-mini-toboga.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
+            }
+          }
+        },
+        {
+          "nome": "Mini escorregador",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "3 x 2,5 x 2,8 m (C x L x A). Até 8 anos. Monitor incluso",
+          "duracao": "4 horas",
+          "foto": {
+            "url": "fotos/liz-brinquedos/wa-mini-escorregador.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
+            }
+          }
+        },
+        {
+          "nome": "Mini tobogã 3 em 1 com piscina de bolinhas ou água",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Escorregador, tobogã e piscina de bolinhas ou água. 5,20 x 2,50 x 2,80 m (C x L x A). Até 8 anos. Monitor incluso",
+          "duracao": "4 horas",
+          "foto": {
+            "url": "fotos/liz-brinquedos/wa-mini-toboga-3em1.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
+            }
+          }
+        },
+        {
+          "nome": "Mult Park com escalada",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Pula-pula, escorregador, escalada e obstáculos. 5 x 5 x 2,80 m (C x L x A). Até 10 anos. Monitor incluso",
+          "duracao": "4 horas",
+          "foto": {
+            "url": "fotos/liz-brinquedos/wa-mult-park.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
+            }
+          }
+        },
+        {
+          "nome": "Castelinho de bolinhas ou água",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "2,7 x 2,7 m",
+          "duracao": "4 horas",
+          "foto": {
+            "url": "fotos/liz-brinquedos/wa-castelinho-bolinhas-agua.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
+            }
+          }
+        },
+        {
+          "nome": "Escorregador / castelinho pula-pula",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Pode ser usado no seco ou na água (tobogã)",
+          "duracao": "4 horas"
+        },
+        {
+          "nome": "Futebol de sabão 10 x 5 m",
+          "tipo": "Futebol de sabão",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Monitor incluso. Confira as regras com a atendente",
+          "duracao": "4 horas",
+          "foto": {
+            "url": "fotos/liz-brinquedos/wa-futebol-sabao.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
+            }
+          }
+        },
+        {
+          "nome": "Piscina de bolinhas Tigrinho 2 x 2 m",
+          "tipo": "Piscina de bolinhas",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null
+        },
+        {
+          "nome": "Pula-pula 2,44 m",
           "tipo": "Pula-pula / cama elástica",
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": "As 4 horas valem só para os infláveis",
-          "duracao": "A combinar"
+          "obs": "Capacidade de 100 kg",
+          "duracao": "A combinar",
+          "foto": {
+            "url": "fotos/liz-brinquedos/wa-pula-244.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
+            }
+          }
+        },
+        {
+          "nome": "Pula-pula 3,05 m",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Capacidade de 120 kg",
+          "duracao": "A combinar",
+          "foto": {
+            "url": "fotos/liz-brinquedos/wa-pula-305.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
+            }
+          }
+        },
+        {
+          "nome": "Combo pula-pula + piscina de bolinhas",
+          "tipo": "Kit",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Combo simples: pula-pula e piscina de bolinhas. Combo especial: mais 1 gangorrinha e 1 cavalinho. Combo master: mais 1 escorregador",
+          "foto": {
+            "url": "fotos/liz-brinquedos/wa-combo-pula-piscina.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
+            }
+          }
+        },
+        {
+          "nome": "Combo master grande",
+          "tipo": "Kit",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Pula-pula, piscina de bolinhas grande (1,5 x 1,5 m), gangorrinhas e escorregador",
+          "foto": {
+            "url": "fotos/liz-brinquedos/wa-combo-master-grande.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
+            }
+          }
+        },
+        {
+          "nome": "Combo master grande + mesinhas de pintura",
+          "tipo": "Kit",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Pula-pula, piscina de bolinhas grande, escorregador, gangorrinhas e mesinhas de pintura",
+          "foto": {
+            "url": "fotos/liz-brinquedos/wa-combo-master-mesinhas.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
+            }
+          }
+        },
+        {
+          "nome": "Combo tobogã 5 m + pula-pula 3,05 m",
+          "tipo": "Kit",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Tobogã de 5 m de altura e pula-pula de 3,05 m",
+          "foto": {
+            "url": "fotos/liz-brinquedos/wa-combo-toboga-pula.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
+            }
+          }
+        },
+        {
+          "nome": "Piscina de bolinhas + espaço baby",
+          "tipo": "Área baby",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Piscina grande (1,5 x 1,5 m) ou média (1,10 x 1,10 m), com gangorrinhas e escorregador",
+          "foto": {
+            "url": "fotos/liz-brinquedos/wa-piscina-espaco-baby.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
+            }
+          }
+        },
+        {
+          "nome": "Espaço baby simples",
+          "tipo": "Área baby",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Escorregador de plástico, duas gangorrinhas e tapetinho",
+          "foto": {
+            "url": "fotos/liz-brinquedos/wa-espaco-baby-simples.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
+            }
+          }
+        },
+        {
+          "nome": "Mesinhas de pintura",
+          "tipo": "Mesas e cadeiras",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Mesinhas e cadeiras com desenhos para pintar e giz de cera",
+          "foto": {
+            "url": "fotos/liz-brinquedos/wa-mesinhas-pintura.jpg",
+            "credito": {
+              "nome": "Catálogo do WhatsApp",
+              "url": "https://wa.me/c/556391058599"
+            }
+          }
+        },
+        {
+          "nome": "Mesas e cadeiras",
+          "tipo": "Mesas e cadeiras",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Mesas e cadeiras avulsas, jogos de mesa com ou sem toalha e toalhas"
         }
       ],
       "id": "liz-brinquedos",
