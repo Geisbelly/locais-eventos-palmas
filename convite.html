@@ -79,6 +79,29 @@
       .rsvp, .rodape { display: none; }
       .imprimir-rsvp { display: block !important; }
     }
+    .rota { margin: 14px 0 0; text-align: left; }
+    .mapa { height: 260px; border-radius: 12px; overflow: hidden; border: 1px solid var(--linha); background: var(--linha); z-index: 0; }
+    .rota-leg { font-size: .84rem; color: var(--suave); margin: 8px 0 0; display: flex; align-items: center; gap: 8px; }
+    .rota-leg .tr { width: 28px; border-top: 4px dashed var(--cor); flex: none; }
+    .rota-txt { margin: 8px 0 0; font-size: .95rem; white-space: pre-line; }
+    .gps { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; justify-content: center; }
+    .gps a { border: 1px solid var(--linha); border-radius: 999px; padding: 9px 14px; font: 600 .88rem var(--texto); color: var(--cor-escura); text-decoration: none; }
+    .gps a.gps-principal { background: var(--cor); border-color: var(--cor); color: #fff; flex: 1 1 100%; text-align: center; }
+    .rota .nota { font-size: .8rem; color: var(--suave); margin: 8px 0 0; text-align: center; }
+    @media print { .gps, .rota .nota { display: none; } }
+    .agenda { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 16px 0 0; }
+    .agenda a, .agenda button { border: 1px solid var(--linha); border-radius: 999px; padding: 8px 14px; font: 600 .88rem var(--texto); color: var(--cor-escura); background: none; text-decoration: none; cursor: pointer; }
+    .presentes { margin: 22px 0 0; padding: 16px 0 0; border-top: 1px dashed var(--linha); }
+    .presentes h2 { font-size: 1.15rem; margin: 0 0 6px; }
+    .presentes p { margin: 0 0 8px; }
+    .presentes ul { list-style: none; padding: 0; margin: 0 auto 6px; max-width: 360px; text-align: left; }
+    .presentes li { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--linha); }
+    .presentes li small { color: var(--suave); white-space: nowrap; }
+    .presentes li.reservado { color: var(--suave); text-decoration: line-through; }
+    .presentes li.reservado small { text-decoration: none; }
+    .presentes a { color: var(--cor-escura); }
+    .presentes .nota { font-size: .82rem; color: var(--suave); }
+    @media print { .agenda { display: none; } }
     .imprimir-rsvp { display: none; text-align: center; padding: 0 24px 24px; color: var(--suave); font-size: .9rem; }
   </style>
 </head>
@@ -106,6 +129,101 @@
     const idAleatorio = () => Math.random().toString(36).slice(2, 10);
     const estrela = '<svg class="enfeite" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M32 8l6.5 14.2 15.5 1.6-11.6 10.4 3.3 15.3L32 41.7l-13.7 7.8 3.3-15.3L10 23.8l15.5-1.6z"/><circle cx="52" cy="10" r="2.2" fill="currentColor" stroke="none"/><circle cx="10" cy="50" r="1.8" fill="currentColor" stroke="none"/><circle cx="56" cy="46" r="1.4" fill="currentColor" stroke="none"/></svg>';
 
+    let reservas = [];
+    const ARAGUAINA = 3; // Palmas: UTC-3, sem horário de verão
+    function quandoUtc(ev) {
+      if (!ev.data) return null;
+      const [a, m, d] = ev.data.split('-').map(Number);
+      const hm = (h) => { const x = /^(\d{1,2}):(\d{2})/.exec(h || ''); return x ? [Number(x[1]), Number(x[2])] : null; };
+      const ini = hm(ev.hora_inicio), fim = hm(ev.hora_fim);
+      if (!ini) return { diaInteiro: true, ini: `${ev.data.replace(/-/g, '')}`, fim: (() => { const t = new Date(Date.UTC(a, m - 1, d + 1)); return t.toISOString().slice(0, 10).replace(/-/g, ''); })() };
+      const t0 = new Date(Date.UTC(a, m - 1, d, ini[0] + ARAGUAINA, ini[1]));
+      let t1 = fim ? new Date(Date.UTC(a, m - 1, d, fim[0] + ARAGUAINA, fim[1])) : new Date(t0.getTime() + 4 * 3600e3);
+      if (t1 <= t0) t1 = new Date(t1.getTime() + 24 * 3600e3);
+      const f = (t) => t.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+      return { ini: f(t0), fim: f(t1) };
+    }
+    function agendaHtml(ev, titulo, local) {
+      const q = quandoUtc(ev);
+      if (!q) return '';
+      const det = `Convite: ${location.href}`;
+      const g = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(titulo)}&dates=${q.ini}/${q.fim}&details=${encodeURIComponent(det)}&location=${encodeURIComponent(local)}`;
+      return `<div class="agenda"><a href="${esc(g)}" target="_blank" rel="noopener">Salvar no Google Agenda</a><button type="button" id="ics">Salvar na agenda do celular</button></div>`;
+    }
+    function baixarIcs(ev, titulo, local) {
+      const q = quandoUtc(ev);
+      const e = (t) => String(t).replace(/[\\;,]/g, (c) => '\\' + c).replace(/\n/g, '\\n');
+      const dt = q.diaInteiro ? [`DTSTART;VALUE=DATE:${q.ini}`, `DTEND;VALUE=DATE:${q.fim}`] : [`DTSTART:${q.ini}`, `DTEND:${q.fim}`];
+      const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Eventos em Palmas//Convite//PT', 'BEGIN:VEVENT', `UID:${evId}@eventos-palmas`,
+        `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')}`, ...dt, `SUMMARY:${e(titulo)}`, local ? `LOCATION:${e(local)}` : null,
+        `DESCRIPTION:${e('Convite: ' + location.href)}`, 'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', `DESCRIPTION:${e(titulo)}`, 'END:VALARM', 'END:VEVENT', 'END:VCALENDAR'].filter(Boolean).join('\r\n');
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+      a.download = 'convite.ics'; document.body.appendChild(a); a.click(); a.remove();
+    }
+    function presentesHtml(ev, minha) {
+      const cv = ev.convite || {};
+      const lista = (ev.presentes || []).filter((g) => g && g.nome);
+      if (!cv.presente_dica && !lista.length) return '';
+      return `<div class="presentes"><h2>Sugestão de presente</h2>
+        ${cv.presente_dica ? `<p>${esc(cv.presente_dica)}</p>` : ''}
+        ${lista.length ? `<ul>${lista.map((g) => {
+          const r = reservas.find((x) => x.presente === g.id);
+          const meu = minha && r && r.id === minha;
+          return `<li class="${r && !meu ? 'reservado' : ''}">${urlOk(g.link) ? `<a href="${esc(g.link)}" target="_blank" rel="noopener">${esc(g.nome)}</a>` : esc(g.nome)}
+            <small>${meu ? 'Você reservou' : r ? 'Já reservado' : 'Disponível'}</small></li>`;
+        }).join('')}</ul><p class="nota">Para reservar um presente, escolha na confirmação de presença.</p>` : ''}</div>`;
+    }
+
+    // Link do Google Maps que passa pela rota desenhada: parte de onde a pessoa está, vai até o início da rota
+    // e segue por alguns pontos dela até o local (o Google aceita até 9 paradas no link).
+    function linkRota(dest, rota) {
+      const ll = (p) => `${p[0]},${p[1]}`;
+      let via = [];
+      if (rota.length) {
+        const n = Math.min(9, rota.length);
+        via = Array.from({ length: n }, (_, i) => rota[Math.round((i * (rota.length - 1)) / Math.max(1, n - 1))]);
+        const ult = via[via.length - 1];
+        if (Math.abs(ult[0] - dest.lat) < 3e-4 && Math.abs(ult[1] - dest.lng) < 3e-4) via.pop();
+      }
+      return `https://www.google.com/maps/dir/?api=1&destination=${dest.lat},${dest.lng}&travelmode=driving${via.length ? `&waypoints=${encodeURIComponent(via.map(ll).join('|'))}` : ''}`;
+    }
+    function rotaHtml(cv, dest, rota) {
+      const temRota = rota.length > 1;
+      const waze = `https://waze.com/ul?ll=${dest.lat},${dest.lng}&navigate=yes`;
+      const gm = `https://www.google.com/maps/dir/?api=1&destination=${dest.lat},${dest.lng}&travelmode=driving`;
+      return `<div class="rota">
+        <div id="mapa" class="mapa" role="img" aria-label="Mapa com o local da festa${temRota ? ' e o caminho indicado' : ''}"></div>
+        ${temRota ? `<p class="rota-leg"><span class="tr"></span>Caminho indicado por quem convida${cv.rota_partida ? `, a partir de: ${esc(cv.rota_partida)}` : ''}</p>` : ''}
+        ${cv.rota_instrucoes ? `<p class="rota-txt">${esc(cv.rota_instrucoes)}</p>` : ''}
+        <div class="gps">
+          ${temRota ? `<a class="gps-principal" href="${esc(linkRota(dest, rota))}" target="_blank" rel="noopener">Ir pelo caminho indicado (Google Maps)</a>` : ''}
+          <a class="${temRota ? '' : 'gps-principal'}" href="${esc(gm)}" target="_blank" rel="noopener">${temRota ? 'Rota do GPS' : 'Abrir no Google Maps'}</a>
+          <a href="${esc(waze)}" target="_blank" rel="noopener">Abrir no Waze</a>
+        </div>
+        ${temRota ? '<p class="nota">“Ir pelo caminho indicado” faz o GPS passar pelos pontos da rota desenhada. “Rota do GPS” deixa o aplicativo escolher o caminho.</p>' : ''}
+      </div>`;
+    }
+    function mapaConvite(dest, rota) {
+      const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css'; document.head.appendChild(css);
+      const js = document.createElement('script'); js.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+      js.onerror = () => { const m = document.getElementById('mapa'); if (m) m.remove(); };
+      js.onload = () => {
+        const el = document.getElementById('mapa'); if (!el) return;
+        const cor = getComputedStyle(document.body).getPropertyValue('--cor').trim() || '#b4781f';
+        const map = L.map(el, { scrollWheelZoom: false, dragging: !L.Browser.mobile, tap: false });
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(map);
+        if (rota.length > 1) {
+          L.polyline(rota, { color: cor, weight: 5, opacity: .9, dashArray: '8 8' }).addTo(map);
+          L.circleMarker(rota[0], { radius: 7, color: '#fff', weight: 2, fillColor: '#2f6fd6', fillOpacity: 1 }).bindTooltip('Início do caminho').addTo(map);
+        }
+        L.circleMarker([dest.lat, dest.lng], { radius: 10, color: '#fff', weight: 3, fillColor: '#c62828', fillOpacity: 1 }).bindTooltip('Local da festa', { permanent: true, direction: 'top', offset: [0, -8] }).addTo(map);
+        const todos = [...rota, [dest.lat, dest.lng]];
+        if (todos.length > 1) map.fitBounds(todos, { padding: [24, 24], maxZoom: 16 }); else map.setView([dest.lat, dest.lng], 15);
+      };
+      document.head.appendChild(js);
+    }
+
     function erro(msg) { app.innerHTML = `<p class="erro-total">${esc(msg)}</p>`; }
 
     async function iniciar() {
@@ -120,6 +238,12 @@
         ev = item && !item.dados.removido ? item.dados : null;
       } catch { return erro('Não consegui abrir o convite. Verifique a internet e tente de novo.'); }
       if (!ev) return erro('Este convite não existe mais.');
+      if ((ev.presentes || []).some((g) => g && g.nome)) {
+        try {
+          const r = await fetch(`${API}/dados/confirmacoes?evento=${encodeURIComponent(evId)}`, { cache: 'no-store' });
+          if (r.ok) reservas = (await r.json()).map((x) => ({ ...x.dados, id: x.id })).filter((x) => x.presente && x.resposta !== 'nao' && !x.removido);
+        } catch { /* segue sem as reservas */ }
+      }
       render(ev);
     }
 
@@ -138,6 +262,9 @@
       const mapa = (cv.local_auto && urlOk(cv.local_auto.mapa) && !cv.endereco && cv.local_auto.mapa)
         || (endereco || local ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([local, endereco, 'Palmas - TO'].filter(Boolean).join(', '))}` : '');
       const prazo = cv.prazo ? dataLocal(cv.prazo) : null;
+      const okC = (c) => c && isFinite(c.lat) && isFinite(c.lng);
+      const dest = okC(cv.local_coord) ? cv.local_coord : cv.local_auto && okC(cv.local_auto.coord) ? cv.local_auto.coord : null;
+      const rota = (Array.isArray(cv.rota) ? cv.rota : []).filter((p) => Array.isArray(p) && p.length === 2 && isFinite(p[0]) && isFinite(p[1]));
       const lugares = convidado && Number(convidado.lugares) > 0 ? Number(convidado.lugares) : null;
       const pedirIdade = cv.pedir_idade !== false;
 
@@ -154,11 +281,14 @@
                 <span><span class="dia">${d.getDate()}</span><br><span class="mes">${esc(MESES[d.getMonth()])}</span></span>
                 <span class="lado">${esc(horario || d.getFullYear())}</span></div>
               <p class="data-longa">${esc(`${SEMANA[d.getDay()]}, ${d.getDate()} de ${MESES[d.getMonth()]} de ${d.getFullYear()}`)}${horario ? ` · ${esc(horario)}` : ''}</p>` : ''}
-            ${local || endereco ? `<div class="local">${local ? `<strong>${esc(local)}</strong>` : ''}${endereco ? `<span>${esc(endereco)}</span>` : ''}
-              ${mapa ? `<a href="${esc(mapa)}" target="_blank" rel="noopener">Como chegar</a>` : ''}</div>` : ''}
+            ${local || endereco || dest ? `<div class="local">${local ? `<strong>${esc(local)}</strong>` : ''}${endereco ? `<span>${esc(endereco)}</span>` : ''}
+              ${!dest && mapa ? `<a href="${esc(mapa)}" target="_blank" rel="noopener">Como chegar</a>` : ''}</div>` : ''}
+            ${dest ? rotaHtml(cv, dest, rota) : ''}
             ${cv.mensagem ? `<p class="mensagem">${esc(cv.mensagem)}</p>` : ''}
             ${lugares ? `<p class="prazo">Este convite vale para até ${lugares} ${lugares === 1 ? 'pessoa' : 'pessoas'}.</p>` : ''}
             ${prazo ? `<p class="prazo">Por favor, confirme até ${prazo.getDate()} de ${MESES[prazo.getMonth()]}.</p>` : ''}
+            ${agendaHtml(ev, titulo, [local, endereco].filter(Boolean).join(', '))}
+            <div id="presentes">${presentesHtml(ev, (lsGet() || {}).id)}</div>
           </div>
           <section class="rsvp" id="rsvp" aria-labelledby="rsvp-tit"></section>
           <p class="imprimir-rsvp">Confirme sua presença pelo link do convite${ev.organiza ? ` ou com ${esc(ev.organiza)}` : ''}.</p>
@@ -166,6 +296,9 @@
         <div class="rodape"><button type="button" onclick="window.print()">Imprimir ou salvar em PDF</button></div>`;
       const fim = prazo ? new Date(prazo.getFullYear(), prazo.getMonth(), prazo.getDate() + 1) : null;
       const encerrado = !!(fim && new Date() >= fim && !cv.aceitar_apos_prazo);
+      if (dest) mapaConvite(dest, rota);
+      const ics = document.getElementById('ics');
+      if (ics) ics.onclick = () => baixarIcs(ev, titulo, [local, endereco].filter(Boolean).join(', '));
       formRsvp(ev, { convidado, nome, lugares, pedirIdade, encerrado });
     }
 
@@ -187,7 +320,10 @@
         idades: ant ? ant.idades || [] : [],
         contato: (ant && ant.contato) || '',
         mensagem: (ant && ant.mensagem) || '',
+        presente: (ant && ant.presente) || '',
       };
+      const meuId = ctx.convidado ? `${evId}-${ctx.convidado.id}` : (ant && ant.id) || null;
+      const livres = () => (ev.presentes || []).filter((g) => g && g.nome && !reservas.some((r) => r.presente === g.id && r.id !== meuId));
       const opcoesIdade = (v) => ['<option value="">Idade</option>', `<option value="0" ${v === 0 ? 'selected' : ''}>Menos de 1 ano</option>`,
         ...Array.from({ length: 17 }, (_, i) => i + 1).map((n) => `<option value="${n}" ${v === n ? 'selected' : ''}>${n} ${n === 1 ? 'ano' : 'anos'}</option>`)].join('');
       function idadesHtml() {
@@ -213,6 +349,8 @@
                 <label class="campo"><span>Crianças</span>${contador('criancas', st.criancas, 0)}</label>
               </div>
               <div id="idades">${idadesHtml()}</div>` : ''}
+            ${vai && livres().length ? `<label class="campo"><span>Quer reservar um presente da lista? (opcional)</span>
+              <select name="presente"><option value="">Não, obrigado</option>${livres().map((g) => `<option value="${esc(g.id)}" ${g.id === st.presente ? 'selected' : ''}>${esc(g.nome)}</option>`).join('')}</select></label>` : ''}
             <label class="campo"><span>WhatsApp (opcional)</span><input name="contato" maxlength="30" inputmode="tel" autocomplete="tel" value="${esc(st.contato)}"></label>
             <label class="campo"><span>Recado (opcional)</span><textarea name="mensagem" rows="2" maxlength="300" placeholder="${vai ? 'Alergia alimentar, horário de chegada…' : 'Deixe um recado'}">${esc(st.mensagem)}</textarea></label>
             <button class="enviar" type="submit">${st.resposta === 'sim' ? 'Confirmar presença' : 'Enviar resposta'}</button>
@@ -230,6 +368,7 @@
         st.nome = f.nome.value.trim();
         st.contato = f.contato.value.trim();
         st.mensagem = f.mensagem.value.trim();
+        st.presente = f.presente ? f.presente.value : (st.resposta === 'nao' ? '' : st.presente);
         if (f.adultos) st.adultos = Math.max(0, Math.min(30, parseInt(f.adultos.value, 10) || 0));
         if (f.criancas) st.criancas = Math.max(0, Math.min(30, parseInt(f.criancas.value, 10) || 0));
       }
@@ -274,7 +413,7 @@
           evento: evId, convidado: ctx.convidado ? ctx.convidado.id : null, nome: st.nome, resposta: st.resposta,
           adultos: vai ? st.adultos : 0, criancas: vai ? st.criancas : 0,
           idades: vai && ctx.pedirIdade ? st.idades.slice(0, st.criancas).map((x) => (x == null ? null : x)) : [],
-          contato: st.contato, mensagem: st.mensagem, atualizado_em: new Date().toISOString(),
+          contato: st.contato, mensagem: st.mensagem, presente: vai && st.presente ? st.presente : null, atualizado_em: new Date().toISOString(),
         };
         const btn = box.querySelector('.enviar');
         btn.disabled = true; av.textContent = 'Enviando…';
@@ -285,6 +424,9 @@
           if (!r.ok) throw new Error(r.status);
           const reg = { ...dados, id, enviado: true };
           lsSet(reg);
+          reservas = reservas.filter((x) => x.id !== id);
+          if (reg.presente) reservas.push(reg);
+          document.getElementById('presentes').innerHTML = presentesHtml(ev, id);
           obrigado(ev, ctx, reg);
         } catch {
           btn.disabled = false;
@@ -305,6 +447,7 @@
       box.innerHTML = `<div class="feito">
         <span class="ok" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
         <h2>${vai ? 'Presença confirmada!' : 'Resposta enviada'}</h2>
+        ${(() => { const g = reg.presente && (ev.presentes || []).find((x) => x && x.id === reg.presente); return g ? `<p class="sub">Presente reservado: <strong>${esc(g.nome)}</strong></p>` : ''; })()}
         <p class="sub">${talvez ? `Anotado, ${esc(reg.nome)}: talvez ${esc(partes)}. Se puder, confirme depois por este mesmo link.` : vai ? `${esc(reg.nome)}: ${esc(partes)}${idades.length ? ` (${esc(idades.join(', '))})` : ''}. Até lá!` : `Obrigado por avisar, ${esc(reg.nome)}. Vamos sentir sua falta.`}</p>
         ${ctx.encerrado ? '' : '<button type="button" class="link-btn" id="mudar">Mudar minha resposta</button>'}</div>`;
       if (ctx.encerrado) return;

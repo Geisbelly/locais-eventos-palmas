@@ -1729,6 +1729,7 @@
       if (cv) copiar(linkConvite(ev, cv), `Link de ${cv.nome || 'convidado'} copiado.`);
       return;
     }
+    if ((b = t.closest('[data-rota]'))) { acaoRota(b.dataset.rota); return; }
     if ((b = t.closest('[data-chegou]'))) { marcarChegada(b.dataset.chegou); return; }
     if ((b = t.closest('[data-conv-resp]'))) { novaResposta(b.dataset.convResp); return; }
     if ((b = t.closest('[data-gasto-st]'))) {
@@ -1983,13 +1984,14 @@
   const novoEvento = () => ({
     id: '', nome: '', tipo: '', data: '', hora_inicio: '', hora_fim: '', para_quem: '', idade: '', organiza: '', contato: '',
     adultos: null, criancas: null, tema: '', orcamento: null, status: 'planejando', descricao: '',
-    escolhas: [], gastos: [], tarefas: [], cronograma: [], convite: {}, convidados: [], buffet_isento_ate: null,
+    escolhas: [], gastos: [], tarefas: [], cronograma: [], convite: {}, convidados: [], presentes: [], buffet_isento_ate: null,
   });
   function evCompleto(bruto) {
     const ev = Object.assign(novoEvento(), bruto);
     ev.gastos = (Array.isArray(ev.gastos) ? ev.gastos : []).map(normGasto);
     ev.convite = { ...(ev.convite && typeof ev.convite === 'object' ? ev.convite : {}) };
     ev.convidados = (Array.isArray(ev.convidados) ? ev.convidados : []).filter(Boolean);
+    ev.presentes = (Array.isArray(ev.presentes) ? ev.presentes : []).filter(Boolean);
     return ev;
   }
   const eventosAtivos = () => Object.values(S.eventos).filter((e) => e && !e.removido)
@@ -2266,7 +2268,7 @@
         <label class="r-num"><span>Adultos</span><input ${f('adultos')} type="number" min="0" max="99" inputmode="numeric" value="${Number(r.adultos) || 0}"></label>
         <label class="r-num"><span>Crianças</span><input ${f('criancas')} type="number" min="0" max="99" inputmode="numeric" value="${Number(r.criancas) || 0}"></label>
         <label class="r-idades"><span>Idades</span><input ${f('idades')} value="${esc((r.idades || []).filter((x) => x != null).map(idadeTxt).join(', '))}" placeholder="ex.: 3, 7"></label>
-        <span class="r-info">${[cv ? 'da lista' : r.manual ? 'lançada aqui' : 'pelo link', r.contato ? esc(r.contato) : null, r.atualizado_em ? dataBR(r.atualizado_em.slice(0, 10)) : null].filter(Boolean).join(' · ')}${r.mensagem ? `<em>“${esc(r.mensagem)}”</em>` : ''}</span>
+        <span class="r-info">${[cv ? 'da lista' : r.manual ? 'lançada aqui' : 'pelo link', r.presente && ev.presentes.find((g) => g.id === r.presente) ? `presente: ${esc(ev.presentes.find((g) => g.id === r.presente).nome)}` : null, r.contato ? esc(r.contato) : null, r.atualizado_em ? dataBR(r.atualizado_em.slice(0, 10)) : null].filter(Boolean).join(' · ')}${r.mensagem ? `<em>“${esc(r.mensagem)}”</em>` : ''}</span>
       </div>`;
     }).join('')}</div>`;
   }
@@ -2298,6 +2300,34 @@
           <label class="campo"><span>Cores</span><select data-evc="convite.estilo">${ESTILOS_CONV.map(([k, r]) => `<option value="${k}" ${k === (cv.estilo || 'ouro') ? 'selected' : ''}>${r}</option>`).join('')}</select></label>
         </div>
         <p class="ajuda">Data, horário e tema vêm do evento (botão Editar). O local vem do espaço marcado com a estrela, se você não preencher aqui.</p>
+      </details>
+      <details class="conv-cfg" id="rota-cfg" ${ROTA.aberta ? 'open' : ''}><summary>Local e rota no mapa ${destinoConvite(ev) ? `<small>${(cv.rota || []).length > 1 ? 'rota desenhada' : 'local marcado'}</small>` : ''}</summary>
+        <p class="ajuda">O convite mostra o mapa com o local e botões para abrir no GPS (Google Maps ou Waze). Se o GPS costuma errar o caminho (condomínio, chácara, estrada de terra), desenhe a rota certa: toque em <strong>Desenhar rota</strong> e vá tocando no mapa, do ponto de partida até o local. O botão do convite manda o GPS passar pela sua rota.</p>
+        <div class="rota-barra">
+          <button type="button" class="btn ghost" data-rota="local">${ic('pin')}Marcar o local</button>
+          <button type="button" class="btn ghost" data-rota="desenhar">${ic('rota')}Desenhar rota</button>
+          <button type="button" class="btn ghost" data-rota="desfazer">Desfazer ponto</button>
+          <button type="button" class="btn ghost" data-rota="limpar">Apagar rota</button>
+        </div>
+        <p class="rota-dica" id="rota-dica">${cv.local_coord ? '' : cv.local_auto && cv.local_auto.coord ? 'O local veio do espaço escolhido. Use “Marcar o local” para corrigir o ponto.' : 'Toque em “Marcar o local” e depois no mapa, no ponto da festa.'}</p>
+        <div id="rota-mapa" class="rota-mapa" aria-label="Mapa para marcar o local e a rota"></div>
+        <div class="grade-2">
+          <label class="campo"><span>A rota começa em</span><input data-evc="convite.rota_partida" maxlength="120" value="${esc(cv.rota_partida || '')}" placeholder="ex.: Rotatória da TO-050 com a Teotônio"></label>
+          <label class="campo largo"><span>Explicação do caminho (aparece no convite)</span><textarea data-evc="convite.rota_instrucoes" rows="3" maxlength="800" placeholder="ex.: Depois do posto, entre na segunda estrada de terra à direita. A chácara tem portão azul.">${esc(cv.rota_instrucoes || '')}</textarea></label>
+        </div>
+      </details>
+      <details class="conv-cfg" ${ev.presentes.length || cv.presente_dica ? 'open' : ''}><summary>Presentes ${presentesResumo(ev)}</summary>
+        <label class="campo"><span>Dica de presente (aparece no convite)</span><textarea data-evc="convite.presente_dica" rows="2" maxlength="500" placeholder="ex.: Fralda tamanho G, roupa tamanho 1 ano ou sapatinho número 20">${esc(cv.presente_dica || '')}</textarea></label>
+        <p class="ajuda">Lista de presentes (opcional): o convidado pode reservar um item ao confirmar, e o item reservado some para os outros.</p>
+        <div class="linhas-ev">${ev.presentes.map((g, i) => {
+          const quem = reservaDe(ev, g.id);
+          return `<div class="linha-ev pres-linha">
+            <input data-evc="presentes.${i}.nome" maxlength="120" value="${esc(g.nome || '')}" placeholder="ex.: Kit de banho" aria-label="Presente">
+            <input class="curto" data-evc="presentes.${i}.link" maxlength="500" inputmode="url" value="${esc(g.link || '')}" placeholder="Link da loja (opcional)" aria-label="Link">
+            <span class="chip-st ${quem ? 'st-sim' : 'pend'}">${quem ? `Reservado por ${esc(quem.nome || 'alguém')}` : 'Livre'}</span>
+            <button type="button" class="tirar-linha" data-ev-tirar="presentes:${i}" aria-label="Remover">×</button></div>`;
+        }).join('')}</div>
+        <button type="button" class="btn ghost add-linha" data-ev-add="presentes">${ic('mais')}Adicionar presente</button>
       </details>
       <div class="acoes-linha conv-botoes">
         <a class="btn" href="${esc(linkConvite(ev))}" target="_blank" rel="noopener">${ic('olho')}Ver convite</a>
@@ -2505,6 +2535,99 @@
       <table class="quant"><tbody>${linhas}</tbody></table>
       <p class="ajuda">Estimativa com médias de festa (cerca de 12 salgados por adulto em 4 horas, 100 g de bolo por pessoa, 600 ml de refrigerante por adulto), já arredondada para cima. Se o buffet já inclui comida e bebida, use só para conferir o que ele vai servir.</p>`;
   }
+
+  const reservaDe = (ev, gid) => rsvpsDe(ev.id).find((r) => r.presente === gid && r.resposta !== 'nao');
+  function presentesResumo(ev) {
+    const n = ev.presentes.filter((g) => g.nome).length;
+    if (!n) return '';
+    const res = ev.presentes.filter((g) => g.nome && reservaDe(ev, g.id)).length;
+    return `<small>${res} de ${n} reservados</small>`;
+  }
+
+  /* ---- Mapa do local e rota desenhada (Leaflet, carregado só quando abre) ---- */
+  const ROTA = { aberta: false, modo: '', map: null, camadas: null };
+  const PALMAS = [-10.184, -48.333];
+  function carregarLeaflet() {
+    if (window.L) return Promise.resolve();
+    if (ROTA.carregando) return ROTA.carregando;
+    ROTA.carregando = new Promise((ok, falha) => {
+      const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css'; document.head.appendChild(css);
+      const js = document.createElement('script'); js.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js'; js.onload = ok; js.onerror = falha; document.head.appendChild(js);
+    });
+    return ROTA.carregando;
+  }
+  function destinoConvite(ev) {
+    const c = ev.convite.local_coord || (ev.convite.local_auto && ev.convite.local_auto.coord);
+    return c && isFinite(c.lat) && isFinite(c.lng) ? c : null;
+  }
+  async function iniciarMapaRota() {
+    const box = $('#rota-mapa');
+    if (!box) return;
+    try { await carregarLeaflet(); } catch { box.innerHTML = '<p class="texto">Não consegui carregar o mapa agora.</p>'; return; }
+    if (!document.body.contains(box)) return;
+    if (ROTA.map) { ROTA.map.remove(); ROTA.map = null; }
+    const map = L.map(box, { scrollWheelZoom: false });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(map);
+    ROTA.map = map; ROTA.camadas = L.layerGroup().addTo(map);
+    map.on('click', (e) => cliqueMapa(e.latlng));
+    desenharRota(true);
+    modoRota(ROTA.modo);
+  }
+  function desenharRota(enquadrar) {
+    const ev = evAtual(); if (!ROTA.map || !ev) return;
+    const cor = getComputedStyle(document.documentElement).getPropertyValue('--ouro').trim() || '#b4781f';
+    ROTA.camadas.clearLayers();
+    const pts = (ev.convite.rota || []).filter((p) => Array.isArray(p) && p.length === 2);
+    const dest = destinoConvite(ev);
+    if (pts.length) {
+      L.polyline(pts, { color: cor, weight: 5, opacity: .9, dashArray: '8 8' }).addTo(ROTA.camadas);
+      L.circleMarker(pts[0], { radius: 7, color: '#fff', weight: 2, fillColor: '#2f6fd6', fillOpacity: 1 }).bindTooltip('Início da rota').addTo(ROTA.camadas);
+      pts.slice(1).forEach((p) => L.circleMarker(p, { radius: 3, color: cor, weight: 1, fillOpacity: 1 }).addTo(ROTA.camadas));
+    }
+    if (dest) L.circleMarker([dest.lat, dest.lng], { radius: 10, color: '#fff', weight: 3, fillColor: '#c62828', fillOpacity: 1 }).bindTooltip('Local da festa').addTo(ROTA.camadas);
+    if (enquadrar) {
+      const todos = [...pts, ...(dest ? [[dest.lat, dest.lng]] : [])];
+      if (todos.length > 1) ROTA.map.fitBounds(todos, { padding: [30, 30], maxZoom: 16 });
+      else ROTA.map.setView(todos[0] || PALMAS, todos.length ? 15 : 12);
+    }
+  }
+  function modoRota(m) {
+    ROTA.modo = m;
+    document.querySelectorAll('[data-rota="local"],[data-rota="desenhar"]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.rota === m)));
+    const d = $('#rota-dica');
+    if (d && m) d.textContent = m === 'local' ? 'Toque no mapa, no ponto exato da festa.' : 'Toque no mapa ponto a ponto, do início da rota até o local. Toque em “Desenhar rota” de novo para terminar.';
+    if (ROTA.map) ROTA.map.getContainer().style.cursor = m ? 'crosshair' : '';
+  }
+  function cliqueMapa(ll) {
+    if (!ROTA.modo) return;
+    const ev = evAtual();
+    const r5 = (n) => Math.round(n * 1e5) / 1e5;
+    if (ROTA.modo === 'local') {
+      ev.convite.local_coord = { lat: r5(ll.lat), lng: r5(ll.lng) };
+      modoRota('');
+      const d = $('#rota-dica'); if (d) d.textContent = 'Local marcado. Se quiser, desenhe a rota até ele.';
+    } else {
+      const pts = Array.isArray(ev.convite.rota) ? ev.convite.rota.slice() : [];
+      if (pts.length >= 150) { toast('A rota já tem pontos demais.'); return; }
+      pts.push([r5(ll.lat), r5(ll.lng)]);
+      ev.convite.rota = pts;
+    }
+    salvarEvento(ev, { render: false });
+    desenharRota(false);
+  }
+  function acaoRota(a) {
+    const ev = evAtual();
+    if (a === 'local' || a === 'desenhar') { modoRota(ROTA.modo === a ? '' : a); return; }
+    if (a === 'desfazer') { const pts = (ev.convite.rota || []).slice(0, -1); ev.convite.rota = pts; }
+    if (a === 'limpar') { if (!(ev.convite.rota || []).length || !confirm('Apagar a rota desenhada?')) return; ev.convite.rota = []; }
+    salvarEvento(ev, { render: false });
+    desenharRota(false);
+  }
+  document.addEventListener('toggle', (e) => {
+    if (e.target.id !== 'rota-cfg') return;
+    ROTA.aberta = e.target.open;
+    if (ROTA.aberta) iniciarMapaRota(); else modoRota('');
+  }, true);
   function atualizarConvite() {
     if (!S.paginaEv || !S.eventos[S.paginaEv]) return;
     const ev = evAtual();
@@ -2703,7 +2826,8 @@
     const c = contas(ev);
     const local = ev.escolhas.find((e) => e.cat === 'espacos' && fechado(e.status));
     const lLocal = local && S.porId[local.id];
-    const auto = lLocal ? { nome: lLocal.nome, endereco: lLocal.endereco || lLocal.bairro || '', mapa: mapaUrl(lLocal) } : null;
+    const cc = lLocal && lLocal.coordenadas && isFinite(lLocal.coordenadas.lat) && isFinite(lLocal.coordenadas.lng) ? { lat: lLocal.coordenadas.lat, lng: lLocal.coordenadas.lng } : null;
+    const auto = lLocal ? { nome: lLocal.nome, endereco: lLocal.endereco || lLocal.bairro || '', mapa: mapaUrl(lLocal), ...(cc ? { coord: cc } : {}) } : null;
     if (JSON.stringify(auto) !== JSON.stringify(ev.convite.local_auto || null)) { ev.convite.local_auto = auto; salvarEvento(ev, { render: false }); }
     if (!S.rsvpPedido[ev.id]) { S.rsvpPedido[ev.id] = true; carregarRsvp(ev.id); }
     const conv = [numV(ev.adultos) ? `${ev.adultos} adultos` : null, numV(ev.criancas) ? `${ev.criancas} crianças` : null].filter(Boolean).join(' + ');
@@ -2749,10 +2873,11 @@
       </div>
       <aside class="pg-lado" id="pg-resumo" aria-label="Resumo do orçamento">${resumoHtml(ev, c)}</aside>
       </div>`;
+    if (ROTA.aberta) iniciarMapaRota();
   }
 
   /* ---- Edição na própria página ---- */
-  const LINHA_VAZIA = { convidados: () => ({ id: idCurto(), nome: '', telefone: '', lugares: null }), gastos: novoGasto, tarefas: () => ({ texto: '', prazo: '', feito: false }), cronograma: () => ({ hora: '', oque: '' }) };
+  const LINHA_VAZIA = { presentes: () => ({ id: idCurto(), nome: '', link: '' }), convidados: () => ({ id: idCurto(), nome: '', telefone: '', lugares: null }), gastos: novoGasto, tarefas: () => ({ texto: '', prazo: '', feito: false }), cronograma: () => ({ hora: '', oque: '' }) };
   function evAtual() { return S.eventos[S.paginaEv] ? evCompleto(S.eventos[S.paginaEv]) : null; }
   function setCaminho(obj, caminho, v) {
     const ps = caminho.split('.');
