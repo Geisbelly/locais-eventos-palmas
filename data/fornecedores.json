@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-14T01:43:35Z",
+  "atualizado_em": "2026-11-14T05:10:00Z",
   "observacao": "Buffet, brinquedos, serviços e aluguéis. Cada item tem cat (buffet | brinquedos | servicos | alugueis). Também dá para cadastrar pelo site.",
   "itens": [
     {
@@ -3141,6 +3141,594 @@
       "id": "marilue-brinquedoteca",
       "cat": "brinquedos",
       "nome": "Mariluê Brinquedoteca Itinerante",
+      "whatsapp": null
+    },
+    {
+      "descricao": "Aluguel de carrinho, berço, bebê conforto, cadeira para auto, bomba de leite, jumperoo, andador e brinquedos por 7, 15 ou 30 dias. O item chega higienizado e embalado em casa, hotel ou casa da família. Reserva e renovação pelo app Club Kids.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 1205 Sul (ARSO 122), Alameda 22",
+      "taxas": [],
+      "pagamento": "Cartão de crédito online ou Pix",
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [
+        "Entrega higienizada",
+        "Entrega em hotel ou casa"
+      ],
+      "eventos": [
+        "Visita de família",
+        "Viagem com bebê",
+        "Aniversário infantil"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": "https://meuclubkids.com.br/",
+      "fotos": [
+        {
+          "url": "fotos/club-kids/carrinho-lucca.jpg",
+          "legenda": "Carrinho de passeio Lucca",
+          "credito": {
+            "nome": "Club Kids",
+            "url": "https://meuclubkids.com.br/AL_brinquedos.php"
+          }
+        }
+      ],
+      "fontes": [
+        "https://meuclubkids.com.br/AL_brinquedos.php",
+        "https://meuclubkids.com.br/",
+        "Google Maps: Club Kids - Aluguel de Brinquedos (5,0, 6 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no site da unidade TO-Palmas",
+      "atualizado_em": "2026-11-14T05:10:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Itens de bebê",
+        "Brinquedos de bebê"
+      ],
+      "precos": [],
+      "observacoes": "Franquia nacional; preços da unidade de Palmas lidos no site em 14/11/2026. O valor é pelo período indicado em cada item. Taxa de entrega não informada no site.",
+      "objetos": [
+        {
+          "nome": "Carrinho de passeio Lucca (Infanti)",
+          "tipo": "Itens de bebê",
+          "valor": 149.4,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "7 dias",
+          "foto": {
+            "url": "fotos/club-kids/carrinho-lucca.jpg",
+            "legenda": "Carrinho de passeio Lucca",
+            "credito": {
+              "nome": "Club Kids",
+              "url": "https://meuclubkids.com.br/AL_brinquedos.php"
+            }
+          }
+        },
+        {
+          "nome": "Bebê conforto com base Maxi-Cosi (0 a 13 kg)",
+          "tipo": "Itens de bebê",
+          "valor": 129.0,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Bebê conforto Beta com base",
+          "tipo": "Itens de bebê",
+          "valor": 107.4,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Cadeira para auto com Isofix e giro 360° (Mundi / MIA)",
+          "tipo": "Itens de bebê",
+          "valor": 161.4,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "A MIA, com alarme, sai por R$ 179,40.",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Cadeira para auto Fisher-Price All Stages Isofix",
+          "tipo": "Itens de bebê",
+          "valor": 161.4,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "Cinza ou preta.",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Cadeira para auto Legacy Voyage",
+          "tipo": "Itens de bebê",
+          "valor": 137.4,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Cadeira para auto Matrix Evolution (Burigotto)",
+          "tipo": "Itens de bebê",
+          "valor": 137.4,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Cadeira para auto Alfa",
+          "tipo": "Itens de bebê",
+          "valor": 125.4,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Assento de elevação para auto (Protege / Booster Strada)",
+          "tipo": "Itens de bebê",
+          "valor": 77.4,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Berço portátil Mini Play (Safety 1st)",
+          "tipo": "Itens de bebê",
+          "valor": 139.2,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Berço Techno Bluetooth",
+          "tipo": "Itens de bebê",
+          "valor": 167.4,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Berço portátil Co-Bed",
+          "tipo": "Itens de bebê",
+          "valor": 167.2,
+          "unidade": "por 15 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "15 dias"
+        },
+        {
+          "nome": "Cercado Baby Playpen",
+          "tipo": "Itens de bebê",
+          "valor": 135.2,
+          "unidade": "por 30 dias",
+          "qtd": null,
+          "obs": "Preço com 20% de desconto (de R$ 169,00).",
+          "duracao": "30 dias"
+        },
+        {
+          "nome": "Banheira portátil Baby Pil (Ibimbo)",
+          "tipo": "Itens de bebê",
+          "valor": 59.4,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Babá eletrônica Smart Vision (Safety 1st)",
+          "tipo": "Itens de bebê",
+          "valor": 95.2,
+          "unidade": "por 15 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "15 dias"
+        },
+        {
+          "nome": "Monitor cardíaco fetal Pocket (Doppler)",
+          "tipo": "Itens de bebê",
+          "valor": 89.0,
+          "unidade": "por 30 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "30 dias"
+        },
+        {
+          "nome": "Canguru ergonômico Hipseat",
+          "tipo": "Itens de bebê",
+          "valor": 65.4,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Bomba extratora de leite elétrica Philips Avent",
+          "tipo": "Itens de bebê",
+          "valor": 139.0,
+          "unidade": "por 30 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "30 dias"
+        },
+        {
+          "nome": "Bomba extratora de leite elétrica Medela (Solo / Swing Maxi)",
+          "tipo": "Itens de bebê",
+          "valor": 199.0,
+          "unidade": "por 30 dias",
+          "qtd": null,
+          "obs": "A Swing Maxi dupla sai por R$ 219,00 a R$ 239,00.",
+          "duracao": "30 dias"
+        },
+        {
+          "nome": "Bomba extratora de leite mãos livres",
+          "tipo": "Itens de bebê",
+          "valor": 149.0,
+          "unidade": "por 30 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "30 dias"
+        },
+        {
+          "nome": "Cadeira de balanço Mamaroo 5.0",
+          "tipo": "Itens de bebê",
+          "valor": 249.0,
+          "unidade": "por 30 dias",
+          "qtd": null,
+          "obs": "Preta ou cinza.",
+          "duracao": "30 dias"
+        },
+        {
+          "nome": "Cadeira de balanço Maxi-Cosi Swing Cassia",
+          "tipo": "Itens de bebê",
+          "valor": 209.0,
+          "unidade": "por 30 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "30 dias"
+        },
+        {
+          "nome": "Cadeira Moisés Multi-Motion (Mastela)",
+          "tipo": "Itens de bebê",
+          "valor": 199.0,
+          "unidade": "por 30 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "30 dias"
+        },
+        {
+          "nome": "Cadeira de descanso Bouncer (Safety 1st)",
+          "tipo": "Itens de bebê",
+          "valor": 119.2,
+          "unidade": "por 30 dias",
+          "qtd": null,
+          "obs": "Preço com 20% de desconto (de R$ 149,00).",
+          "duracao": "30 dias"
+        },
+        {
+          "nome": "Cadeira de alimentação Techno Plus (Mastela)",
+          "tipo": "Itens de bebê",
+          "valor": 151.2,
+          "unidade": "por 15 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "15 dias"
+        },
+        {
+          "nome": "Assento Baby Base 2 em 1",
+          "tipo": "Itens de bebê",
+          "valor": 76.16,
+          "unidade": "por 15 dias",
+          "qtd": null,
+          "obs": "Preço com 20% de desconto (de R$ 95,20).",
+          "duracao": "15 dias"
+        },
+        {
+          "nome": "Andador e centro de atividades Explore & More 4 em 1 (Skip Hop)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 149.0,
+          "unidade": "por 30 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "30 dias"
+        },
+        {
+          "nome": "Andador de madeira Boho Chic",
+          "tipo": "Brinquedos de bebê",
+          "valor": 149.0,
+          "unidade": "por 30 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "30 dias"
+        },
+        {
+          "nome": "Andador primeiros passos (Fisher-Price)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 116.1,
+          "unidade": "por 30 dias",
+          "qtd": null,
+          "obs": "Puppy ou Tigre, com desconto.",
+          "duracao": "30 dias"
+        },
+        {
+          "nome": "Jumperoo (Fisher-Price / Skip Hop / Joyful)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 159.0,
+          "unidade": "por 30 dias",
+          "qtd": null,
+          "obs": "O Explore & More sai por R$ 169,00.",
+          "duracao": "30 dias"
+        },
+        {
+          "nome": "Centro de atividades (Tiny Love, Play Center, Home Office)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 129.0,
+          "unidade": "por 30 dias",
+          "qtd": null,
+          "obs": "De R$ 129,00 a R$ 169,00 conforme o modelo.",
+          "duracao": "30 dias"
+        },
+        {
+          "nome": "Tapete de atividades Gymini (Tiny Love)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 125.1,
+          "unidade": "por 30 dias",
+          "qtd": null,
+          "obs": "De R$ 109,00 (Pianinho) a R$ 139,00.",
+          "duracao": "30 dias"
+        },
+        {
+          "nome": "Playground infantil (Little Tikes / Ursinho)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 167.2,
+          "unidade": "por 15 dias",
+          "qtd": null,
+          "obs": "Dupla Diversão R$ 231,20; Navio Pirata R$ 199,20.",
+          "duracao": "15 dias"
+        },
+        {
+          "nome": "Escorregador Baby SlidePlay 2 degraus",
+          "tipo": "Brinquedos de bebê",
+          "valor": 71.28,
+          "unidade": "por 15 dias",
+          "qtd": null,
+          "obs": "Com 10% de desconto.",
+          "duracao": "15 dias"
+        },
+        {
+          "nome": "Triângulo de Pikler com rampa e capa casinha",
+          "tipo": "Brinquedos de bebê",
+          "valor": 151.2,
+          "unidade": "por 15 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "15 dias"
+        },
+        {
+          "nome": "Cama elástica 1,40 m (Toaninni)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 118.26,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "Com 10% de desconto (de R$ 131,40).",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Bicicleta de equilíbrio (Bandeirante)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 89.0,
+          "unidade": "por 30 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "30 dias"
+        },
+        {
+          "nome": "Patinete / triciclo Skip Hop",
+          "tipo": "Brinquedos de bebê",
+          "valor": 119.2,
+          "unidade": "por 15 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "15 dias"
+        },
+        {
+          "nome": "Carro elétrico infantil (Mercedes, Hilux, Kart)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 174.0,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "Hilux R$ 186,00; Vespa 12V R$ 137,40; scooter R$ 119,94.",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Tabela de basquete infantil (Xalingo)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 95.2,
+          "unidade": "por 15 dias",
+          "qtd": null,
+          "obs": null,
+          "duracao": "15 dias"
+        }
+      ],
+      "id": "club-kids",
+      "cat": "alugueis",
+      "nome": "Club Kids Palmas (aluguel de itens de bebê)",
+      "whatsapp": "(63) 99293-7220"
+    },
+    {
+      "descricao": "Locação de pula-pula (cama elástica com rede) e inflável para festas e eventos, inclusive na praia.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 1206 Sul, Alameda 21, 18",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil",
+        "Evento ao ar livre"
+      ],
+      "instagram": "pulapulatelekids",
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/tele-kids/ig-CrWVXbJOIWj.jpg",
+          "legenda": "Pula-pula montado na Praia da Graciosa",
+          "credito": {
+            "nome": "Instagram @pulapulatelekids",
+            "url": "https://www.instagram.com/pulapulatelekids/p/CrWVXbJOIWj/"
+          }
+        }
+      ],
+      "fontes": [
+        "https://www.instagram.com/pulapulatelekids/",
+        "Google Maps: Pula Pula Telê Kids (5,0, 6 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Divulgado no Instagram e no Google Maps",
+      "atualizado_em": "2026-11-14T05:10:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [],
+      "precos": [],
+      "observacoes": "O Instagram tem poucas postagens e não mostra preços; pedir os valores pelo WhatsApp.",
+      "objetos": [
+        {
+          "nome": "Pula-pula com rede",
+          "grupo": "Pula-pula",
+          "tipo": "Pula-pula",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Inflável",
+          "tipo": "Inflável",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Aparece nas fotos do perfil.",
+          "duracao": null
+        }
+      ],
+      "id": "tele-kids",
+      "cat": "brinquedos",
+      "nome": "Pula Pula Telê Kids",
+      "whatsapp": "(63) 98116-8384"
+    },
+    {
+      "descricao": "Locação de brinquedos para festas.",
+      "atende_em": "Palmas",
+      "endereco": "ARSO (Alameda 3, QI 17, 279)",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [],
+      "instagram": null,
+      "telefone": "(63) 98422-4596",
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "Google Maps: Pulando De Alegria - Locações de Brinquedos (5,0, 4 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Só no Google Maps",
+      "atualizado_em": "2026-11-14T05:10:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [],
+      "precos": [],
+      "observacoes": "Não achei Instagram nem lista de brinquedos; confirmar itens e valores por telefone.",
+      "objetos": [
+        {
+          "nome": "Brinquedos para festa",
+          "tipo": "Outros",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "id": "pulando-de-alegria",
+      "cat": "brinquedos",
+      "nome": "Pulando de Alegria Locações de Brinquedos",
+      "whatsapp": null
+    },
+    {
+      "descricao": "Locação de mesas, cadeiras, freezers e brinquedos.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 706 Sul, Alameda 12, 39",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [],
+      "instagram": null,
+      "telefone": "(63) 98456-3177",
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "Google Maps: Loc Eventos - Locação Mesas, Cadeiras, Freezes e Brinquedos (3,3, 7 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Só no Google Maps",
+      "atualizado_em": "2026-11-14T05:10:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Mesas e cadeiras",
+        "Freezer / chopeira"
+      ],
+      "precos": [],
+      "observacoes": "Nota 3,3 no Google. Sem preços publicados.",
+      "objetos": [
+        {
+          "nome": "Mesas e cadeiras",
+          "tipo": "Mesas e cadeiras",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Freezer",
+          "tipo": "Freezer / chopeira",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Brinquedos",
+          "tipo": "Outros",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "id": "loc-eventos",
+      "cat": "alugueis",
+      "nome": "Loc Eventos",
       "whatsapp": null
     }
   ]
