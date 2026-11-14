@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-14T08:40:00Z",
+  "atualizado_em": "2026-11-14T09:30:00Z",
   "observacao": "Buffet, brinquedos, serviços e aluguéis. Cada item tem cat (buffet | brinquedos | servicos | alugueis). Também dá para cadastrar pelo site.",
   "itens": [
     {
@@ -5595,6 +5595,157 @@
       "id": "casa-crianca-festas",
       "cat": "alugueis",
       "nome": "Casa da Criança Festas"
+    },
+    {
+      "descricao": "Aluguel de mesas, cadeiras e freezer, com entrega.",
+      "atende_em": "Palmas",
+      "endereco": "ACSE 01, Conj. 2, Lote 32",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "Google Maps: Império Locações - Aluguel de mesas em Palmas (5,0, 40 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Só no Google Maps",
+      "atualizado_em": "2026-11-14T09:30:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Mesas e cadeiras",
+        "Freezer / chopeira"
+      ],
+      "precos": [],
+      "observacoes": "Avaliações elogiam o atendimento e a entrega. Não publica preços nem catálogo; pedir orçamento pelo WhatsApp.",
+      "objetos": [
+        {
+          "nome": "Mesas e cadeiras",
+          "tipo": "Mesas e cadeiras",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Freezer",
+          "tipo": "Freezer / chopeira",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 98472-0813",
+      "id": "imperio-locacoes",
+      "cat": "alugueis",
+      "nome": "Império Locações"
+    },
+    {
+      "descricao": "Locação de mesas e cadeiras.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 507 Sul, Alameda 13, 04",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "Google Maps: LOCAÇÃO DE MESAS E CADEIRAS - NEW LOCAÇÕES (5,0, 32 avaliações)",
+        "https://linktr.ee/newlocacoes.pmw"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Só no Google Maps",
+      "atualizado_em": "2026-11-14T09:30:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Mesas e cadeiras"
+      ],
+      "precos": [],
+      "observacoes": "Não publica preços nem catálogo; pedir orçamento pelo WhatsApp.",
+      "objetos": [
+        {
+          "nome": "Mesas e cadeiras",
+          "tipo": "Mesas e cadeiras",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 99263-8768",
+      "id": "new-locacoes",
+      "cat": "alugueis",
+      "nome": "New Locações (mesas e cadeiras)"
+    },
+    {
+      "descricao": "Decoração de festas montada ou no formato pegue e monte.",
+      "atende_em": "Palmas",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "Google Maps: ELOÁ DECORAÇÕES DE FESTAS E PEGUE MONTE (5,0, 127 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Só no Google Maps",
+      "atualizado_em": "2026-11-14T09:30:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Pegue e monte (decoração)"
+      ],
+      "precos": [],
+      "observacoes": "Não confundir com o Acervo Eloá Locações. Não publica preços nem catálogo; pedir orçamento pelo WhatsApp.",
+      "objetos": [
+        {
+          "nome": "Kits pegue e monte",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Decoração montada",
+          "tipo": "Decoração montada",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 99222-1004",
+      "id": "eloa-decoracoes",
+      "cat": "alugueis",
+      "nome": "Eloá Decorações de Festas e Pegue e Monte"
     }
   ]
 }
