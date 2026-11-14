@@ -119,7 +119,7 @@
     brinquedos: {
       rot: 'Brinquedos e recreação', curto: 'Brinquedos', icone: 'brinquedos', um: 'fornecedor', varios: 'fornecedores', criterios: CRIT_F,
       exemplo: 'Pula Pula Kids',
-      porObjeto: { rot: 'Brinquedos', um: 'brinquedo', varios: 'brinquedos', tipoRot: 'Tipo de brinquedo', ex: 'ex.: Pula-pula 3 x 3 m' },
+      porObjeto: { rot: 'Brinquedos', um: 'brinquedo', varios: 'brinquedos', tipoRot: 'Tipo de brinquedo', ex: 'ex.: Pula-pula 3 x 3 m', grupoEx: 'ex.: Pula-pula 3,05 m' },
       subtipos: ['Pula-pula / cama elástica', 'Inflável / tobogã', 'Piscina de bolinhas', 'Escorregador / gangorra', 'Área baby', 'Touro mecânico', 'Futebol de sabão',
         'Games / fliperama', 'Recreação com monitores', 'Personagens', 'Pintura facial / oficinas', 'Mágico / palhaço'],
       unidades: ['por evento', 'por hora', 'pacote', 'diária'],
@@ -149,7 +149,7 @@
     alugueis: {
       rot: 'Aluguéis e barraquinhas', curto: 'Aluguéis', icone: 'alugueis', um: 'fornecedor', varios: 'fornecedores', criterios: CRIT_F,
       exemplo: 'Pipoca da Festa',
-      porObjeto: { rot: 'Itens para alugar', um: 'item', varios: 'itens', tipoRot: 'Tipo de item', ex: 'ex.: Carrinho de pipoca' },
+      porObjeto: { rot: 'Itens para alugar', um: 'item', varios: 'itens', tipoRot: 'Tipo de item', ex: 'ex.: Carrinho de pipoca', grupoEx: 'ex.: Carrinho de pipoca' },
       subtipos: ['Carrinho de pipoca', 'Algodão-doce', 'Crepe', 'Churros', 'Hot dog', 'Sorvete / açaí', 'Food truck', 'Barraquinhas temáticas',
         'Mesas e cadeiras', 'Louças e talheres', 'Toalhas e tecidos', 'Tendas', 'Som e iluminação', 'Gerador', 'Freezer / chopeira', 'Pegue e monte (decoração)'],
       unidades: ['por hora', 'por evento', 'diária', 'por unidade', 'por porção', 'pacote'],
@@ -1248,12 +1248,15 @@
     precos: { rot: 'valor', campos: [['valor', 'Valor', 'R$ 1.500 ou Sob consulta'], ['unidade', 'Por', 'escolha ou escreva'], ['condicao', 'Condição', 'sexta a domingo, até 100 pessoas'], ['inclui', 'O que esse valor inclui', 'mesas, limpeza…']] },
     taxas: { rot: 'taxa', campos: [['nome', 'Taxa', 'limpeza, caução, energia'], ['valor', 'Valor', 'R$ 150']] },
     horarios: { rot: 'horário', campos: [['dias', 'Dias', 'sábado'], ['horario', 'Horário', '8h às 2h']] },
-    objetos: { rot: 'item', campos: [['nome', 'Nome', 'ex.: Pula-pula 3 x 3 m'], ['grupo', 'Mesmo brinquedo que', 'ex.: Pula-pula 3,05 m (junta com outras lojas)'], ['tipo', 'Tipo', 'escolha ou escreva'], ['valor', 'Valor', 'R$ 250 ou Sob consulta'],
+    objetos: { rot: 'item', campos: [['nome', 'Nome', 'ex.: Pula-pula 3 x 3 m'], ['grupo', 'Mesmo item que', 'nome comum, para juntar com outras lojas'], ['tipo', 'Tipo', 'escolha ou escreva'], ['valor', 'Valor', 'R$ 250 ou Sob consulta'],
       ['unidade', 'Por', 'por evento'], ['qtd', 'Quantos tem', 'ex.: 2'], ['duracao', 'Tempo de uso', 'ex.: 4 horas'], ['obs', 'Observação', 'idade, tamanho, monitor, energia…']] },
   };
   function linhaRep(tipo, d = {}) {
     return `<div class="rep-linha rep-${tipo}"${tipo === 'objetos' && d.foto ? ` data-foto="${esc(JSON.stringify(d.foto))}"` : ''}>
-      ${REP[tipo].campos.map(([k, rot, ph]) => `<label class="campo c-${k}"><span>${rot}</span><input data-k="${k}" ${k === 'unidade' ? 'list="dl-unidades"' : tipo === 'objetos' && k === 'tipo' ? 'list="dl-subtipos"' : tipo === 'objetos' && k === 'grupo' ? 'list="dl-grupos"' : ''} value="${esc(k === 'valor' ? valorTxt(d[k]) : d[k] || '')}" placeholder="${esc(ph)}"></label>`).join('')}
+      ${REP[tipo].campos.map(([k, rot, ph]) => {
+        const P = tipo === 'objetos' && ED && CATS[ED.cat] && CATS[ED.cat].porObjeto;
+        if (P && k === 'grupo') { rot = `Mesmo ${P.um} que`; ph = `${P.grupoEx} (junta com outras lojas)`; }
+        return `<label class="campo c-${k}"><span>${rot}</span><input data-k="${k}" ${k === 'unidade' ? 'list="dl-unidades"' : tipo === 'objetos' && k === 'tipo' ? 'list="dl-subtipos"' : tipo === 'objetos' && k === 'grupo' ? 'list="dl-grupos"' : ''} value="${esc(k === 'valor' ? valorTxt(d[k]) : d[k] || '')}" placeholder="${esc(ph)}"></label>`; }).join('')}
       <button type="button" class="tirar-linha" data-tirar-linha aria-label="Remover ${REP[tipo].rot}">×</button>
     </div>`;
   }
