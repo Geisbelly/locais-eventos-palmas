@@ -135,6 +135,8 @@
     servicos: {
       rot: 'Serviços', curto: 'Serviços', icone: 'servicos', um: 'fornecedor', varios: 'fornecedores', criterios: CRIT_F,
       exemplo: 'Ana Lima Fotografia',
+      porObjeto: { rot: 'Serviços oferecidos', um: 'serviço', varios: 'serviços', tipoRot: 'Tipo de serviço', ex: 'ex.: Fotografia 4 horas', grupoEx: 'ex.: Fotografia de aniversário 4 h',
+        tempoRot: 'Duração', qtdRot: 'Profissionais', qtdUm: 'profissional', qtdVarios: 'profissionais', pacoteEx: 'ex.: foto + vídeo por R$ 2.500', obsEx: 'o que entrega, prazo, deslocamento…' },
       subtipos: ['Fotografia', 'Filmagem', 'DJ / som', 'Banda / música ao vivo', 'Decoração', 'Cerimonial / assessoria', 'Garçons / copeiras',
         'Bartender', 'Segurança', 'Limpeza', 'Maquiagem e cabelo', 'Convites e papelaria', 'Lembrancinhas', 'Iluminação', 'Animação / MC'],
       unidades: ['por evento', 'por hora', 'pacote', 'por pessoa', 'por profissional'],
@@ -760,6 +762,7 @@
   // O que junta itens de empresas diferentes é o campo "grupo" (ex.: Pula-pula 3,05 m); sem ele, vale o nome sem o que está entre parênteses.
   const grupoDe = (o) => String(o.grupo || '').trim() || String(o.nome || o.tipo || '').replace(/\s*\([^)]*\)\s*/g, ' ').trim();
   const porUn = (u) => { const t = String(u || 'evento').trim(); return /^por\b/i.test(t) ? t : `/ ${t}`; };
+  const qtdTxt = (l, o) => { const P = catDe(l).porObjeto || {}; return `${o.qtd} ${o.qtd === 1 ? P.qtdUm || 'disponível' : P.qtdVarios || 'disponíveis'}`; };
   const valNum = (o) => (typeof o.valor === 'number' ? o.valor : Infinity);
   function objetosFiltrados(empresas) {
     const q = norm(S.f.busca.trim()).split(/\s+/).filter(Boolean);
@@ -791,9 +794,10 @@
     const num = typeof o.valor === 'number';
     const zap = zapLink(l.whatsapp, l.nome, o.nome || g.nome);
     const outroNome = o.nome && norm(o.nome) !== norm(g.nome) ? o.nome : '';
-    const tempo = mostraTempo(l) ? tempoObj(l, o) : '';
+    const tempo = mostraTempo(l) ? tempoObj(l, o) : String(o.duracao || '').trim();
+    const tRot = (catDe(l).porObjeto || {}).tempoRot ? 'duração' : 'uso';
     const inclui = itensDo(l).slice(0, 3).map((k) => itemTexto(l, k));
-    const cond = [outroNome, o.obs, tempo && `uso: ${tempo}`, o.qtd ? `${o.qtd} ${o.qtd === 1 ? 'disponível' : 'disponíveis'}` : ''].filter(Boolean);
+    const cond = [outroNome, o.obs, tempo && `${tRot}: ${tempo}`, o.qtd ? qtdTxt(l, o) : ''].filter(Boolean);
     return `<li class="oferta ${menor ? 'menor' : ''}">
       <div class="of-topo">
         <span class="of-loja">${miniCapa(l)}<button type="button" data-abrir="${l.id}">${esc(l.nome)}</button></span>
@@ -971,7 +975,7 @@
           ${f ? `<figure class="obj-foto"><img src="${esc(f.url)}" alt="${esc(o.nome || o.tipo)}" loading="lazy">${f.credito ? `<figcaption><a href="${esc(f.credito.url)}" target="_blank" rel="noopener" title="Foto: ${esc(f.credito.nome || 'fonte')}">${esc(String(f.credito.nome || 'fonte').replace(/^Instagram\s+/, ''))}</a></figcaption>` : ''}</figure>` : ''}
           <div><strong>${esc(o.nome || o.tipo)}</strong>${o.tipo && o.tipo !== o.nome ? `<span class="obj-tipo">${esc(o.tipo)}</span>` : ''}
             ${mostraTempo(l) ? `<span class="obj-tempo ${tempoObj(l, o) ? '' : 'sem'}">${ic('relogio')}${esc(tempoObj(l, o) || 'Tempo de uso não informado')}</span>` : ''}
-            ${o.qtd || o.obs ? `<small>${[o.qtd ? `${o.qtd} ${o.qtd === 1 ? 'disponível' : 'disponíveis'}` : null, o.obs].filter(Boolean).map(esc).join(' · ')}</small>` : ''}</div>
+            ${o.qtd || o.obs || (!mostraTempo(l) && o.duracao) ? `<small>${[!mostraTempo(l) && o.duracao ? `${P.tempoRot || 'Duração'}: ${o.duracao}` : null, o.qtd ? qtdTxt(l, o) : null, o.obs].filter(Boolean).map(esc).join(' · ')}</small>` : ''}</div>
           <span class="obj-valor">${num ? `${o.valor === mpObj && objs.length > 1 ? '<span class="selo-menor">Menor</span>' : ''}${brl(o.valor)} <small>${esc(porUn(o.unidade))}</small>` : `<span class="fraco">${esc(o.valor || 'Sob consulta')}</span>`}</span>
         </li>`;
       }).join('')}</ul>`
@@ -1256,6 +1260,10 @@
       ${REP[tipo].campos.map(([k, rot, ph]) => {
         const P = tipo === 'objetos' && ED && CATS[ED.cat] && CATS[ED.cat].porObjeto;
         if (P && k === 'grupo') { rot = `Mesmo ${P.um} que`; ph = `${P.grupoEx} (junta com outras lojas)`; }
+        if (P && k === 'nome') ph = P.ex;
+        if (P && k === 'obs' && P.obsEx) ph = P.obsEx;
+        if (P && k === 'duracao' && P.tempoRot) rot = P.tempoRot;
+        if (P && k === 'qtd' && P.qtdRot) { rot = P.qtdRot; ph = 'ex.: 2'; }
         return `<label class="campo c-${k}"><span>${rot}</span><input data-k="${k}" ${k === 'unidade' ? 'list="dl-unidades"' : tipo === 'objetos' && k === 'tipo' ? 'list="dl-subtipos"' : tipo === 'objetos' && k === 'grupo' ? 'list="dl-grupos"' : ''} value="${esc(k === 'valor' ? valorTxt(d[k]) : d[k] || '')}" placeholder="${esc(ph)}"></label>`; }).join('')}
       <button type="button" class="tirar-linha" data-tirar-linha aria-label="Remover ${REP[tipo].rot}">×</button>
     </div>`;
@@ -1343,7 +1351,7 @@
           .replace(/Adicionar item/, `Adicionar ${esc(C.porObjeto.um)}`) : ''}
         ${C.porObjeto ? `<datalist id="dl-subtipos">${C.subtipos.map((t) => `<option value="${esc(t)}">`).join('')}</datalist>
           <datalist id="dl-grupos">${[...new Set(S.locais.filter((x) => x.cat === ED.cat).flatMap((x) => objetosDe(x).map(grupoDe)))].sort((x, y) => x.localeCompare(y, 'pt-BR')).map((t) => `<option value="${esc(t)}">`).join('')}</datalist>` : ''}
-        ${blocoRep('precos', C.porObjeto ? 'Pacotes e outros valores' : 'Valores', C.porObjeto ? 'Combos ou valores que valem para a empresa toda (ex.: 3 brinquedos por R$ 600).' : 'Cada valor com a sua condição: dia, horário, número de convidados, pacote.', (l && l.precos) || [])}
+        ${blocoRep('precos', C.porObjeto ? 'Pacotes e outros valores' : 'Valores', C.porObjeto ? `Combos ou valores que valem para a empresa toda (${esc(C.porObjeto.pacoteEx || 'ex.: 3 brinquedos por R$ 600')}).` : 'Cada valor com a sua condição: dia, horário, número de convidados, pacote.', (l && l.precos) || [])}
         <datalist id="dl-unidades">${C.unidades.map((u) => `<option value="${esc(u)}">`).join('')}</datalist>
         ${blocoRep('taxas', 'Taxas extras', esp ? 'Cobranças à parte, como limpeza, caução ou energia.' : 'Frete, deslocamento, hora extra, profissional adicional.', (l && l.taxas) || [])}
         <fieldset class="ed-bloco"><legend>Pagamento, reserva e cancelamento</legend>
