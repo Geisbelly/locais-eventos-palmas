@@ -2888,6 +2888,260 @@
       "cat": "alugueis",
       "nome": "Fábrica de Sonhos Locações",
       "whatsapp": "(63) 98106-8758"
+    },
+    {
+      "descricao": "Locação de peças e decorações pegue e monte, com kits prontos e temas variados. Também faz montagens.",
+      "atende_em": "Palmas",
+      "endereco": "804 Sul, Alameda 03, Lote 07",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": "denicedecoracoes",
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/denice-decoracoes/ig-Dfr0G9iBi_i.jpg",
+          "legenda": null,
+          "credito": {
+            "nome": "Instagram @denicedecoracoes",
+            "url": "https://www.instagram.com/denicedecoracoes/p/Dfr0G9iBi_i/"
+          }
+        }
+      ],
+      "fontes": [
+        "https://www.instagram.com/denicedecoracoes/"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Dados mínimos",
+      "atualizado_em": "2026-11-14T05:00:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Pegue e monte (decoração)"
+      ],
+      "precos": [],
+      "observacoes": "Nomes dos kits tirados dos destaques do Instagram; valores não publicados. O link de reserva (zapbio) estava fora do ar.",
+      "objetos": [
+        {
+          "nome": "Pocket Table",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null,
+          "foto": {
+            "url": "fotos/denice-decoracoes/ig-Dfr0G9iBi_i.jpg",
+            "legenda": null,
+            "credito": {
+              "nome": "Instagram @denicedecoracoes",
+              "url": "https://www.instagram.com/denicedecoracoes/p/Dfr0G9iBi_i/"
+            }
+          }
+        },
+        {
+          "nome": "Kit Golden",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Kit Celebration",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Kit Essencial",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "id": "denice-decoracoes",
+      "cat": "alugueis",
+      "nome": "Denice Decorações",
+      "whatsapp": "(63) 99230-2607"
+    },
+    {
+      "descricao": "Locação de peças para festas: pegue e monte, mesas, painéis e acervo decorativo.",
+      "atende_em": "Palmas",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": "acervoeloalocacoes",
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/acervo-eloa/ig-DefhBbQplLn.jpg",
+          "legenda": null,
+          "credito": {
+            "nome": "Instagram @acervoeloalocacoes",
+            "url": "https://www.instagram.com/acervoeloalocacoes/p/DefhBbQplLn/"
+          }
+        }
+      ],
+      "fontes": [
+        "https://www.instagram.com/acervoeloalocacoes/"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Dados mínimos",
+      "atualizado_em": "2026-11-14T05:00:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Mesas e cadeiras",
+        "Pegue e monte (decoração)"
+      ],
+      "precos": [],
+      "observacoes": "Valores não publicados; consultar disponibilidade pelo WhatsApp.",
+      "objetos": [
+        {
+          "nome": "Kits pegue e monte",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null,
+          "foto": {
+            "url": "fotos/acervo-eloa/ig-DefhBbQplLn.jpg",
+            "legenda": null,
+            "credito": {
+              "nome": "Instagram @acervoeloalocacoes",
+              "url": "https://www.instagram.com/acervoeloalocacoes/p/DefhBbQplLn/"
+            }
+          }
+        },
+        {
+          "nome": "Painéis",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Mesas e peças decorativas",
+          "tipo": "Mesas e cadeiras",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "id": "acervo-eloa",
+      "cat": "alugueis",
+      "nome": "Acervo Eloá Locações",
+      "whatsapp": "(63) 98451-4409"
+    },
+    {
+      "descricao": "Brinquedoteca itinerante: castelinho inflável branco, bubble house, piscina de bolinhas, oficinas de pintura e candy bar.",
+      "atende_em": "Palmas",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": "mariluebrinquedoteca",
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "https://www.instagram.com/mariluebrinquedoteca/"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Dados mínimos",
+      "atualizado_em": "2026-11-14T05:00:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Inflável / tobogã",
+        "Kit",
+        "Pintura facial / oficinas",
+        "Piscina de bolinhas"
+      ],
+      "precos": [],
+      "observacoes": "Sem telefone nem valores publicados; contato pelo direct do Instagram. As fotos do perfil mostram crianças, por isso não foram usadas.",
+      "objetos": [
+        {
+          "nome": "Castelinho inflável branco",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Bubble house (casa de bolha)",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Piscina de bolinhas branca",
+          "tipo": "Piscina de bolinhas",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Oficinas de pintura",
+          "tipo": "Pintura facial / oficinas",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Candy bar",
+          "tipo": "Kit",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "id": "marilue-brinquedoteca",
+      "cat": "brinquedos",
+      "nome": "Mariluê Brinquedoteca Itinerante",
+      "whatsapp": null
     }
   ]
 }
