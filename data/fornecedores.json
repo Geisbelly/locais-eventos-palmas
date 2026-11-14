@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-14T05:10:00Z",
+  "atualizado_em": "2026-11-14T06:20:00Z",
   "observacao": "Buffet, brinquedos, serviços e aluguéis. Cada item tem cat (buffet | brinquedos | servicos | alugueis). Também dá para cadastrar pelo site.",
   "itens": [
     {
@@ -3730,6 +3730,746 @@
       "cat": "alugueis",
       "nome": "Loc Eventos",
       "whatsapp": null
+    },
+    {
+      "descricao": "Kits de decoração pegue e monte padronizados (bronze, prata e ouro) ou montados com as peças que o cliente escolher. Arco de balões como adicional.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 1306 Sul, Alameda 1, QI 5, Lote 40",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil",
+        "Chá de bebê",
+        "Batizado",
+        "Aniversário adulto",
+        "15 anos"
+      ],
+      "instagram": "ada_pegueemonte",
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/ada-pegue-e-monte/ig-C2KoL1gORse.jpg",
+          "legenda": "Kit Bronze",
+          "credito": {
+            "nome": "Instagram @ada_pegueemonte",
+            "url": "https://www.instagram.com/ada_pegueemonte/p/C2KoL1gORse/"
+          }
+        }
+      ],
+      "fontes": [
+        "https://www.instagram.com/ada_pegueemonte/",
+        "https://www.instagram.com/ada_pegueemonte/p/C2KoL1gORse/",
+        "https://www.instagram.com/ada_pegueemonte/p/DLLj2uSySh5/",
+        "https://wa.me/c/556392955627",
+        "Google Maps: Ada ateliê Decor Artes (5,0, 3 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no WhatsApp e preços no Instagram",
+      "atualizado_em": "2026-11-14T06:20:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Pegue e monte (decoração)"
+      ],
+      "precos": [],
+      "observacoes": "Retirada e devolução no endereço da 1306 Sul; não faz entrega nem montagem. Os preços dos kits padrão são de jan/2024; em jun/2025 o perfil ainda divulgava \"kits a partir de R$ 130\".",
+      "objetos": [
+        {
+          "nome": "Kit Bronze",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 130,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Painel com capa sublimada do tema, mesas pés palito e acessórios.",
+          "duracao": null,
+          "foto": {
+            "url": "fotos/ada-pegue-e-monte/ig-C2KoL1gORse.jpg",
+            "legenda": "Kit Bronze",
+            "credito": {
+              "nome": "Instagram @ada_pegueemonte",
+              "url": "https://www.instagram.com/ada_pegueemonte/p/C2KoL1gORse/"
+            }
+          }
+        },
+        {
+          "nome": "Kit Prata",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 150,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Painel com capa sublimada, 3 mesas cilindro com capas lisas, 3 bandejas, boleira e 2 vasos.",
+          "duracao": null,
+          "grupo": "Kit pegue e monte com painel e mesas"
+        },
+        {
+          "nome": "Kit Ouro",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 180,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Como o prata, mas com as 3 capas dos cilindros sublimadas no tema, displays e tapete.",
+          "duracao": null
+        },
+        {
+          "nome": "Kit bronze com escadinha",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 160,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Kit chá de bebê",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 170,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Kit adulto",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 150,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Painel de ferro, tecido sublimado no tema, 3 mesas cubo, 3 bandejas e boleira.",
+          "duracao": null
+        },
+        {
+          "nome": "Arco de balões",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Adicional, com entrega.",
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 99295-5627",
+      "id": "ada-pegue-e-monte",
+      "cat": "alugueis",
+      "nome": "Ada Pegue e Monte (Ateliê Decor Artes)"
+    },
+    {
+      "descricao": "Aluguel de kits de decoração pegue e monte em qualquer tema.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 405 Norte, Alameda 14",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": "pegue_e_monte.palmas",
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/art-trio/zap-kit-painel-cilindro.jpg",
+          "legenda": "Kit painel + cilindros",
+          "credito": {
+            "nome": "Catálogo do WhatsApp da Art'Trio",
+            "url": "https://wa.me/c/556392643245"
+          }
+        }
+      ],
+      "fontes": [
+        "https://www.instagram.com/pegue_e_monte.palmas/",
+        "https://wa.me/c/556392643245",
+        "Google Maps: Art' Trio Pegue e monte (5,0, 6 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no WhatsApp",
+      "atualizado_em": "2026-11-14T06:20:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Pegue e monte (decoração)"
+      ],
+      "precos": [],
+      "observacoes": null,
+      "objetos": [
+        {
+          "nome": "Kit painel + cilindros",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 180,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Qualquer tema.",
+          "duracao": null,
+          "grupo": "Kit pegue e monte com painel e mesas",
+          "foto": {
+            "url": "fotos/art-trio/zap-kit-painel-cilindro.jpg",
+            "legenda": "Kit painel + cilindros",
+            "credito": {
+              "nome": "Catálogo do WhatsApp da Art'Trio",
+              "url": "https://wa.me/c/556392643245"
+            }
+          }
+        },
+        {
+          "nome": "Kit pegue e monte com mesas",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 150,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Qualquer tema.",
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 99264-3245",
+      "id": "art-trio",
+      "cat": "alugueis",
+      "nome": "Art'Trio Pegue e Monte"
+    },
+    {
+      "descricao": "Kits pegue e monte, festa na mesa, mini decor e locação de peças avulsas.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 409 Sul, Alameda 12, 09",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil",
+        "Chá de bebê",
+        "Aniversário adulto"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "https://wa.me/c/556399917855",
+        "Google Maps: Pegue Monte e Comemore (4,0, 4 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no WhatsApp",
+      "atualizado_em": "2026-11-14T06:20:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Pegue e monte (decoração)"
+      ],
+      "precos": [],
+      "observacoes": "Balões e bolo fake não estão inclusos no mini decor.",
+      "objetos": [
+        {
+          "nome": "Kit pegue e monte tradicional",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 150,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "1 painel, 3 cilindros ou mesas, bandejas, vaso com flores ou buchinhos, displays e tapete.",
+          "duracao": null,
+          "grupo": "Kit pegue e monte com painel e mesas"
+        },
+        {
+          "nome": "Festa na mesa (painel 50 cm, bandejas e flores)",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 70,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null,
+          "grupo": "Mini festa na mesa"
+        },
+        {
+          "nome": "Festa na mesa com mini arco de balões",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 100,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Festa na mesa com mesa cavalete e mini arco de balões",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 150,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Mini decor (aparador, bandejas e flores)",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 100,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Kit romano e mesa ripada",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Kit chá de bebê",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Peças avulsas",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 99991-7855",
+      "id": "pegue-monte-comemore",
+      "cat": "alugueis",
+      "nome": "Pegue Monte e Comemore"
+    },
+    {
+      "descricao": "Kits pegue e monte temáticos nos níveis prata, ouro, platina e diamante.",
+      "atende_em": "Palmas",
+      "endereco": "Av. D, 18, Quadra 175",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil",
+        "Chá de bebê"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/divina-bellas/zap-3-palavrinhas.jpg",
+          "legenda": "Kit Ouro tema 3 Palavrinhas",
+          "credito": {
+            "nome": "Catálogo do WhatsApp da Divina Bellas Festas",
+            "url": "https://wa.me/c/556381264340"
+          }
+        }
+      ],
+      "fontes": [
+        "https://wa.me/c/556381264340",
+        "Google Maps: Divina Bellas Festas Pegue e Monte (4,9, 7 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no WhatsApp",
+      "atualizado_em": "2026-11-14T06:20:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Pegue e monte (decoração)"
+      ],
+      "precos": [],
+      "observacoes": "Alguns temas no catálogo têm preço próprio (ex.: Cerejinha e Baby Shark a R$ 290, Pool Party R$ 300, Oh Baby diamante R$ 450).",
+      "objetos": [
+        {
+          "nome": "Kit Prata",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 150,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Kit Ouro",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 190,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Painel redondo com capa, 3 cilindros com capas temáticas e acessórios.",
+          "duracao": null,
+          "grupo": "Kit pegue e monte com painel e mesas",
+          "foto": {
+            "url": "fotos/divina-bellas/zap-3-palavrinhas.jpg",
+            "legenda": "Kit Ouro tema 3 Palavrinhas",
+            "credito": {
+              "nome": "Catálogo do WhatsApp da Divina Bellas Festas",
+              "url": "https://wa.me/c/556381264340"
+            }
+          }
+        },
+        {
+          "nome": "Kit Platina",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 250,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Kit Diamante",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 300,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Painel romano e redondo, trio de cilindros, cômoda, tapete e boleira.",
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 98126-4340",
+      "id": "divina-bellas",
+      "cat": "alugueis",
+      "nome": "Divina Bellas Festas Pegue e Monte"
+    },
+    {
+      "descricao": "Kits pegue e monte infantis e baby e festa na mesa infantil ou adulta.",
+      "atende_em": "Palmas",
+      "endereco": "ARSO 151, Alameda 33, 06",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil",
+        "Chá de bebê",
+        "Aniversário adulto"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "https://wa.me/c/556392735374",
+        "Google Maps: Mar&Cia Decorações/ Pegue e Monte Palmas"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no WhatsApp",
+      "atualizado_em": "2026-11-14T06:20:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Pegue e monte (decoração)"
+      ],
+      "precos": [],
+      "observacoes": null,
+      "objetos": [
+        {
+          "nome": "Pegue e monte infantil",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 150,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Valor inicial; muda conforme o tema.",
+          "duracao": null,
+          "grupo": "Kit pegue e monte com painel e mesas"
+        },
+        {
+          "nome": "Pegue e monte baby",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 150,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Valor inicial; muda conforme o tema.",
+          "duracao": null
+        },
+        {
+          "nome": "Festa na mesa infantil",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 70,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Valor inicial; muda conforme o tema.",
+          "duracao": null,
+          "grupo": "Mini festa na mesa"
+        },
+        {
+          "nome": "Festa na mesa adulto",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 70,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Valor inicial; muda conforme o tema.",
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 99273-5374",
+      "id": "marcia-decoracoes",
+      "cat": "alugueis",
+      "nome": "Mar&Cia Decorações Pegue e Monte"
+    },
+    {
+      "descricao": "Locação de mesas, cadeiras, kits pegue e monte, vasos e pula-pula.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 306 Sul, Alameda 8",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil",
+        "Chá de panela",
+        "Chá de lingerie"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "https://wa.me/c/556392954799",
+        "Google Maps: W & I Fest (5,0, 6 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no WhatsApp",
+      "atualizado_em": "2026-11-14T06:20:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Pegue e monte (decoração)",
+        "Mesas e cadeiras"
+      ],
+      "precos": [],
+      "observacoes": "O deslocamento para entrega e retirada do pula-pula é cobrado à parte. O catálogo pode ter mais itens do que os listados aqui.",
+      "objetos": [
+        {
+          "nome": "Kit Leão e Natureza",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 150,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Kit Palmeiras",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 180,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Kit chá de panela",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 170,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Kit chá de lingerie",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 200,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Aparador com prancha de vidro (1,5 m)",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 100,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Par de vasos de flores para entrada",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": 250,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "R$ 125 cada; sem flores, o par sai por R$ 200. Diária.",
+          "duracao": null
+        },
+        {
+          "nome": "Conjunto bistrô (mesa e cadeiras)",
+          "tipo": "Mesas e cadeiras",
+          "valor": 16,
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": "Preto ou branco.",
+          "duracao": null
+        },
+        {
+          "nome": "Mesa com poltronas Alice",
+          "tipo": "Mesas e cadeiras",
+          "valor": 25,
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Cama elástica 3,05 m",
+          "tipo": "Brinquedos",
+          "valor": 280,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Até 5 crianças pequenas. Deslocamento à parte.",
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 99295-4799",
+      "id": "wi-fest",
+      "cat": "alugueis",
+      "nome": "W & I Fest"
+    },
+    {
+      "descricao": "Mesas, cadeiras, toalhas, capas de cadeira, louças, pratarias e pula-pula.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 1003 Sul, Alameda 12, QI 9, Lote 11",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [
+        "Material higienizado"
+      ],
+      "eventos": [],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "https://wa.me/c/556392883303",
+        "Google Maps: Favo de Mel Locações - Mesas, Cadeiras, Toalhas e Pula-pula (4,9, 41 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no WhatsApp",
+      "atualizado_em": "2026-11-14T06:20:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Mesas e cadeiras",
+        "Toalhas e tecidos",
+        "Louças e talheres"
+      ],
+      "precos": [],
+      "observacoes": "O catálogo não mostra preços.",
+      "objetos": [
+        {
+          "nome": "Kit mesa, cadeiras e toalha",
+          "tipo": "Mesas e cadeiras",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Mesa redonda 8 lugares com toalha e capas",
+          "tipo": "Mesas e cadeiras",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Cadeira bistrô branca",
+          "tipo": "Mesas e cadeiras",
+          "valor": "Sob consulta",
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Toalhas (redonda jacquard e quadrada)",
+          "tipo": "Toalhas e tecidos",
+          "valor": "Sob consulta",
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Pratarias e louças para servir",
+          "tipo": "Louças e talheres",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Pula-pula",
+          "tipo": "Brinquedos",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 99288-3303",
+      "id": "favo-de-mel",
+      "cat": "alugueis",
+      "nome": "Favo de Mel Locações"
+    },
+    {
+      "descricao": "Locação de pula-pula.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 212 Norte, Alameda 2, Lote 21",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "https://wa.me/c/556391092772",
+        "Google Maps: PLAYGROUNDS LOCAÇÃO"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no WhatsApp",
+      "atualizado_em": "2026-11-14T06:20:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [],
+      "precos": [],
+      "observacoes": "O catálogo não informa o tamanho do pula-pula nem o tempo de uso.",
+      "objetos": [
+        {
+          "nome": "Pula-pula",
+          "tipo": "Pula-pula",
+          "valor": 160,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null,
+          "grupo": "Pula-pula"
+        }
+      ],
+      "whatsapp": "(63) 99109-2772",
+      "id": "playgrounds-locacao",
+      "cat": "brinquedos",
+      "nome": "Playgrounds Locação"
     }
   ]
 }
