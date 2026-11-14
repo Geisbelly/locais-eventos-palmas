@@ -3240,7 +3240,12 @@
       return { k, st: fe.length ? 'ok' : es.length ? 'meio' : 'nada', n: es.length, nomes };
     });
   }
-  const listaCobre = (ev) => ev.convidados.filter((c) => c.nome).reduce((a, c) => a + (numV(c.lugares) || 1), 0);
+  // Pessoas já cobertas: lugares dos convites da lista + quem respondeu pelo link geral (fora da lista).
+  const listaCobre = (ev) => {
+    const ids = new Set(ev.convidados.map((c) => c.id));
+    return ev.convidados.filter((c) => c.nome).reduce((a, c) => a + (numV(c.lugares) || 1), 0)
+      + rsvpsDe(ev.id).filter((r) => !r.convidado || !ids.has(r.convidado)).reduce((a, r) => a + Math.max(1, (Number(r.adultos) || 0) + (Number(r.criancas) || 0)), 0);
+  };
   const barra = (v, tot, cls = '') => `<span class="kpi-barra ${cls}"><i style="width:${tot ? Math.min(100, (v / tot) * 100).toFixed(1) : 0}%"></i></span>`;
   function kpisHtml(ev, c) {
     const est = estCats(ev); const ok = est.filter((x) => x.st === 'ok').length;
@@ -3253,7 +3258,7 @@
     return card('fornecedores', 'Fornecedores', `${ok}<small> de ${est.length}</small>`, faltam.length ? `Falta: ${esc(faltam.join(', '))}` : 'Tudo resolvido', barra(ok, est.length, ok === est.length ? 'ok' : ''))
       + card('convidados', 'Confirmados', `${L.total}${prev ? `<small> de ${prev}</small>` : ''}`,
         ev.convidados.length || L.rs.length ? [L.maisTalvez > L.total ? `${L.maisTalvez - L.total} talvez` : null, L.semResposta ? `${L.semResposta} sem resposta` : null].filter(Boolean).join(' · ')
-          || (prev && listaCobre(ev) < prev * 0.8 ? `lista com ${listaCobre(ev)} de ${prev} pessoas` : 'Todos responderam') : 'Lista vazia',
+          || (prev && listaCobre(ev) < prev * 0.8 ? `${listaCobre(ev)} de ${prev} pessoas na lista` : 'Todos responderam') : 'Lista vazia',
         barra(L.total, prev || L.total), L.limites.some((x) => x.passou) ? 'ruim' : '')
       + card('orcamento', 'Orçamento', brl(c.combinado), orc ? `${c.combinado > orc ? 'passou' : 'de'} ${brl(orc)} · ${brl(c.pago)} pago` : `${brl(c.pago)} pago`,
         barra(c.pago, Math.max(orc, c.combinado)), orc && c.combinado > orc ? 'ruim' : '')
@@ -3275,7 +3280,7 @@
     if (passou) add('ruim', `Confirmados passaram da capacidade ${passou.cat === 'buffet' ? 'do buffet' : 'do espaço'}`, `${passou.usado} para ${passou.cap} lugares.`, ['Convidados', 'data-ev-aba="convidados"']);
     if (!ev.convidados.length && !L.rs.length) add('meio', 'Montar a lista de convidados', 'Cole a lista do WhatsApp ou adicione um por um.', ['Adicionar', 'data-ev-aba="convidados"']);
     else if (numV(ev.adultos) + numV(ev.criancas) && listaCobre(ev) < (numV(ev.adultos) + numV(ev.criancas)) * 0.8 && diasAte(ev.data) > 0)
-      add('', 'Completar a lista de convidados', `A lista tem ${listaCobre(ev)} de ${numV(ev.adultos) + numV(ev.criancas)} pessoas previstas. Cole o resto da lista de uma vez.`, ['Colar lista', 'data-acao="conv-colar-abrir"']);
+      add('', 'Completar a lista de convidados', `A lista e as respostas somam ${listaCobre(ev)} de ${numV(ev.adultos) + numV(ev.criancas)} pessoas previstas. Cole o resto da lista de uma vez.`, ['Colar lista', 'data-acao="conv-colar-abrir"']);
     if (L.semResposta) add('meio', `${plural(L.semResposta, 'convidado não respondeu', 'convidados não responderam')}`, ev.convite.prazo ? `Prazo: ${dataBR(ev.convite.prazo)}.` : 'Mande um lembrete pelo WhatsApp.', ['Lembrar', 'data-acao="conv-lembrar"']);
     if (ev.convidados.length && !ev.convite.prazo) add('', 'Definir o prazo de confirmação', 'Ajuda a fechar o número com o buffet.', ['Definir', 'data-ev-aba="convidados"']);
     if (!ev.tarefas.some((t) => (t.texto || '').trim())) add('', 'Criar a lista de tarefas', ev.data ? 'Sugiro as tarefas com prazo contado a partir da data da festa.' : 'O que precisa ser feito até a festa.', [ev.data ? 'Sugerir tarefas' : 'Tarefas', ev.data ? 'data-acao="ev-sugerir"' : 'data-ev-aba="dia"']);
