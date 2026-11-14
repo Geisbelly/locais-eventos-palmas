@@ -1147,3 +1147,19 @@ span.foto-credito:hover { text-decoration: none; }
 .conv-import textarea { width: 100%; font: inherit; padding: 8px 10px; border: 1px solid var(--linha); background: var(--fundo-campo, transparent); color: inherit; border-radius: 8px; margin: 6px 0 8px; resize: vertical; }
 .conv-import code { font-size: .85em; }
 .lot-prev { margin: 10px 0 0; font-size: .92rem; }
+
+/* Recepção e quantidades */
+.rec-total { font-size: 1.05rem; margin: 0 0 10px; }
+.rec-total strong { font-size: 1.6rem; color: var(--ouro-texto); margin-right: 4px; }
+.rec-total small { color: var(--suave); display: block; }
+.rec-item { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: none; border: 1px solid var(--linha); border-radius: 10px; padding: 10px 12px; margin: 0 0 6px; color: inherit; font: inherit; cursor: pointer; }
+.rec-item > span:nth-child(2) { flex: 1; display: flex; flex-direction: column; }
+.rec-item small { color: var(--suave); font-size: .82rem; }
+.rec-item b { font-size: 1.1rem; }
+.rec-marca { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--linha); display: grid; place-items: center; flex: none; }
+.rec-marca svg { width: 16px; height: 16px; }
+.rec-item.chegou { opacity: .7; }
+.rec-item.chegou .rec-marca { background: #2f8f5b; border-color: #2f8f5b; color: #fff; }
+table.quant { border-collapse: collapse; width: 100%; max-width: 560px; margin: 6px 0 8px; }
+table.quant th, table.quant td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--linha); font-size: .92rem; }
+table.quant th { font-weight: 600; width: 42%; }

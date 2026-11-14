@@ -1729,6 +1729,7 @@
       if (cv) copiar(linkConvite(ev, cv), `Link de ${cv.nome || 'convidado'} copiado.`);
       return;
     }
+    if ((b = t.closest('[data-chegou]'))) { marcarChegada(b.dataset.chegou); return; }
     if ((b = t.closest('[data-conv-resp]'))) { novaResposta(b.dataset.convResp); return; }
     if ((b = t.closest('[data-gasto-st]'))) {
       const ev = evAtual(); const g = ev.gastos[Number(b.dataset.gastoSt)];
@@ -1763,6 +1764,8 @@
       if (a === 'rsvp-atualizar') carregarRsvp(S.paginaEv, { avisar: true });
       if (a === 'rsvp-novo') novaResposta(null);
       if (a === 'conv-importar') importarConvidados();
+      if (a === 'rec-abrir') abrirRecepcao();
+      if (a === 'rec-novo') chegouSemConfirmar();
       if (a === 'conv-lembrar') abrirLembretes();
       if (a === 'rsvp-csv') exportarRespostas();
       if (a === 'rsvp-imprimir') imprimirPresenca();
@@ -1838,6 +1841,7 @@
   const timersCampo = {};
   document.addEventListener('input', (e) => {
     const t = e.target;
+    if (t.id === 'rec-busca') { REC.busca = t.value; $('#rec-lista').innerHTML = listaRecepcao(); return; }
     if (t.id === 'pick-busca' && PK) { PK.busca = t.value; $('#pick-lista').innerHTML = listaPick(); return; }
     if (!t.matches('[data-campo]') || !S.detalheId) return;
     const id = S.detalheId, k = t.dataset.campo, v = t.value;
@@ -2314,7 +2318,8 @@
         <button type="button" class="btn ghost" data-acao="rsvp-novo">${ic('mais')}<span class="lbl">Lançar resposta</span></button>
         <button type="button" class="btn ghost" data-acao="rsvp-atualizar">Atualizar</button>
         <button type="button" class="btn ghost" data-acao="rsvp-csv">Planilha</button>
-        <button type="button" class="btn ghost" data-acao="rsvp-imprimir">${ic('imprimir')}<span class="lbl">Lista de presença</span></button></div>
+        <button type="button" class="btn ghost" data-acao="rsvp-imprimir">${ic('imprimir')}<span class="lbl">Lista de presença</span></button>
+        <button type="button" class="btn" data-acao="rec-abrir">${ic('check')}<span class="lbl">Recepção</span></button></div>
       <div id="conv-resp">${respostasHtml(ev)}</div>`;
   }
 
@@ -2399,6 +2404,107 @@
       <script>window.onload=()=>window.print()<\/script></body></html>`);
     w.document.close();
   }
+
+  /* ---- Recepção no dia: marcar quem chegou ---- */
+  const REC = { busca: '' };
+  const pessoasDe = (r) => (Number(r.adultos) || 0) + (Number(r.criancas) || 0);
+  function totalRecepcao() {
+    const ev = evAtual(); const rs = rsvpsDe(ev.id).filter((r) => r.resposta !== 'nao');
+    const esperados = rs.filter((r) => r.resposta === 'sim').reduce((a, r) => a + pessoasDe(r), 0);
+    const chegaram = rs.filter((r) => r.chegou).reduce((a, r) => a + pessoasDe(r), 0);
+    const grupos = rs.filter((r) => r.chegou).length;
+    return `<strong>${chegaram}</strong> ${chegaram === 1 ? 'pessoa chegou' : 'pessoas chegaram'} <small>de ${esperados} confirmadas · ${plural(grupos, 'convite', 'convites')}</small>`;
+  }
+  function listaRecepcao() {
+    const ev = evAtual(); const q = norm(REC.busca.trim());
+    const rs = rsvpsDe(ev.id).filter((r) => r.resposta !== 'nao' && (!q || norm(r.nome).includes(q)))
+      .sort((a, b) => (a.chegou ? 1 : 0) - (b.chegou ? 1 : 0) || String(a.nome).localeCompare(String(b.nome), 'pt-BR'));
+    if (!rs.length) return `<p class="texto vazio-cat">${q ? 'Ninguém com esse nome nas respostas.' : 'Ainda não há confirmados.'}</p>`;
+    return rs.map((r) => {
+      const n = pessoasDe(r);
+      const det = [plural(Number(r.adultos) || 0, 'adulto', 'adultos'), r.criancas ? plural(Number(r.criancas), 'criança', 'crianças') : null, r.resposta === 'talvez' ? 'talvez' : null,
+        r.chegou && r.chegada_em ? `chegou ${new Date(r.chegada_em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}` : null].filter(Boolean).join(' · ');
+      return `<button type="button" class="rec-item ${r.chegou ? 'chegou' : ''}" data-chegou="${esc(r.id)}" aria-pressed="${r.chegou ? 'true' : 'false'}">
+        <span class="rec-marca" aria-hidden="true">${r.chegou ? ic('check') : ''}</span>
+        <span><strong>${esc(r.nome || 'Sem nome')}</strong><small>${esc(det)}</small></span><b>${n}</b></button>`;
+    }).join('');
+  }
+  async function abrirRecepcao() {
+    const ev = evAtual();
+    PK = null; REC.busca = '';
+    const d = $('#picker');
+    d.innerHTML = `<div class="folha-corpo rec">
+      <h2>Recepção</h2>
+      <p id="rec-total" class="rec-total">${totalRecepcao()}</p>
+      <label class="busca pick-busca"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <span class="sr">Buscar convidado</span><input id="rec-busca" type="search" placeholder="Buscar pelo nome…" autocomplete="off"></label>
+      <div class="pick-lista" id="rec-lista">${listaRecepcao()}</div>
+      <p class="ajuda">Toque no nome quando o convidado chegar. Toque de novo para desfazer. Dá para usar em mais de um celular ao mesmo tempo: toque em Atualizar para ver o que os outros marcaram.</p>
+      <div class="acoes"><button type="button" class="btn" data-acao="rec-novo">${ic('mais')}Chegou sem confirmar</button>
+        <button type="button" class="btn ghost" data-acao="rsvp-atualizar">Atualizar</button><span class="esp"></span>
+        <button type="button" class="btn primario" data-fechar>Pronto</button></div></div>`;
+    d.showModal();
+    carregarRsvp(ev.id);
+  }
+  function marcarChegada(id) {
+    const ev = evAtual(); const r = rsvpsDe(ev.id).find((x) => x.id === id);
+    if (!r) return;
+    const novo = { ...r, chegou: !r.chegou, chegada_em: !r.chegou ? new Date().toISOString() : null };
+    if (novo.chegou && r.resposta === 'talvez') novo.resposta = 'sim';
+    salvarResposta(novo);
+  }
+  function chegouSemConfirmar() {
+    const ev = evAtual();
+    const nome = (prompt('Nome de quem chegou:') || '').trim().slice(0, 80);
+    if (!nome) return;
+    const ad = parseInt(prompt(`Quantos adultos com ${nome}? (contando com a pessoa)`, '1'), 10);
+    const cr = parseInt(prompt('E quantas crianças?', '0'), 10);
+    salvarResposta({ id: `${ev.id}-m${idCurto()}`, evento: ev.id, convidado: null, nome, resposta: 'sim',
+      adultos: Number.isFinite(ad) && ad >= 0 ? Math.min(ad, 99) : 1, criancas: Number.isFinite(cr) && cr >= 0 ? Math.min(cr, 99) : 0, idades: [], contato: '', mensagem: '',
+      manual: true, chegou: true, chegada_em: new Date().toISOString() });
+  }
+
+  /* ---- Quanto comprar de comida e bebida ---- */
+  function horasEvento(ev) {
+    const m = (h) => { const x = /^(\d{1,2}):(\d{2})/.exec(h || ''); return x ? Number(x[1]) * 60 + Number(x[2]) : null; };
+    const a = m(ev.hora_inicio), b = m(ev.hora_fim);
+    if (a == null || b == null) return null;
+    const d = (b - a + 1440) % 1440;
+    return d ? d / 60 : null;
+  }
+  // Médias usadas em festas (por pessoa, para uma festa de cerca de 4 horas).
+  const centos = (n) => (n === 50 ? 'meio cento' : `${String(n / 100).replace('.', ',')} ${n <= 100 ? 'cento' : 'centos'}`);
+  const QUANT = [
+    { k: 'salgados', rot: 'Salgados', un: 'unid.', ad: 12, cr: 8, arred: 50, fmt: (n) => `${n} unid. (${centos(n)})`, horas: true },
+    { k: 'doces', rot: 'Docinhos', un: 'unid.', ad: 4, cr: 5, arred: 50, fmt: (n) => `${n} unid. (${centos(n)})` },
+    { k: 'bolo', rot: 'Bolo', un: 'kg', ad: 0.1, cr: 0.08, arred: 0.5, fmt: (n) => `${String(n).replace('.', ',')} kg` },
+    { k: 'refri', rot: 'Refrigerante', un: 'L', ad: 0.6, cr: 0.4, arred: 2, fmt: (n) => `${String(n).replace('.', ',')} L (${plural(Math.ceil(n / 2), 'garrafa', 'garrafas')} de 2 L)`, horas: true },
+    { k: 'suco', rot: 'Suco', un: 'L', ad: 0.2, cr: 0.4, arred: 1, fmt: (n) => `${String(n).replace('.', ',')} L`, horas: true },
+    { k: 'agua', rot: 'Água', un: 'L', ad: 0.3, cr: 0.2, arred: 1.5, fmt: (n) => `${String(n).replace('.', ',')} L (${plural(Math.ceil(n / 1.5), 'garrafa', 'garrafas')} de 1,5 L)`, horas: true },
+    { k: 'gelo', rot: 'Gelo', un: 'kg', ad: 0.5, cr: 0.3, arred: 5, fmt: (n) => `${n} kg (${plural(Math.ceil(n / 5), 'saco', 'sacos')} de 5 kg)`, horas: true },
+    { k: 'descart', rot: 'Copos, pratos e guardanapos', un: 'unid.', ad: 3, cr: 3, arred: 10, fmt: (n) => `${n} copos · ${Math.ceil(n / 2)} pratinhos · ${n * 2} guardanapos` },
+  ];
+  function quantHtml(ev) {
+    const L = lotacao(ev);
+    const usaConf = L.total > 0;
+    const ad = usaConf ? L.adultos : numV(ev.adultos), cr = usaConf ? L.criancas : numV(ev.criancas);
+    if (!ad && !cr) return '<p class="texto vazio-cat">Informe quantos adultos e crianças vão (botão Editar) ou receba confirmações pelo convite para calcular.</p>';
+    // Bebês de até 2 anos quase não comem salgados e docinhos.
+    const bebes = usaConf ? L.idades.filter((x) => x <= 2).length : 0;
+    const h = horasEvento(ev);
+    const fator = h ? Math.min(1.5, Math.max(0.75, h / 4)) : 1;
+    const linhas = QUANT.map((q) => {
+      const crq = q.k === 'salgados' || q.k === 'doces' ? cr - bebes : cr;
+      let v = (ad * q.ad + crq * q.cr) * (q.horas ? fator : 1);
+      v = Math.ceil(v / q.arred - 1e-9) * q.arred;
+      v = Math.round(v * 100) / 100;
+      return `<tr><th>${esc(q.rot)}</th><td>${esc(q.fmt(v))}</td></tr>`;
+    }).join('');
+    const base = `${usaConf ? 'Confirmados' : 'Previsto no evento'}: ${plural(ad, 'adulto', 'adultos')} e ${plural(cr, 'criança', 'crianças')}${bebes ? ` (${bebes} de até 2 anos)` : ''}${h ? ` · festa de ${String(Math.round(h * 10) / 10).replace('.', ',')} h` : ''}.`;
+    return `<p class="meta">${esc(base)}${usaConf && L.maisTalvez > L.total ? ' Os “talvez” não entram na conta.' : ''}</p>
+      <table class="quant"><tbody>${linhas}</tbody></table>
+      <p class="ajuda">Estimativa com médias de festa (cerca de 12 salgados por adulto em 4 horas, 100 g de bolo por pessoa, 600 ml de refrigerante por adulto), já arredondada para cima. Se o buffet já inclui comida e bebida, use só para conferir o que ele vai servir.</p>`;
+  }
   function atualizarConvite() {
     if (!S.paginaEv || !S.eventos[S.paginaEv]) return;
     const ev = evAtual();
@@ -2407,6 +2513,8 @@
     const resp = $('#conv-resp'); if (resp && !ativo) resp.innerHTML = respostasHtml(ev);
     document.querySelectorAll('[data-conv-st]').forEach((el) => { const cv = ev.convidados.find((x) => x.id === el.dataset.convSt); if (cv) el.innerHTML = statusConvidado(ev, cv); });
     const lado = $('#pg-resumo'); if (lado) lado.innerHTML = resumoHtml(ev, contas(ev));
+    const q = $('#quant-corpo'); if (q) q.innerHTML = quantHtml(ev);
+    if ($('#picker').open && $('#rec-lista')) { $('#rec-lista').innerHTML = listaRecepcao(); $('#rec-total').innerHTML = totalRecepcao(); }
   }
 
   /* ---- Página do evento ---- */
@@ -2630,6 +2738,7 @@
         ${ORDEM_CATS.map((k) => blocoCat(ev, k)).join('')}
       </section>
       <section class="pg-sec" id="sec-convite"><h2>Convite e confirmações</h2>${secaoConvite(ev)}</section>
+      <section class="pg-sec" id="sec-quant"><h2>Comida e bebida</h2><div id="quant-corpo">${quantHtml(ev)}</div></section>
       <section class="pg-sec"><div class="orc-cab"><h2>Orçamento detalhado</h2>
         <div class="seg-f" role="group" aria-label="Mostrar">${[['todos', 'Todos'], ['rascunho', 'Rascunho'], ['aprovado', 'Aprovados']].map(([k, r]) =>
           `<button type="button" data-orc-f="${k}" aria-pressed="${(S.orcF || 'todos') === k}">${r}</button>`).join('')}</div></div>
