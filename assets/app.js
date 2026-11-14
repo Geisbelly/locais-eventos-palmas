@@ -1830,7 +1830,7 @@
       }
       setCaminho(ev, t.dataset.evc, v);
       // Mudar a categoria muda o agrupamento do orçamento: redesenha a página.
-      const estrutura = t.tagName === 'SELECT' || tp === 'bool' || /^gastos\.\d+\.categoria$/.test(t.dataset.evc) || /^escolhas\.\d+\.pessoas$|^buffet_isento_ate$|^convidados\.\d+\.lugares$/.test(t.dataset.evc);
+      const estrutura = t.tagName === 'SELECT' || tp === 'bool' || /^gastos\.\d+\.categoria$/.test(t.dataset.evc) || /^escolhas\.\d+\.pessoas$|^buffet_isento_ate$|^convite\.prazo$|^convidados\.\d+\.lugares$/.test(t.dataset.evc);
       salvarEvento(ev, { render: estrutura });
       if (!estrutura) {
         $('#pg-resumo').innerHTML = resumoHtml(ev, contas(ev));
@@ -2287,6 +2287,11 @@
     const cv = ev.convite;
     const auto = cv.local_auto;
     return `<p class="meta">Monte o convite, envie o link pelo WhatsApp e acompanhe quem confirmou. O convidado responde quantos adultos e crianças vão, com a idade de cada criança.</p>
+      <div class="conv-prazo">
+        <label class="campo"><span>Prazo para confirmar presença</span><input type="date" data-evc="convite.prazo" value="${esc(cv.prazo || '')}" ${ev.data ? `max="${esc(ev.data)}"` : ''}></label>
+        <label class="chk"><input type="checkbox" data-evc="convite.aceitar_apos_prazo" data-tipo="bool" ${cv.aceitar_apos_prazo ? 'checked' : ''}>Aceitar respostas depois do prazo</label>
+        <p class="prazo-st">${prazoStatus(ev)}</p>
+      </div>
       <div id="conv-lotacao" class="lotacao">${lotacaoHtml(ev)}</div>
       <details class="conv-cfg"><summary>Personalizar o convite</summary>
         <div class="grade-2">
@@ -2295,8 +2300,6 @@
           <label class="campo largo"><span>Mensagem</span><textarea data-evc="convite.mensagem" rows="3" maxlength="1000" placeholder="ex.: Venha comemorar com a gente! Traje: confortável.">${esc(cv.mensagem || '')}</textarea></label>
           <label class="campo"><span>Nome do local</span><input data-evc="convite.local_nome" maxlength="120" value="${esc(cv.local_nome || '')}" placeholder="${esc((auto && auto.nome) || 'Espaço escolhido')}"></label>
           <label class="campo"><span>Endereço</span><input data-evc="convite.endereco" maxlength="200" value="${esc(cv.endereco || '')}" placeholder="${esc((auto && auto.endereco) || 'Quadra, alameda, lote')}"></label>
-          <label class="campo"><span>Confirmar até</span><input type="date" data-evc="convite.prazo" value="${esc(cv.prazo || '')}"></label>
-          <label class="chk largo"><input type="checkbox" data-evc="convite.aceitar_apos_prazo" data-tipo="bool" ${cv.aceitar_apos_prazo ? 'checked' : ''}>Aceitar respostas depois do prazo</label>
           <label class="campo"><span>Cores</span><select data-evc="convite.estilo">${ESTILOS_CONV.map(([k, r]) => `<option value="${k}" ${k === (cv.estilo || 'ouro') ? 'selected' : ''}>${r}</option>`).join('')}</select></label>
         </div>
         <p class="ajuda">Data, horário e tema vêm do evento (botão Editar). O local vem do espaço marcado com a estrela, se você não preencher aqui.</p>
@@ -2628,6 +2631,18 @@
     ROTA.aberta = e.target.open;
     if (ROTA.aberta) iniciarMapaRota(); else modoRota('');
   }, true);
+
+  function prazoStatus(ev) {
+    const p = ev.convite.prazo;
+    if (!p) return 'Sem prazo: o convite aceita respostas até o dia da festa.';
+    const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+    const [a, m, d] = p.split('-').map(Number);
+    const dias = Math.round((new Date(a, m - 1, d) - hoje) / 864e5);
+    if (ev.data && p > ev.data) return `<span class="ruim">O prazo está depois da data da festa.</span>`;
+    if (dias < 0) return ev.convite.aceitar_apos_prazo ? `Prazo passou em ${dataBR(p)}, mas o convite ainda aceita respostas.` : `<strong>Confirmações encerradas</strong> em ${dataBR(p)}. Quem abrir o convite vê o aviso.`;
+    if (dias === 0) return 'O prazo termina <strong>hoje</strong>.';
+    return `Faltam <strong>${plural(dias, 'dia', 'dias')}</strong> para o prazo (${dataBR(p)}). O convite mostra a data e encerra as respostas depois dela.`;
+  }
   function atualizarConvite() {
     if (!S.paginaEv || !S.eventos[S.paginaEv]) return;
     const ev = evAtual();

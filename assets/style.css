@@ -1173,3 +1173,9 @@ table.quant th { font-weight: 600; width: 42%; }
 .rota-mapa { height: 340px; border-radius: 12px; overflow: hidden; border: 1px solid var(--linha); margin-bottom: 10px; background: var(--linha); }
 @media (max-width: 640px) { .rota-mapa { height: 300px; } }
 .rota-mapa img { max-width: none !important; }
+
+.conv-prazo { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 6px 16px; margin: 0 0 12px; padding: 12px; border: 1px solid var(--linha); border-radius: 12px; }
+.conv-prazo .campo { margin: 0; }
+.conv-prazo .chk { margin: 0 0 10px; }
+.prazo-st { flex: 1 1 100%; margin: 0; font-size: .88rem; color: var(--suave); }
+.prazo-st .ruim { color: #c62828; }
