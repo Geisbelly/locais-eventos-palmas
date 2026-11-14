@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-14T07:30:00Z",
+  "atualizado_em": "2026-11-14T08:40:00Z",
   "observacao": "Buffet, brinquedos, serviços e aluguéis. Cada item tem cat (buffet | brinquedos | servicos | alugueis). Também dá para cadastrar pelo site.",
   "itens": [
     {
@@ -3205,7 +3205,8 @@
               "nome": "Club Kids",
               "url": "https://meuclubkids.com.br/AL_brinquedos.php"
             }
-          }
+          },
+          "grupo": "Carrinho de passeio Lucca"
         },
         {
           "nome": "Bebê conforto com base Maxi-Cosi (0 a 13 kg)",
@@ -3223,7 +3224,8 @@
           "unidade": "por 7 dias",
           "qtd": null,
           "obs": null,
-          "duracao": "7 dias"
+          "duracao": "7 dias",
+          "grupo": "Bebê conforto 0 a 13 kg"
         },
         {
           "nome": "Cadeira para auto com Isofix e giro 360° (Mundi / MIA)",
@@ -3250,7 +3252,8 @@
           "unidade": "por 7 dias",
           "qtd": null,
           "obs": null,
-          "duracao": "7 dias"
+          "duracao": "7 dias",
+          "grupo": "Cadeira para auto Legacy (Voyage)"
         },
         {
           "nome": "Cadeira para auto Matrix Evolution (Burigotto)",
@@ -3259,7 +3262,8 @@
           "unidade": "por 7 dias",
           "qtd": null,
           "obs": null,
-          "duracao": "7 dias"
+          "duracao": "7 dias",
+          "grupo": "Cadeira para auto Matrix (Burigotto)"
         },
         {
           "nome": "Cadeira para auto Alfa",
@@ -3286,7 +3290,8 @@
           "unidade": "por 7 dias",
           "qtd": null,
           "obs": null,
-          "duracao": "7 dias"
+          "duracao": "7 dias",
+          "grupo": "Berço portátil Mini Play"
         },
         {
           "nome": "Berço Techno Bluetooth",
@@ -3295,7 +3300,8 @@
           "unidade": "por 7 dias",
           "qtd": null,
           "obs": null,
-          "duracao": "7 dias"
+          "duracao": "7 dias",
+          "grupo": "Berço Techno (Mastela)"
         },
         {
           "nome": "Berço portátil Co-Bed",
@@ -3313,7 +3319,8 @@
           "unidade": "por 30 dias",
           "qtd": null,
           "obs": "Preço com 20% de desconto (de R$ 169,00).",
-          "duracao": "30 dias"
+          "duracao": "30 dias",
+          "grupo": "Cercado portátil"
         },
         {
           "nome": "Banheira portátil Baby Pil (Ibimbo)",
@@ -3349,7 +3356,8 @@
           "unidade": "por 7 dias",
           "qtd": null,
           "obs": null,
-          "duracao": "7 dias"
+          "duracao": "7 dias",
+          "grupo": "Canguru"
         },
         {
           "nome": "Bomba extratora de leite elétrica Philips Avent",
@@ -3385,7 +3393,8 @@
           "unidade": "por 30 dias",
           "qtd": null,
           "obs": "Preta ou cinza.",
-          "duracao": "30 dias"
+          "duracao": "30 dias",
+          "grupo": "Cadeira de balanço Mamaroo"
         },
         {
           "nome": "Cadeira de balanço Maxi-Cosi Swing Cassia",
@@ -3394,7 +3403,8 @@
           "unidade": "por 30 dias",
           "qtd": null,
           "obs": null,
-          "duracao": "30 dias"
+          "duracao": "30 dias",
+          "grupo": "Cadeira de balanço Maxi-Cosi Cassia"
         },
         {
           "nome": "Cadeira Moisés Multi-Motion (Mastela)",
@@ -3457,7 +3467,8 @@
           "unidade": "por 30 dias",
           "qtd": null,
           "obs": "Puppy ou Tigre, com desconto.",
-          "duracao": "30 dias"
+          "duracao": "30 dias",
+          "grupo": "Andador primeiros passos (Fisher-Price)"
         },
         {
           "nome": "Jumperoo (Fisher-Price / Skip Hop / Joyful)",
@@ -3466,7 +3477,8 @@
           "unidade": "por 30 dias",
           "qtd": null,
           "obs": "O Explore & More sai por R$ 169,00.",
-          "duracao": "30 dias"
+          "duracao": "30 dias",
+          "grupo": "Jumperoo"
         },
         {
           "nome": "Centro de atividades (Tiny Love, Play Center, Home Office)",
@@ -3475,7 +3487,8 @@
           "unidade": "por 30 dias",
           "qtd": null,
           "obs": "De R$ 129,00 a R$ 169,00 conforme o modelo.",
-          "duracao": "30 dias"
+          "duracao": "30 dias",
+          "grupo": "Centro de atividades"
         },
         {
           "nome": "Tapete de atividades Gymini (Tiny Love)",
@@ -3484,7 +3497,8 @@
           "unidade": "por 30 dias",
           "qtd": null,
           "obs": "De R$ 109,00 (Pianinho) a R$ 139,00.",
-          "duracao": "30 dias"
+          "duracao": "30 dias",
+          "grupo": "Tapete de atividades"
         },
         {
           "nome": "Playground infantil (Little Tikes / Ursinho)",
@@ -3502,7 +3516,8 @@
           "unidade": "por 15 dias",
           "qtd": null,
           "obs": "Com 10% de desconto.",
-          "duracao": "15 dias"
+          "duracao": "15 dias",
+          "grupo": "Escorregador infantil para bebê"
         },
         {
           "nome": "Triângulo de Pikler com rampa e capa casinha",
@@ -3511,7 +3526,8 @@
           "unidade": "por 15 dias",
           "qtd": null,
           "obs": null,
-          "duracao": "15 dias"
+          "duracao": "15 dias",
+          "grupo": "Triângulo de Pikler com rampa"
         },
         {
           "nome": "Cama elástica 1,40 m (Toaninni)",
@@ -4994,6 +5010,591 @@
       "id": "celebrate-festas",
       "cat": "alugueis",
       "nome": "Celebrate Festas (Locfest)"
+    },
+    {
+      "descricao": "Aluguel de carrinho, cadeira para auto, berço, cadeira de balanço, jumperoo, tapetes e brinquedos de bebê por 7, 14, 21, 28 ou 56 dias. Entrega e coleta agendadas em casa.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 208 Norte, Alameda 32, 1B",
+      "taxas": [],
+      "pagamento": "Mercado Pago, no site",
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [
+        "Frete grátis no Plano Diretor",
+        "Entrega e coleta agendadas"
+      ],
+      "eventos": [
+        "Visita de família",
+        "Viagem com bebê"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": "https://ioioplay.com.br/",
+      "fotos": [
+        {
+          "url": "fotos/ioio-play/zap-jumperoo.jpg",
+          "legenda": "Jumperoo Diversão na Selva",
+          "credito": {
+            "nome": "Catálogo do WhatsApp da Ioiô Play",
+            "url": "https://wa.me/c/556392337935"
+          }
+        }
+      ],
+      "fontes": [
+        "https://ioioplay.com.br/",
+        "https://ioioplay.com.br/pages/duvidas-frequentes",
+        "https://wa.me/c/556392337935",
+        "Google Maps: Ioiô Play (5,0, 57 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no site e no WhatsApp",
+      "atualizado_em": "2026-11-14T08:40:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Itens de bebê",
+        "Brinquedos de bebê"
+      ],
+      "precos": [],
+      "observacoes": "Frete grátis nas quadras do Plano Diretor de Palmas (há condições no site). Entrega e coleta de segunda a sexta, das 8h às 18h. O catálogo do WhatsApp tem 57 itens; aqui estão agrupados por modelo.",
+      "objetos": [
+        {
+          "nome": "Carrinho de passeio Lucca (Infanti)",
+          "tipo": "Itens de bebê",
+          "valor": 149,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 189; 28 dias R$ 259; 56 dias R$ 389.",
+          "duracao": "7 dias",
+          "grupo": "Carrinho de passeio Lucca"
+        },
+        {
+          "nome": "Carrinho City Tour (Baby Jogger) ou Up (Burigotto)",
+          "tipo": "Itens de bebê",
+          "valor": 149,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 189; 28 dias R$ 259; 56 dias R$ 389.",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Cadeira para auto Matrix (Burigotto)",
+          "tipo": "Itens de bebê",
+          "valor": 129,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 159; 28 dias R$ 209; 56 dias R$ 299.",
+          "duracao": "7 dias",
+          "grupo": "Cadeira para auto Matrix (Burigotto)"
+        },
+        {
+          "nome": "Cadeira para auto Legacy (Voyage)",
+          "tipo": "Itens de bebê",
+          "valor": 129,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 159; 28 dias R$ 209; 56 dias R$ 299.",
+          "duracao": "7 dias",
+          "grupo": "Cadeira para auto Legacy (Voyage)"
+        },
+        {
+          "nome": "Cadeira para auto Baby Prius, Mass (Fisher-Price / Litet)",
+          "tipo": "Itens de bebê",
+          "valor": 129,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 159; 28 dias R$ 209; 56 dias R$ 299.",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Bebê conforto Rest 0 a 13 kg (Multikids)",
+          "tipo": "Itens de bebê",
+          "valor": 99,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 139; 28 dias R$ 179; 56 dias R$ 269.",
+          "duracao": "7 dias",
+          "grupo": "Bebê conforto 0 a 13 kg"
+        },
+        {
+          "nome": "Berço portátil Mini Play (Safety 1st)",
+          "tipo": "Itens de bebê",
+          "valor": 109,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 139; 28 dias R$ 189; 56 dias R$ 269.",
+          "duracao": "7 dias",
+          "grupo": "Berço portátil Mini Play"
+        },
+        {
+          "nome": "Berço portátil Hello / Sereno (Infanti) ou Sonata (Burigotto)",
+          "tipo": "Itens de bebê",
+          "valor": 109,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 139; 28 dias R$ 189; 56 dias R$ 269.",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Berço Side by Side (Safety 1st)",
+          "tipo": "Itens de bebê",
+          "valor": 119,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 149; 28 dias R$ 199; 56 dias R$ 289.",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Berço Techno automático (Mastela)",
+          "tipo": "Itens de bebê",
+          "valor": 139,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 179; 28 dias R$ 249; 56 dias R$ 359.",
+          "duracao": "7 dias",
+          "grupo": "Berço Techno (Mastela)"
+        },
+        {
+          "nome": "Moisés Dreamy (Safety 1st)",
+          "tipo": "Itens de bebê",
+          "valor": 99,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 139; 28 dias R$ 179; 56 dias R$ 269.",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Cercado portátil My Place (Safety 1st)",
+          "tipo": "Itens de bebê",
+          "valor": 99,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 139; 28 dias R$ 179; 56 dias R$ 269.",
+          "duracao": "7 dias",
+          "grupo": "Cercado portátil"
+        },
+        {
+          "nome": "Cadeira de balanço Mamaroo (4.0 ou 5.0)",
+          "tipo": "Itens de bebê",
+          "valor": 149,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 189; 28 dias R$ 259; 56 dias R$ 389.",
+          "duracao": "7 dias",
+          "grupo": "Cadeira de balanço Mamaroo"
+        },
+        {
+          "nome": "Cadeira de balanço Maxi-Cosi Cassia",
+          "tipo": "Itens de bebê",
+          "valor": 119,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 149; 28 dias R$ 199; 56 dias R$ 289.",
+          "duracao": "7 dias",
+          "grupo": "Cadeira de balanço Maxi-Cosi Cassia"
+        },
+        {
+          "nome": "Cadeira de balanço relaxante (Fisher-Price)",
+          "tipo": "Itens de bebê",
+          "valor": 89,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 109; 28 dias R$ 139; 56 dias R$ 209.",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Cadeirinha Bumbo",
+          "tipo": "Itens de bebê",
+          "valor": 69,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "Com barra de atividades ou multiassento: R$ 79 por 7 dias. 14 dias R$ 89; 28 dias R$ 119; 56 dias R$ 179.",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Cadeirinha Sit Me Up (Fisher-Price)",
+          "tipo": "Itens de bebê",
+          "valor": 79,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 99; 28 dias R$ 129; 56 dias R$ 189.",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Cadeira de alimentação (Fisher-Price) ou Superseat (Summer Infant)",
+          "tipo": "Itens de bebê",
+          "valor": 79,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "Superseat: R$ 89 por 7 dias. 14 dias R$ 99; 28 dias R$ 129; 56 dias R$ 189.",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Canguru (Eazyfit / Infanti Close 5 em 1)",
+          "tipo": "Itens de bebê",
+          "valor": 69,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 89; 28 dias R$ 119; 56 dias R$ 179.",
+          "duracao": "7 dias",
+          "grupo": "Canguru"
+        },
+        {
+          "nome": "Tapete de atividades (Tiny Love Gymini, Pianinho)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 79,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 99; 28 dias R$ 129; 56 dias R$ 189.",
+          "duracao": "7 dias",
+          "grupo": "Tapete de atividades"
+        },
+        {
+          "nome": "Jumperoo (Fisher-Price / Baby Einstein)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 109,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 139; 28 dias R$ 189; 56 dias R$ 269.",
+          "duracao": "7 dias",
+          "grupo": "Jumperoo",
+          "foto": {
+            "url": "fotos/ioio-play/zap-jumperoo.jpg",
+            "legenda": "Jumperoo Diversão na Selva",
+            "credito": {
+              "nome": "Catálogo do WhatsApp da Ioiô Play",
+              "url": "https://wa.me/c/556392337935"
+            }
+          }
+        },
+        {
+          "nome": "Centro de atividades (Home Office, Grow and Go, Sweet Tea)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 99,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 139; 28 dias R$ 179; 56 dias R$ 269.",
+          "duracao": "7 dias",
+          "grupo": "Centro de atividades"
+        },
+        {
+          "nome": "Andador primeiros passos (Fisher-Price)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 79,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "Macaco, cachorrinho, zebrinha ou tigre. 14 dias R$ 99; 28 dias R$ 129; 56 dias R$ 189.",
+          "duracao": "7 dias",
+          "grupo": "Andador primeiros passos (Fisher-Price)"
+        },
+        {
+          "nome": "Jardim de atividades (Little Tikes) ou Casinha interativa (Fisher-Price)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 109,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 139; 28 dias R$ 189; 56 dias R$ 269.",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Mesa de atividades (Fisher-Price / Little Tikes)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 89,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "Mesa espiral Little Tikes: R$ 99 por 7 dias. 14 dias R$ 109; 28 dias R$ 139; 56 dias R$ 209.",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Cozinha interativa (Little Tikes)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 129,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 159; 28 dias R$ 209; 56 dias R$ 299.",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Pista de lançamento e loops Little People",
+          "tipo": "Brinquedos de bebê",
+          "valor": 109,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 139; 28 dias R$ 189; 56 dias R$ 269.",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Escorregador (Little Tikes)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 69,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 89; 28 dias R$ 119; 56 dias R$ 179.",
+          "duracao": "7 dias",
+          "grupo": "Escorregador infantil para bebê"
+        },
+        {
+          "nome": "Triângulo de Pikler com rampa",
+          "tipo": "Brinquedos de bebê",
+          "valor": 99,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 139; 28 dias R$ 179; 56 dias R$ 269.",
+          "duracao": "7 dias",
+          "grupo": "Triângulo de Pikler com rampa"
+        },
+        {
+          "nome": "Trailer aprendizagem sobre rodas (Fisher-Price)",
+          "tipo": "Brinquedos de bebê",
+          "valor": 89,
+          "unidade": "por 7 dias",
+          "qtd": null,
+          "obs": "14 dias R$ 109; 28 dias R$ 139; 56 dias R$ 209.",
+          "duracao": "7 dias"
+        }
+      ],
+      "whatsapp": "(63) 99233-7935",
+      "id": "ioio-play",
+      "cat": "alugueis",
+      "nome": "Ioiô Play (aluguel de itens de bebê)"
+    },
+    {
+      "descricao": "Mesas, cadeiras, toalhas, taças, pratos e freezer.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 403 Sul, Alameda 20",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "https://wa.me/c/556384538856",
+        "Google Maps: QUATRO LOCAÇÕES (5,0, 43 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no WhatsApp",
+      "atualizado_em": "2026-11-14T08:40:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Mesas e cadeiras",
+        "Toalhas e tecidos",
+        "Louças e talheres",
+        "Freezer / chopeira"
+      ],
+      "precos": [],
+      "observacoes": "Cobra taxa de entrega. Louça quebrada ou não devolvida é cobrada (taça R$ 10, prato R$ 12, colher R$ 5).",
+      "objetos": [
+        {
+          "nome": "Jogo de mesa com 4 cadeiras e toalha",
+          "tipo": "Mesas e cadeiras",
+          "valor": 20,
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": "Sem toalha, R$ 15. Avulsos: mesa plástica R$ 8, cadeira R$ 2,50.",
+          "duracao": null,
+          "grupo": "Jogo de mesa com 4 cadeiras"
+        },
+        {
+          "nome": "Kit mesa redonda com 8 cadeiras e toalha",
+          "tipo": "Mesas e cadeiras",
+          "valor": 45,
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": "Mesa de 1,20 m avulsa R$ 15.",
+          "duracao": null
+        },
+        {
+          "nome": "Mesa dobrável de madeira 70 x 70",
+          "tipo": "Mesas e cadeiras",
+          "valor": 10,
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Toalha quadrada 1,40 x 1,40",
+          "tipo": "Toalhas e tecidos",
+          "valor": 8,
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": "Oxford, jacquard ou xadrez, várias cores.",
+          "duracao": null
+        },
+        {
+          "nome": "Freezer horizontal 419 litros",
+          "tipo": "Freezer / chopeira",
+          "valor": 200,
+          "unidade": "diária",
+          "qtd": null,
+          "obs": "Diária; fim de semana (sexta a segunda) R$ 250. Taxa de entrega à parte.",
+          "duracao": null
+        },
+        {
+          "nome": "Taça diamond 340 ml",
+          "tipo": "Louças e talheres",
+          "valor": 2,
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Caixa com 24 taças de água/suco",
+          "tipo": "Louças e talheres",
+          "valor": 30,
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": "Só a caixa completa.",
+          "duracao": null
+        },
+        {
+          "nome": "Prato de sobremesa com colher",
+          "tipo": "Louças e talheres",
+          "valor": 3,
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 98453-8856",
+      "id": "quatro-locacoes",
+      "cat": "alugueis",
+      "nome": "Quatro Locações"
+    },
+    {
+      "descricao": "Locação de mesas plásticas, cadeiras bistrô e kits com toalha.",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 605 Sul, Alameda 16",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "https://wa.me/c/556392549975",
+        "Google Maps: Paredão - Locação de Mesas e Cadeiras (5,0, 12 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no WhatsApp",
+      "atualizado_em": "2026-11-14T08:40:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Mesas e cadeiras"
+      ],
+      "precos": [],
+      "observacoes": "O catálogo não mostra preços.",
+      "objetos": [
+        {
+          "nome": "Kit mesa e cadeiras com toalha",
+          "tipo": "Mesas e cadeiras",
+          "valor": "Sob consulta",
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Kit simples mesa e cadeiras",
+          "tipo": "Mesas e cadeiras",
+          "valor": "Sob consulta",
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Cadeira bistrô branca",
+          "tipo": "Mesas e cadeiras",
+          "valor": "Sob consulta",
+          "unidade": "por unidade",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 99254-9975",
+      "id": "paredao-locacoes",
+      "cat": "alugueis",
+      "nome": "Paredão Locação de Mesas e Cadeiras"
+    },
+    {
+      "descricao": "Kits de decoração para festas infantis e adultas, temáticos e mini table (pocket party).",
+      "atende_em": "Palmas",
+      "endereco": "Quadra 806 Sul, Alameda 8, 21",
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil",
+        "Aniversário adulto"
+      ],
+      "instagram": null,
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "https://wa.me/c/556392128737",
+        "Google Maps: Casa da Criança Festas Palmas (5,0, 2 avaliações)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Catálogo no WhatsApp",
+      "atualizado_em": "2026-11-14T08:40:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Pegue e monte (decoração)"
+      ],
+      "precos": [],
+      "observacoes": "O catálogo não mostra preços.",
+      "objetos": [
+        {
+          "nome": "Festas infantis temáticas (ex.: fundo do mar)",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Festa adulto",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Mini table / pocket party",
+          "tipo": "Pegue e monte (decoração)",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "whatsapp": "(63) 99212-8737",
+      "id": "casa-crianca-festas",
+      "cat": "alugueis",
+      "nome": "Casa da Criança Festas"
     }
   ]
 }
