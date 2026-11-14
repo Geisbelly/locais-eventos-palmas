@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-14T00:18:44Z",
+  "atualizado_em": "2026-11-14T00:22:36Z",
   "observacao": "Dados reunidos de páginas públicas. Campo ausente = não encontrado na fonte. Valores são referência da data de conferência e variam conforme dia, temporada e pacote.",
   "locais": [
     {
@@ -3642,17 +3642,39 @@
     {
       "id": "ximenes",
       "nome": "Espaço Ximenes",
-      "tipo": "Espaço de eventos",
+      "tipo": "Espaço com piscina",
       "bairro": "804 Sul",
-      "endereco": null,
-      "capacidade": null,
-      "precos": [],
+      "endereco": "Quadra 804 Sul",
+      "capacidade": 40,
+      "precos": [
+        {
+          "valor": 700,
+          "unidade": "12h",
+          "condicao": "Divulgado no Instagram em jul/2025; confirmar o valor atual"
+        }
+      ],
       "instagram": "espaco.ximenes",
       "whatsapp": "(63) 98449-6898",
       "site": null,
-      "horarios": [],
-      "comodidades": [],
-      "eventos": [],
+      "horarios": [
+        {
+          "dias": "Locação de 12h",
+          "horario": "8h às 20h, 9h às 21h, 10h às 22h ou 11h às 23h"
+        },
+        {
+          "dias": "Locação de 24h",
+          "horario": "Com direito aos quartos"
+        }
+      ],
+      "comodidades": [
+        "Piscina",
+        "Quiosque",
+        "Deck",
+        "Quartos climatizados (na locação de 24h)"
+      ],
+      "eventos": [
+        "Eventos familiares"
+      ],
       "fotos": [
         {
           "url": "fotos/ximenes/ig-DfUhyteBgbd.jpg",
@@ -3679,14 +3701,20 @@
           }
         }
       ],
-      "observacoes": "Só nome e WhatsApp no diretório.",
+      "observacoes": "Só som ambiente. Fechando 24h, dá direito aos quartos (3 camas de casal e 2 de solteiro, climatizados); o valor de 24h não foi divulgado. Também alugam os quartos à parte.",
       "fontes": [
+        "https://www.instagram.com/espaco.ximenes/p/DMwGO3TOoqc/",
+        "https://www.instagram.com/espaco.ximenes/p/DMwGFuQuSF1/",
         "https://guiafix.com.br/palmas-to/salao-de-festas"
       ],
       "conferido_em": "2026-11-13",
-      "status": "Dados mínimos",
+      "status": "Perfil oficial no Instagram",
       "itens": {},
-      "atualizado_em": "2026-11-13T19:18:33Z"
+      "atualizado_em": "2026-11-14T00:22:36Z",
+      "uso": {
+        "modo": "horas",
+        "texto": "12h entre 8h e 23h, ou 24h"
+      }
     },
     {
       "id": "casa-de-xavier",
