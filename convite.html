@@ -59,6 +59,8 @@
     .contador button { width: 44px; min-height: 44px; border: 0; background: none; font-size: 1.3rem; color: var(--cor-escura); cursor: pointer; }
     .contador input { border: 0; text-align: center; min-height: 44px; padding: 0; outline-offset: -2px; }
     .idades { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin: -4px 0 14px; }
+    .idades select + select { margin-top: 6px; }
+    .nota-idades { font-size: .8rem; color: var(--suave); margin: -6px 0 14px; }
     .idades label span { font-size: .8rem; color: var(--suave); display: block; margin-bottom: 3px; }
     .enviar { width: 100%; min-height: 52px; border: 0; border-radius: 12px; background: var(--cor); color: #fff; font: 600 1.05rem var(--texto); cursor: pointer; margin-top: 4px; }
     .enviar:disabled { opacity: .6; cursor: wait; }
@@ -343,6 +345,7 @@
       const rota = (Array.isArray(cv.rota) ? cv.rota : []).filter((p) => Array.isArray(p) && p.length === 2 && isFinite(p[0]) && isFinite(p[1]));
       const lugares = convidado && Number(convidado.lugares) > 0 ? Number(convidado.lugares) : null;
       const pedirIdade = cv.pedir_idade !== false;
+      const pedirSexo = cv.pedir_sexo === true || (ev.itens_festa || []).some((i) => i && i.sexo);
       const fim = prazo ? new Date(prazo.getFullYear(), prazo.getMonth(), prazo.getDate() + 1) : null;
       const encerrado = !!(fim && new Date() >= fim && !cv.aceitar_apos_prazo);
       const ondeTxt = [local, endereco].filter(Boolean).join(', ');
@@ -390,7 +393,7 @@
       if (dest && $id('mapa')) mapaConvite(dest, rota);
       const ics = $id('ics');
       if (ics) ics.onclick = () => baixarIcs(ev, titulo, [local, endereco].filter(Boolean).join(', '));
-      formRsvp(ev, { convidado, nome, lugares, pedirIdade, encerrado });
+      formRsvp(ev, { convidado, nome, lugares, pedirIdade, pedirSexo, encerrado });
     }
 
     function formRsvp(ev, ctx) {
@@ -409,6 +412,7 @@
         adultos: ant ? ant.adultos : 1,
         criancas: ant ? ant.criancas : 0,
         idades: ant ? ant.idades || [] : [],
+        sexos: ant ? ant.sexos || [] : [],
         contato: (ant && ant.contato) || '',
         mensagem: (ant && ant.mensagem) || '',
         presente: (ant && ant.presente) || '',
@@ -418,9 +422,13 @@
       const opcoesIdade = (v) => ['<option value="">Idade</option>', `<option value="0" ${v === 0 ? 'selected' : ''}>Menos de 1 ano</option>`,
         ...Array.from({ length: 17 }, (_, i) => i + 1).map((n) => `<option value="${n}" ${v === n ? 'selected' : ''}>${n} ${n === 1 ? 'ano' : 'anos'}</option>`)].join('');
       function idadesHtml() {
-        if (!ctx.pedirIdade || !st.criancas) return '';
+        if ((!ctx.pedirIdade && !ctx.pedirSexo) || !st.criancas) return '';
+        const sx = (i) => `<select data-sexo="${i}" aria-label="Criança ${i + 1}: menino ou menina"><option value="">Menino ou menina?</option>
+          <option value="m" ${st.sexos[i] === 'm' ? 'selected' : ''}>Menino</option><option value="f" ${st.sexos[i] === 'f' ? 'selected' : ''}>Menina</option></select>`;
         return `<div class="idades">${Array.from({ length: st.criancas }, (_, i) => `<label><span>Criança ${i + 1}</span>
-          <select data-idade="${i}" aria-label="Idade da criança ${i + 1}">${opcoesIdade(st.idades[i])}</select></label>`).join('')}</div>`;
+          ${ctx.pedirIdade ? `<select data-idade="${i}" aria-label="Idade da criança ${i + 1}">${opcoesIdade(st.idades[i])}</select>` : ''}
+          ${ctx.pedirSexo ? sx(i) : ''}</label>`).join('')}</div>
+          ${ctx.pedirSexo ? '<p class="nota-idades">Perguntamos para separar as lembrancinhas.</p>' : ''}`;
       }
       function desenhar() {
         const vai = st.resposta === 'sim' || st.resposta === 'talvez';
@@ -466,6 +474,7 @@
       function mudarCriancas(n) {
         st.criancas = Math.max(0, Math.min(30, n));
         st.idades = st.idades.slice(0, st.criancas);
+        st.sexos = st.sexos.slice(0, st.criancas);
         const f = $id('f-rsvp');
         f.criancas.value = st.criancas;
         $id('idades').innerHTML = idadesHtml();
@@ -488,6 +497,8 @@
       box.onchange = (e) => {
         const i = e.target.dataset.idade;
         if (i != null) st.idades[Number(i)] = e.target.value === '' ? null : Number(e.target.value);
+        const sxi = e.target.dataset.sexo;
+        if (sxi != null) st.sexos[Number(sxi)] = e.target.value || null;
       };
       box.onsubmit = async (e) => {
         e.preventDefault();
@@ -504,6 +515,7 @@
           evento: evId, convidado: ctx.convidado ? ctx.convidado.id : null, nome: st.nome, resposta: st.resposta,
           adultos: vai ? st.adultos : 0, criancas: vai ? st.criancas : 0,
           idades: vai && ctx.pedirIdade ? st.idades.slice(0, st.criancas).map((x) => (x == null ? null : x)) : [],
+          sexos: vai && ctx.pedirSexo ? Array.from({ length: st.criancas }, (_, i) => st.sexos[i] || null) : [],
           contato: st.contato, mensagem: st.mensagem, presente: vai && st.presente ? st.presente : null, atualizado_em: new Date().toISOString(),
         };
         const btn = box.querySelector('.enviar');

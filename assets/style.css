@@ -1183,3 +1183,27 @@ table.quant th { font-weight: 600; width: 42%; }
 .modelo-html { margin: 4px 0 12px; }
 .modelo-html code { font-size: .82em; background: var(--ouro-fundo); padding: 0 4px; border-radius: 4px; }
 textarea.codigo { width: 100%; font: 12.5px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; padding: 10px; border: 1px solid var(--linha); border-radius: 10px; background: transparent; color: inherit; margin: 8px 0 4px; resize: vertical; tab-size: 2; white-space: pre; overflow: auto; }
+
+/* Lembrancinhas e itens da festa */
+.if-mesas { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: flex-end; margin: 0 0 6px; }
+.if-mesas .meta { flex: 1 1 200px; margin: 0 0 10px; }
+.campo.cnum { width: 110px; flex: none; }
+.itens-festa { display: grid; gap: 10px; margin: 10px 0; }
+.item-festa { border: 1px solid var(--linha); border-radius: 12px; padding: 10px 12px; }
+.item-festa.st-pronto { border-color: #2f8f5b; }
+.item-festa.st-encomendado { border-color: var(--ouro); }
+.if-topo { display: grid; grid-template-columns: minmax(0, 1fr) auto auto auto; gap: 8px; align-items: center; }
+.if-campos { display: flex; flex-wrap: wrap; gap: 6px 10px; margin-top: 8px; }
+.if-campos .campo { margin: 0; flex: 1 1 150px; }
+.if-campos .campo.cnum { flex: 0 0 96px; }
+.if-conta { margin: 8px 0 0; font-size: .92rem; }
+.if-conta strong { font-size: 1.25rem; color: var(--ouro-texto); margin-right: 4px; }
+.if-conta span { color: var(--suave); }
+table.quant th small { display: block; font-weight: 400; color: var(--suave); font-size: .8rem; }
+@media (max-width: 640px) { .if-topo { grid-template-columns: minmax(0, 1fr) auto; } .if-topo select { grid-column: 1; } }
+.if-campos { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px 10px; align-items: end; }
+.if-campos .campo, .if-campos .campo.cnum { width: auto; flex: none; }
+.if-campos .campo > span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.if-campos .campo:first-child { grid-column: span 2; }
+.if-mesas { align-items: end; }
+.if-mesas .campo.cnum { width: 130px; }

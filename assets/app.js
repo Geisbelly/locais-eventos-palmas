@@ -1767,6 +1767,7 @@
       if (a === 'conv-importar') importarConvidados();
       if (a === 'rec-abrir') abrirRecepcao();
       if (a === 'msg-abrir') abrirMensagens();
+      if (a === 'itens-sug') sugerirItensFesta(b.dataset.itsug);
       if (a === 'modelo-exemplo') {
         const ev = evAtual();
         if (String(ev.convite.modelo_html || '').trim() && !confirm('Trocar o HTML atual pelo modelo de exemplo?')) return;
@@ -1853,6 +1854,7 @@
       // Mudar a categoria muda o agrupamento do orçamento: redesenha a página.
       const estrutura = t.tagName === 'SELECT' || tp === 'bool' || /^gastos\.\d+\.categoria$/.test(t.dataset.evc) || /^escolhas\.\d+\.pessoas$|^buffet_isento_ate$|^convite\.prazo$|^convidados\.\d+\.lugares$/.test(t.dataset.evc);
       salvarEvento(ev, { render: estrutura });
+      if (!estrutura && /^(itens_festa\.|mesas$|pessoas_mesa$)/.test(t.dataset.evc)) { const it = $('#itens-corpo'); if (it) it.innerHTML = itensHtml(ev); }
       if (!estrutura) {
         $('#pg-resumo').innerHTML = resumoHtml(ev, contas(ev));
         if (t.dataset.evc.startsWith('gastos.')) atualizarOrc(ev);
@@ -2006,7 +2008,7 @@
   const novoEvento = () => ({
     id: '', nome: '', tipo: '', data: '', hora_inicio: '', hora_fim: '', para_quem: '', idade: '', organiza: '', contato: '',
     adultos: null, criancas: null, tema: '', orcamento: null, status: 'planejando', descricao: '',
-    escolhas: [], gastos: [], tarefas: [], cronograma: [], convite: {}, convidados: [], presentes: [], buffet_isento_ate: null,
+    escolhas: [], gastos: [], tarefas: [], cronograma: [], convite: {}, convidados: [], presentes: [], itens_festa: [], mesas: null, pessoas_mesa: null, buffet_isento_ate: null,
   });
   function evCompleto(bruto) {
     const ev = Object.assign(novoEvento(), bruto);
@@ -2014,6 +2016,7 @@
     ev.convite = { ...(ev.convite && typeof ev.convite === 'object' ? ev.convite : {}) };
     ev.convidados = (Array.isArray(ev.convidados) ? ev.convidados : []).filter(Boolean);
     ev.presentes = (Array.isArray(ev.presentes) ? ev.presentes : []).filter(Boolean);
+    ev.itens_festa = (Array.isArray(ev.itens_festa) ? ev.itens_festa : []).filter(Boolean);
     return ev;
   }
   const eventosAtivos = () => Object.values(S.eventos).filter((e) => e && !e.removido)
@@ -2198,7 +2201,17 @@
     if (!reg) return;
     let v = t.value.trim();
     if (k === 'adultos' || k === 'criancas') v = Math.max(0, Math.min(99, parseInt(v, 10) || 0));
-    if (k === 'idades') v = v.split(/[,;\s]+/).filter(Boolean).map((x) => (/^<\s*1$|^0$/.test(x) ? 0 : parseInt(x, 10))).filter((n) => Number.isFinite(n) && n >= 0 && n < 18);
+    if (k === 'idades') {
+      // Aceita "3, 7" ou com o sexo: "3m, 7f, <1f" (m = menino, f = menina).
+      const toks = v.split(/[,;\s]+/).filter(Boolean).map((x) => {
+        const m = /^(<\s*1|\d{1,2})\s*([mf])?$/i.exec(x.trim());
+        if (!m) return null;
+        const id = /^</.test(m[1]) ? 0 : parseInt(m[1], 10);
+        return id >= 0 && id < 18 ? { id, sx: m[2] ? m[2].toLowerCase() : null } : null;
+      }).filter(Boolean);
+      v = toks.map((t) => t.id);
+      reg.sexos = toks.map((t) => t.sx);
+    }
     reg[k] = v;
     if (k === 'criancas' && Array.isArray(reg.idades)) reg.idades = reg.idades.slice(0, v);
     if (k === 'resposta' && v === 'nao') { reg.adultos = reg.adultos || 0; }
@@ -2289,7 +2302,7 @@
         <select class="r-st" ${f('resposta')} aria-label="Situação">${RESP.map(([k, rot]) => `<option value="${k}" ${k === r.resposta ? 'selected' : ''}>${rot}</option>`).join('')}</select>
         <label class="r-num"><span>Adultos</span><input ${f('adultos')} type="number" min="0" max="99" inputmode="numeric" value="${Number(r.adultos) || 0}"></label>
         <label class="r-num"><span>Crianças</span><input ${f('criancas')} type="number" min="0" max="99" inputmode="numeric" value="${Number(r.criancas) || 0}"></label>
-        <label class="r-idades"><span>Idades</span><input ${f('idades')} value="${esc((r.idades || []).filter((x) => x != null).map(idadeTxt).join(', '))}" placeholder="ex.: 3, 7"></label>
+        <label class="r-idades"><span>Idades</span><input ${f('idades')} value="${esc((r.idades || []).map((x, j) => (x == null ? null : idadeTxt(x) + ((r.sexos || [])[j] || ''))).filter(Boolean).join(', '))}" placeholder="ex.: 3m, 7f" title="m = menino, f = menina"></label>
         <span class="r-info">${[cv ? 'da lista' : r.manual ? 'lançada aqui' : 'pelo link', r.presente && ev.presentes.find((g) => g.id === r.presente) ? `presente: ${esc(ev.presentes.find((g) => g.id === r.presente).nome)}` : null, r.contato ? esc(r.contato) : null, r.atualizado_em ? dataBR(r.atualizado_em.slice(0, 10)) : null].filter(Boolean).join(' · ')}${r.mensagem ? `<em>“${esc(r.mensagem)}”</em>` : ''}</span>
       </div>`;
     }).join('')}</div>`;
@@ -2447,7 +2460,7 @@
   function linhasRespostas(ev) {
     return rsvpsDe(ev.id).slice().sort((a, b) => ['sim', 'talvez', 'nao'].indexOf(a.resposta) - ['sim', 'talvez', 'nao'].indexOf(b.resposta) || String(a.nome).localeCompare(String(b.nome), 'pt-BR'))
       .map((r) => ({ nome: r.nome || '', situacao: respRot(r.resposta), adultos: Number(r.adultos) || 0, criancas: Number(r.criancas) || 0,
-        idades: (r.idades || []).filter((x) => x != null).map((x) => (x === 0 ? 'menos de 1' : x)).join(', '), contato: r.contato || '', recado: r.mensagem || '' }));
+        idades: (r.idades || []).map((x, j) => (x == null ? null : `${x === 0 ? 'menos de 1' : x}${(r.sexos || [])[j] === 'm' ? ' (menino)' : (r.sexos || [])[j] === 'f' ? ' (menina)' : ''}`)).filter(Boolean).join(', '), contato: r.contato || '', recado: r.mensagem || '' }));
   }
   function exportarRespostas() {
     const ev = evAtual(); const ls = linhasRespostas(ev);
@@ -2748,6 +2761,118 @@
     }
     if (e.target.id === 'msg-grupo') { MSG.grupo = e.target.value; $('#msg-lista').innerHTML = listaMensagens(); }
   });
+
+  /* ---- Lembrancinhas, centros de mesa e outros itens que dependem de quem vai ---- */
+  const TIPOS_ITEM = [['lembrancinha', 'Lembrancinha'], ['centro_mesa', 'Centro de mesa'], ['kit', 'Kit ou sacolinha'], ['decoracao', 'Decoração'], ['papelaria', 'Papelaria (tags, toppers)'], ['outro', 'Outro']];
+  const PARA_ITEM = [['todos', 'Todos os convidados'], ['adultos', 'Só adultos'], ['criancas', 'Crianças (filtrar idade e sexo)'], ['convite', 'Uma por convite ou família'], ['mesa', 'Uma por mesa'], ['fixo', 'Quantidade fixa']];
+  const STATUS_ITEM = [['definir', 'A definir'], ['orcando', 'Orçando'], ['encomendado', 'Encomendado'], ['pronto', 'Pronto']];
+  function novoItemFesta(x = {}) {
+    return { id: idCurto(), nome: '', tipo: 'lembrancinha', para: 'criancas', de: null, ate: null, sexo: '', qtd: null, folga: 10, valor: null, fornecedor: '', status: 'definir', ...x };
+  }
+  // Quem vai, com idade e sexo de cada criança. Sem respostas ainda, usa o previsto no evento.
+  function publicoFesta(ev) {
+    const rs = rsvpsDe(ev.id);
+    const sim = rs.filter((r) => r.resposta === 'sim');
+    if (sim.length) {
+      const kids = sim.flatMap((r) => Array.from({ length: Number(r.criancas) || 0 }, (_, i) => ({
+        idade: Array.isArray(r.idades) && r.idades[i] != null ? r.idades[i] : null, sexo: Array.isArray(r.sexos) ? r.sexos[i] || null : null })));
+      return { fonte: 'confirmados', adultos: sim.reduce((a, r) => a + (Number(r.adultos) || 0), 0), kids, convites: sim.length };
+    }
+    return { fonte: 'previsto', adultos: numV(ev.adultos), kids: Array.from({ length: numV(ev.criancas) }, () => ({ idade: null, sexo: null })), convites: ev.convidados.filter((c) => c.nome).length };
+  }
+  function mesasDe(ev, P) {
+    if (numV(ev.mesas)) return { n: numV(ev.mesas), estimado: false };
+    const total = P.adultos + P.kids.length;
+    return { n: total ? Math.ceil(total / (numV(ev.pessoas_mesa) || 6)) : 0, estimado: true };
+  }
+  function contaItem(ev, it, P) {
+    const det = [];
+    let base = 0, semInfo = 0;
+    const faixa = (it.de != null || it.ate != null) ? `de ${it.de ?? 0} a ${it.ate ?? 17} anos` : '';
+    const sx = it.sexo === 'm' ? 'meninos' : it.sexo === 'f' ? 'meninas' : '';
+    if (it.para === 'todos') { base = P.adultos + P.kids.length; det.push(`${base} pessoas`); }
+    else if (it.para === 'adultos') { base = P.adultos; det.push(plural(base, 'adulto', 'adultos')); }
+    else if (it.para === 'convite') { base = P.convites; det.push(plural(base, P.fonte === 'confirmados' ? 'convite confirmado' : 'convite da lista', P.fonte === 'confirmados' ? 'convites confirmados' : 'convites da lista')); }
+    else if (it.para === 'mesa') { const m = mesasDe(ev, P); base = m.n; det.push(`${plural(base, 'mesa', 'mesas')}${m.estimado ? ' (estimadas)' : ''}`); }
+    else if (it.para === 'fixo') { base = numV(it.qtd); det.push('quantidade fixa'); }
+    else {
+      const casa = P.kids.filter((k) => {
+        if ((it.de != null || it.ate != null) && k.idade == null) return false;
+        if (it.sexo && !k.sexo) return false;
+        return (it.de == null || k.idade >= it.de) && (it.ate == null || k.idade <= it.ate) && (!it.sexo || k.sexo === it.sexo);
+      });
+      semInfo = P.kids.filter((k) => ((it.de != null || it.ate != null) && k.idade == null) || (it.sexo && !k.sexo)).length;
+      base = casa.length;
+      det.push(`${plural(base, 'criança', 'crianças')}${sx ? ` (${sx})` : ''}${faixa ? ` ${faixa}` : ''}`);
+    }
+    const folga = it.para === 'fixo' ? 0 : numV(it.folga);
+    const total = Math.ceil(base * (1 + folga / 100));
+    if (folga && base) det.push(`+${folga}% de folga`);
+    return { base, total, det: det.join(' · '), semInfo, custo: numV(it.valor) ? numV(it.valor) * total : null };
+  }
+  function itensHtml(ev) {
+    const P = publicoFesta(ev);
+    const m = mesasDe(ev, P);
+    const usaSexo = ev.itens_festa.some((i) => i.sexo);
+    const sel = (cam, ops, v) => `<select data-evc="${cam}">${ops.map(([k, r]) => `<option value="${k}" ${k === (v ?? '') ? 'selected' : ''}>${r}</option>`).join('')}</select>`;
+    const num = (cam, v, ph, rot) => `<label class="campo cnum"><span>${rot}</span><input data-evc="${cam}" data-tipo="num" inputmode="decimal" value="${v != null ? esc(/\.valor$/.test(cam) ? valorTxt(v) : v) : ''}" placeholder="${ph}"></label>`;
+    const linhas = ev.itens_festa.map((it, i) => {
+      const c = contaItem(ev, it, P);
+      const k = `itens_festa.${i}`;
+      return `<div class="item-festa st-${esc(it.status || 'definir')}">
+        <div class="if-topo">
+          <input data-evc="${k}.nome" maxlength="120" value="${esc(it.nome || '')}" placeholder="ex.: Caixinha de massinha" aria-label="Item">
+          ${sel(`${k}.tipo`, TIPOS_ITEM, it.tipo)}
+          ${sel(`${k}.status`, STATUS_ITEM, it.status)}
+          <button type="button" class="tirar-linha" data-ev-tirar="itens_festa:${i}" aria-label="Remover">×</button>
+        </div>
+        <div class="if-campos">
+          <label class="campo"><span>Para quem</span>${sel(`${k}.para`, PARA_ITEM, it.para)}</label>
+          ${it.para === 'criancas' ? `${num(`${k}.de`, it.de, '0', 'Idade de')}${num(`${k}.ate`, it.ate, '17', 'até')}
+            <label class="campo"><span>Sexo</span>${sel(`${k}.sexo`, [['', 'Todos'], ['m', 'Meninos'], ['f', 'Meninas']], it.sexo)}</label>` : ''}
+          ${it.para === 'fixo' ? num(`${k}.qtd`, it.qtd, 'ex.: 1', 'Quantidade') : num(`${k}.folga`, it.folga, '10', 'Folga %')}
+          ${num(`${k}.valor`, it.valor, 'R$', 'Valor unitário')}
+          <label class="campo"><span>Quem faz</span><input data-evc="${k}.fornecedor" maxlength="120" value="${esc(it.fornecedor || '')}" placeholder="Fornecedor ou eu mesma"></label>
+        </div>
+        <p class="if-conta"><strong>${c.total}</strong> ${c.total === 1 ? 'unidade' : 'unidades'} <span>${esc(c.det)}${c.custo != null ? ` · ${brl(c.custo)}` : ''}</span></p>
+        ${c.semInfo ? `<p class="nota-aviso neutro">${ic('alerta')}<span>${plural(c.semInfo, 'criança está', 'crianças estão')} sem ${it.sexo && (it.de != null || it.ate != null) ? 'idade ou sexo informados' : it.sexo ? 'sexo informado' : 'idade informada'} e ${c.semInfo === 1 ? 'ficou' : 'ficaram'} fora da conta. Complete nas respostas (ex.: 3m, 7f).</span></p>` : ''}
+      </div>`;
+    }).join('');
+    const ativos = ev.itens_festa.filter((i) => i.nome);
+    const contas = ativos.map((i) => ({ i, c: contaItem(ev, i, P) }));
+    const total = contas.reduce((a, x) => a + (x.c.custo || 0), 0);
+    const crSexo = P.kids.filter((k) => k.sexo).length;
+    return `<p class="meta">Monte aqui o que muda conforme os convidados: lembrancinhas diferentes por idade e sexo, as comuns a todos, uma por família, centros de mesa e itens fixos. As quantidades saem ${P.fonte === 'confirmados' ? 'das confirmações' : 'do número previsto no evento (quando chegarem confirmações, passam a usar elas)'}.</p>
+      <div class="if-mesas">
+        ${num('mesas', ev.mesas, m.estimado && m.n ? String(m.n) : 'ex.: 10', 'Mesas')}
+        ${num('pessoas_mesa', ev.pessoas_mesa, '6', 'Pessoas por mesa')}
+        <p class="meta">${m.estimado ? (m.n ? `Sem número de mesas: estimei ${plural(m.n, 'mesa', 'mesas')}.` : '') : ''} ${P.kids.length ? `${plural(P.kids.length, 'criança', 'crianças')}${usaSexo || crSexo ? `, ${crSexo} com sexo informado` : ''}.` : ''}</p>
+      </div>
+      <label class="chk"><input type="checkbox" data-evc="convite.pedir_sexo" data-tipo="bool" ${ev.convite.pedir_sexo || usaSexo ? 'checked' : ''} ${usaSexo ? 'disabled' : ''}>Perguntar no convite se cada criança é menino ou menina${usaSexo ? ' (ligado porque há item separado por sexo)' : ''}</label>
+      <div class="itens-festa">${linhas}</div>
+      <div class="acoes-linha">
+        <button type="button" class="btn ghost add-linha" data-ev-add="itens_festa">${ic('mais')}Adicionar item</button>
+        <button type="button" class="btn ghost add-linha" data-acao="itens-sug" data-itsug="todos">Lembrancinha comum a todos</button>
+        <button type="button" class="btn ghost add-linha" data-acao="itens-sug" data-itsug="sexo">Lembrancinhas de menino e de menina</button>
+        <button type="button" class="btn ghost add-linha" data-acao="itens-sug" data-itsug="idade">Lembrancinhas por faixa de idade</button>
+        <button type="button" class="btn ghost add-linha" data-acao="itens-sug" data-itsug="mesa">Centro de mesa</button>
+      </div>
+      ${contas.length ? `<h3 class="conv-sub">Para encomendar</h3><table class="quant"><tbody>
+        ${contas.map(({ i, c }) => `<tr><th>${esc(i.nome)}<small>${esc(TIPOS_ITEM.find((t) => t[0] === i.tipo)?.[1] || '')}${i.fornecedor ? ` · ${esc(i.fornecedor)}` : ''} · ${esc(STATUS_ITEM.find((t) => t[0] === i.status)?.[1] || '')}</small></th><td>${c.total} un.${c.custo != null ? ` · ${brl(c.custo)}` : ''}</td></tr>`).join('')}
+        ${total ? `<tr><th>Total estimado</th><td><strong>${brl(total)}</strong></td></tr>` : ''}</tbody></table>` : ''}`;
+  }
+  function sugerirItensFesta(tipo) {
+    const ev = evAtual();
+    const novos = {
+      todos: [novoItemFesta({ nome: 'Lembrancinha para todos', para: 'todos' })],
+      sexo: [novoItemFesta({ nome: 'Lembrancinha de menino', sexo: 'm' }), novoItemFesta({ nome: 'Lembrancinha de menina', sexo: 'f' })],
+      idade: [novoItemFesta({ nome: 'Lembrancinha até 3 anos', de: 0, ate: 3 }), novoItemFesta({ nome: 'Lembrancinha de 4 a 8 anos', de: 4, ate: 8 }), novoItemFesta({ nome: 'Lembrancinha de 9 a 12 anos', de: 9, ate: 12 })],
+      mesa: [novoItemFesta({ nome: 'Centro de mesa', tipo: 'centro_mesa', para: 'mesa', folga: 0 })],
+    }[tipo] || [];
+    ev.itens_festa.push(...novos);
+    salvarEvento(ev);
+    toast(`${plural(novos.length, 'item adicionado', 'itens adicionados')}. Ajuste nomes, idades e valores.`);
+  }
   function atualizarConvite() {
     if (!S.paginaEv || !S.eventos[S.paginaEv]) return;
     const ev = evAtual();
@@ -2757,6 +2882,7 @@
     document.querySelectorAll('[data-conv-st]').forEach((el) => { const cv = ev.convidados.find((x) => x.id === el.dataset.convSt); if (cv) el.innerHTML = statusConvidado(ev, cv); });
     const lado = $('#pg-resumo'); if (lado) lado.innerHTML = resumoHtml(ev, contas(ev));
     const q = $('#quant-corpo'); if (q) q.innerHTML = quantHtml(ev);
+    const it = $('#itens-corpo'); if (it && !it.contains(document.activeElement)) it.innerHTML = itensHtml(ev);
     if ($('#picker').open && $('#rec-lista')) { $('#rec-lista').innerHTML = listaRecepcao(); $('#rec-total').innerHTML = totalRecepcao(); }
   }
 
@@ -2983,6 +3109,7 @@
       </section>
       <section class="pg-sec" id="sec-convite"><h2>Convite e confirmações</h2>${secaoConvite(ev)}</section>
       <section class="pg-sec" id="sec-quant"><h2>Comida e bebida</h2><div id="quant-corpo">${quantHtml(ev)}</div></section>
+      <section class="pg-sec" id="sec-itens"><h2>Lembrancinhas e itens da festa</h2><div id="itens-corpo">${itensHtml(ev)}</div></section>
       <section class="pg-sec"><div class="orc-cab"><h2>Orçamento detalhado</h2>
         <div class="seg-f" role="group" aria-label="Mostrar">${[['todos', 'Todos'], ['rascunho', 'Rascunho'], ['aprovado', 'Aprovados']].map(([k, r]) =>
           `<button type="button" data-orc-f="${k}" aria-pressed="${(S.orcF || 'todos') === k}">${r}</button>`).join('')}</div></div>
@@ -2997,7 +3124,7 @@
   }
 
   /* ---- Edição na própria página ---- */
-  const LINHA_VAZIA = { presentes: () => ({ id: idCurto(), nome: '', link: '' }), convidados: () => ({ id: idCurto(), nome: '', telefone: '', lugares: null }), gastos: novoGasto, tarefas: () => ({ texto: '', prazo: '', feito: false }), cronograma: () => ({ hora: '', oque: '' }) };
+  const LINHA_VAZIA = { itens_festa: () => novoItemFesta(), presentes: () => ({ id: idCurto(), nome: '', link: '' }), convidados: () => ({ id: idCurto(), nome: '', telefone: '', lugares: null }), gastos: novoGasto, tarefas: () => ({ texto: '', prazo: '', feito: false }), cronograma: () => ({ hora: '', oque: '' }) };
   function evAtual() { return S.eventos[S.paginaEv] ? evCompleto(S.eventos[S.paginaEv]) : null; }
   function setCaminho(obj, caminho, v) {
     const ps = caminho.split('.');
