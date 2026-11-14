@@ -1431,3 +1431,33 @@ button.cnum-card:hover { border-color: var(--ouro); }
 .ev-principal { grid-template-columns: minmax(0, 1fr); }
 .ct-barra > * { min-width: 0; }
 .ct-busca input { min-width: 0; }
+
+/* Fornecedores compactos (v53) */
+.cat-atalhos { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 6px; }
+.cat-atalhos button { display: inline-flex; align-items: center; gap: 7px; font: inherit; font-size: .88rem; font-weight: 500; color: var(--tinta); background: var(--card); border: 1px solid var(--linha); border-radius: 999px; padding: 7px 14px 7px 10px; cursor: pointer; }
+.cat-atalhos button:hover { border-color: var(--ouro); }
+.cat-atalhos svg { width: 16px; height: 16px; color: var(--suave); }
+.cat-atalhos .c-ok svg { color: var(--verde); }
+.cat-atalhos .c-meio svg { color: var(--ambar); }
+.cat-atalhos small { color: var(--suave); font-size: .78rem; }
+.cat-atalhos small:empty { display: none; }
+.pg-cat { scroll-margin-top: 120px; }
+.esc-topo { align-items: center; }
+.esc-dir { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; flex: none; }
+.esc-din { font-size: .8rem; color: var(--suave-forte); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.esc-din strong { color: var(--tinta); }
+.esc-bts { display: flex; gap: 6px; flex: none; }
+.esc-bts .mini[aria-expanded="true"] { border-color: var(--ouro); color: var(--tinta); }
+.esc-obs { margin: 6px 0 0 46px; font-size: .84rem; color: var(--suave-forte); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.esc.aberta { background: color-mix(in srgb, var(--ouro-fundo) 30%, transparent); margin-left: -14px; margin-right: -14px; padding: 10px 14px 12px; }
+.esc.st-contratado .selo-esc, .esc.st-reservado .selo-esc, .esc.st-escolhido .selo-esc { background: var(--verde-fundo); color: var(--verde); }
+.esc.st-descartado { opacity: .6; }
+.sug-rot { font-size: .84rem; color: var(--suave); align-self: center; }
+[data-itsug] { border: 1px dashed var(--linha) !important; border-radius: 999px !important; padding: 7px 14px !important; font-size: .85rem !important; }
+[data-itsug]:hover { border-color: var(--ouro) !important; }
+@media (max-width: 640px) {
+  .esc-topo { flex-wrap: wrap; }
+  .esc-nome { flex-basis: calc(100% - 110px); }
+  .esc-dir { flex-direction: row; align-items: center; margin-left: 46px; flex: 1; justify-content: flex-start; flex-wrap: wrap; }
+  .esc-obs { margin-left: 0; }
+}

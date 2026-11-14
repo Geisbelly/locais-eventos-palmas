@@ -423,7 +423,7 @@
   /* ============ Estado ============ */
   const S = {
     locais: [], porId: {}, dataDados: '', base: [], fbase: [], remotos: [],
-    secao: 'espacos', paginaEv: null, rsvp: {}, rsvpPedido: {}, abaEv: 'geral', convF: 'todos', convBusca: '', convAberto: new Set(),
+    secao: 'espacos', paginaEv: null, rsvp: {}, rsvpPedido: {}, abaEv: 'geral', escAberto: new Set(), convF: 'todos', convBusca: '', convAberto: new Set(),
     eventos: lsGet(LS.eventos, {}), evPend: new Set(lsGet(LS.evPend, [])),
     visitas: lsGet(LS.visitas, {}),
     pendentes: new Set(lsGet(LS.pendentes, [])),
@@ -1639,6 +1639,18 @@
     if ((b = t.closest('[data-pag]'))) { irPagina(b.dataset.pag); return; }
     if ((b = t.closest('[data-visao]'))) { S.visao[S.secao] = b.dataset.visao; ui.visao = S.visao; lsSet(LS.ui, ui); renderLista(); return; }
     if ((b = t.closest('[data-ev-aba]'))) { irAbaEv(b.dataset.evAba); return; }
+    if ((b = t.closest('[data-ir-cat]'))) {
+      const alvo = $('#cat-' + b.dataset.irCat); const nav = $('.ev-abas');
+      if (alvo) window.scrollTo({ top: alvo.getBoundingClientRect().top + window.scrollY - (nav ? nav.getBoundingClientRect().bottom : 0) - 10, behavior: 'smooth' });
+      return;
+    }
+    if ((b = t.closest('[data-esc-abrir]'))) {
+      const k = b.dataset.escAbrir; S.escAberto.has(k) ? S.escAberto.delete(k) : S.escAberto.add(k);
+      const ev = evAtual(); const i = ev.escolhas.findIndex((e) => escK(e) === k);
+      const el = b.closest('.esc');
+      if (i >= 0 && el) { el.outerHTML = linhaEscolha(ev.escolhas[i], i); const n = document.querySelector(`[data-esc-k="${CSS.escape(k)}"] .esc-campos select`); if (n) n.focus({ preventScroll: true }); }
+      return;
+    }
     if ((b = t.closest('[data-conv-f]'))) { S.convF = b.dataset.convF; refazerTabelaConv(); const n = $('#conv-nums'); if (n) n.innerHTML = convNums(evAtual()); return; }
     if ((b = t.closest('[data-conv-abrir]'))) {
       const k = b.dataset.convAbrir; S.convAberto.has(k) ? S.convAberto.delete(k) : S.convAberto.add(k);
@@ -2954,6 +2966,7 @@
       <div class="itens-festa">${linhas}</div>
       <div class="acoes-linha">
         <button type="button" class="btn ghost add-linha" data-ev-add="itens_festa">${ic('mais')}Adicionar item</button>
+        <span class="sug-rot">Sugestões prontas:</span>
         <button type="button" class="btn ghost add-linha" data-acao="itens-sug" data-itsug="todos">Lembrancinha comum a todos</button>
         <button type="button" class="btn ghost add-linha" data-acao="itens-sug" data-itsug="sexo">Lembrancinhas de menino e de menina</button>
         <button type="button" class="btn ghost add-linha" data-acao="itens-sug" data-itsug="idade">Lembrancinhas por faixa de idade</button>
@@ -2996,21 +3009,27 @@
 
 
   /* ---- Página do evento ---- */
+  const escK = (e) => `${e.cat || 'espacos'}|${e.id || e.nome || ''}`;
   function linhaEscolha(e, i) {
     const l = S.porId[e.id];
     const zap = l && zapLink(l.whatsapp, l.nome);
     const mp = l && menorPreco(l);
     const ref = l ? (mp != null ? `a partir de ${brl(mp)}` : 'valor sob consulta') : 'não está mais no catálogo';
     const v = l ? visita(l.id) : null;
-    return `<div class="esc st-${e.status}">
+    const k = escK(e); const aberto = S.escAberto.has(k);
+    const din = [e.valor != null ? `<strong>${brl(e.valor)}</strong>` : null, e.pago ? `${brl(e.pago)} pago` : null, e.pessoas ? `${e.pessoas} pessoas` : null].filter(Boolean).join(' · ');
+    return `<div class="esc st-${e.status} ${aberto ? 'aberta' : ''}" data-esc-k="${esc(k)}">
       <div class="esc-topo">
         <button type="button" class="esc-estrela" data-esc-melhor="${i}" aria-pressed="${fechado(e.status)}" title="${fechado(e.status) ? 'Tirar dos escolhidos' : 'Marcar como escolhido'}" aria-label="${fechado(e.status) ? 'Tirar dos escolhidos' : 'Marcar como escolhido'}">${ic('estrela')}</button>
         ${l ? `<button type="button" class="mini-capa-btn esc-capa" data-abrir="${l.id}" aria-label="Ver ${esc(l.nome)}">${miniCapa(l)}</button>` : ''}
         <div class="esc-nome">${l ? `<button type="button" data-abrir="${l.id}">${esc(l.nome)}</button>` : `<span>${esc(e.nome || 'Sem nome')}</span>`}
           <small>${esc([l ? tiposDe(l)[0] : null, ref, v && v.nota ? `sua nota ${v.nota}/5` : null].filter(Boolean).join(' · '))}</small></div>
-        <span class="selo-esc">${esc(escRot(e.status))}</span>
+        <span class="esc-dir"><span class="selo-esc">${esc(escRot(e.status))}</span>${din ? `<small class="esc-din">${din}</small>` : ''}</span>
+        <span class="esc-bts">${zap ? `<a class="mini zap" href="${zap}" target="_blank" rel="noopener" title="WhatsApp de ${esc(l.nome)}" aria-label="WhatsApp">${ic('zap')}</a>` : ''}
+          <button type="button" class="mini" data-esc-abrir="${esc(k)}" aria-expanded="${aberto}" title="${aberto ? 'Fechar' : 'Editar situação e valores'}">${ic(aberto ? 'x' : 'editar')}<span class="sr">${aberto ? 'Fechar' : 'Editar'}</span></button></span>
       </div>
-      <div class="esc-campos">
+      ${e.obs && !aberto ? `<p class="esc-obs">${esc(e.obs)}</p>` : ''}
+      ${aberto ? `<div class="esc-campos">
         <label class="campo"><span>Situação</span><select data-evc="escolhas.${i}.status">${ESC_STATUS.map(([k, r]) => `<option value="${k}" ${k === e.status ? 'selected' : ''}>${r}</option>`).join('')}</select></label>
         <label class="campo"><span>Valor combinado</span><input data-evc="escolhas.${i}.valor" data-tipo="num" inputmode="decimal" value="${e.valor != null ? esc(valorTxt(e.valor)) : ''}" placeholder="R$"></label>
         <label class="campo"><span>Já pago</span><input data-evc="escolhas.${i}.pago" data-tipo="num" inputmode="decimal" value="${e.pago != null ? esc(valorTxt(e.pago)) : ''}" placeholder="R$"></label>
@@ -3018,9 +3037,8 @@
         ${e.cat === 'espacos' || e.cat === 'buffet' ? `<label class="campo"><span>${e.cat === 'buffet' ? 'Buffet para (pessoas)' : 'Comporta (pessoas)'}</span><input data-evc="escolhas.${i}.pessoas" data-tipo="num" inputmode="numeric" value="${e.pessoas != null ? esc(e.pessoas) : ''}" placeholder="${l && capCatalogo(l) ? `catálogo: ${capCatalogo(l)}` : 'ex.: 80'}"></label>` : ''}
         <label class="campo largo"><span>Observação</span><input data-evc="escolhas.${i}.obs" maxlength="300" value="${esc(e.obs || '')}" placeholder="O que foi combinado, horário de montagem…"></label>
       </div>
-      <div class="esc-acoes">${zap ? `<a class="mini zap" href="${zap}" target="_blank" rel="noopener">${ic('zap')}WhatsApp</a>` : ''}
-        ${l && l.telefone && !zap ? `<a class="mini" href="tel:+55${digitos(l.telefone)}">${ic('fone')}Ligar</a>` : ''}
-        <span class="esp"></span><button type="button" class="link-btn" data-esc-tirar="${i}">Tirar do evento</button></div>
+      <div class="esc-acoes">${l && l.telefone && !zap ? `<a class="mini" href="tel:+55${digitos(l.telefone)}">${ic('fone')}Ligar</a>` : ''}
+        <span class="esp"></span><button type="button" class="link-btn perigo" data-esc-tirar="${i}">Tirar do evento</button></div>` : ''}
     </div>`;
   }
   function blocoCat(ev, k) {
@@ -3029,7 +3047,7 @@
     const idx = ev.escolhas.map((e, i) => [e, i]).filter(([e]) => e.cat === k).sort((a, b) => (ordem[a[0].status] ?? 3) - (ordem[b[0].status] ?? 3));
     const nF = idx.filter(([e]) => fechado(e.status)).length;
     const nO = idx.filter(([e]) => e.status === 'opcao').length;
-    return `<div class="pg-cat ${nF ? 'tem' : ''}">
+    return `<div class="pg-cat ${nF ? 'tem' : ''}" id="cat-${k}">
       <div class="pg-cat-topo"><h3>${ic(C.icone)}${esc(C.rot)}</h3>
         <span class="n">${nF ? `${nF} escolhido${nF > 1 ? 's' : ''}` : 'nada escolhido'}${nO ? ` · ${nO} ${nO === 1 ? 'opção' : 'opções'}` : ''}</span>
         <button type="button" class="btn ghost" data-picker="${k}">${ic('mais')}<span class="lbl">Adicionar opção</span></button></div>
@@ -3327,6 +3345,7 @@
       </div>`)}
       ${painel('fornecedores', `<div class="aba-cab"><div><h2>Fornecedores</h2>
         <p class="meta">Adicione as opções que está considerando e marque com a estrela as escolhidas. Pode haver mais de uma por categoria (buffet e bolo, por exemplo).</p></div></div>
+        <div class="cat-atalhos">${estCats(ev).map((x) => `<button type="button" class="c-${x.st}" data-ir-cat="${x.k}">${ic(x.st === 'ok' ? 'check' : CATS[x.k].icone)}${esc(CATS[x.k].curto)}<small>${x.n || ''}</small></button>`).join('')}</div>
         ${ORDEM_CATS.map((k) => blocoCat(ev, k)).join('')}`)}
       ${painel('convidados', abaConvidados(ev))}
       ${painel('convite', abaConvite(ev))}
