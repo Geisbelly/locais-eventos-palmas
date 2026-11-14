@@ -641,12 +641,18 @@
   }
 
   /* ============ Render: cards ============ */
-  // Crédito das fotos copiadas de terceiros (ex.: Google Maps), com link para a página de origem.
+  // Crédito das fotos copiadas de terceiros (Google Maps, Instagram), um link por fonte.
   function creditoHtml(fotos) {
-    const c = fotos.map((f) => f && f.credito).find((x) => x && /^https?:\/\//i.test(x.url || ''));
-    if (!c) return '';
-    const todas = fotos.every((f) => f && f.credito);
-    return `<a class="foto-credito" href="${esc(c.url)}" target="_blank" rel="noopener">${todas ? 'Fotos' : 'Parte das fotos'}: ${esc(c.nome || 'fonte')}</a>`;
+    const fontes = [];
+    fotos.forEach((f) => {
+      const c = f && f.credito;
+      if (c && /^https?:\/\//i.test(c.url || '') && !fontes.some((x) => (x.nome || '') === (c.nome || ''))) fontes.push(c);
+    });
+    if (!fontes.length) return '';
+    const rot = fotos.every((f) => f && f.credito) ? 'Fotos' : 'Parte das fotos';
+    const link = (c) => `<a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.nome || 'fonte')}</a>`;
+    if (fontes.length === 1) return `<a class="foto-credito" href="${esc(fontes[0].url)}" target="_blank" rel="noopener">${rot}: ${esc(fontes[0].nome || 'fonte')}</a>`;
+    return `<span class="foto-credito">${rot}: ${fontes.map(link).join(' · ')}</span>`;
   }
   function capaHtml(l, grande = false) {
     const fotos = (l.fotos || []).filter((f) => urlSegura(f.url || f));

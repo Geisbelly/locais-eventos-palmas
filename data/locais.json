@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-13T23:37:44Z",
+  "atualizado_em": "2026-11-14T00:18:44Z",
   "observacao": "Dados reunidos de páginas públicas. Campo ausente = não encontrado na fonte. Valores são referência da data de conferência e variam conforme dia, temporada e pacote.",
   "locais": [
     {
@@ -26,7 +26,7 @@
         }
       ],
       "pagamento": null,
-      "instagram": null,
+      "instagram": "plenitudeevento",
       "whatsapp": "(63) 9241-7077",
       "site": null,
       "horarios": [
@@ -59,6 +59,46 @@
           "credito": {
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/Plenitude+eventos/data=!4m2!3m1!1s0x933b370050bd072f:0x7a7060b9eac5062a"
+          }
+        },
+        {
+          "url": "fotos/plenitude/ig-DayKBgEmqTL.jpg",
+          "legenda": "Salão à noite",
+          "credito": {
+            "nome": "Instagram @plenitudeevento",
+            "url": "https://www.instagram.com/plenitudeevento/p/DayKBgEmqTL/"
+          }
+        },
+        {
+          "url": "fotos/plenitude/ig-DZ0yF_eO-m-.jpg",
+          "legenda": "Piscina",
+          "credito": {
+            "nome": "Instagram @plenitudeevento",
+            "url": "https://www.instagram.com/plenitudeevento/reel/DZ0yF_eO-m-/"
+          }
+        },
+        {
+          "url": "fotos/plenitude/ig-DYdOKzNjlG5.jpg",
+          "legenda": "Salão com mesas",
+          "credito": {
+            "nome": "Instagram @plenitudeevento",
+            "url": "https://www.instagram.com/plenitudeevento/p/DYdOKzNjlG5/"
+          }
+        },
+        {
+          "url": "fotos/plenitude/ig-DYQTgSCjn5e.jpg",
+          "legenda": "Piscina à noite",
+          "credito": {
+            "nome": "Instagram @plenitudeevento",
+            "url": "https://www.instagram.com/plenitudeevento/p/DYQTgSCjn5e/"
+          }
+        },
+        {
+          "url": "fotos/plenitude/ig-DUtzF-ujkUh.jpg",
+          "legenda": "Área externa",
+          "credito": {
+            "nome": "Instagram @plenitudeevento",
+            "url": "https://www.instagram.com/plenitudeevento/reel/DUtzF-ujkUh/"
           }
         }
       ],
@@ -109,7 +149,7 @@
       ],
       "taxas": [],
       "pagamento": null,
-      "instagram": null,
+      "instagram": "kazaraeventos",
       "whatsapp": "(63) 8405-9340",
       "site": null,
       "horarios": [],
@@ -145,6 +185,14 @@
           "credito": {
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/Kazara+Eventos/data=!4m2!3m1!1s0x9324cca0857fe623:0xd362a9d6bf416eed"
+          }
+        },
+        {
+          "url": "fotos/kazara/ig-DbbXy0dJX18.jpg",
+          "legenda": "Fachada à noite",
+          "credito": {
+            "nome": "Instagram @kazaraeventos",
+            "url": "https://www.instagram.com/kazaraeventos/reel/DbbXy0dJX18/"
           }
         }
       ],
@@ -185,7 +233,7 @@
       ],
       "taxas": [],
       "pagamento": "50% na assinatura do contrato e o restante 3 dias antes do evento. Gás por conta do cliente.",
-      "instagram": null,
+      "instagram": "ranchteixeira1",
       "whatsapp": "(63) 9963-2245",
       "site": null,
       "horarios": [
@@ -220,6 +268,30 @@
           "credito": {
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/Ranch+Teixeira/data=!4m2!3m1!1s0x933b373b380465bf:0xe91fac7fb76f34de"
+          }
+        },
+        {
+          "url": "fotos/ranch-teixeira/ig-DbVrIpUgvvo.jpg",
+          "legenda": "Beira do lago ao entardecer",
+          "credito": {
+            "nome": "Instagram @ranchteixeira1",
+            "url": "https://www.instagram.com/ranchteixeira1/reel/DbVrIpUgvvo/"
+          }
+        },
+        {
+          "url": "fotos/ranch-teixeira/ig-DTahPrYgIiw.jpg",
+          "legenda": "Piscina",
+          "credito": {
+            "nome": "Instagram @ranchteixeira1",
+            "url": "https://www.instagram.com/ranchteixeira1/reel/DTahPrYgIiw/"
+          }
+        },
+        {
+          "url": "fotos/ranch-teixeira/ig-DfXQBxBEQMO.jpg",
+          "legenda": "Decoração à noite",
+          "credito": {
+            "nome": "Instagram @ranchteixeira1",
+            "url": "https://www.instagram.com/ranchteixeira1/p/DfXQBxBEQMO/"
           }
         }
       ],
@@ -286,7 +358,7 @@
       ],
       "taxas": [],
       "pagamento": "Data reservada com sinal de 50% (ou a combinar).",
-      "instagram": null,
+      "instagram": "ricor.eventos",
       "whatsapp": "(63) 9100-2240",
       "site": null,
       "horarios": [
@@ -565,7 +637,7 @@
       ],
       "taxas": [],
       "pagamento": null,
-      "instagram": null,
+      "instagram": "p1eventos",
       "whatsapp": "(63) 8511-8171",
       "site": null,
       "horarios": [],
@@ -601,6 +673,38 @@
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/P+1+Eventos/data=!4m2!3m1!1s0x933b35d16d8722c7:0xf297c42ee4f1dab"
           }
+        },
+        {
+          "url": "fotos/p1-eventos/ig-CHGn1KFF4aw.jpg",
+          "legenda": "Mesas no gramado",
+          "credito": {
+            "nome": "Instagram @p1eventos",
+            "url": "https://www.instagram.com/p1eventos/p/CHGn1KFF4aw/"
+          }
+        },
+        {
+          "url": "fotos/p1-eventos/ig-BZ60Z__nynJ.jpg",
+          "legenda": "Fachada",
+          "credito": {
+            "nome": "Instagram @p1eventos",
+            "url": "https://www.instagram.com/p1eventos/p/BZ60Z__nynJ/"
+          }
+        },
+        {
+          "url": "fotos/p1-eventos/ig-BXtWU0CHuoN.jpg",
+          "legenda": "Piscina à noite",
+          "credito": {
+            "nome": "Instagram @p1eventos",
+            "url": "https://www.instagram.com/p1eventos/p/BXtWU0CHuoN/"
+          }
+        },
+        {
+          "url": "fotos/p1-eventos/ig-BXagODinQod.jpg",
+          "legenda": "Piscina",
+          "credito": {
+            "nome": "Instagram @p1eventos",
+            "url": "https://www.instagram.com/p1eventos/p/BXagODinQod/"
+          }
         }
       ],
       "observacoes": "Fica onde era a Planeta Chevrolet, em frente à Casa do Extintor. Costuma ter mais de uma festa infantil no mesmo dia.",
@@ -634,7 +738,7 @@
       ],
       "taxas": [],
       "pagamento": null,
-      "instagram": null,
+      "instagram": "guerreiro.eventos",
       "whatsapp": "(63) 9256-8493",
       "site": null,
       "horarios": [],
@@ -657,6 +761,38 @@
           "credito": {
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/Guerreiro+eventos/data=!4m2!3m1!1s0x933b37003f2b3529:0x8be101cf1111711c"
+          }
+        },
+        {
+          "url": "fotos/guerreiro-eventos/ig-DWEkbcXDTqY.jpg",
+          "legenda": "Piscina",
+          "credito": {
+            "nome": "Instagram @guerreiro.eventos",
+            "url": "https://www.instagram.com/guerreiro.eventos/p/DWEkbcXDTqY/"
+          }
+        },
+        {
+          "url": "fotos/guerreiro-eventos/ig-DdtzPj8kUFy.jpg",
+          "legenda": "Salão decorado",
+          "credito": {
+            "nome": "Instagram @guerreiro.eventos",
+            "url": "https://www.instagram.com/guerreiro.eventos/p/DdtzPj8kUFy/"
+          }
+        },
+        {
+          "url": "fotos/guerreiro-eventos/ig-DSYA5gfj81G.jpg",
+          "legenda": "Decoração rústica",
+          "credito": {
+            "nome": "Instagram @guerreiro.eventos",
+            "url": "https://www.instagram.com/guerreiro.eventos/p/DSYA5gfj81G/"
+          }
+        },
+        {
+          "url": "fotos/guerreiro-eventos/ig-DNVoFWMtGLX.jpg",
+          "legenda": "Área coberta",
+          "credito": {
+            "nome": "Instagram @guerreiro.eventos",
+            "url": "https://www.instagram.com/guerreiro.eventos/p/DNVoFWMtGLX/"
           }
         }
       ],
@@ -768,7 +904,7 @@
       ],
       "taxas": [],
       "pagamento": null,
-      "instagram": null,
+      "instagram": "surrealeventos__",
       "whatsapp": "(63) 8508-0524",
       "site": null,
       "horarios": [],
@@ -784,7 +920,16 @@
         "Festa com bilheteria",
         "Formatura"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/surreal-eventos/ig-DSAnALgjY8F.jpg",
+          "legenda": "Salão com mesas",
+          "credito": {
+            "nome": "Instagram @surrealeventos__",
+            "url": "https://www.instagram.com/surrealeventos__/p/DSAnALgjY8F/"
+          }
+        }
+      ],
       "observacoes": "Estrutura de casa de shows, com caixa de portaria. O Google Maps tem um perfil \"SURREAL EVENTOS\" sem endereço nem telefone: confirmar se é o mesmo lugar.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
@@ -857,13 +1002,22 @@
       ],
       "taxas": [],
       "pagamento": null,
-      "instagram": null,
+      "instagram": "chacaraw4",
       "whatsapp": "(63) 8414-5388",
       "site": null,
       "horarios": [],
       "comodidades": [],
       "eventos": [],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/espaco-aparecida-km16/ig-DTas7uBkQ8z.jpg",
+          "legenda": "Salão decorado",
+          "credito": {
+            "nome": "Instagram @chacaraw4",
+            "url": "https://www.instagram.com/chacaraw4/reel/DTas7uBkQ8z/"
+          }
+        }
+      ],
       "observacoes": "Na conversa o nome não apareceu; no Google Maps o mesmo WhatsApp é da Chácara W4. Detalhes do espaço vieram só em fotos.",
       "fontes": [
         "WhatsApp com o local (conversa de out–nov/2026)",
@@ -1141,7 +1295,7 @@
         }
       ],
       "pagamento": "Pix ou parcelado, com a última parcela até 10 dias antes do evento. Reserva com 30% + contrato.",
-      "instagram": null,
+      "instagram": "lamaison.pmw",
       "whatsapp": "(63) 9965-0102",
       "site": null,
       "horarios": [],
@@ -1153,7 +1307,24 @@
         "Corporativo",
         "Aniversário"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/la-maison/ig-DJSwzDMxeO4.jpg",
+          "legenda": "Salão",
+          "credito": {
+            "nome": "Instagram @lamaison.pmw",
+            "url": "https://www.instagram.com/lamaison.pmw/p/DJSwzDMxeO4/"
+          }
+        },
+        {
+          "url": "fotos/la-maison/ig-DJHt5x3RoCM.jpg",
+          "legenda": "Área externa",
+          "credito": {
+            "nome": "Instagram @lamaison.pmw",
+            "url": "https://www.instagram.com/lamaison.pmw/reel/DJHt5x3RoCM/"
+          }
+        }
+      ],
       "observacoes": "Valores da tabela 2025 enviada em nov/2026. Disseram que alugando o espaço todo há 20% de desconto: confirmar se já está nos R$ 5.000. Data show, microfones e som para corporativo são opcionais. No Google Maps o La Maison (local para eventos) aparece com outro telefone, (63) 98500-1847: confirmar se é o mesmo espaço.",
       "fontes": [
         "WhatsApp com o local (conversa de nov/2026)",
@@ -1300,7 +1471,7 @@
         }
       ],
       "pagamento": "50% na assinatura do contrato e o restante até 24h antes do evento.",
-      "instagram": null,
+      "instagram": "arena42_palmas",
       "whatsapp": "(63) 9212-5451",
       "site": null,
       "horarios": [
@@ -1325,6 +1496,14 @@
           "credito": {
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/Arena+42/data=!4m2!3m1!1s0x9324cb00160b787d:0xd974cb20696e8076"
+          }
+        },
+        {
+          "url": "fotos/arena-42/ig-DdkD8vMNbWD.jpg",
+          "legenda": "Mesas montadas no salão",
+          "credito": {
+            "nome": "Instagram @arena42_palmas",
+            "url": "https://www.instagram.com/arena42_palmas/reel/DdkD8vMNbWD/"
           }
         }
       ],
@@ -1560,7 +1739,7 @@
       "endereco": "Quadra 912 Sul, Avenida 95, Lote 10, Plano Diretor Sul",
       "capacidade": null,
       "precos": [],
-      "instagram": null,
+      "instagram": "californiapalace_",
       "whatsapp": "(63) 99299-7771",
       "site": "https://californiapalace.com.br/",
       "horarios": [],
@@ -1833,7 +2012,7 @@
       "endereco": null,
       "capacidade": null,
       "precos": [],
-      "instagram": null,
+      "instagram": "recantodaspedras1",
       "whatsapp": "(63) 98109-2240",
       "site": null,
       "horarios": [],
@@ -1888,7 +2067,7 @@
           "inclui": "Piscina, tendas, mesas redondas, cadeiras simples, fogão e freezer pequeno"
         }
       ],
-      "instagram": null,
+      "instagram": "chacaraespacogarden",
       "whatsapp": "(63) 8417-0627",
       "site": null,
       "horarios": [
@@ -2101,7 +2280,7 @@
       "endereco": "110 Norte, Alameda 13, Lote 04, Plano Diretor Norte",
       "capacidade": 1500,
       "precos": [],
-      "instagram": null,
+      "instagram": "ahadupalmas",
       "whatsapp": null,
       "telefone": "(63) 3213-4100",
       "site": null,
@@ -2210,7 +2389,7 @@
       "endereco": "Loteamento Coqueirinho - Fazenda José Caboclo",
       "capacidade": 480,
       "precos": [],
-      "instagram": null,
+      "instagram": "vilacabana",
       "whatsapp": "(63) 99237-8064",
       "site": null,
       "horarios": [],
@@ -2241,6 +2420,38 @@
           "credito": {
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/Vila+Cabana/data=!4m2!3m1!1s0x933b31a0caf28035:0x4c2200b99092883"
+          }
+        },
+        {
+          "url": "fotos/vila-cabana/ig-DJSC0faJ9sh.jpg",
+          "legenda": "Piscinas",
+          "credito": {
+            "nome": "Instagram @vilacabana",
+            "url": "https://www.instagram.com/vilacabana/p/DJSC0faJ9sh/"
+          }
+        },
+        {
+          "url": "fotos/vila-cabana/ig-CvXV-UxOtLG.jpg",
+          "legenda": "Fachada",
+          "credito": {
+            "nome": "Instagram @vilacabana",
+            "url": "https://www.instagram.com/vilacabana/p/CvXV-UxOtLG/"
+          }
+        },
+        {
+          "url": "fotos/vila-cabana/ig-CvUvxzfOShs.jpg",
+          "legenda": "Piscina",
+          "credito": {
+            "nome": "Instagram @vilacabana",
+            "url": "https://www.instagram.com/vilacabana/p/CvUvxzfOShs/"
+          }
+        },
+        {
+          "url": "fotos/vila-cabana/ig-Cj3VFvrusH0.jpg",
+          "legenda": "Salão",
+          "credito": {
+            "nome": "Instagram @vilacabana",
+            "url": "https://www.instagram.com/vilacabana/p/Cj3VFvrusH0/"
           }
         }
       ],
@@ -2275,7 +2486,7 @@
           "inclui": "Piscina, churrasqueira, cozinha, sinuca, suíte, mesas"
         }
       ],
-      "instagram": null,
+      "instagram": "eventos_cellebre",
       "whatsapp": "(63) 99241-7077",
       "site": null,
       "horarios": [
@@ -2312,6 +2523,38 @@
           "credito": {
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/Cellebre+Eventos/data=!4m2!3m1!1s0x933b3732d6b239bf:0xc00692656f951630"
+          }
+        },
+        {
+          "url": "fotos/cellebre/ig-DXouiwyALcR.jpg",
+          "legenda": "Piscina",
+          "credito": {
+            "nome": "Instagram @eventos_cellebre",
+            "url": "https://www.instagram.com/eventos_cellebre/p/DXouiwyALcR/"
+          }
+        },
+        {
+          "url": "fotos/cellebre/ig-DUtyM4UkmE-.jpg",
+          "legenda": "Entrada com pergolado",
+          "credito": {
+            "nome": "Instagram @eventos_cellebre",
+            "url": "https://www.instagram.com/eventos_cellebre/p/DUtyM4UkmE-/"
+          }
+        },
+        {
+          "url": "fotos/cellebre/ig-DcQsk5MG2sG.jpg",
+          "legenda": "Piscina à noite",
+          "credito": {
+            "nome": "Instagram @eventos_cellebre",
+            "url": "https://www.instagram.com/eventos_cellebre/p/DcQsk5MG2sG/"
+          }
+        },
+        {
+          "url": "fotos/cellebre/ig-DPXAUviinvT.jpg",
+          "legenda": "Mesas no jardim",
+          "credito": {
+            "nome": "Instagram @eventos_cellebre",
+            "url": "https://www.instagram.com/eventos_cellebre/reel/DPXAUviinvT/"
           }
         }
       ],
@@ -2367,7 +2610,7 @@
           "inclui": "Salão fechado e climatizado com mezanino"
         }
       ],
-      "instagram": null,
+      "instagram": "crystalhall_palmas",
       "whatsapp": null,
       "site": null,
       "horarios": [],
@@ -2415,7 +2658,7 @@
       "endereco": "Q. 103 Sul Rua SO 11, 09 - Lote 03/05 - Centro",
       "capacidade": null,
       "precos": [],
-      "instagram": null,
+      "instagram": "cabanadolago",
       "whatsapp": null,
       "site": null,
       "horarios": [],
@@ -2438,6 +2681,22 @@
           "credito": {
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/Cabana+do+Lago+Restaurante/data=!4m2!3m1!1s0x9324cb4cfd87b557:0x826c7df7071b7120"
+          }
+        },
+        {
+          "url": "fotos/cabana-do-lago/ig-DfUZp7eFihN.jpg",
+          "legenda": "Salão do restaurante",
+          "credito": {
+            "nome": "Instagram @cabanadolago",
+            "url": "https://www.instagram.com/cabanadolago/p/DfUZp7eFihN/"
+          }
+        },
+        {
+          "url": "fotos/cabana-do-lago/ig-DeY-EHjja0q.jpg",
+          "legenda": "Espaço kids",
+          "credito": {
+            "nome": "Instagram @cabanadolago",
+            "url": "https://www.instagram.com/cabanadolago/p/DeY-EHjja0q/"
           }
         }
       ],
@@ -2550,7 +2809,7 @@
           "inclui": null
         }
       ],
-      "instagram": null,
+      "instagram": "chacarasaocamilo",
       "whatsapp": null,
       "site": null,
       "horarios": [],
@@ -2581,6 +2840,46 @@
           "credito": {
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/Ch%C3%A1cara+S%C3%A3o+Camilo+de+Lelis/data=!4m2!3m1!1s0x9324c8c8c29572cf:0xff5c03d6ca5bbfae"
+          }
+        },
+        {
+          "url": "fotos/sao-camillo/ig-CAdt8w8FO2Q.jpg",
+          "legenda": "Piscina",
+          "credito": {
+            "nome": "Instagram @chacarasaocamilo",
+            "url": "https://www.instagram.com/chacarasaocamilo/p/CAdt8w8FO2Q/"
+          }
+        },
+        {
+          "url": "fotos/sao-camillo/ig-Bp64zYQAGf4.jpg",
+          "legenda": "Piscina e jardim",
+          "credito": {
+            "nome": "Instagram @chacarasaocamilo",
+            "url": "https://www.instagram.com/chacarasaocamilo/p/Bp64zYQAGf4/"
+          }
+        },
+        {
+          "url": "fotos/sao-camillo/ig-BgwaLkuBcMm.jpg",
+          "legenda": "Deck e quiosque",
+          "credito": {
+            "nome": "Instagram @chacarasaocamilo",
+            "url": "https://www.instagram.com/chacarasaocamilo/p/BgwaLkuBcMm/"
+          }
+        },
+        {
+          "url": "fotos/sao-camillo/ig-BckEJKaFbeu.jpg",
+          "legenda": "Casa e jardim",
+          "credito": {
+            "nome": "Instagram @chacarasaocamilo",
+            "url": "https://www.instagram.com/chacarasaocamilo/p/BckEJKaFbeu/"
+          }
+        },
+        {
+          "url": "fotos/sao-camillo/ig-BbegNwzFFew.jpg",
+          "legenda": "Lago",
+          "credito": {
+            "nome": "Instagram @chacarasaocamilo",
+            "url": "https://www.instagram.com/chacarasaocamilo/p/BbegNwzFFew/"
           }
         }
       ],
@@ -2736,7 +3035,7 @@
       "endereco": "104 Sul, Rua SE 5, 40, Centro",
       "capacidade": null,
       "precos": [],
-      "instagram": null,
+      "instagram": "joaoemaria_eventos",
       "whatsapp": null,
       "site": null,
       "horarios": [],
@@ -2757,6 +3056,30 @@
           "credito": {
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/Jo%C3%A3o+e+Maria+Eventos/data=!4m2!3m1!1s0x933b37be9fc5b871:0xed34c3b9a15c531c"
+          }
+        },
+        {
+          "url": "fotos/joao-e-maria/ig-CUVD-x6PKxk.jpg",
+          "legenda": "Mesa decorada",
+          "credito": {
+            "nome": "Instagram @joaoemaria_eventos",
+            "url": "https://www.instagram.com/joaoemaria_eventos/p/CUVD-x6PKxk/"
+          }
+        },
+        {
+          "url": "fotos/joao-e-maria/ig-CLr4PO-LW-T.jpg",
+          "legenda": "Mesa decorada",
+          "credito": {
+            "nome": "Instagram @joaoemaria_eventos",
+            "url": "https://www.instagram.com/joaoemaria_eventos/p/CLr4PO-LW-T/"
+          }
+        },
+        {
+          "url": "fotos/joao-e-maria/ig-B82HMtLFVXy.jpg",
+          "legenda": "Salão com brinquedos",
+          "credito": {
+            "nome": "Instagram @joaoemaria_eventos",
+            "url": "https://www.instagram.com/joaoemaria_eventos/p/B82HMtLFVXy/"
           }
         }
       ],
@@ -2812,7 +3135,7 @@
       "endereco": "ARNE 64, 508 N - QC 04, Alameda 06 e 08, Lote 04 - Plano Diretor Norte",
       "capacidade": null,
       "precos": [],
-      "instagram": null,
+      "instagram": "silverhill.eventos",
       "whatsapp": "(63) 99715-8800",
       "site": null,
       "horarios": [],
@@ -2833,6 +3156,30 @@
           "credito": {
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/Espa%C3%A7o+Silver+Hill+Festas+e+Eventos/data=!4m2!3m1!1s0x9324cdf7d9a97585:0x62e978b98a8bf7ba"
+          }
+        },
+        {
+          "url": "fotos/silver-hill/ig-DV6-wetiUv6.jpg",
+          "legenda": "Fachada",
+          "credito": {
+            "nome": "Instagram @silverhill.eventos",
+            "url": "https://www.instagram.com/silverhill.eventos/reel/DV6-wetiUv6/"
+          }
+        },
+        {
+          "url": "fotos/silver-hill/ig-DU3ekl2l7t3.jpg",
+          "legenda": "Piscina",
+          "credito": {
+            "nome": "Instagram @silverhill.eventos",
+            "url": "https://www.instagram.com/silverhill.eventos/reel/DU3ekl2l7t3/"
+          }
+        },
+        {
+          "url": "fotos/silver-hill/ig-DWXA0ktlZSK.jpg",
+          "legenda": "Salão decorado",
+          "credito": {
+            "nome": "Instagram @silverhill.eventos",
+            "url": "https://www.instagram.com/silverhill.eventos/p/DWXA0ktlZSK/"
           }
         }
       ],
@@ -3044,7 +3391,7 @@
           "inclui": "Limpeza inclusa: entregam limpo e não precisa limpar na devolução"
         }
       ],
-      "instagram": null,
+      "instagram": "topaziopmw",
       "whatsapp": "(63) 98484-8748",
       "site": null,
       "horarios": [
@@ -3128,7 +3475,7 @@
       "endereco": "Rua 18 qudra 17 lote 24 Lt 24 Setor, Av. União Sul",
       "capacidade": null,
       "precos": [],
-      "instagram": null,
+      "instagram": "uniaoeventos749",
       "whatsapp": "(63) 99293-9127",
       "site": null,
       "horarios": [],
@@ -3149,6 +3496,30 @@
           "credito": {
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/Espa%C3%A7o+uni%C3%A3o+festa+e+eventos/data=!4m2!3m1!1s0x933b31e16c95cfc9:0x37bc0daa69203a51"
+          }
+        },
+        {
+          "url": "fotos/uniao/ig-CuKyfgKPW9n.jpg",
+          "legenda": "Salão",
+          "credito": {
+            "nome": "Instagram @uniaoeventos749",
+            "url": "https://www.instagram.com/uniaoeventos749/p/CuKyfgKPW9n/"
+          }
+        },
+        {
+          "url": "fotos/uniao/ig-Cs7hRVkuU50.jpg",
+          "legenda": "Salão",
+          "credito": {
+            "nome": "Instagram @uniaoeventos749",
+            "url": "https://www.instagram.com/uniaoeventos749/p/Cs7hRVkuU50/"
+          }
+        },
+        {
+          "url": "fotos/uniao/ig-Cp4u6dnug5c.jpg",
+          "legenda": "Mesa decorada",
+          "credito": {
+            "nome": "Instagram @uniaoeventos749",
+            "url": "https://www.instagram.com/uniaoeventos749/p/Cp4u6dnug5c/"
           }
         }
       ],
@@ -3187,7 +3558,7 @@
           "inclui": null
         }
       ],
-      "instagram": null,
+      "instagram": "espacogoldeneventos",
       "whatsapp": "(63) 99217-6770",
       "site": null,
       "horarios": [],
@@ -3216,6 +3587,30 @@
           "credito": {
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/Espa%C3%A7o+Golden/data=!4m2!3m1!1s0x933b374e973bdba9:0x9b9c2c71c58b5592"
+          }
+        },
+        {
+          "url": "fotos/golden/ig-CmIFtMZAhED.jpg",
+          "legenda": "Salão",
+          "credito": {
+            "nome": "Instagram @espacogoldeneventos",
+            "url": "https://www.instagram.com/espacogoldeneventos/reel/CmIFtMZAhED/"
+          }
+        },
+        {
+          "url": "fotos/golden/ig-DbZDZQioDDw.jpg",
+          "legenda": "Salão decorado",
+          "credito": {
+            "nome": "Instagram @espacogoldeneventos",
+            "url": "https://www.instagram.com/espacogoldeneventos/reel/DbZDZQioDDw/"
+          }
+        },
+        {
+          "url": "fotos/golden/ig-DYN2Ytugvx8.jpg",
+          "legenda": "Mesa decorada",
+          "credito": {
+            "nome": "Instagram @espacogoldeneventos",
+            "url": "https://www.instagram.com/espacogoldeneventos/reel/DYN2Ytugvx8/"
           }
         }
       ],
@@ -3248,17 +3643,42 @@
       "id": "ximenes",
       "nome": "Espaço Ximenes",
       "tipo": "Espaço de eventos",
-      "bairro": "Palmas",
+      "bairro": "804 Sul",
       "endereco": null,
       "capacidade": null,
       "precos": [],
-      "instagram": null,
+      "instagram": "espaco.ximenes",
       "whatsapp": "(63) 98449-6898",
       "site": null,
       "horarios": [],
       "comodidades": [],
       "eventos": [],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/ximenes/ig-DfUhyteBgbd.jpg",
+          "legenda": "Piscina e quiosque",
+          "credito": {
+            "nome": "Instagram @espaco.ximenes",
+            "url": "https://www.instagram.com/espaco.ximenes/reel/DfUhyteBgbd/"
+          }
+        },
+        {
+          "url": "fotos/ximenes/ig-DfTPkKPuwRC.jpg",
+          "legenda": "Deck",
+          "credito": {
+            "nome": "Instagram @espaco.ximenes",
+            "url": "https://www.instagram.com/espaco.ximenes/reel/DfTPkKPuwRC/"
+          }
+        },
+        {
+          "url": "fotos/ximenes/ig-Dc6wYJchYYx.jpg",
+          "legenda": "Área da piscina",
+          "credito": {
+            "nome": "Instagram @espaco.ximenes",
+            "url": "https://www.instagram.com/espaco.ximenes/p/Dc6wYJchYYx/"
+          }
+        }
+      ],
       "observacoes": "Só nome e WhatsApp no diretório.",
       "fontes": [
         "https://guiafix.com.br/palmas-to/salao-de-festas"
@@ -3410,7 +3830,7 @@
         }
       ],
       "pagamento": null,
-      "instagram": null,
+      "instagram": "c2eventospmw",
       "whatsapp": "(63) 98451-8576",
       "site": null,
       "horarios": [
@@ -3431,7 +3851,16 @@
         "Aniversário infantil",
         "Aniversário"
       ],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/espaco-60-brinquedoteca/ig-DHOWCZpOApB.jpg",
+          "legenda": "Salão decorado",
+          "credito": {
+            "nome": "Instagram @c2eventospmw",
+            "url": "https://www.instagram.com/c2eventospmw/reel/DHOWCZpOApB/"
+          }
+        }
+      ],
       "observacoes": "Evento para até 60 pessoas. No Google Maps o WhatsApp é do \"C2 eventos\"; no mesmo ponto há o perfil \"ESPAÇO CELEBRAR\". Confirmar o endereço exato.",
       "fontes": [
         "Conversas de WhatsApp sobre a festa (out–nov/2026)",
@@ -3563,7 +3992,7 @@
         }
       ],
       "pagamento": null,
-      "instagram": null,
+      "instagram": "ranchonoleto",
       "whatsapp": "(63) 98485-7884",
       "site": null,
       "horarios": [
@@ -3588,7 +4017,40 @@
         "13 jogos de mesa"
       ],
       "eventos": [],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/rancho-noleto/ig-DLXm91iANeJ.jpg",
+          "legenda": "Piscina",
+          "credito": {
+            "nome": "Instagram @ranchonoleto",
+            "url": "https://www.instagram.com/ranchonoleto/reel/DLXm91iANeJ/"
+          }
+        },
+        {
+          "url": "fotos/rancho-noleto/ig-DHf_HGhxQL3.jpg",
+          "legenda": "Piscina",
+          "credito": {
+            "nome": "Instagram @ranchonoleto",
+            "url": "https://www.instagram.com/ranchonoleto/p/DHf_HGhxQL3/"
+          }
+        },
+        {
+          "url": "fotos/rancho-noleto/ig-DBj8kHJxCw5.jpg",
+          "legenda": "Área coberta",
+          "credito": {
+            "nome": "Instagram @ranchonoleto",
+            "url": "https://www.instagram.com/ranchonoleto/p/DBj8kHJxCw5/"
+          }
+        },
+        {
+          "url": "fotos/rancho-noleto/ig-DBeye4LR-M8.jpg",
+          "legenda": "Campo de futebol",
+          "credito": {
+            "nome": "Instagram @ranchonoleto",
+            "url": "https://www.instagram.com/ranchonoleto/p/DBeye4LR-M8/"
+          }
+        }
+      ],
       "observacoes": "Cabem umas 100 pessoas com conforto; já recebeu mais, mas fica cheio. Valores do folheto de promoção de fim de ano.",
       "fontes": [
         "WhatsApp com o local (conversa de nov/2026)",
@@ -3706,7 +4168,7 @@
       ],
       "taxas": [],
       "pagamento": null,
-      "instagram": null,
+      "instagram": "chacara.recantodosburitipmw",
       "whatsapp": "(63) 98438-8643",
       "site": null,
       "horarios": [],
@@ -3753,6 +4215,22 @@
         {
           "url": "fotos/recanto-dos-buritis/cozinha.jpg",
           "legenda": "Cozinha"
+        },
+        {
+          "url": "fotos/recanto-dos-buritis/ig-DefcA8Wi21u.jpg",
+          "legenda": "Área decorada",
+          "credito": {
+            "nome": "Instagram @chacara.recantodosburitipmw",
+            "url": "https://www.instagram.com/chacara.recantodosburitipmw/reel/DefcA8Wi21u/"
+          }
+        },
+        {
+          "url": "fotos/recanto-dos-buritis/ig-DeHXWV-Cgxg.jpg",
+          "legenda": "Área verde",
+          "credito": {
+            "nome": "Instagram @chacara.recantodosburitipmw",
+            "url": "https://www.instagram.com/chacara.recantodosburitipmw/reel/DeHXWV-Cgxg/"
+          }
         }
       ],
       "observacoes": "Aluga a chácara inteira. O valor é passado conforme o evento, a data e o número de pessoas. Fins de semana disputados: reservam vários dias seguidos. As fotos enviadas não mostram a piscina.",
@@ -3799,7 +4277,7 @@
       ],
       "taxas": [],
       "pagamento": null,
-      "instagram": null,
+      "instagram": "oasis_ducerrado",
       "whatsapp": "(63) 99229-6387",
       "site": null,
       "horarios": [],
@@ -3814,7 +4292,16 @@
         "Jogos de mesas de plástico"
       ],
       "eventos": [],
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/oasis-ducerrado/ig-DL-vL_KPPIj.jpg",
+          "legenda": "Área externa com gramado",
+          "credito": {
+            "nome": "Instagram @oasis_ducerrado",
+            "url": "https://www.instagram.com/oasis_ducerrado/reel/DL-vL_KPPIj/"
+          }
+        }
+      ],
       "observacoes": "Limpeza e gás já inclusos na diária. Tem hospedagem em 3 suítes com ar. As fotos vieram, mas a conversa foi exportada sem mídia.",
       "fontes": [
         "WhatsApp com o local (conversa de nov/2026)",

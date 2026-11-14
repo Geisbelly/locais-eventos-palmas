@@ -906,6 +906,10 @@ body[data-modo="eventos"] .grade-cat { grid-template-columns: 1fr; margin-top: 8
 /* Crédito das fotos de terceiros */
 .foto-credito { position: absolute; left: 12px; bottom: 12px; background: rgba(20,18,15,.6); color: #fff; font-size: .72rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; text-decoration: none; z-index: 1; }
 .foto-credito:hover, .foto-credito:focus-visible { background: rgba(20,18,15,.82); text-decoration: underline; }
+span.foto-credito { max-width: calc(100% - 104px); line-height: 1.35; }
+span.foto-credito:hover { text-decoration: none; }
+.foto-credito a { color: inherit; text-decoration: none; }
+.foto-credito a:hover, .foto-credito a:focus-visible { text-decoration: underline; }
 
 /* ===== Correção: topo, capas, mapa e distância (v11) ===== */
 .topo-in { flex-wrap: nowrap; }
