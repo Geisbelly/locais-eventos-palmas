@@ -3243,8 +3243,9 @@
   // Pessoas já cobertas: lugares dos convites da lista + quem respondeu pelo link geral (fora da lista).
   const listaCobre = (ev) => {
     const ids = new Set(ev.convidados.map((c) => c.id));
-    return ev.convidados.filter((c) => c.nome).reduce((a, c) => a + (numV(c.lugares) || 1), 0)
-      + rsvpsDe(ev.id).filter((r) => !r.convidado || !ids.has(r.convidado)).reduce((a, r) => a + Math.max(1, (Number(r.adultos) || 0) + (Number(r.criancas) || 0)), 0);
+    const rs = rsvpsDe(ev.id); const pes = (r) => Math.max(1, (Number(r.adultos) || 0) + (Number(r.criancas) || 0));
+    return ev.convidados.reduce((a, c) => { const r = rs.find((x) => x.convidado === c.id); return a + (r ? Math.max(numV(c.lugares) || 0, pes(r)) : c.nome ? numV(c.lugares) || 1 : 0); }, 0)
+      + rs.filter((r) => !r.convidado || !ids.has(r.convidado)).reduce((a, r) => a + pes(r), 0);
   };
   const barra = (v, tot, cls = '') => `<span class="kpi-barra ${cls}"><i style="width:${tot ? Math.min(100, (v / tot) * 100).toFixed(1) : 0}%"></i></span>`;
   function kpisHtml(ev, c) {
