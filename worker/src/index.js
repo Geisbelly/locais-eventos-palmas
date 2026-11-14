@@ -6,7 +6,8 @@
 // PUT  /dados/:colecao/:id -> cadastra ou edita sem chave. Excluir (removido: true) exige X-Chave
 
 const MAX_BYTES = 20_000;
-const MAX_BYTES_DADOS = 100_000;
+const MAX_BYTES_DADOS = 300_000;
+const MAX_HTML = 200_000; // campos *_html (modelo de convite feito pelo organizador)
 // publica = qualquer um lê e grava. A chave só vale para excluir.
 // confirmacoes = respostas dos convidados aos convites (uma por convidado, filtráveis por ?evento=).
 const COLECOES = { locais: { publica: true }, fornecedores: { publica: true }, eventos: { publica: true }, confirmacoes: { publica: true } };
@@ -84,7 +85,7 @@ function limparGenerico(v, nivel = 0) {
     let n = 0;
     for (const [k, x] of Object.entries(v)) {
       if (!/^[a-z0-9_]{1,40}$/i.test(k) || n++ >= 80) continue;
-      o[k] = limparGenerico(x, nivel + 1);
+      o[k] = typeof x === 'string' && k.endsWith('_html') ? x.slice(0, MAX_HTML) : limparGenerico(x, nivel + 1);
     }
     return o;
   }

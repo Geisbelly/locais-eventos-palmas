@@ -1767,6 +1767,19 @@
       if (a === 'conv-importar') importarConvidados();
       if (a === 'rec-abrir') abrirRecepcao();
       if (a === 'msg-abrir') abrirMensagens();
+      if (a === 'modelo-exemplo') {
+        const ev = evAtual();
+        if (String(ev.convite.modelo_html || '').trim() && !confirm('Trocar o HTML atual pelo modelo de exemplo?')) return;
+        fetch('modelos/convite-exemplo.html', { cache: 'no-store' }).then((r) => r.text()).then((txt) => { ev.convite.modelo_html = txt; salvarEvento(ev); })
+          .catch(() => toast('Não consegui abrir o modelo de exemplo.'));
+      }
+      if (a === 'modelo-baixar') {
+        const ev = evAtual(); const txt = ev.convite.modelo_html || '';
+        if (!txt) { toast('Ainda não há HTML.'); return; }
+        const el = document.createElement('a');
+        el.href = URL.createObjectURL(new Blob([txt], { type: 'text/html;charset=utf-8' }));
+        el.download = `convite-${ev.id}.html`; document.body.appendChild(el); el.click(); el.remove();
+      }
       if (a === 'rec-novo') chegouSemConfirmar();
       if (a === 'conv-lembrar') abrirLembretes();
       if (a === 'rsvp-csv') exportarRespostas();
@@ -1820,6 +1833,12 @@
     }
     if (t.id === 'f-porpag') { S.porPag = Number(t.value) || 12; ui.porPag = S.porPag; lsSet(LS.ui, ui); renderLista(); return; }
     if (t.id === 'in-import' && t.files[0]) importar(t.files[0]);
+    if (t.id === 'in-modelo' && t.files[0] && S.paginaEv) {
+      const f = t.files[0];
+      if (f.size > 200000) { toast('Arquivo grande demais (máximo 200 KB). Use links para as imagens.'); return; }
+      f.text().then((txt) => { const ev = evAtual(); ev.convite.modelo_html = txt; salvarEvento(ev); toast('Modelo carregado. Toque em Ver convite para conferir.'); });
+      return;
+    }
     if (t.matches('[data-rsvp]') && S.paginaEv) { editarResposta(t); return; }
     if (t.matches('[data-evc]') && S.paginaEv) {
       const ev = evAtual();
@@ -1829,6 +1848,7 @@
         v = numDe(v);
         if (v == null && t.value.trim()) { toast('Não entendi o valor. Use números, ex.: 1.500'); t.value = ''; }
       }
+      if (t.dataset.evc === 'convite.modelo_html' && String(v).length > 200000) { toast('O HTML passou de 200.000 caracteres. Tire imagens embutidas e use links.'); return; }
       setCaminho(ev, t.dataset.evc, v);
       // Mudar a categoria muda o agrupamento do orçamento: redesenha a página.
       const estrutura = t.tagName === 'SELECT' || tp === 'bool' || /^gastos\.\d+\.categoria$/.test(t.dataset.evc) || /^escolhas\.\d+\.pessoas$|^buffet_isento_ate$|^convite\.prazo$|^convidados\.\d+\.lugares$/.test(t.dataset.evc);
@@ -2295,7 +2315,25 @@
         <p class="prazo-st">${prazoStatus(ev)}</p>
       </div>
       <div id="conv-lotacao" class="lotacao">${lotacaoHtml(ev)}</div>
-      <details class="conv-cfg"><summary>Personalizar o convite</summary>
+      <details class="conv-cfg" ${cv.modelo === 'html' ? 'open' : ''}><summary>Personalizar o convite</summary>
+        <label class="campo"><span>Aparência do convite</span><select data-evc="convite.modelo">
+          <option value="" ${cv.modelo !== 'html' ? 'selected' : ''}>Modelo pronto (escolho as cores)</option>
+          <option value="html" ${cv.modelo === 'html' ? 'selected' : ''}>Meu próprio HTML (design livre)</option></select></label>
+        ${cv.modelo === 'html' ? `<div class="modelo-html">
+          <p class="ajuda">Cole aqui o HTML do convite com o seu design. Onde quiser os dados do evento, escreva os campos entre chaves duplas:
+            <code>{{titulo}}</code> <code>{{ola}}</code> <code>{{data}}</code> <code>{{dia}}</code> <code>{{mes}}</code> <code>{{horario}}</code> <code>{{local}}</code> <code>{{endereco}}</code> <code>{{tema}}</code> <code>{{mensagem}}</code> <code>{{prazo}}</code> <code>{{faltam}}</code>.
+            E coloque os blocos prontos onde eles devem aparecer: <code>{{confirmacao}}</code> (confirmação de presença), <code>{{mapa}}</code>, <code>{{agenda}}</code> e <code>{{presentes}}</code>.
+            Os blocos usam a fonte e a cor do texto do seu HTML; as cores dos botões vêm das variáveis <code>--cor</code>, <code>--cor-escura</code>, <code>--cor-fundo</code> e <code>--linha</code> do seu CSS.
+            Scripts não rodam no convite e imagens precisam ser links (https://…).</p>
+          <div class="acoes-linha">
+            <button type="button" class="btn ghost" data-acao="modelo-exemplo">Começar com o modelo de exemplo</button>
+            <label class="btn ghost"><input type="file" id="in-modelo" accept=".html,.htm,text/html" hidden>Carregar arquivo .html</label>
+            <button type="button" class="btn ghost" data-acao="modelo-baixar">Baixar o HTML</button>
+            <a class="btn ghost" href="${esc(linkConvite(ev))}" target="_blank" rel="noopener">${ic('olho')}Ver convite</a>
+          </div>
+          <textarea class="codigo" data-evc="convite.modelo_html" rows="14" spellcheck="false" autocapitalize="off" placeholder="<!doctype html>…">${esc(cv.modelo_html || '')}</textarea>
+          <p class="meta">${(cv.modelo_html || '').length.toLocaleString('pt-BR')} de 200.000 caracteres. ${String(cv.modelo_html || '').includes('{{confirmacao}}') ? '' : 'Sem <code>{{confirmacao}}</code>, a confirmação aparece no fim da página.'}</p>
+        </div>` : ''}
         <div class="grade-2">
           <label class="campo largo"><span>Título</span><input data-evc="convite.titulo" maxlength="120" value="${esc(cv.titulo || '')}" placeholder="${esc(ev.nome)}"></label>
           <label class="campo largo"><span>Frase de abertura</span><input data-evc="convite.chamada" maxlength="120" value="${esc(cv.chamada || '')}" placeholder="Você é nosso convidado especial para"></label>

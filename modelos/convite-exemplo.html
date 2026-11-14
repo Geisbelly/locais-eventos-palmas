@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<!--
+  MODELO DE CONVITE — edite à vontade (cores, fontes, textos, imagens).
+
+  Campos que viram texto do evento:
+    {{ola}} {{convidado}} {{chamada}} {{titulo}} {{tema}} {{data}} {{dia_semana}} {{dia}} {{mes}} {{ano}}
+    {{hora}} {{horario}} {{local}} {{endereco}} {{mensagem}} {{prazo}} {{faltam}} {{lugares}}
+
+  Blocos prontos (mantêm o funcionamento e herdam a fonte e a cor do texto daqui):
+    {{confirmacao}}  formulário de confirmação de presença (adultos, crianças e idades)
+    {{mapa}}         mapa com o local, rota desenhada e botões do GPS
+    {{agenda}}       botões para salvar na agenda
+    {{presentes}}    dica e lista de presentes
+
+  Cores dos blocos: defina estas variáveis no seu CSS (aqui estão no body).
+    --cor (botões e destaques), --cor-escura (textos de destaque), --cor-fundo (fundo do botão escolhido),
+    --linha (bordas), --suave (textos secundários)
+
+  Imagens: use links (https://...). Scripts não rodam no convite.
+-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500&family=Quicksand:wght@400;600&display=swap">
+<style>
+  body {
+    margin: 0; min-height: 100vh;
+    font-family: 'Quicksand', system-ui, sans-serif; color: #2d2a4a;
+    background: radial-gradient(circle at 20% 10%, #fde7c8 0, transparent 40%), radial-gradient(circle at 85% 30%, #d9e4ff 0, transparent 45%), #f7f3ee;
+    --cor: #e08a2c; --cor-escura: #a85a12; --cor-fundo: #fdebd3; --linha: #eadfce; --suave: #7a7390;
+  }
+  .pagina { max-width: 520px; margin: 0 auto; padding: 28px 16px 48px; }
+  .cartao { background: #fffdf8; border-radius: 28px; padding: 36px 26px; box-shadow: 0 20px 60px -30px rgba(45, 42, 74, .45); text-align: center; position: relative; overflow: hidden; }
+  .sol { width: 96px; height: 96px; margin: 0 auto 16px; border-radius: 50%; background: radial-gradient(circle, #ffd27a 0 45%, #ffb347 46% 60%, transparent 61%); box-shadow: 0 0 0 10px #fff3dc, 0 0 0 20px #fff9ee; }
+  .ola { color: var(--cor-escura); font-weight: 600; margin: 0; }
+  .chamada { color: var(--suave); margin: 4px 0 14px; }
+  h1 { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 8vw, 2.8rem); line-height: 1.05; margin: 0 0 6px; }
+  .tema { font-family: 'Playfair Display', Georgia, serif; font-style: italic; color: var(--cor-escura); margin: 0 0 22px; font-size: 1.15rem; }
+  .data { display: inline-flex; gap: 14px; align-items: center; padding: 10px 18px; border-radius: 999px; background: #fff3dc; font-weight: 600; }
+  .data b { font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; color: var(--cor-escura); }
+  .faltam { color: var(--suave); font-size: .9rem; margin: 8px 0 0; }
+  .onde { margin: 22px 0 6px; }
+  .onde strong { display: block; font-size: 1.05rem; }
+  .onde span { color: var(--suave); font-size: .92rem; }
+  .mensagem { margin: 18px 0; white-space: pre-line; }
+  .miudo { color: var(--suave); font-size: .85rem; margin: 6px 0; }
+  .confirmar { margin-top: 26px; padding-top: 22px; border-top: 2px dotted var(--linha); }
+  .confirmar h2 { font-family: 'Playfair Display', Georgia, serif; margin: 0 0 4px; }
+</style>
+</head>
+<body>
+  <main class="pagina">
+    <article class="cartao">
+      <div class="sol" aria-hidden="true"></div>
+      <p class="ola">{{ola}}</p>
+      <p class="chamada">{{chamada}}</p>
+      <h1>{{titulo}}</h1>
+      <p class="tema">{{tema}}</p>
+      <div class="data"><span>{{dia_semana}}</span><b>{{dia}}</b><span>{{mes}} · {{horario}}</span></div>
+      <p class="faltam">{{faltam}}</p>
+      <div class="onde"><strong>{{local}}</strong><span>{{endereco}}</span></div>
+      {{mapa}}
+      <p class="mensagem">{{mensagem}}</p>
+      <p class="miudo">{{lugares}}</p>
+      <p class="miudo">Confirme até {{prazo}}</p>
+      {{agenda}}
+      {{presentes}}
+      <section class="confirmar">
+        {{confirmacao}}
+      </section>
+    </article>
+  </main>
+</body>
+</html>

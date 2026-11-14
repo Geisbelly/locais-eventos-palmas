@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,650;1,9..144,500&family=Inter:wght@400;500;600&display=swap">
-  <style>
+  <style id="base-css">
     :root {
       --bg: #f6f1e9; --papel: #fffdf9; --tinta: #2a241d; --suave: #6f665b; --linha: #e6ddd0;
       --cor: #b4781f; --cor-escura: #8a5a12; --cor-fundo: #f7ecd9;
@@ -132,6 +132,9 @@
     const estrela = '<svg class="enfeite" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M32 8l6.5 14.2 15.5 1.6-11.6 10.4 3.3 15.3L32 41.7l-13.7 7.8 3.3-15.3L10 23.8l15.5-1.6z"/><circle cx="52" cy="10" r="2.2" fill="currentColor" stroke="none"/><circle cx="10" cy="50" r="1.8" fill="currentColor" stroke="none"/><circle cx="56" cy="46" r="1.4" fill="currentColor" stroke="none"/></svg>';
 
     let reservas = [];
+    // Partes do convite podem morar dentro de shadow roots (modelo HTML próprio): procura em todas.
+    const RAIZES = [document];
+    const $id = (id) => { for (const r of RAIZES) { const e = r.getElementById(id); if (e) return e; } return null; };
     const ARAGUAINA = 3; // Palmas: UTC-3, sem horário de verão
     function quandoUtc(ev) {
       if (!ev.data) return null;
@@ -209,10 +212,12 @@
     function mapaConvite(dest, rota) {
       const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css'; document.head.appendChild(css);
       const js = document.createElement('script'); js.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
-      js.onerror = () => { const m = document.getElementById('mapa'); if (m) m.remove(); };
+      js.onerror = () => { const m = $id('mapa'); if (m) m.remove(); };
+      const raizMapa = $id('mapa') && $id('mapa').getRootNode();
+      if (raizMapa && raizMapa !== document) raizMapa.appendChild(css.cloneNode());
       js.onload = () => {
-        const el = document.getElementById('mapa'); if (!el) return;
-        const cor = getComputedStyle(document.body).getPropertyValue('--cor').trim() || '#b4781f';
+        const el = $id('mapa'); if (!el) return;
+        const cor = getComputedStyle(el).getPropertyValue('--cor').trim() || '#b4781f';
         const map = L.map(el, { scrollWheelZoom: false, dragging: !L.Browser.mobile, tap: false });
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(map);
         if (rota.length > 1) {
@@ -226,6 +231,75 @@
       document.head.appendChild(js);
     }
 
+
+    /* ---- Modelo HTML feito pelo organizador ----
+       Os campos {{titulo}}, {{data}}... viram texto; {{confirmacao}}, {{mapa}}, {{agenda}} e {{presentes}}
+       viram blocos prontos. Scripts e eventos são removidos: o HTML só define a aparência. */
+    function limparModelo(doc) {
+      doc.querySelectorAll('script,iframe,frame,frameset,object,embed,applet,base,meta,form,portal,noscript,template').forEach((e) => e.remove());
+      doc.querySelectorAll('link').forEach((l) => {
+        if (!(String(l.rel).toLowerCase() === 'stylesheet' && /^https:\/\/fonts\.googleapis\.com\//.test(l.getAttribute('href') || ''))) l.remove();
+      });
+      doc.querySelectorAll('set,animate').forEach((e) => { if (/href/i.test(e.getAttribute('attributeName') || '')) e.remove(); });
+      const URLS = ['href', 'src', 'xlink:href', 'action', 'formaction', 'srcset', 'poster', 'background', 'data', 'ping'];
+      doc.querySelectorAll('*').forEach((el) => {
+        [...el.attributes].forEach((a) => {
+          const n = a.name.toLowerCase();
+          if (n.startsWith('on')) { el.removeAttribute(a.name); return; }
+          if (URLS.includes(n)) {
+            const v = a.value.replace(/[\s\u0000-\u001f]+/g, '').toLowerCase();
+            const imagem = n === 'src' && el.tagName.toLowerCase() === 'img' && v.startsWith('data:image/');
+            if (/^(javascript|vbscript):/.test(v) || (v.startsWith('data:') && !imagem)) el.removeAttribute(a.name);
+          }
+        });
+        if (el.tagName.toLowerCase() === 'a' && el.getAttribute('target') === '_blank') el.setAttribute('rel', 'noopener');
+      });
+    }
+    let CSS_BLOCO = '';
+    function cssDosBlocos() {
+      if (CSS_BLOCO) return CSS_BLOCO;
+      const base = $id('base-css') ? $id('base-css').textContent : '';
+      const raiz = (base.match(/:root\s*\{([^}]*)\}/) || [])[1] || '';
+      const pad = {};
+      raiz.replace(/(--[a-z-]+)\s*:\s*([^;]+);/g, (_, k, v) => { pad[k] = v.trim(); return ''; });
+      // Cor do texto e fontes ficam sem padrão de propósito: herdam do modelo.
+      ['--tinta', '--texto', '--titulo', '--bg', '--papel'].forEach((k) => delete pad[k]);
+      CSS_BLOCO = ':host { display: block; } * { box-sizing: border-box; } .rsvp { border-top: 0; padding: 8px 0; }\n'
+        + base.replace(/:root\s*\{[^}]*\}/, '').replace(/body\[data-estilo[^}]*\}/g, '')
+          .replace(/var\((--[a-z-]+)\)/g, (m, k) => (pad[k] ? `var(${k}, ${pad[k]})` : m));
+      return CSS_BLOCO;
+    }
+    function renderProprio(ev, vals, x) {
+      let html = String(ev.convite.modelo_html);
+      const blocos = { confirmacao: 'rsvp', mapa: 'mapa', agenda: 'agenda', presentes: 'presentes' };
+      html = html.replace(/\{\{\s*([a-z_]+)\s*\}\}/gi, (m, k) => {
+        k = k.toLowerCase();
+        if (blocos[k]) return `<div data-convite="${blocos[k]}"></div>`;
+        return k in vals ? esc(vals[k]) : m;
+      });
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      limparModelo(doc);
+      if (!doc.querySelector('[data-convite="rsvp"]')) { const r = doc.createElement('div'); r.dataset.convite = 'rsvp'; doc.body.appendChild(r); }
+      cssDosBlocos();
+      document.getElementById('base-css').remove();
+      doc.head.querySelectorAll('style,link').forEach((e) => document.head.appendChild(e));
+      document.body.removeAttribute('data-estilo');
+      ['class', 'style'].forEach((a) => { if (doc.body.hasAttribute(a)) document.body.setAttribute(a, doc.body.getAttribute(a)); });
+      document.body.replaceChildren(...doc.body.childNodes);
+      const conteudo = {
+        rsvp: () => '<section class="rsvp" id="rsvp" aria-labelledby="rsvp-tit"></section>',
+        mapa: () => (x.dest ? rotaHtml(x.cv, x.dest, x.rota) : ''),
+        agenda: () => agendaHtml(ev, vals.titulo, x.ondeTxt),
+        presentes: () => `<div id="presentes">${presentesHtml(ev, (lsGet() || {}).id)}</div>`,
+      };
+      document.querySelectorAll('[data-convite]').forEach((el) => {
+        const f = conteudo[el.dataset.convite];
+        if (!f || el.shadowRoot) return;
+        const sr = el.attachShadow({ mode: 'open' });
+        sr.innerHTML = `<style>${CSS_BLOCO}</style>${f()}`;
+        RAIZES.push(sr);
+      });
+    }
     function erro(msg) { app.innerHTML = `<p class="erro-total">${esc(msg)}</p>`; }
 
     async function iniciar() {
@@ -269,7 +343,22 @@
       const rota = (Array.isArray(cv.rota) ? cv.rota : []).filter((p) => Array.isArray(p) && p.length === 2 && isFinite(p[0]) && isFinite(p[1]));
       const lugares = convidado && Number(convidado.lugares) > 0 ? Number(convidado.lugares) : null;
       const pedirIdade = cv.pedir_idade !== false;
+      const fim = prazo ? new Date(prazo.getFullYear(), prazo.getMonth(), prazo.getDate() + 1) : null;
+      const encerrado = !!(fim && new Date() >= fim && !cv.aceitar_apos_prazo);
+      const ondeTxt = [local, endereco].filter(Boolean).join(', ');
+      const faltaN = d ? (() => { const h = new Date(); h.setHours(0, 0, 0, 0); return Math.round((d - h) / 864e5); })() : null;
 
+      if (cv.modelo === 'html' && String(cv.modelo_html || '').trim()) {
+        renderProprio(ev, {
+          titulo, chamada: cv.chamada || 'Você é nosso convidado especial para', convidado: nome || '', ola: nome ? `Olá, ${nome}!` : '',
+          tema: ev.tema || '', data: d ? `${SEMANA[d.getDay()]}, ${d.getDate()} de ${MESES[d.getMonth()]} de ${d.getFullYear()}` : '',
+          dia: d ? String(d.getDate()) : '', mes: d ? MESES[d.getMonth()] : '', ano: d ? String(d.getFullYear()) : '', dia_semana: d ? SEMANA[d.getDay()] : '',
+          hora: hora(ev.hora_inicio), horario, local, endereco, mensagem: cv.mensagem || '',
+          prazo: prazo ? `${prazo.getDate()} de ${MESES[prazo.getMonth()]}` : '',
+          faltam: faltaN == null ? '' : faltaN > 1 ? `Faltam ${faltaN} dias` : faltaN === 1 ? 'É amanhã!' : faltaN === 0 ? 'É hoje!' : '',
+          lugares: lugares ? `Este convite vale para até ${lugares} ${lugares === 1 ? 'pessoa' : 'pessoas'}.` : '',
+        }, { cv, dest, rota, ondeTxt });
+      } else {
       app.innerHTML = `
         <article class="cartao">
           <div class="faixa" aria-hidden="true"></div>
@@ -297,16 +386,15 @@
           <p class="imprimir-rsvp">Confirme sua presença pelo link do convite${ev.organiza ? ` ou com ${esc(ev.organiza)}` : ''}.</p>
         </article>
         <div class="rodape"><button type="button" onclick="window.print()">Imprimir ou salvar em PDF</button></div>`;
-      const fim = prazo ? new Date(prazo.getFullYear(), prazo.getMonth(), prazo.getDate() + 1) : null;
-      const encerrado = !!(fim && new Date() >= fim && !cv.aceitar_apos_prazo);
-      if (dest) mapaConvite(dest, rota);
-      const ics = document.getElementById('ics');
+      }
+      if (dest && $id('mapa')) mapaConvite(dest, rota);
+      const ics = $id('ics');
       if (ics) ics.onclick = () => baixarIcs(ev, titulo, [local, endereco].filter(Boolean).join(', '));
       formRsvp(ev, { convidado, nome, lugares, pedirIdade, encerrado });
     }
 
     function formRsvp(ev, ctx) {
-      const box = document.getElementById('rsvp');
+      const box = $id('rsvp');
       const salvo = lsGet();
       const ant = salvo && (!ctx.convidado || salvo.convidado === ctx.convidado.id) ? salvo : null;
       if (ant && ant.enviado) return obrigado(ev, ctx, ant);
@@ -366,7 +454,7 @@
           <button type="button" data-mais="${k}" aria-label="Mais">+</button></span>`;
       }
       function lerCampos() {
-        const f = document.getElementById('f-rsvp');
+        const f = $id('f-rsvp');
         if (!f) return;
         st.nome = f.nome.value.trim();
         st.contato = f.contato.value.trim();
@@ -378,9 +466,9 @@
       function mudarCriancas(n) {
         st.criancas = Math.max(0, Math.min(30, n));
         st.idades = st.idades.slice(0, st.criancas);
-        const f = document.getElementById('f-rsvp');
+        const f = $id('f-rsvp');
         f.criancas.value = st.criancas;
-        document.getElementById('idades').innerHTML = idadesHtml();
+        $id('idades').innerHTML = idadesHtml();
       }
       box.onclick = (e) => {
         const b = e.target.closest('button');
@@ -391,7 +479,7 @@
           lerCampos();
           const d = b.dataset.mais ? 1 : -1;
           if (k === 'criancas') mudarCriancas(st.criancas + d);
-          else { st.adultos = Math.max(0, Math.min(30, st.adultos + d)); document.getElementById('f-rsvp').adultos.value = st.adultos; }
+          else { st.adultos = Math.max(0, Math.min(30, st.adultos + d)); $id('f-rsvp').adultos.value = st.adultos; }
         }
       };
       box.oninput = (e) => {
@@ -404,7 +492,7 @@
       box.onsubmit = async (e) => {
         e.preventDefault();
         lerCampos();
-        const av = document.getElementById('aviso');
+        const av = $id('aviso');
         av.className = 'aviso';
         if (!st.nome) { av.textContent = 'Escreva seu nome.'; av.classList.add('erro'); box.querySelector('[name=nome]').focus(); return; }
         if (st.resposta !== 'nao' && st.adultos + st.criancas < 1) { av.textContent = 'Informe quantas pessoas vão.'; av.classList.add('erro'); return; }
@@ -429,7 +517,7 @@
           lsSet(reg);
           reservas = reservas.filter((x) => x.id !== id);
           if (reg.presente) reservas.push(reg);
-          document.getElementById('presentes').innerHTML = presentesHtml(ev, id);
+          $id('presentes').innerHTML = presentesHtml(ev, id);
           obrigado(ev, ctx, reg);
         } catch {
           btn.disabled = false;
@@ -441,7 +529,7 @@
     }
 
     function obrigado(ev, ctx, reg) {
-      const box = document.getElementById('rsvp');
+      const box = $id('rsvp');
       const vai = reg.resposta === 'sim';
       const talvez = reg.resposta === 'talvez';
       const partes = [reg.adultos ? `${reg.adultos} ${reg.adultos === 1 ? 'adulto' : 'adultos'}` : null,
@@ -454,7 +542,7 @@
         <p class="sub">${talvez ? `Anotado, ${esc(reg.nome)}: talvez ${esc(partes)}. Se puder, confirme depois por este mesmo link.` : vai ? `${esc(reg.nome)}: ${esc(partes)}${idades.length ? ` (${esc(idades.join(', '))})` : ''}. Até lá!` : `Obrigado por avisar, ${esc(reg.nome)}. Vamos sentir sua falta.`}</p>
         ${ctx.encerrado ? '' : '<button type="button" class="link-btn" id="mudar">Mudar minha resposta</button>'}</div>`;
       if (ctx.encerrado) return;
-      document.getElementById('mudar').onclick = () => { lsSet({ ...reg, enviado: false }); formRsvp(ev, ctx); };
+      $id('mudar').onclick = () => { lsSet({ ...reg, enviado: false }); formRsvp(ev, ctx); };
     }
 
     iniciar();

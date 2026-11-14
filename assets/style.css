@@ -1179,3 +1179,7 @@ table.quant th { font-weight: 600; width: 42%; }
 .conv-prazo .chk { margin: 0 0 10px; }
 .prazo-st { flex: 1 1 100%; margin: 0; font-size: .88rem; color: var(--suave); }
 .prazo-st .ruim { color: #c62828; }
+
+.modelo-html { margin: 4px 0 12px; }
+.modelo-html code { font-size: .82em; background: var(--ouro-fundo); padding: 0 4px; border-radius: 4px; }
+textarea.codigo { width: 100%; font: 12.5px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; padding: 10px; border: 1px solid var(--linha); border-radius: 10px; background: transparent; color: inherit; margin: 8px 0 4px; resize: vertical; tab-size: 2; white-space: pre; overflow: auto; }
