@@ -1885,6 +1885,644 @@
       "cat": "buffet",
       "nome": "Zil Lanches",
       "whatsapp": "(63) 98412-9348"
+    },
+    {
+      "descricao": "Pula-pula de 2,30 m e piscina de bolinhas de 1 x 1 m, com montagem no local. Locação por 4 horas.",
+      "atende_em": "Palmas e região",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": "edu.kids.locacoes",
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/edu-kids/ig-DeRa-ZSR-33.jpg",
+          "legenda": null,
+          "credito": {
+            "nome": "Instagram @edu.kids.locacoes",
+            "url": "https://www.instagram.com/edu.kids.locacoes/p/DeRa-ZSR-33/"
+          }
+        }
+      ],
+      "fontes": [
+        "https://www.instagram.com/edu.kids.locacoes/",
+        "https://www.instagram.com/edu.kids.locacoes/p/DeRa-ZSR-33/",
+        "https://www.instagram.com/edu.kids.locacoes/p/Dee6Niyxjyy/"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Divulgado no Instagram",
+      "atualizado_em": "2026-11-14T03:30:00Z",
+      "detalhes": {
+        "duracao": "4 horas"
+      },
+      "itens": {
+        "entrega": true,
+        "montagem": true
+      },
+      "subtipos": [
+        "Piscina de bolinhas",
+        "Pula-pula / cama elástica"
+      ],
+      "precos": [],
+      "observacoes": "Valores dos posts de out/2026 no Instagram. Não tem catálogo no WhatsApp.",
+      "objetos": [
+        {
+          "nome": "Pula-pula 2,30 m",
+          "grupo": "Pula-pula 2,30 m",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": 200,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": "4 horas",
+          "foto": {
+            "url": "fotos/edu-kids/ig-DeRa-ZSR-33.jpg",
+            "legenda": null,
+            "credito": {
+              "nome": "Instagram @edu.kids.locacoes",
+              "url": "https://www.instagram.com/edu.kids.locacoes/p/DeRa-ZSR-33/"
+            }
+          }
+        },
+        {
+          "nome": "Piscina de bolinhas 1 x 1 m",
+          "grupo": "Piscina de bolinhas 1 x 1 m",
+          "tipo": "Piscina de bolinhas",
+          "valor": 150,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": "4 horas"
+        },
+        {
+          "nome": "Combo pula-pula 2,30 m + piscina de bolinhas",
+          "grupo": "Combo pula-pula 2,30 m + piscina de bolinhas",
+          "tipo": "Kit",
+          "valor": 250,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Os dois brinquedos juntos.",
+          "duracao": "4 horas"
+        }
+      ],
+      "id": "edu-kids",
+      "cat": "brinquedos",
+      "nome": "Edu Kids Festas",
+      "whatsapp": "(63) 99294-5140"
+    },
+    {
+      "descricao": "Pula-pula de 2,30 m, piscina de bolinhas, escorregador e gangorra, avulsos ou em combo. Cobra taxa de deslocamento.",
+      "atende_em": "Palmas e região",
+      "endereco": null,
+      "taxas": [
+        {
+          "nome": "Deslocamento",
+          "valor": "Conforme a distância"
+        }
+      ],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": "pula_e_brinca_palmas",
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "https://www.instagram.com/pula_e_brinca_palmas/",
+        "Posts de combos no perfil do Instagram (nov/2026)"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Divulgado no Instagram",
+      "atualizado_em": "2026-11-14T03:30:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Escorregador / gangorra",
+        "Piscina de bolinhas",
+        "Pula-pula / cama elástica"
+      ],
+      "precos": [],
+      "observacoes": "Fotos do perfil mostram crianças, por isso não foram usadas. Não tem catálogo no WhatsApp.",
+      "objetos": [
+        {
+          "nome": "Combo completo: pula-pula, piscina de bolinhas, escorregador e gangorra",
+          "grupo": "Combo pula-pula + piscina de bolinhas + escorregador + gangorra",
+          "tipo": "Kit",
+          "valor": 350,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Promoção divulgada no Instagram (de R$ 450 por R$ 350). Taxa de deslocamento à parte.",
+          "duracao": null
+        },
+        {
+          "nome": "Combo pula-pula 2,30 m + piscina de bolinhas",
+          "grupo": "Combo pula-pula 2,30 m + piscina de bolinhas",
+          "tipo": "Kit",
+          "valor": 250,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Promoção divulgada no Instagram (de R$ 270 por R$ 250). Taxa de deslocamento à parte.",
+          "duracao": null
+        },
+        {
+          "nome": "Pula-pula 2,30 m",
+          "grupo": "Pula-pula 2,30 m",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Piscina de bolinhas",
+          "tipo": "Piscina de bolinhas",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Escorregador infantil",
+          "grupo": "Escorregador infantil",
+          "tipo": "Escorregador / gangorra",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Gangorra",
+          "grupo": "Gangorra",
+          "tipo": "Escorregador / gangorra",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "id": "pula-e-brinca",
+      "cat": "brinquedos",
+      "nome": "Pula e Brinca Palmas",
+      "whatsapp": "(63) 98497-5035"
+    },
+    {
+      "descricao": "Pula-pula (cama elástica), casinha com piscina de bolinhas, escorregador e gangorra, avulsos ou em combo.",
+      "atende_em": "Palmas e região",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": "Cartão de crédito e Pix",
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": "familylocacoesbrinquedos",
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/family-locacoes/ig-DU3H4opject.jpg",
+          "legenda": null,
+          "credito": {
+            "nome": "Instagram @familylocacoesbrinquedos",
+            "url": "https://www.instagram.com/familylocacoesbrinquedos/p/DU3H4opject/"
+          }
+        }
+      ],
+      "fontes": [
+        "https://www.instagram.com/familylocacoesbrinquedos/",
+        "https://www.instagram.com/familylocacoesbrinquedos/p/DU3H4opject/"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Dados mínimos",
+      "atualizado_em": "2026-11-14T03:30:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Escorregador / gangorra",
+        "Piscina de bolinhas",
+        "Pula-pula / cama elástica"
+      ],
+      "precos": [],
+      "observacoes": "Sem valores publicados. Não tem catálogo no WhatsApp.",
+      "objetos": [
+        {
+          "nome": "Combo promocional: pula-pula + casinha com piscina de bolinhas + gangorra",
+          "grupo": "Combo pula-pula + piscina de bolinhas + gangorra",
+          "tipo": "Kit",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null,
+          "foto": {
+            "url": "fotos/family-locacoes/ig-DU3H4opject.jpg",
+            "legenda": null,
+            "credito": {
+              "nome": "Instagram @familylocacoesbrinquedos",
+              "url": "https://www.instagram.com/familylocacoesbrinquedos/p/DU3H4opject/"
+            }
+          }
+        },
+        {
+          "nome": "Pula-pula / cama elástica",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Casinha com piscina de bolinhas",
+          "tipo": "Piscina de bolinhas",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Escorregador infantil",
+          "grupo": "Escorregador infantil",
+          "tipo": "Escorregador / gangorra",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Gangorra",
+          "grupo": "Gangorra",
+          "tipo": "Escorregador / gangorra",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "id": "family-locacoes",
+      "cat": "brinquedos",
+      "nome": "Family Locações de Brinquedos",
+      "whatsapp": "(63) 99259-6502"
+    },
+    {
+      "descricao": "Mais de 10 opções de brinquedos: pula-pula, piscina de bolinhas, futebol de sabão, tobogã, centopeia inflável, pebolim e pingue-pongue.",
+      "atende_em": "Palmas e região",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": "vembrincar_pmw",
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/vem-brincar/ig-DePyBWtsAQv.jpg",
+          "legenda": null,
+          "credito": {
+            "nome": "Instagram @vembrincar_pmw",
+            "url": "https://www.instagram.com/vembrincar_pmw/p/DePyBWtsAQv/"
+          }
+        }
+      ],
+      "fontes": [
+        "https://www.instagram.com/vembrincar_pmw/",
+        "https://www.instagram.com/vembrincar_pmw/p/DePyBWtsAQv/"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Dados mínimos",
+      "atualizado_em": "2026-11-14T03:30:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Futebol de sabão",
+        "Games / fliperama",
+        "Inflável / tobogã",
+        "Piscina de bolinhas",
+        "Pula-pula / cama elástica"
+      ],
+      "precos": [],
+      "observacoes": "Sem valores publicados. Não tem catálogo no WhatsApp.",
+      "objetos": [
+        {
+          "nome": "Pula-pula",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null,
+          "foto": {
+            "url": "fotos/vem-brincar/ig-DePyBWtsAQv.jpg",
+            "legenda": null,
+            "credito": {
+              "nome": "Instagram @vembrincar_pmw",
+              "url": "https://www.instagram.com/vembrincar_pmw/p/DePyBWtsAQv/"
+            }
+          }
+        },
+        {
+          "nome": "Piscina de bolinhas",
+          "tipo": "Piscina de bolinhas",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Futebol de sabão",
+          "tipo": "Futebol de sabão",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Tobogã inflável",
+          "grupo": "Tobogã inflável",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Centopeia inflável",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Pebolim",
+          "grupo": "Pebolim",
+          "tipo": "Games / fliperama",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Pingue-pongue",
+          "tipo": "Games / fliperama",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "id": "vem-brincar",
+      "cat": "brinquedos",
+      "nome": "Vem Brincar Locação de Brinquedos",
+      "whatsapp": "(63) 99231-1645"
+    },
+    {
+      "descricao": "Brinquedos infláveis com entrega e montagem: tobogã, cama elástica, piscina de bolinhas, futebol de sabão e water ball. Também faz recreação.",
+      "atende_em": "Palmas e região",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": "megarecreacaopmw",
+      "telefone": "(63) 99237-3331",
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/mega-locacao/ig-DdZBjgszrDP.jpg",
+          "legenda": null,
+          "credito": {
+            "nome": "Instagram @megarecreacaopmw",
+            "url": "https://www.instagram.com/megarecreacaopmw/p/DdZBjgszrDP/"
+          }
+        }
+      ],
+      "fontes": [
+        "https://www.instagram.com/megarecreacaopmw/",
+        "https://www.instagram.com/megarecreacaopmw/p/DdZBjgszrDP/"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Dados mínimos",
+      "atualizado_em": "2026-11-14T03:30:00Z",
+      "detalhes": {},
+      "itens": {
+        "entrega": true,
+        "montagem": true
+      },
+      "subtipos": [
+        "Futebol de sabão",
+        "Inflável / tobogã",
+        "Piscina de bolinhas",
+        "Pula-pula / cama elástica"
+      ],
+      "precos": [],
+      "observacoes": "Sem valores publicados. Não tem catálogo no WhatsApp.",
+      "objetos": [
+        {
+          "nome": "Tobogã inflável",
+          "grupo": "Tobogã inflável",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null,
+          "foto": {
+            "url": "fotos/mega-locacao/ig-DdZBjgszrDP.jpg",
+            "legenda": null,
+            "credito": {
+              "nome": "Instagram @megarecreacaopmw",
+              "url": "https://www.instagram.com/megarecreacaopmw/p/DdZBjgszrDP/"
+            }
+          }
+        },
+        {
+          "nome": "Cama elástica",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Piscina de bolinhas",
+          "tipo": "Piscina de bolinhas",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Futebol de sabão",
+          "tipo": "Futebol de sabão",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        },
+        {
+          "nome": "Water ball",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "id": "mega-locacao",
+      "cat": "brinquedos",
+      "nome": "Mega Locação (Mega Recreação)",
+      "whatsapp": "(63) 99279-7393"
+    },
+    {
+      "descricao": "Parque infantil móvel que vai até a festa, com escorregadores, pula-pula, piscina de bolinhas e circuito de obstáculos.",
+      "atende_em": "Palmas e região",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": "brinqueaipark",
+      "telefone": null,
+      "site": null,
+      "fotos": [
+        {
+          "url": "fotos/brinque-ai/ig-DeUzzxNjyMn.jpg",
+          "legenda": null,
+          "credito": {
+            "nome": "Instagram @brinqueaipark",
+            "url": "https://www.instagram.com/brinqueaipark/p/DeUzzxNjyMn/"
+          }
+        }
+      ],
+      "fontes": [
+        "https://www.instagram.com/brinqueaipark/",
+        "https://www.instagram.com/brinqueaipark/p/DeZUHYnkWNl/",
+        "https://www.instagram.com/brinqueaipark/p/DeUzzxNjyMn/"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Dados mínimos",
+      "atualizado_em": "2026-11-14T03:30:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Inflável / tobogã"
+      ],
+      "precos": [],
+      "observacoes": "Começou em nov/2026. Sem valores publicados. Não tem catálogo no WhatsApp.",
+      "objetos": [
+        {
+          "nome": "Parque infantil móvel",
+          "grupo": "Parque infantil móvel",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Escorregadores, pula-pula, piscina de bolinhas e circuito de obstáculos numa estrutura só.",
+          "duracao": null,
+          "foto": {
+            "url": "fotos/brinque-ai/ig-DeUzzxNjyMn.jpg",
+            "legenda": null,
+            "credito": {
+              "nome": "Instagram @brinqueaipark",
+              "url": "https://www.instagram.com/brinqueaipark/p/DeUzzxNjyMn/"
+            }
+          }
+        }
+      ],
+      "id": "brinque-ai",
+      "cat": "brinquedos",
+      "nome": "Brinque Aí Kids Park",
+      "whatsapp": "(63) 98411-9162"
+    },
+    {
+      "descricao": "Carreta com brinquedos que vai até a festa.",
+      "atende_em": "Palmas e região",
+      "endereco": null,
+      "taxas": [],
+      "pagamento": null,
+      "antecedencia": null,
+      "cancelamento": null,
+      "comodidades": [],
+      "eventos": [
+        "Aniversário infantil"
+      ],
+      "instagram": "carretabrinquedaopmw",
+      "telefone": null,
+      "site": null,
+      "fotos": [],
+      "fontes": [
+        "https://www.instagram.com/carretabrinquedaopmw/"
+      ],
+      "conferido_em": "2026-11-14",
+      "status": "Dados mínimos",
+      "atualizado_em": "2026-11-14T03:30:00Z",
+      "detalhes": {},
+      "itens": {},
+      "subtipos": [
+        "Inflável / tobogã"
+      ],
+      "precos": [],
+      "observacoes": "Sem valores nem lista de brinquedos publicados. Não tem catálogo no WhatsApp.",
+      "objetos": [
+        {
+          "nome": "Carreta de brinquedos (parque móvel)",
+          "grupo": "Parque infantil móvel",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": null,
+          "duracao": null
+        }
+      ],
+      "id": "carreta-brinquedao",
+      "cat": "brinquedos",
+      "nome": "Carreta Brinquedão",
+      "whatsapp": "(63) 99254-3700"
     }
   ]
 }
