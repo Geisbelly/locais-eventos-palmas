@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-13T22:56:08Z",
+  "atualizado_em": "2026-11-14T00:34:36Z",
   "observacao": "Buffet, brinquedos, serviços e aluguéis. Cada item tem cat (buffet | brinquedos | servicos | alugueis). Também dá para cadastrar pelo site.",
   "itens": [
     {
@@ -104,7 +104,7 @@
       "eventos": [
         "Aniversário infantil"
       ],
-      "instagram": null,
+      "instagram": "palmas_kids_fest_locacoes",
       "telefone": null,
       "site": null,
       "fotos": [
@@ -147,15 +147,56 @@
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/D.L.A+locações+e+palmas+kids+fest/data=!4m2!3m1!1s0x933b3546219e979d:0xa9afecaa5da9b779"
           }
+        },
+        {
+          "url": "fotos/palmas-kids-fest/ig-DcHOAftNpGJ.jpg",
+          "legenda": "Espaço recreativo com cercadinho",
+          "credito": {
+            "nome": "Instagram @palmas_kids_fest_locacoes",
+            "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/DcHOAftNpGJ/"
+          }
+        },
+        {
+          "url": "fotos/palmas-kids-fest/ig-DXMilIAtp-4.jpg",
+          "legenda": "Pula-pula com rede",
+          "credito": {
+            "nome": "Instagram @palmas_kids_fest_locacoes",
+            "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/DXMilIAtp-4/"
+          }
+        },
+        {
+          "url": "fotos/palmas-kids-fest/ig-DXXlAriNa6t.jpg",
+          "legenda": "Piscina de bolinhas",
+          "credito": {
+            "nome": "Instagram @palmas_kids_fest_locacoes",
+            "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/DXXlAriNa6t/"
+          }
+        },
+        {
+          "url": "fotos/palmas-kids-fest/ig-DbTNPy0urFV.jpg",
+          "legenda": "Escorregador e piscina de bolinhas",
+          "credito": {
+            "nome": "Instagram @palmas_kids_fest_locacoes",
+            "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/DbTNPy0urFV/"
+          }
+        },
+        {
+          "url": "fotos/palmas-kids-fest/ig-Db4aOWGNrmq.jpg",
+          "legenda": "Mesinhas e cadeiras infantis",
+          "credito": {
+            "nome": "Instagram @palmas_kids_fest_locacoes",
+            "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/Db4aOWGNrmq/"
+          }
         }
       ],
       "fontes": [
+        "https://www.instagram.com/palmas_kids_fest_locacoes/p/DbTa3VXOKtA/",
         "Conversa de WhatsApp com a empresa (out/2026)",
         "https://www.google.com/maps/place/D.L.A+locações+e+palmas+kids+fest/data=!4m2!3m1!1s0x933b3546219e979d:0xa9afecaa5da9b779"
       ],
       "conferido_em": "2026-10-15",
       "status": "Informado pelo local",
-      "atualizado_em": "2026-11-13T22:27:50Z",
+      "atualizado_em": "2026-11-14T00:34:36Z",
       "detalhes": {
         "duracao": "24 horas"
       },
@@ -186,23 +227,59 @@
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Tatame, mesinhas, gangorrinhas, piscina de bolinhas e pula-pula de 2 m. O cercadinho não comporta mais de um pula-pula; o pula-pula grande fica fora"
+          "obs": "Tatame, mesinhas, gangorrinhas, piscina de bolinhas e pula-pula de 2 m. O cercadinho não comporta mais de um pula-pula; o pula-pula grande fica fora",
+          "foto": {
+            "url": "fotos/palmas-kids-fest/ig-DcHOAftNpGJ.jpg",
+            "credito": {
+              "nome": "Instagram @palmas_kids_fest_locacoes",
+              "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/DcHOAftNpGJ/"
+            }
+          }
         },
         {
-          "nome": "Pula-pula de 3 m",
+          "nome": "Pula-pula grande 3,05 m",
           "tipo": "Pula-pula / cama elástica",
-          "valor": "Sob consulta",
+          "valor": 190,
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Montado fora do espaço recreativo"
+          "obs": "Montado fora do espaço recreativo. Promoção de segunda a quinta: R$ 160 (flyer de jul/2026)",
+          "foto": {
+            "url": "fotos/palmas-kids-fest/ig-DXMilIAtp-4.jpg",
+            "credito": {
+              "nome": "Instagram @palmas_kids_fest_locacoes",
+              "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/DXMilIAtp-4/"
+            }
+          }
         },
         {
-          "nome": "Pula-pula",
+          "nome": "Pula-pula médio 2,44 m",
           "tipo": "Pula-pula / cama elástica",
-          "valor": "Sob consulta",
+          "valor": 175,
           "unidade": "por evento",
           "qtd": null,
-          "obs": null
+          "obs": "Promoção de segunda a quinta: R$ 140 (flyer de jul/2026)",
+          "foto": {
+            "url": "fotos/palmas-kids-fest/ig-DXMilIAtp-4.jpg",
+            "credito": {
+              "nome": "Instagram @palmas_kids_fest_locacoes",
+              "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/DXMilIAtp-4/"
+            }
+          }
+        },
+        {
+          "nome": "Pula-pula pequeno 2,00 m",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": 150,
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Promoção de segunda a quinta: R$ 130 (flyer de jul/2026)",
+          "foto": {
+            "url": "fotos/palmas-kids-fest/ig-DXMilIAtp-4.jpg",
+            "credito": {
+              "nome": "Instagram @palmas_kids_fest_locacoes",
+              "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/DXMilIAtp-4/"
+            }
+          }
         },
         {
           "nome": "Piscina de bolinhas",
@@ -210,7 +287,14 @@
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": null
+          "obs": null,
+          "foto": {
+            "url": "fotos/palmas-kids-fest/ig-DXXlAriNa6t.jpg",
+            "credito": {
+              "nome": "Instagram @palmas_kids_fest_locacoes",
+              "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/DXXlAriNa6t/"
+            }
+          }
         },
         {
           "nome": "Escorregador",
@@ -218,7 +302,14 @@
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": null
+          "obs": null,
+          "foto": {
+            "url": "fotos/palmas-kids-fest/ig-DbTNPy0urFV.jpg",
+            "credito": {
+              "nome": "Instagram @palmas_kids_fest_locacoes",
+              "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/DbTNPy0urFV/"
+            }
+          }
         },
         {
           "nome": "Gangorra",
@@ -226,7 +317,14 @@
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": null
+          "obs": null,
+          "foto": {
+            "url": "fotos/palmas-kids-fest/maps-5.jpg",
+            "credito": {
+              "nome": "Google Maps",
+              "url": "https://www.google.com/maps/place/D.L.A+locações+e+palmas+kids+fest/data=!4m2!3m1!1s0x933b3546219e979d:0xa9afecaa5da9b779"
+            }
+          }
         },
         {
           "nome": "Mesas e cadeiras",
@@ -234,7 +332,14 @@
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Pela D.L.A Locações; dá para fechar junto com os brinquedos"
+          "obs": "Pela D.L.A Locações; dá para fechar junto com os brinquedos",
+          "foto": {
+            "url": "fotos/palmas-kids-fest/ig-Db4aOWGNrmq.jpg",
+            "credito": {
+              "nome": "Instagram @palmas_kids_fest_locacoes",
+              "url": "https://www.instagram.com/palmas_kids_fest_locacoes/reel/Db4aOWGNrmq/"
+            }
+          }
         }
       ],
       "coordenadas": {
@@ -254,7 +359,7 @@
       "eventos": [
         "Aniversário infantil"
       ],
-      "instagram": null,
+      "instagram": "fglpulapula",
       "telefone": null,
       "site": null,
       "fotos": [
@@ -297,6 +402,22 @@
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/FGL+PULA+PULA/data=!4m2!3m1!1s0x933b353e630f55b3:0xe538dfc6041f44f2"
           }
+        },
+        {
+          "url": "fotos/fgl-pula-pula/ig-DHRLBEduD2m.jpg",
+          "legenda": "Futebol de sabão",
+          "credito": {
+            "nome": "Instagram @fglpulapula",
+            "url": "https://www.instagram.com/fglpulapula/reel/DHRLBEduD2m/"
+          }
+        },
+        {
+          "url": "fotos/fgl-pula-pula/ig-Dbat0s2jn6A.jpg",
+          "legenda": "Pula-pula com rede",
+          "credito": {
+            "nome": "Instagram @fglpulapula",
+            "url": "https://www.instagram.com/fglpulapula/p/Dbat0s2jn6A/"
+          }
         }
       ],
       "fontes": [
@@ -305,7 +426,7 @@
       ],
       "conferido_em": "2026-10-14",
       "status": "Informado pelo local",
-      "atualizado_em": "2026-11-13T22:27:50Z",
+      "atualizado_em": "2026-11-14T00:34:36Z",
       "detalhes": {
         "duracao": "Até 4 horas (infláveis e futebol de sabão)"
       },
@@ -336,7 +457,14 @@
           "unidade": "por evento",
           "qtd": null,
           "obs": "Inclui 1 monitor",
-          "duracao": "Até 4 horas"
+          "duracao": "Até 4 horas",
+          "foto": {
+            "url": "fotos/fgl-pula-pula/ig-DHRLBEduD2m.jpg",
+            "credito": {
+              "nome": "Instagram @fglpulapula",
+              "url": "https://www.instagram.com/fglpulapula/reel/DHRLBEduD2m/"
+            }
+          }
         },
         {
           "nome": "Escorregador inflável (até 10 anos)",
@@ -353,7 +481,14 @@
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": null
+          "obs": null,
+          "foto": {
+            "url": "fotos/fgl-pula-pula/ig-Dbat0s2jn6A.jpg",
+            "credito": {
+              "nome": "Instagram @fglpulapula",
+              "url": "https://www.instagram.com/fglpulapula/p/Dbat0s2jn6A/"
+            }
+          }
         },
         {
           "nome": "Pula-pula 2,44 m (até 7 anos)",
@@ -361,7 +496,14 @@
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": null
+          "obs": null,
+          "foto": {
+            "url": "fotos/fgl-pula-pula/ig-Dbat0s2jn6A.jpg",
+            "credito": {
+              "nome": "Instagram @fglpulapula",
+              "url": "https://www.instagram.com/fglpulapula/p/Dbat0s2jn6A/"
+            }
+          }
         },
         {
           "nome": "Piscina de bolinhas 1,50 x 1,50 m",
@@ -369,7 +511,14 @@
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Com 1.500 bolinhas"
+          "obs": "Com 1.500 bolinhas",
+          "foto": {
+            "url": "fotos/fgl-pula-pula/maps-4.jpg",
+            "credito": {
+              "nome": "Google Maps",
+              "url": "https://www.google.com/maps/place/FGL+PULA+PULA/data=!4m2!3m1!1s0x933b353e630f55b3:0xe538dfc6041f44f2"
+            }
+          }
         },
         {
           "nome": "Piscina de bolinhas 1,10 x 1,10 m",
@@ -377,7 +526,14 @@
           "valor": "Sob consulta",
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Com 1.000 bolinhas"
+          "obs": "Com 1.000 bolinhas",
+          "foto": {
+            "url": "fotos/fgl-pula-pula/maps-4.jpg",
+            "credito": {
+              "nome": "Google Maps",
+              "url": "https://www.google.com/maps/place/FGL+PULA+PULA/data=!4m2!3m1!1s0x933b353e630f55b3:0xe538dfc6041f44f2"
+            }
+          }
         }
       ],
       "id": "fgl-pula-pula",
@@ -401,7 +557,7 @@
       "eventos": [
         "Aniversário infantil"
       ],
-      "instagram": null,
+      "instagram": "brinquejapalmas",
       "telefone": null,
       "site": null,
       "fotos": [
@@ -428,6 +584,30 @@
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/Brinque+Já/data=!4m2!3m1!1s0x933b37d978236b3b:0x67ce3706fcd86a79"
           }
+        },
+        {
+          "url": "fotos/brinque-ja/ig-DfrySh4lReI.jpg",
+          "legenda": "Castelinho inflável com escorregador",
+          "credito": {
+            "nome": "Instagram @brinquejapalmas",
+            "url": "https://www.instagram.com/brinquejapalmas/p/DfrySh4lReI/"
+          }
+        },
+        {
+          "url": "fotos/brinque-ja/ig-Dffd0zENZ8U.jpg",
+          "legenda": "Quadra inflável",
+          "credito": {
+            "nome": "Instagram @brinquejapalmas",
+            "url": "https://www.instagram.com/brinquejapalmas/reel/Dffd0zENZ8U/"
+          }
+        },
+        {
+          "url": "fotos/brinque-ja/ig-DeekU_0xV4y.jpg",
+          "legenda": "Piscina de bolinhas inflável",
+          "credito": {
+            "nome": "Instagram @brinquejapalmas",
+            "url": "https://www.instagram.com/brinquejapalmas/reel/DeekU_0xV4y/"
+          }
         }
       ],
       "fontes": [
@@ -436,7 +616,7 @@
       ],
       "conferido_em": "2026-10-14",
       "status": "Dados mínimos",
-      "atualizado_em": "2026-11-13T22:27:50Z",
+      "atualizado_em": "2026-11-14T00:34:36Z",
       "detalhes": {},
       "itens": {},
       "subtipos": [
@@ -453,7 +633,53 @@
         }
       ],
       "observacoes": "Para orçar pedem nome, data, local e quais brinquedos. Catálogo no WhatsApp: wa.me/c/556384320373.",
-      "objetos": [],
+      "objetos": [
+        {
+          "nome": "Castelinho inflável com escorregador",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Visto nas fotos da empresa; peça o valor",
+          "foto": {
+            "url": "fotos/brinque-ja/ig-DfrySh4lReI.jpg",
+            "credito": {
+              "nome": "Instagram @brinquejapalmas",
+              "url": "https://www.instagram.com/brinquejapalmas/p/DfrySh4lReI/"
+            }
+          }
+        },
+        {
+          "nome": "Quadra inflável",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Visto nas fotos da empresa; peça o valor",
+          "foto": {
+            "url": "fotos/brinque-ja/ig-Dffd0zENZ8U.jpg",
+            "credito": {
+              "nome": "Instagram @brinquejapalmas",
+              "url": "https://www.instagram.com/brinquejapalmas/reel/Dffd0zENZ8U/"
+            }
+          }
+        },
+        {
+          "nome": "Piscina de bolinhas inflável",
+          "tipo": "Piscina de bolinhas",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Visto nas fotos da empresa; peça o valor",
+          "foto": {
+            "url": "fotos/brinque-ja/ig-DeekU_0xV4y.jpg",
+            "credito": {
+              "nome": "Instagram @brinquejapalmas",
+              "url": "https://www.instagram.com/brinquejapalmas/reel/DeekU_0xV4y/"
+            }
+          }
+        }
+      ],
       "id": "brinque-ja",
       "cat": "brinquedos",
       "nome": "Brinque Já Locações",
@@ -475,7 +701,7 @@
       "eventos": [
         "Aniversário infantil"
       ],
-      "instagram": null,
+      "instagram": "kaio.locacoesdebrinquedos",
       "telefone": null,
       "site": null,
       "fotos": [
@@ -510,6 +736,22 @@
             "nome": "Google Maps",
             "url": "https://www.google.com/maps/place/Kaio+Locações+de+Brinquedos/data=!4m2!3m1!1s0x933b35005837530b:0x3a68994317ea5f8b"
           }
+        },
+        {
+          "url": "fotos/kaio-locacoes/ig-DfruXESlUr6.jpg",
+          "legenda": "Tobogã inflável",
+          "credito": {
+            "nome": "Instagram @kaio.locacoesdebrinquedos",
+            "url": "https://www.instagram.com/kaio.locacoesdebrinquedos/p/DfruXESlUr6/"
+          }
+        },
+        {
+          "url": "fotos/kaio-locacoes/ig-Dez20uPv72b.jpg",
+          "legenda": "Touro mecânico inflável",
+          "credito": {
+            "nome": "Instagram @kaio.locacoesdebrinquedos",
+            "url": "https://www.instagram.com/kaio.locacoesdebrinquedos/reel/Dez20uPv72b/"
+          }
         }
       ],
       "fontes": [
@@ -518,7 +760,7 @@
       ],
       "conferido_em": "2026-10-14",
       "status": "Informado pelo local",
-      "atualizado_em": "2026-11-13T22:27:50Z",
+      "atualizado_em": "2026-11-14T00:34:36Z",
       "detalhes": {
         "duracao": "5 horas"
       },
@@ -545,6 +787,70 @@
           "qtd": null,
           "obs": "O nome do brinquedo só aparece no vídeo; confirmar qual é",
           "duracao": "5 horas"
+        },
+        {
+          "nome": "Tobogã inflável",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Visto nas fotos da empresa; peça o valor",
+          "foto": {
+            "url": "fotos/kaio-locacoes/ig-DfruXESlUr6.jpg",
+            "credito": {
+              "nome": "Instagram @kaio.locacoesdebrinquedos",
+              "url": "https://www.instagram.com/kaio.locacoesdebrinquedos/p/DfruXESlUr6/"
+            }
+          },
+          "duracao": "5 horas"
+        },
+        {
+          "nome": "Touro mecânico inflável",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Visto nas fotos da empresa; peça o valor",
+          "foto": {
+            "url": "fotos/kaio-locacoes/ig-Dez20uPv72b.jpg",
+            "credito": {
+              "nome": "Instagram @kaio.locacoesdebrinquedos",
+              "url": "https://www.instagram.com/kaio.locacoesdebrinquedos/reel/Dez20uPv72b/"
+            }
+          },
+          "duracao": "5 horas"
+        },
+        {
+          "nome": "Escorregador inflável",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Visto nas fotos da empresa; peça o valor",
+          "foto": {
+            "url": "fotos/kaio-locacoes/maps-2.jpg",
+            "credito": {
+              "nome": "Google Maps",
+              "url": "https://www.google.com/maps/place/Kaio+Locações+de+Brinquedos/data=!4m2!3m1!1s0x933b35005837530b:0x3a68994317ea5f8b"
+            }
+          },
+          "duracao": "5 horas"
+        },
+        {
+          "nome": "Pula-pula com rede",
+          "tipo": "Pula-pula / cama elástica",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Visto nas fotos da empresa; peça o valor",
+          "foto": {
+            "url": "fotos/kaio-locacoes/maps-4.jpg",
+            "credito": {
+              "nome": "Google Maps",
+              "url": "https://www.google.com/maps/place/Kaio+Locações+de+Brinquedos/data=!4m2!3m1!1s0x933b35005837530b:0x3a68994317ea5f8b"
+            }
+          },
+          "duracao": "5 horas"
         }
       ],
       "id": "kaio-locacoes",
@@ -568,7 +874,7 @@
       "eventos": [
         "Aniversário infantil"
       ],
-      "instagram": null,
+      "instagram": "ligbrinqpmw",
       "telefone": null,
       "site": null,
       "fotos": [
@@ -602,7 +908,7 @@
       ],
       "conferido_em": "2026-11-13",
       "status": "Dados mínimos",
-      "atualizado_em": "2026-11-13T22:27:50Z",
+      "atualizado_em": "2026-11-14T00:34:36Z",
       "detalhes": {},
       "itens": {},
       "subtipos": [
@@ -617,7 +923,23 @@
         }
       ],
       "observacoes": "Confirmar se aluga brinquedos para festa e pedir os valores. Catálogo no WhatsApp: wa.me/c/556392044431.",
-      "objetos": [],
+      "objetos": [
+        {
+          "nome": "Escorregador inflável",
+          "tipo": "Inflável / tobogã",
+          "valor": "Sob consulta",
+          "unidade": "por evento",
+          "qtd": null,
+          "obs": "Visto nas fotos da empresa; peça o valor",
+          "foto": {
+            "url": "fotos/lig-brinq/maps-1.jpg",
+            "credito": {
+              "nome": "Google Maps",
+              "url": "https://www.google.com/maps/place/Lig+brinq+brinquedos/data=!4m2!3m1!1s0x933b359bb08ba2b1:0x44b9034882ed9995"
+            }
+          }
+        }
+      ],
       "id": "lig-brinq",
       "cat": "brinquedos",
       "nome": "Lig Brinq Brinquedos",
@@ -639,16 +961,25 @@
       "eventos": [
         "Aniversário infantil"
       ],
-      "instagram": null,
+      "instagram": "lizbrinquedoslocacoes",
       "telefone": null,
       "site": null,
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "fotos/liz-brinquedos/ig-DeJlMbnMF58.jpg",
+          "legenda": "Escorregador inflável",
+          "credito": {
+            "nome": "Instagram @lizbrinquedoslocacoes",
+            "url": "https://www.instagram.com/lizbrinquedoslocacoes/reel/DeJlMbnMF58/"
+          }
+        }
+      ],
       "fontes": [
         "Conversa de WhatsApp com a empresa (out/2026)"
       ],
       "conferido_em": "2026-10-15",
       "status": "Informado pelo local",
-      "atualizado_em": "2026-11-13T22:27:50Z",
+      "atualizado_em": "2026-11-14T00:34:36Z",
       "detalhes": {
         "duracao": "4 horas nos infláveis; pula-pula a combinar"
       },
@@ -676,7 +1007,14 @@
           "unidade": "por evento",
           "qtd": null,
           "obs": "1 monitor por inflável",
-          "duracao": "4 horas"
+          "duracao": "4 horas",
+          "foto": {
+            "url": "fotos/liz-brinquedos/ig-DeJlMbnMF58.jpg",
+            "credito": {
+              "nome": "Instagram @lizbrinquedoslocacoes",
+              "url": "https://www.instagram.com/lizbrinquedoslocacoes/reel/DeJlMbnMF58/"
+            }
+          }
         },
         {
           "nome": "Pula-pula",

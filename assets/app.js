@@ -171,6 +171,14 @@
   const tiposDe = (l) => (ehEspaco(l) ? [l.tipo].filter(Boolean)
     : [...new Set([...(l.subtipos || []), ...(l.objetos || []).map((o) => o.tipo).filter(Boolean)])]);
   const objetosDe = (l) => (l.objetos || []).filter((o) => o && (o.nome || o.tipo));
+  // Foto de um brinquedo (ou item): { url, credito? }; aceita só caminho seguro.
+  const fotoObj = (o) => {
+    const f = o && o.foto;
+    const url = f && (f.url || f);
+    if (!url || typeof url !== 'string' || !urlSegura(url)) return null;
+    const c = f.credito && /^https?:\/\//i.test(f.credito.url || '') ? f.credito : null;
+    return { url, credito: c };
+  };
   // Tempo de uso (brinquedos e aluguéis): o da empresa fica em detalhes.duracao; cada item pode ter o seu.
   const CATS_TEMPO = ['brinquedos', 'alugueis'];
   const mostraTempo = (l) => CATS_TEMPO.includes(l.cat);
@@ -777,9 +785,11 @@
     const nome = o.nome || o.tipo;
     const zap = zapLink(l.whatsapp, l.nome, nome);
     const num = typeof o.valor === 'number';
-    return `<article class="card obj-card">
+    const f = fotoObj(o);
+    return `<article class="card obj-card ${f ? 'com-capa' : ''}">
+      ${f ? `<button type="button" class="card-capa" data-abrir="${l.id}" tabindex="-1" aria-hidden="true"><img src="${esc(f.url)}" alt="" loading="lazy">${f.credito ? `<span class="capa-cred">${esc(f.credito.nome || '')}</span>` : ''}</button>` : ''}
       <div class="card-cab">
-        <span class="mini-capa mono mono-${numHash(l.id + (o.tipo || '')) % 5}" aria-hidden="true">${ic(CATS[l.cat].icone)}</span>
+        ${f ? '' : `<span class="mini-capa mono mono-${numHash(l.id + (o.tipo || '')) % 5}" aria-hidden="true">${ic(CATS[l.cat].icone)}</span>`}
         <div class="card-tit">
           <h2><button type="button" data-abrir="${l.id}">${esc(nome)}</button></h2>
           ${o.tipo && o.tipo !== nome ? `<p class="onde">${esc(o.tipo)}</p>` : ''}
@@ -938,7 +948,9 @@
     const objsHtml = P ? `<section class="secao" id="det-objetos"><h3>${esc(P.rot)}${objs.length ? ` (${objs.length})` : ''}</h3>
       ${objs.length ? `<ul class="obj-lista">${objs.map((o) => {
         const num = typeof o.valor === 'number';
-        return `<li class="${num && o.valor === mpObj && objs.length > 1 ? 'menor' : ''}">
+        const f = fotoObj(o);
+        return `<li class="${num && o.valor === mpObj && objs.length > 1 ? 'menor' : ''} ${f ? 'com-foto' : ''}">
+          ${f ? `<figure class="obj-foto"><img src="${esc(f.url)}" alt="${esc(o.nome || o.tipo)}" loading="lazy">${f.credito ? `<figcaption><a href="${esc(f.credito.url)}" target="_blank" rel="noopener" title="Foto: ${esc(f.credito.nome || 'fonte')}">${esc(String(f.credito.nome || 'fonte').replace(/^Instagram\s+/, ''))}</a></figcaption>` : ''}</figure>` : ''}
           <div><strong>${esc(o.nome || o.tipo)}</strong>${o.tipo && o.tipo !== o.nome ? `<span class="obj-tipo">${esc(o.tipo)}</span>` : ''}
             ${mostraTempo(l) ? `<span class="obj-tempo ${tempoObj(l, o) ? '' : 'sem'}">${ic('relogio')}${esc(tempoObj(l, o) || 'Tempo de uso não informado')}</span>` : ''}
             ${o.qtd || o.obs ? `<small>${[o.qtd ? `${o.qtd} ${o.qtd === 1 ? 'disponível' : 'disponíveis'}` : null, o.obs].filter(Boolean).map(esc).join(' · ')}</small>` : ''}</div>
@@ -1226,7 +1238,7 @@
       ['unidade', 'Por', 'por evento'], ['qtd', 'Quantos tem', 'ex.: 2'], ['duracao', 'Tempo de uso', 'ex.: 4 horas'], ['obs', 'Observação', 'idade, tamanho, monitor, energia…']] },
   };
   function linhaRep(tipo, d = {}) {
-    return `<div class="rep-linha rep-${tipo}">
+    return `<div class="rep-linha rep-${tipo}"${tipo === 'objetos' && d.foto ? ` data-foto="${esc(JSON.stringify(d.foto))}"` : ''}>
       ${REP[tipo].campos.map(([k, rot, ph]) => `<label class="campo c-${k}"><span>${rot}</span><input data-k="${k}" ${k === 'unidade' ? 'list="dl-unidades"' : tipo === 'objetos' && k === 'tipo' ? 'list="dl-subtipos"' : ''} value="${esc(k === 'valor' ? valorTxt(d[k]) : d[k] || '')}" placeholder="${esc(ph)}"></label>`).join('')}
       <button type="button" class="tirar-linha" data-tirar-linha aria-label="Remover ${REP[tipo].rot}">×</button>
     </div>`;
@@ -1444,6 +1456,8 @@
     const objetos = CATS[ED.cat].porObjeto ? rep('objetos', (r) => {
       const o = { nome: val(r, 'nome'), tipo: val(r, 'tipo') || null, valor: parseValor(val(r, 'valor')), unidade: val(r, 'unidade') || null,
         qtd: parseInt(val(r, 'qtd'), 10) > 0 ? parseInt(val(r, 'qtd'), 10) : null, duracao: val(r, 'duracao') || null, obs: val(r, 'obs') || null };
+      // a foto não tem campo no editor: mantém a que já estava na linha
+      if (r.dataset.foto) { try { const ft = JSON.parse(r.dataset.foto); if (fotoObj({ foto: ft })) o.foto = ft; } catch (e) { /* ignora foto inválida */ } }
       return o.nome || o.tipo ? o : null;
     }) : undefined;
     return { ...comum, subtipos, descricao: g('descricao') || null, atende_em: g('atende_em') || null, detalhes, ...(objetos ? { objetos } : {}) };

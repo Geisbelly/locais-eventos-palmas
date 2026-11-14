@@ -193,6 +193,8 @@ dialog::backdrop { background: rgba(20, 15, 8, .5); backdrop-filter: blur(2px); 
 .folha-capa .capa-arte svg { width: 64px; height: 64px; }
 .galeria { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; height: 100%; }
 .galeria img { height: 100%; width: auto; max-width: 92%; object-fit: cover; scroll-snap-align: start; flex: none; }
+/* a última foto não cabe alinhada ao início; sem isto o celular volta para a anterior e ela fica cortada */
+.galeria img:last-child { scroll-snap-align: end; }
 .folha-corpo { padding: 18px 20px 40px; }
 .folha-corpo h1 { font-family: var(--titulo); font-weight: 650; font-size: 1.75rem; line-height: 1.12; margin: 0 0 6px; }
 .meta { color: var(--suave); margin: 0; font-size: .9rem; }
@@ -931,6 +933,15 @@ span.foto-credito:hover { text-decoration: none; }
 .card:hover .card-capa img { transform: scale(1.03); }
 .capa-dist { position: absolute; left: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 4px; height: 28px; padding: 0 10px; border-radius: 999px; background: rgba(20, 18, 15, .78); color: #fff; font-size: .8rem; font-weight: 600; }
 .capa-dist svg { width: 14px; height: 14px; }
+.capa-cred { position: absolute; left: 10px; bottom: 10px; max-width: calc(100% - 20px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; height: 24px; line-height: 24px; padding: 0 9px; border-radius: 999px; background: rgba(20, 18, 15, .66); color: #fff; font-size: .72rem; font-weight: 600; }
+.obj-lista li.com-foto { display: grid; grid-template-columns: 76px minmax(0, 1fr); column-gap: 12px; row-gap: 6px; align-items: start; }
+.obj-lista li.com-foto .obj-foto { grid-row: span 2; }
+.obj-lista li.com-foto .obj-valor { grid-column: 2; justify-self: start; text-align: left; }
+.obj-foto { margin: 0; flex: none; width: 76px; display: flex; flex-direction: column; gap: 3px; }
+.obj-foto img { width: 76px; height: 76px; border-radius: 10px; object-fit: cover; display: block; background: var(--bg-2); }
+.obj-foto figcaption { font-size: .66rem; line-height: 1.2; overflow-wrap: anywhere; }
+.obj-foto figcaption a { color: var(--suave-forte); text-decoration: none; }
+.obj-foto figcaption a:hover, .obj-foto figcaption a:focus-visible { text-decoration: underline; }
 .card .onde .dist { margin-left: 4px; color: var(--verde); font-weight: 600; white-space: nowrap; }
 .card h2, .card .onde { overflow-wrap: anywhere; }
 .card .rodape-card { flex-wrap: wrap; }
