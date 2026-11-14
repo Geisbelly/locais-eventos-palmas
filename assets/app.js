@@ -1782,12 +1782,13 @@
       if (a === 'remover-evento') removerEvento();
       if (a === 'imprimir') window.print();
       if (a === 'ev-sugerir') sugerirTarefas();
+      if (a === 'crono-sugerir') sugerirCrono();
       if (a === 'ev-sugerir-itens') sugerirItens();
       if (a === 'conv-copiar') copiar(linkConvite(evAtual()), 'Link do convite copiado.');
       if (a === 'rsvp-atualizar') carregarRsvp(S.paginaEv, { avisar: true });
       if (a === 'rsvp-novo') novaResposta(null);
       if (a === 'conv-importar') importarConvidados();
-      if (a === 'conv-colar-abrir') { const d = $('#conv-import'); if (d) { d.open = true; d.scrollIntoView({ block: 'nearest' }); $('#conv-colar').focus(); } }
+      if (a === 'conv-colar-abrir') { if (S.abaEv !== 'convidados') irAbaEv('convidados'); const d = $('#conv-import'); if (d) { d.open = true; d.scrollIntoView({ block: 'nearest' }); $('#conv-colar').focus(); } }
       if (a === 'rec-abrir') abrirRecepcao();
       if (a === 'msg-abrir') abrirMensagens();
       if (a === 'itens-sug') sugerirItensFesta(b.dataset.itsug);
@@ -2697,7 +2698,7 @@
     if (!L.total) return { fonte: 'previsto', L, auto: true };
     if (!prev) return { fonte: 'confirmados', L, auto: true };
     // "Todos responderam" só vale se a lista cobre quase todo o previsto (lugares de cada convite, ou 1 se vazio).
-    const cobre = ev.convidados.filter((c) => c.nome).reduce((a, c) => a + (numV(c.lugares) || 1), 0) >= prev * 0.8;
+    const cobre = listaCobre(ev) >= prev * 0.8;
     const p = ev.convite.prazo; const fechou = (p && diasAte(p) < 0) || (cobre && ev.convidados.length && !L.semResposta) || L.total >= prev;
     return { fonte: fechou ? 'confirmados' : 'previsto', L, auto: true, fechou };
   }
@@ -3187,6 +3188,9 @@
   function listaTarefas(ev) {
     const ordem = ev.tarefas.map((t, i) => [t, i]).sort((a, b) => (a[0].feito ? 1 : 0) - (b[0].feito ? 1 : 0) || (a[0].prazo || '9999').localeCompare(b[0].prazo || '9999'));
     const feitas = ev.tarefas.filter((t) => t.feito).length;
+    if (!ev.tarefas.length) return `<div class="conv-vazio">${ic('check')}<p><strong>Nenhuma tarefa ainda.</strong>${ev.data ? 'Posso sugerir a lista com os prazos contados a partir da data da festa: reservar o espaço, mandar os convites, encomendar o bolo, confirmar o buffet…' : 'Defina a data da festa (botão Editar) para eu sugerir as tarefas com prazos.'}</p>
+      <div class="acoes-linha">${ev.data ? `<button type="button" class="btn ouro" data-acao="ev-sugerir">${ic('check')}Sugerir tarefas pela data</button>` : ''}
+      <button type="button" class="btn" data-ev-add="tarefas">${ic('mais')}Adicionar tarefa</button></div></div>`;
     return `${ev.tarefas.length ? `<p class="meta">${feitas} de ${ev.tarefas.length} feitas</p>` : ''}
       <div class="linhas-ev">${ordem.map(([t, i]) => `<div class="linha-ev tarefa ${t.feito ? 'feita' : ''} ${!t.feito && t.prazo && diasAte(t.prazo) < 0 ? 'atrasada' : ''}">
         <label class="chk"><input type="checkbox" data-evc="tarefas.${i}.feito" data-tipo="bool" ${t.feito ? 'checked' : ''}><span class="sr">Feita</span></label>
@@ -3196,7 +3200,28 @@
       <div class="acoes-linha"><button type="button" class="btn ghost add-linha" data-ev-add="tarefas">${ic('mais')}Adicionar tarefa</button>
         <button type="button" class="btn ghost add-linha" data-acao="ev-sugerir">${ic('check')}Sugerir tarefas${ev.data ? ' pela data' : ''}</button></div>`;
   }
+  function sugerirCrono() {
+    const ev = evAtual();
+    const hm = (t) => { const m = /^(\d{1,2}):(\d{2})/.exec(t || ''); return m ? Number(m[1]) * 60 + Number(m[2]) : null; };
+    const fmt = (m) => `${String(Math.floor(((m % 1440) + 1440) % 1440 / 60)).padStart(2, '0')}:${String(((m % 60) + 60) % 60).padStart(2, '0')}`;
+    const ini = hm(ev.hora_inicio); if (ini == null) { toast('Defina o horário de início da festa (botão Editar).'); return; }
+    const fim = hm(ev.hora_fim) ?? ini + 240;
+    const temBuffet = ev.escolhas.some((e) => e.cat === 'buffet' && fechado(e.status));
+    const temBrinq = ev.escolhas.some((e) => e.cat === 'brinquedos' && fechado(e.status));
+    const it = [[ini - 180, 'Montagem da decoração e da mesa do bolo'], temBrinq ? [ini - 90, 'Chegada e montagem dos brinquedos'] : null,
+      temBuffet ? [ini - 60, 'Chegada da equipe do buffet'] : [ini - 45, 'Salgados e bebidas prontos para servir'],
+      [ini - 15, 'Conferir som, luz e lista de presença'], [ini, 'Início: recepção dos convidados'],
+      [ini + Math.round(((fim - ini) * 0.45) / 15) * 15, 'Brincadeiras e animação'], [fim - 60, 'Parabéns e bolo'],
+      [fim - 30, 'Entrega das lembrancinhas'], [fim, 'Encerramento'], [fim + 60, 'Desmontagem e devolução do que foi alugado']].filter(Boolean);
+    const tem = new Set(ev.cronograma.map((x) => norm(x.oque)));
+    const novos = it.filter(([, o]) => !tem.has(norm(o))).map(([m, oque]) => ({ hora: fmt(m), oque }));
+    ev.cronograma.push(...novos); salvarEvento(ev);
+    toast(novos.length ? `${plural(novos.length, 'horário sugerido', 'horários sugeridos')}. Ajuste ao que combinou com os fornecedores.` : 'Os horários sugeridos já estão no cronograma.');
+  }
   function listaCrono(ev) {
+    if (!ev.cronograma.length) return `<div class="conv-vazio">${ic('relogio')}<p><strong>O roteiro do dia ainda está vazio.</strong>Montagem, chegada do buffet, parabéns, entrega das lembrancinhas. ${ev.hora_inicio ? `Posso sugerir os horários a partir de ${esc(horario(ev))}.` : 'Defina o horário da festa para eu sugerir.'}</p>
+      <div class="acoes-linha">${ev.hora_inicio ? `<button type="button" class="btn ouro" data-acao="crono-sugerir">${ic('relogio')}Sugerir horários</button>` : ''}
+      <button type="button" class="btn" data-ev-add="cronograma">${ic('mais')}Adicionar horário</button></div></div>`;
     const ordem = ev.cronograma.map((x, i) => [x, i]).sort((a, b) => (a[0].hora || '99').localeCompare(b[0].hora || '99'));
     return `<p class="meta">Horários do dia: montagem, chegada dos convidados, parabéns, fim do buffet.</p>
       <div class="linhas-ev">${ordem.map(([x, i]) => linhasEv('cronograma', i, `
@@ -3215,6 +3240,7 @@
       return { k, st: fe.length ? 'ok' : es.length ? 'meio' : 'nada', n: es.length, nomes };
     });
   }
+  const listaCobre = (ev) => ev.convidados.filter((c) => c.nome).reduce((a, c) => a + (numV(c.lugares) || 1), 0);
   const barra = (v, tot, cls = '') => `<span class="kpi-barra ${cls}"><i style="width:${tot ? Math.min(100, (v / tot) * 100).toFixed(1) : 0}%"></i></span>`;
   function kpisHtml(ev, c) {
     const est = estCats(ev); const ok = est.filter((x) => x.st === 'ok').length;
@@ -3226,7 +3252,8 @@
     const card = (aba, rot, valor, sub, bar, tom = '') => `<button type="button" class="kpi ${tom}" data-ev-aba="${aba}"><span class="kpi-rot">${rot}</span><strong class="kpi-v">${valor}</strong>${bar}<small class="kpi-sub">${sub}</small></button>`;
     return card('fornecedores', 'Fornecedores', `${ok}<small> de ${est.length}</small>`, faltam.length ? `Falta: ${esc(faltam.join(', '))}` : 'Tudo resolvido', barra(ok, est.length, ok === est.length ? 'ok' : ''))
       + card('convidados', 'Confirmados', `${L.total}${prev ? `<small> de ${prev}</small>` : ''}`,
-        ev.convidados.length || L.rs.length ? [L.maisTalvez > L.total ? `${L.maisTalvez - L.total} talvez` : null, L.semResposta ? `${L.semResposta} sem resposta` : null].filter(Boolean).join(' · ') || 'Todos responderam' : 'Lista vazia',
+        ev.convidados.length || L.rs.length ? [L.maisTalvez > L.total ? `${L.maisTalvez - L.total} talvez` : null, L.semResposta ? `${L.semResposta} sem resposta` : null].filter(Boolean).join(' · ')
+          || (prev && listaCobre(ev) < prev * 0.8 ? `lista com ${listaCobre(ev)} de ${prev} pessoas` : 'Todos responderam') : 'Lista vazia',
         barra(L.total, prev || L.total), L.limites.some((x) => x.passou) ? 'ruim' : '')
       + card('orcamento', 'Orçamento', brl(c.combinado), orc ? `${c.combinado > orc ? 'passou' : 'de'} ${brl(orc)} · ${brl(c.pago)} pago` : `${brl(c.pago)} pago`,
         barra(c.pago, Math.max(orc, c.combinado)), orc && c.combinado > orc ? 'ruim' : '')
@@ -3247,7 +3274,9 @@
     const passou = L.limites.find((x) => x.passou);
     if (passou) add('ruim', `Confirmados passaram da capacidade ${passou.cat === 'buffet' ? 'do buffet' : 'do espaço'}`, `${passou.usado} para ${passou.cap} lugares.`, ['Convidados', 'data-ev-aba="convidados"']);
     if (!ev.convidados.length && !L.rs.length) add('meio', 'Montar a lista de convidados', 'Cole a lista do WhatsApp ou adicione um por um.', ['Adicionar', 'data-ev-aba="convidados"']);
-    else if (L.semResposta) add('meio', `${plural(L.semResposta, 'convidado não respondeu', 'convidados não responderam')}`, ev.convite.prazo ? `Prazo: ${dataBR(ev.convite.prazo)}.` : 'Mande um lembrete pelo WhatsApp.', ['Lembrar', 'data-acao="conv-lembrar"']);
+    else if (numV(ev.adultos) + numV(ev.criancas) && listaCobre(ev) < (numV(ev.adultos) + numV(ev.criancas)) * 0.8 && diasAte(ev.data) > 0)
+      add('', 'Completar a lista de convidados', `A lista tem ${listaCobre(ev)} de ${numV(ev.adultos) + numV(ev.criancas)} pessoas previstas. Cole o resto da lista de uma vez.`, ['Colar lista', 'data-acao="conv-colar-abrir"']);
+    if (L.semResposta) add('meio', `${plural(L.semResposta, 'convidado não respondeu', 'convidados não responderam')}`, ev.convite.prazo ? `Prazo: ${dataBR(ev.convite.prazo)}.` : 'Mande um lembrete pelo WhatsApp.', ['Lembrar', 'data-acao="conv-lembrar"']);
     if (ev.convidados.length && !ev.convite.prazo) add('', 'Definir o prazo de confirmação', 'Ajuda a fechar o número com o buffet.', ['Definir', 'data-ev-aba="convidados"']);
     if (!ev.tarefas.some((t) => (t.texto || '').trim())) add('', 'Criar a lista de tarefas', ev.data ? 'Sugiro as tarefas com prazo contado a partir da data da festa.' : 'O que precisa ser feito até a festa.', [ev.data ? 'Sugerir tarefas' : 'Tarefas', ev.data ? 'data-acao="ev-sugerir"' : 'data-ev-aba="dia"']);
     const tAtr = ev.tarefas.filter((t) => !t.feito && t.prazo && (t.texto || '').trim() && diasAte(t.prazo) < 0);
