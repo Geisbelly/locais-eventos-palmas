@@ -440,19 +440,18 @@
 
   /* ============ Persistência e sincronização ============ */
   let timerSync = null;
-  // Sem a opção de guardar só no aparelho: para gravar é preciso entrar com a chave (tudo vai para a nuvem).
+  // Visitas e cadastros vão direto para a nuvem, sem chave. A chave só vale para excluir e para os eventos (privados).
   let avisouChave = 0;
   function precisaChave() {
     if (!API || S.chave) return false;
     if (Date.now() - avisouChave > 1500) {
       avisouChave = Date.now();
-      toast('Entre com a chave de edição para salvar na nuvem.');
+      toast('Entre com a chave de edição para criar e ver eventos.');
       if (!$('#config').open) abrirConfig();
     }
     return true;
   }
   function salvarVisita(id, patch, { render = true } = {}) {
-    if (precisaChave()) return false;
     S.visitas[id] = Object.assign(visita(id), patch, { atualizado_em: new Date().toISOString() });
     lsSet(LS.visitas, S.visitas);
     if (API) { S.pendentes.add(id); lsSet(LS.pendentes, [...S.pendentes]); }
@@ -465,8 +464,8 @@
   function atualizarSync(estado) {
     if (estado) S.sync = estado;
     else if (!API) S.sync = 'local';
-    else if (!S.chave) S.sync = 'sem-chave';
     else if (S.pendentes.size) S.sync = 'pendente';
+    else if (S.sync === 'local' || S.sync === 'sem-chave') S.sync = 'ok';
     const mapa = { local: '', 'sem-chave': 'pendente', pendente: 'pendente', ok: 'ok', erro: 'erro' };
     document.querySelectorAll('.ponto-sync').forEach((p) => { p.dataset.estado = mapa[S.sync]; });
     const t = $('#txt-sync');
@@ -496,7 +495,7 @@
       }
       lsSet(LS.visitas, S.visitas);
       lsSet(LS.pendentes, [...S.pendentes]);
-      atualizarSync(S.chave && !S.pendentes.size ? 'ok' : undefined);
+      atualizarSync(!S.pendentes.size ? 'ok' : undefined);
       if (S.pendentes.size) sincronizar();
     } catch {
       atualizarSync('erro');
@@ -504,15 +503,14 @@
   }
 
   async function sincronizar() {
-    if (!API || !S.chave || !S.pendentes.size) { atualizarSync(); return; }
+    if (!API || !S.pendentes.size) { atualizarSync(); return; }
     atualizarSync('pendente');
     let falhou = false;
     for (const id of [...S.pendentes]) {
       try {
         const r = await fetch(`${API}/visitas/${encodeURIComponent(id)}`, {
-          method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Chave': S.chave }, body: JSON.stringify(S.visitas[id]),
+          method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(S.visitas[id]),
         });
-        if (r.status === 401) { toast('Chave de edição recusada. Confira em Sincronização.'); falhou = true; break; }
         if (!r.ok) throw new Error(r.status);
         S.pendentes.delete(id);
       } catch { falhou = true; }
@@ -567,7 +565,7 @@
 
   /* ============ Render: topo ============ */
   const TITULOS = { espacos: 'Espaços para eventos' };
-  const SYNC_CURTO = { local: 'Sem nuvem', 'sem-chave': 'Entrar', pendente: 'Salvando…', ok: 'Na nuvem', erro: 'Sem conexão' };
+  const SYNC_CURTO = { local: 'Sem nuvem', 'sem-chave': 'Na nuvem', pendente: 'Salvando…', ok: 'Na nuvem', erro: 'Sem conexão' };
   function renderNav() {
     const nEv = eventosAtivos().length;
     const cat = CATS[S.secao] ? S.secao : S.ultCat;
@@ -1019,7 +1017,7 @@
   }
   function visitaHtml(l) {
     const v = visita(l.id);
-    const entrar = API && !S.chave ? `<div class="aviso-chave">${ic('nuvem')}<p>Para registrar visita, nota e anotações, entre com a chave de edição. Tudo fica salvo na nuvem.</p><button type="button" class="btn primario" data-acao="abrir-config">Entrar</button></div>` : '';
+    const entrar = '';
     return `${entrar}
       <section class="secao"><h3>Situação</h3>
         <div class="status-visita">${Object.entries(STATUS).map(([k, s]) =>
@@ -1144,7 +1142,7 @@
     d.innerHTML = `<div class="folha-corpo">
       <h2>Salvar na nuvem</h2>
       ${API
-        ? `<p>Visitas, eventos e cadastros ficam sempre na nuvem e aparecem em qualquer aparelho. Para <strong>gravar</strong>, <strong>cadastrar ou editar</strong> e <strong>ver os eventos</strong>, entre com a chave de edição (pergunte a quem cuida do site).</p>
+        ? `<p>Visitas, cadastros e edições são salvos direto na nuvem, sem chave, e aparecem em qualquer aparelho. A chave de edição só é pedida para <strong>excluir</strong> e para <strong>criar e ver os eventos</strong> (pergunte a quem cuida do site).</p>
            <label class="campo"><span>Chave de edição</span><input id="in-chave" type="password" autocomplete="off" value="${esc(S.chave)}" placeholder="Digite a chave"></label>
            <div class="acoes"><button class="btn primario" data-acao="salvar-chave">${S.chave ? 'Trocar chave' : 'Entrar e sincronizar'}</button>${S.chave ? '<button class="btn" data-acao="esquecer-chave">Sair</button>' : ''}</div>`
         : `<p>A nuvem não está configurada neste site.</p>`}
@@ -1168,9 +1166,7 @@
       if (!r.ok) throw new Error(r.status);
     } catch { toast('Não consegui falar com a nuvem agora. Entrei mesmo assim; sincronizo quando a conexão voltar.'); }
     S.chave = v; lsSet(LS.chave, v);
-    Object.keys(S.visitas).forEach((id) => S.pendentes.add(id));
-    lsSet(LS.pendentes, [...S.pendentes]);
-    toast('Pronto! Sincronizando com a nuvem…');
+    toast('Pronto! Chave guardada neste aparelho.');
     $('#config').close();
     sincronizar();
     Object.keys(S.eventos).forEach((id) => S.evPend.add(id));
@@ -1304,7 +1300,7 @@
       </div>
       <div class="folha-corpo">
         ${!API ? '<p class="nota-aviso">A nuvem não está configurada, então não dá para salvar cadastros por aqui.</p>'
-          : !S.chave ? '<p class="nota-aviso">Para salvar você vai precisar da chave de edição. Pode preencher agora e informar a chave na hora de salvar.</p>' : ''}
+          : ''}
 
         <fieldset class="ed-bloco"><legend>Básico</legend>${basico}</fieldset>
 
@@ -1467,11 +1463,12 @@
   async function gravarLocal(id, dados) {
     const col = colDe(dados);
     if (!API) { toast('A nuvem não está configurada.'); return null; }
-    if (!S.chave) { toast('Informe a chave de edição para salvar.'); abrirConfig(); return null; }
+    const excluir = dados.removido === true;
+    if (excluir && !S.chave) { toast('Para excluir, informe a chave de edição.'); abrirConfig(); return null; }
     const em = new Date().toISOString();
     try {
       const r = await fetch(`${API}/dados/${col}/${encodeURIComponent(id)}`, {
-        method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Chave': S.chave }, body: JSON.stringify({ ...dados, atualizado_em: em }),
+        method: 'PUT', headers: { 'Content-Type': 'application/json', ...(excluir ? { 'X-Chave': S.chave } : {}) }, body: JSON.stringify({ ...dados, atualizado_em: em }),
       });
       if (r.status === 401) { toast('Chave de edição incorreta.'); abrirConfig(); return null; }
       if (!r.ok) throw new Error(r.status);

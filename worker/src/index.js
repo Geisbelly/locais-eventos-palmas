@@ -1,9 +1,10 @@
 // API das visitas: Cloudflare Worker + D1 (plano gratuito).
 // GET  /visitas            -> lista pública de visitas
 // GET  /verificar          -> 204 se a chave (header X-Chave) estiver certa
-// PUT  /visitas/:local_id  -> grava a visita (exige X-Chave)
+// PUT  /visitas/:local_id  -> grava a visita (sem chave)
 // GET  /dados/:colecao     -> locais e fornecedores (público); eventos (exige X-Chave)
-// PUT  /dados/:colecao/:id -> cadastra, edita ou remove (removido: true). Exige X-Chave
+// PUT  /dados/:colecao/:id -> cadastra ou edita locais e fornecedores sem chave.
+//                             Excluir (removido: true) e tudo de eventos exigem X-Chave
 
 const MAX_BYTES = 20_000;
 const MAX_BYTES_DADOS = 100_000;
@@ -39,6 +40,13 @@ async function chaveOk(req, env) {
     crypto.subtle.digest('SHA-256', enc.encode(env.CHAVE_EDICAO)),
   ]);
   return crypto.subtle.timingSafeEqual(a, b);
+}
+
+// Data da gravação: aceita a do aparelho, mas nunca no futuro (senão travaria as edições seguintes).
+function quando(v) {
+  const agora = Date.now();
+  const t = typeof v === 'string' ? Date.parse(v) : NaN;
+  return new Date(isNaN(t) || t > agora ? agora : t).toISOString();
 }
 
 function limpar(d) {
@@ -101,15 +109,13 @@ export default {
     }
 
     if (req.method === 'PUT' && partes[0] === 'visitas' && partes.length === 2) {
-      if (!(await chaveOk(req, env))) return json({ erro: 'chave inválida' }, 401, h);
       const id = decodeURIComponent(partes[1]);
       if (!/^[a-z0-9-]{1,80}$/.test(id)) return json({ erro: 'id inválido' }, 400, h);
       const corpo = await req.text();
       if (corpo.length > MAX_BYTES) return json({ erro: 'muito grande' }, 413, h);
       let dados;
       try { dados = JSON.parse(corpo); } catch { return json({ erro: 'json inválido' }, 400, h); }
-      const em = typeof dados.atualizado_em === 'string' && !isNaN(Date.parse(dados.atualizado_em))
-        ? new Date(dados.atualizado_em).toISOString() : new Date().toISOString();
+      const em = quando(dados.atualizado_em);
       await env.DB.prepare(
         `INSERT INTO visitas (local_id, dados, atualizado_em) VALUES (?1, ?2, ?3)
          ON CONFLICT(local_id) DO UPDATE SET dados = excluded.dados, atualizado_em = excluded.atualizado_em
@@ -126,7 +132,6 @@ export default {
         return json(results.map((r) => ({ ...r, dados: JSON.parse(r.dados) })), 200, { ...h, 'Cache-Control': 'no-store' });
       }
       if (req.method === 'PUT' && partes.length === 3) {
-        if (!(await chaveOk(req, env))) return json({ erro: 'chave inválida' }, 401, h);
         const id = decodeURIComponent(partes[2]);
         if (!/^[a-z0-9-]{1,80}$/.test(id)) return json({ erro: 'id inválido' }, 400, h);
         const corpo = await req.text();
@@ -134,8 +139,10 @@ export default {
         let dados;
         try { dados = JSON.parse(corpo); } catch { return json({ erro: 'json inválido' }, 400, h); }
         if (!dados || typeof dados !== 'object' || Array.isArray(dados)) return json({ erro: 'formato inválido' }, 400, h);
-        const em = typeof dados.atualizado_em === 'string' && !isNaN(Date.parse(dados.atualizado_em))
-          ? new Date(dados.atualizado_em).toISOString() : new Date().toISOString();
+        // Cadastrar e editar o catálogo é livre. A chave vale para excluir e para os eventos, que são privados.
+        const exigeChave = !COLECOES[col].publica || dados.removido === true;
+        if (exigeChave && !(await chaveOk(req, env))) return json({ erro: 'chave inválida' }, 401, h);
+        const em = quando(dados.atualizado_em);
         const limpo = { ...limparGenerico(dados), id, removido: dados.removido === true };
         await env.DB.prepare(
           `INSERT INTO registros (colecao, id, dados, atualizado_em) VALUES (?1, ?2, ?3, ?4)
