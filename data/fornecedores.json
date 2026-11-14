@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-14T01:32:54Z",
+  "atualizado_em": "2026-11-14T01:43:35Z",
   "observacao": "Buffet, brinquedos, serviços e aluguéis. Cada item tem cat (buffet | brinquedos | servicos | alugueis). Também dá para cadastrar pelo site.",
   "itens": [
     {
@@ -721,7 +721,7 @@
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
-      "atualizado_em": "2026-11-14T01:32:54Z",
+      "atualizado_em": "2026-11-14T01:43:35Z",
       "detalhes": {},
       "itens": {
         "monitor": 1
@@ -737,7 +737,7 @@
         {
           "valor": "Sob consulta",
           "unidade": "por evento",
-          "condicao": "O catálogo do WhatsApp lista os brinquedos, mas não mostra preços (conferido em 13/11/2026). Os valores vieram em mensagem interativa e áudio, que não aparecem na conversa exportada. Peça de novo por escrito.",
+          "condicao": "Três brinquedos têm o valor do orçamento recebido pelo WhatsApp em 14/10/2026 (a cobrança veio marcada como CVE, mas o valor é em reais). Os outros não têm preço no catálogo; a empresa também respondeu por áudio, que não foi transcrito.",
           "inclui": "Monitor nos infláveis"
         }
       ],
@@ -810,10 +810,10 @@
         {
           "nome": "Multiplay 3x1",
           "tipo": "Inflável / tobogã",
-          "valor": "Sob consulta",
+          "valor": 600,
           "unidade": "por evento",
           "qtd": null,
-          "obs": "4,00 m de comprimento, 3,30 m de largura e 1,80 m de altura. Suporta 250 kg. Monitor incluso",
+          "obs": "4,00 m de comprimento, 3,30 m de largura e 1,80 m de altura. Suporta 250 kg. Monitor incluso. Valor do orçamento de 14/10/2026",
           "duracao": "5 horas",
           "foto": {
             "url": "fotos/brinque-ja/wa-multiplay-3x1.jpg",
@@ -952,19 +952,19 @@
         {
           "nome": "Air Game S3",
           "tipo": "Games / fliperama",
-          "valor": "Sob consulta",
+          "valor": 500,
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Mesa de 1,63 m de comprimento, 0,88 m de largura e 0,80 m de altura",
+          "obs": "Mesa de 1,63 m de comprimento, 0,88 m de largura e 0,80 m de altura. Valor do orçamento de 14/10/2026",
           "duracao": "5 horas"
         },
         {
           "nome": "Pebolim",
           "tipo": "Games / fliperama",
-          "valor": "Sob consulta",
+          "valor": 500,
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Mesa de 1,38 m de comprimento, 1,17 m de largura e 0,89 m de altura",
+          "obs": "Mesa de 1,38 m de comprimento, 1,17 m de largura e 0,89 m de altura. Valor do orçamento de 14/10/2026",
           "duracao": "5 horas"
         },
         {
@@ -1483,7 +1483,7 @@
       ],
       "conferido_em": "2026-11-13",
       "status": "Informado pelo local",
-      "atualizado_em": "2026-11-14T01:32:54Z",
+      "atualizado_em": "2026-11-14T01:43:35Z",
       "detalhes": {
         "duracao": "4 horas nos infláveis; pula-pula a combinar"
       },
@@ -1501,7 +1501,7 @@
         {
           "valor": "Sob consulta",
           "unidade": "por evento",
-          "condicao": "O catálogo do WhatsApp lista os brinquedos, mas não mostra preços (conferido em 13/11/2026); peça o valor de cada um. O deslocamento é cobrado conforme a distância.",
+          "condicao": "Sete brinquedos têm o valor do orçamento recebido pelo WhatsApp em 15/10/2026; os outros não têm preço no catálogo. O deslocamento é cobrado à parte, conforme a distância.",
           "inclui": "1 monitor por inflável"
         }
       ],
@@ -1574,10 +1574,10 @@
         {
           "nome": "Mini tobogã 3 em 1 com piscina de bolinhas ou água",
           "tipo": "Inflável / tobogã",
-          "valor": "Sob consulta",
+          "valor": 500,
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Escorregador, tobogã e piscina de bolinhas ou água. 5,20 x 2,50 x 2,80 m (C x L x A). Até 8 anos. Monitor incluso",
+          "obs": "Escorregador, tobogã e piscina de bolinhas ou água. 5,20 x 2,50 x 2,80 m (C x L x A). Até 8 anos. Monitor incluso. Valor do orçamento de 15/10/2026",
           "duracao": "4 horas",
           "foto": {
             "url": "fotos/liz-brinquedos/wa-mini-toboga-3em1.jpg",
@@ -1590,10 +1590,10 @@
         {
           "nome": "Mult Park com escalada",
           "tipo": "Inflável / tobogã",
-          "valor": "Sob consulta",
+          "valor": 600,
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Pula-pula, escorregador, escalada e obstáculos. 5 x 5 x 2,80 m (C x L x A). Até 10 anos. Monitor incluso",
+          "obs": "Pula-pula, escorregador, escalada e obstáculos. 5 x 5 x 2,80 m (C x L x A). Até 10 anos. Monitor incluso. Valor do orçamento de 15/10/2026",
           "duracao": "4 horas",
           "foto": {
             "url": "fotos/liz-brinquedos/wa-mult-park.jpg",
@@ -1622,10 +1622,10 @@
         {
           "nome": "Escorregador / castelinho pula-pula",
           "tipo": "Inflável / tobogã",
-          "valor": "Sob consulta",
+          "valor": 400,
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Pode ser usado no seco ou na água (tobogã)",
+          "obs": "Pode ser usado no seco ou na água (tobogã). Valor do orçamento de 15/10/2026",
           "duracao": "4 horas"
         },
         {
@@ -1655,10 +1655,10 @@
         {
           "nome": "Pula-pula 2,44 m",
           "tipo": "Pula-pula / cama elástica",
-          "valor": "Sob consulta",
+          "valor": 120,
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Capacidade de 100 kg",
+          "obs": "Capacidade de 100 kg. Valor do orçamento de 15/10/2026",
           "duracao": "A combinar",
           "foto": {
             "url": "fotos/liz-brinquedos/wa-pula-244.jpg",
@@ -1671,10 +1671,10 @@
         {
           "nome": "Pula-pula 3,05 m",
           "tipo": "Pula-pula / cama elástica",
-          "valor": "Sob consulta",
+          "valor": 150,
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Capacidade de 120 kg",
+          "obs": "Capacidade de 120 kg. Valor do orçamento de 15/10/2026",
           "duracao": "A combinar",
           "foto": {
             "url": "fotos/liz-brinquedos/wa-pula-305.jpg",
@@ -1717,10 +1717,10 @@
         {
           "nome": "Combo master grande + mesinhas de pintura",
           "tipo": "Kit",
-          "valor": "Sob consulta",
+          "valor": 450,
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Pula-pula, piscina de bolinhas grande, escorregador, gangorrinhas e mesinhas de pintura",
+          "obs": "Pula-pula, piscina de bolinhas grande, escorregador, gangorrinhas e mesinhas de pintura. Valor do orçamento de 15/10/2026",
           "foto": {
             "url": "fotos/liz-brinquedos/wa-combo-master-mesinhas.jpg",
             "credito": {
@@ -1732,10 +1732,10 @@
         {
           "nome": "Combo tobogã 5 m + pula-pula 3,05 m",
           "tipo": "Kit",
-          "valor": "Sob consulta",
+          "valor": 650,
           "unidade": "por evento",
           "qtd": null,
-          "obs": "Tobogã de 5 m de altura e pula-pula de 3,05 m",
+          "obs": "Tobogã de 5 m de altura e pula-pula de 3,05 m. Valor do orçamento de 15/10/2026",
           "foto": {
             "url": "fotos/liz-brinquedos/wa-combo-toboga-pula.jpg",
             "credito": {
