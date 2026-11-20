@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Giotto Eventi</title>
+  <link rel="canonical" href="https://geisbelly.github.io/giotto-eventi/">
+  <script>
+    // O site mudou de endereço: leva para o mesmo caminho no novo, com os parâmetros e o # (links de convite continuam valendo).
+    (function () {
+      var antigo = '/locais-eventos-palmas';
+      var caminho = location.pathname.indexOf(antigo) === 0 ? location.pathname.slice(antigo.length) : '/';
+      location.replace('https://geisbelly.github.io/giotto-eventi' + (caminho || '/') + location.search + location.hash);
+    })();
+  </script>
+  <style>body{margin:0;min-height:100vh;display:grid;place-items:center;font:16px/1.5 system-ui,sans-serif;background:#f6f1e9;color:#2a241d;text-align:center;padding:24px}a{color:#8a5a12;font-weight:600}</style>
+</head>
+<body>
+  <p>O site agora se chama <strong>Giotto Eventi</strong> e mudou de endereço.<br><a href="https://geisbelly.github.io/giotto-eventi/">Abrir o novo endereço</a></p>
+</body>
+</html>
